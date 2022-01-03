@@ -1,0 +1,20 @@
+.navbar {
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__logo {
+    font-size: 2.4rem;
+    font-weight: 700;
+  }
+
+  &__links {
+    &--item {
+      font-size: 1.6rem;
+      color: #afafaf;
+      font-weight: 500;
+      margin-left: 2rem;
+    }
+  }
+}
