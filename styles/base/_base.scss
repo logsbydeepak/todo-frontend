@@ -16,6 +16,11 @@ body {
   background-color: $color-background;
 }
 
+.container {
+  margin: 0 auto;
+  max-width: 60rem;
+}
+
 a,
 a:hover,
 a:active {

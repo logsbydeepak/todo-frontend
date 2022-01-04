@@ -1,25 +1,17 @@
 import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.scss";
+import Link from "next/link";
 
-import Navbar from "../components/Navbar";
-
-const links = [
-  {
-    name: "Login",
-    link: "/login",
-  },
-  {
-    name: "Sign Up",
-    link: "/signUp",
-  },
-];
+import landingPageStyle from "../styles/Landing.module.scss";
 
 const Home: NextPage = () => {
   return (
     <>
-      <Navbar links={links} />
+      <div className={landingPageStyle.base}>
+        <h1 className={landingPageStyle.title}>Finish Your Task with TODO</h1>
+        <Link href="/SignUp">
+          <a className={landingPageStyle.btn}>Get Started</a>
+        </Link>
+      </div>
     </>
   );
 };
