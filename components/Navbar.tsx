@@ -1,6 +1,8 @@
 import { NextPage } from "next";
 import Link from "next/link";
 
+import navigationStyle from "../styles/layout/navigation.module.scss";
+
 interface prop {
   links: { name: string; link: string }[];
 }
@@ -8,16 +10,16 @@ interface prop {
 const Navbar: NextPage<prop> = (prop) => {
   return (
     <>
-      <header className="navbar">
+      <header className={navigationStyle.base}>
         <Link href="/">
-          <a className="navbar__logo">TODO</a>
+          <a className={navigationStyle.logo}>TODO</a>
         </Link>
 
-        <div className="navbar__links">
+        <div className={navigationStyle.link}>
           {prop.links.map(({ name, link }, index) => (
             <>
               <Link href={link} key={index}>
-                <a className="navbar__links--item">{name}</a>
+                <a className={navigationStyle.item}>{name}</a>
               </Link>
             </>
           ))}

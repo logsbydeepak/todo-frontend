@@ -1,6 +1,7 @@
-import "../styles/globals.scss";
+import Head from "next/head";
 import type { AppProps } from "next/app";
 
+import "../styles/globals.scss";
 import Navbar from "../components/Navbar";
 
 const links = [
@@ -17,6 +18,9 @@ const links = [
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
+      <Head>
+        <link rel="shortcut icon" href="/favicon.png" />
+      </Head>
       <Navbar links={links} />
       <div className="container">
         <Component {...pageProps} />
