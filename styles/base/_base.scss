@@ -8,11 +8,12 @@
   color: $color-text-main;
 }
 
-body {
+body,
+html {
   margin: 0 auto;
   padding: 0 16rem;
   max-width: 144rem;
-  box-sizing: inherit;
+  box-sizing: border-box;
   background-color: $color-background;
 }
 
@@ -25,4 +26,8 @@ a,
 a:hover,
 a:active {
   text-decoration: none;
+}
+
+input {
+  outline: none;
 }

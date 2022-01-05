@@ -1,13 +1,13 @@
-import { NextPage } from "next";
 import Link from "next/link";
+import { FunctionComponent } from "react";
 
 import navigationStyle from "../styles/layout/navigation.module.scss";
 
-interface prop {
+type Props = {
   links: { name: string; link: string }[];
-}
+};
 
-const Navbar: NextPage<prop> = (prop) => {
+const Navbar: FunctionComponent<Props> = (prop) => {
   return (
     <>
       <header className={navigationStyle.base}>
@@ -17,11 +17,9 @@ const Navbar: NextPage<prop> = (prop) => {
 
         <div className={navigationStyle.link}>
           {prop.links.map(({ name, link }, index) => (
-            <>
-              <Link href={link} key={index}>
-                <a className={navigationStyle.item}>{name}</a>
-              </Link>
-            </>
+            <Link href={link} key={index}>
+              <a className={navigationStyle.item}>{name}</a>
+            </Link>
           ))}
         </div>
       </header>
