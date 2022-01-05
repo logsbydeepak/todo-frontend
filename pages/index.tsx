@@ -3,6 +3,7 @@ import Head from "next/head";
 import type { NextPage } from "next";
 
 import landingPageStyle from "../styles/Landing.module.scss";
+import { ButtonSimple } from "../components/Button";
 
 const Home: NextPage = () => {
   return (
@@ -12,9 +13,7 @@ const Home: NextPage = () => {
       </Head>
       <div className={landingPageStyle.base}>
         <h1 className={landingPageStyle.title}>Finish Your Task with TODO</h1>
-        <Link href="/SignUp">
-          <a className={landingPageStyle.btn}>Get Started</a>
-        </Link>
+        <ButtonSimple link="/SignUp" />
       </div>
     </>
   );

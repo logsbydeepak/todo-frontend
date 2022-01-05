@@ -1,0 +1,12 @@
+@import "../utilities/variables";
+
+.link {
+  margin-top: 8rem;
+  background-color: $color-primary;
+  font-size: 2rem;
+  border-radius: 0.4rem;
+  padding: 2rem 5rem;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0rem 0rem 1rem 0rem #561bd7;
+}
