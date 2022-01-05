@@ -1,12 +1,52 @@
 @import "../utilities/variables";
 
-.link {
-  margin-top: 8rem;
-  background-color: $color-primary;
-  font-size: 2rem;
+.base {
+  font-size: 1.8rem;
   border-radius: 0.4rem;
-  padding: 2rem 5rem;
+  padding: 2rem 3rem;
   width: 100%;
   text-align: center;
-  box-shadow: 0rem 0rem 1rem 0rem #561bd7;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.base i {
+  font-size: 3rem;
+}
+
+.icon {
+  background-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.primary {
+  background-color: #722ae6;
+  box-shadow: 0rem 0rem 0.4rem 0rem #722ae6;
+}
+
+.primary:hover {
+  background-color: #6725e0;
+  box-shadow: 0rem 0rem 0.8rem 0rem #6725e0;
+}
+
+.primary:active {
+  background-color: #561bd7;
+  box-shadow: 0rem 0rem 0.6rem 0rem #561bd7;
+}
+
+.warning {
+  background-color: #ea4335;
+  box-shadow: 0rem 0rem 0.4rem 0rem #ea4335;
+}
+
+.warning:hover {
+  background-color: #db3b34;
+  box-shadow: 0rem 0rem 0.8rem 0rem #db3b34;
+}
+
+.warning:active {
+  background-color: #c9312e;
+  box-shadow: 0rem 0rem 0.6rem 0rem #c9312e;
 }

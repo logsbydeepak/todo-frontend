@@ -6,8 +6,14 @@
   font-size: 1.8rem;
   padding: 2rem 3rem;
   margin-bottom: 3rem;
+  transition: all 0.2s;
 }
 
 .input::placeholder {
   color: #9f9f9f;
+}
+
+.input:focus {
+  background-color: #292929;
+  border-color: #626262;
 }

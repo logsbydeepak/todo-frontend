@@ -6,12 +6,19 @@ type Props = {
   name: string;
   placeholder: string;
   type: string;
+  autoFocus: boolean;
 };
 
-const Input: FunctionComponent<Props> = ({ name, placeholder, type }) => {
+const Input: FunctionComponent<Props> = ({
+  name,
+  placeholder,
+  type,
+  autoFocus,
+}) => {
   return (
     <>
       <input
+        autoFocus={autoFocus}
         className={inputStyle.input}
         type={type}
         id={name}
