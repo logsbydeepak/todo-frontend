@@ -1,0 +1,19 @@
+version: "3"
+services:
+  todo_frontend:
+    tty: true
+    ports:
+      - 3000:3000
+    build:
+      context: ../../
+      dockerfile: ./docker/dev/Dockerfile.dev
+    volumes:
+      - ../../:/home/node/todo-frontend
+    networks:
+      - dev_frontend_network
+    container_name: todo_dev_frontend_next
+
+networks:
+  dev_frontend_network:
+    external: true
+    name: todo_dev_backend_network
