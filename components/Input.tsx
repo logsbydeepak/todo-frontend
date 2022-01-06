@@ -6,14 +6,14 @@ type Props = {
   name: string;
   placeholder: string;
   type: string;
-  autoFocus: boolean;
+  autoFocus?: boolean;
 };
 
 const Input: FunctionComponent<Props> = ({
   name,
   placeholder,
   type,
-  autoFocus,
+  autoFocus = false,
 }) => {
   return (
     <>
