@@ -7,6 +7,8 @@ type Props = {
   placeholder: string;
   type: string;
   autoFocus?: boolean;
+  value: any;
+  onChange: any;
 };
 
 const Input: FunctionComponent<Props> = ({
@@ -14,6 +16,8 @@ const Input: FunctionComponent<Props> = ({
   placeholder,
   type,
   autoFocus = false,
+  value,
+  onChange,
 }) => {
   return (
     <>
@@ -24,6 +28,8 @@ const Input: FunctionComponent<Props> = ({
         id={name}
         name={name}
         placeholder={placeholder}
+        value={value}
+        onChange={onChange}
       />
     </>
   );

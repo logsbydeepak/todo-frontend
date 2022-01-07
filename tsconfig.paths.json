@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@config/axios": ["./config/axios.config"]
+    }
+  }
+}

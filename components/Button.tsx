@@ -11,6 +11,7 @@ type ButtonIconProps = {
   icon: string;
   text: string;
   type: "primary" | "warning";
+  clickHandler: any;
 };
 
 export const ButtonSimple: FunctionComponent<ButtonSimpleProps> = ({
@@ -29,10 +30,14 @@ export const ButtonIcon: FunctionComponent<ButtonIconProps> = ({
   icon,
   text,
   type,
+  clickHandler,
 }) => {
   return (
     <>
-      <button className={`${style.base} ${style.icon} ${style[type]}`}>
+      <button
+        className={`${style.base} ${style.icon} ${style[type]}`}
+        onClick={clickHandler}
+      >
         {text}
         <i className="icon">{icon}</i>
       </button>
