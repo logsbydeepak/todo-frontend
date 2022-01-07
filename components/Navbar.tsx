@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FunctionComponent } from "react";
 
-import navigationStyle from "../styles/layout/navigation.module.scss";
+import navigationStyle from "../styles/module/components/navbar.module.scss";
 
 type Props = {
   links: { name: string; link: string }[];

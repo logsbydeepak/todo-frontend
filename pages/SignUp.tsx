@@ -16,10 +16,12 @@ const SignUp: NextPage = () => {
           subtitle="Create your account to get started"
         />
 
-        <Input name="name" placeholder="Name" type="text" autoFocus={true} />
-        <Input name="email" placeholder="Email" type="email" />
-        <Input name="password" placeholder="Password" type="password" />
-        <ButtonIcon icon="east" text="Create your account" type="primary" />
+        <form>
+          <Input name="name" placeholder="Name" type="text" autoFocus={true} />
+          <Input name="email" placeholder="Email" type="email" />
+          <Input name="password" placeholder="Password" type="password" />
+          <ButtonIcon icon="east" text="Create your account" type="primary" />
+        </form>
       </div>
     </>
   );

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FunctionComponent } from "react";
 
-import style from "../styles/components/button.module.scss";
+import style from "../styles/module/components/button.module.scss";
 
 type ButtonSimpleProps = {
   link: string;

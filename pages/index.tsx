@@ -1,8 +1,7 @@
-import Link from "next/link";
 import Head from "next/head";
 import type { NextPage } from "next";
 
-import landingPageStyle from "../styles/Landing.module.scss";
+import landingPageStyle from "../styles/module/pages/Index.module.scss";
 import { ButtonSimple } from "../components/Button";
 
 const Home: NextPage = () => {
