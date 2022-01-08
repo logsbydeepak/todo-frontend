@@ -9,6 +9,8 @@ type Props = {
   autoFocus?: boolean;
   value: any;
   onChange: any;
+  label: string;
+  helper: string;
 };
 
 const Input: FunctionComponent<Props> = ({
@@ -18,19 +20,27 @@ const Input: FunctionComponent<Props> = ({
   autoFocus = false,
   value,
   onChange,
+  label,
+  helper,
 }) => {
   return (
     <>
-      <input
-        autoFocus={autoFocus}
-        className={inputStyle.input}
-        type={type}
-        id={name}
-        name={name}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-      />
+      <div className={inputStyle.base}>
+        <label htmlFor={name} className={inputStyle.label}>
+          {label}
+        </label>
+        <input
+          autoFocus={autoFocus}
+          className={inputStyle.input}
+          type={type}
+          id={name}
+          name={name}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+        />
+        <p className={inputStyle.helper}>{helper}</p>
+      </div>
     </>
   );
 };

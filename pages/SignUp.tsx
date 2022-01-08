@@ -4,16 +4,26 @@ import PageTitle from "../components/PageTitle";
 import Input from "../components/Input";
 import { ButtonIcon } from "../components/Button";
 import { EventHandler, useState } from "react";
+import { useRouter } from "next/router";
+import isEmail from "validator/lib/isEmail";
+import isStrongPassword from "validator/lib/isStrongPassword";
 
 import axios from "@config/axios";
 
 const SignUp: NextPage = () => {
+  const router = useRouter();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
 
+  const [helper, setHelper] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
   const formInputHandler = (e: any) => {
     setFormData({
       ...formData,
@@ -23,18 +33,34 @@ const SignUp: NextPage = () => {
 
   const clickHandler = async (e: any) => {
     e.preventDefault();
-    const request = axios
-      .post("/user", formData)
-      .then((response: any) => {
-        console.log("then");
-        console.log(response.data);
-        console.log(response.status);
-      })
-      .catch((error: any) => {
-        console.log("catch");
-        console.log(error.response.data);
-        console.log(error.response.status);
-      });
+
+    let helperText = { name: "", email: "", password: "" };
+
+    if (formData.name.length === 0) {
+      helperText.name = "name is required";
+    }
+
+    if (!isEmail(formData.email)) {
+      helperText.email = "invalid email";
+    }
+
+    if (!isStrongPassword(formData.password)) {
+      helperText.password = "invalid password";
+    }
+
+    setHelper(helperText);
+    // try {
+    //   const request = await axios.post("/user", formData, {
+    //     withCredentials: true,
+    //   });
+    //   if (request.data.data.name) {
+    //     console.log(request
+    // );
+    //     router.push("/");
+    //   }
+    // } catch (e: any) {
+    //   console.log(e.response.data);
+    // }
   };
 
   return (
@@ -51,25 +77,31 @@ const SignUp: NextPage = () => {
         <form>
           <Input
             name="name"
-            placeholder="Name"
+            label="Name"
             type="text"
             autoFocus={true}
             value={formData.name}
             onChange={formInputHandler}
+            helper={helper.name}
+            placeholder="Your name"
           />
           <Input
             name="email"
-            placeholder="Email"
+            label="Email"
             type="email"
             value={formData.email}
             onChange={formInputHandler}
+            helper={helper.email}
+            placeholder="example@email.com"
           />
           <Input
             name="password"
-            placeholder="Password"
+            label="Password"
             type="password"
             value={formData.password}
             onChange={formInputHandler}
+            helper={helper.password}
+            placeholder="Minimum 8 character"
           />
           <ButtonIcon
             icon="east"
