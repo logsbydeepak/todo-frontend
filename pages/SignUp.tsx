@@ -24,6 +24,13 @@ const SignUp: NextPage = () => {
     email: "",
     password: "",
   });
+
+  const [isError, setIsError] = useState({
+    name: false,
+    email: false,
+    password: false,
+  });
+
   const formInputHandler = (e: any) => {
     setFormData({
       ...formData,
@@ -35,32 +42,36 @@ const SignUp: NextPage = () => {
     e.preventDefault();
 
     let helperText = { name: "", email: "", password: "" };
+    let isErrorStatus = { name: false, email: false, password: false };
 
     if (formData.name.length === 0) {
       helperText.name = "name is required";
+      isErrorStatus.name = true;
     }
 
     if (!isEmail(formData.email)) {
       helperText.email = "invalid email";
+      isErrorStatus.email = true;
+    }
+
+    if (formData.email.length === 0) {
+      helperText.email = "email is required";
+      isErrorStatus.email = true;
     }
 
     if (!isStrongPassword(formData.password)) {
-      helperText.password = "invalid password";
+      helperText.password =
+        "min of 8 characters, 1 lower case, upper case, symbol";
+      isErrorStatus.password = true;
+    }
+
+    if (formData.password.length === 0) {
+      helperText.password = "password is required";
+      isErrorStatus.password = true;
     }
 
     setHelper(helperText);
-    // try {
-    //   const request = await axios.post("/user", formData, {
-    //     withCredentials: true,
-    //   });
-    //   if (request.data.data.name) {
-    //     console.log(request
-    // );
-    //     router.push("/");
-    //   }
-    // } catch (e: any) {
-    //   console.log(e.response.data);
-    // }
+    setIsError(isErrorStatus);
   };
 
   return (
@@ -84,6 +95,7 @@ const SignUp: NextPage = () => {
             onChange={formInputHandler}
             helper={helper.name}
             placeholder="Your name"
+            isError={isError.name}
           />
           <Input
             name="email"
@@ -93,6 +105,7 @@ const SignUp: NextPage = () => {
             onChange={formInputHandler}
             helper={helper.email}
             placeholder="example@email.com"
+            isError={isError.email}
           />
           <Input
             name="password"
@@ -102,6 +115,7 @@ const SignUp: NextPage = () => {
             onChange={formInputHandler}
             helper={helper.password}
             placeholder="Minimum 8 character"
+            isError={isError.password}
           />
           <ButtonIcon
             icon="east"

@@ -11,6 +11,7 @@ type Props = {
   onChange: any;
   label: string;
   helper: string;
+  isError: boolean;
 };
 
 const Input: FunctionComponent<Props> = ({
@@ -22,10 +23,11 @@ const Input: FunctionComponent<Props> = ({
   onChange,
   label,
   helper,
+  isError,
 }) => {
   return (
     <>
-      <div className={inputStyle.base}>
+      <div className={`${inputStyle.base} ${isError && inputStyle.error}`}>
         <label htmlFor={name} className={inputStyle.label}>
           {label}
         </label>

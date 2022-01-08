@@ -22,6 +22,7 @@
 
 .input::placeholder {
   color: #9f9f9f;
+  font-weight: 400;
 }
 
 .input:focus {
@@ -30,8 +31,24 @@
 }
 
 .helper {
-  margin-left: 1rem;
-  font-size: 1.6rem;
+  margin: 0 1rem;
+  font-size: 1.4rem;
   font-weight: 400;
   color: #9f9f9f;
+}
+
+.error .input {
+  border: 0.2rem solid #ea4435;
+}
+
+.error .label {
+  color: #ea4435;
+}
+
+.error .helper {
+  color: #ea4435;
+}
+
+.error .input::placeholder {
+  color: #ea4435;
 }
