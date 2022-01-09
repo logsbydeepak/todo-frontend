@@ -41,8 +41,8 @@ const SignUp: NextPage = () => {
   const clickHandler = async (e: any) => {
     e.preventDefault();
 
-    let helperText = { name: "", email: "", password: "" };
-    let isErrorStatus = { name: false, email: false, password: false };
+    const helperText = { name: "", email: "", password: "" };
+    const isErrorStatus = { name: false, email: false, password: false };
 
     if (formData.name.length === 0) {
       helperText.name = "name is required";
@@ -72,6 +72,21 @@ const SignUp: NextPage = () => {
 
     setHelper(helperText);
     setIsError(isErrorStatus);
+
+    if (
+      formData.name.length === 0 ||
+      !isEmail(formData.email) ||
+      !isStrongPassword(formData.password)
+    ) {
+      return;
+    }
+
+    try {
+      await axios.post("/user", formData);
+      router.push("/");
+    } catch (e: any) {
+      console.log(e.request);
+    }
   };
 
   return (
