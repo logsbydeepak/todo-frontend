@@ -13,15 +13,6 @@ const Login: NextPage = () => {
       </Head>
       <div>
         <PageTitle title="Login Account" subtitle="Access your created todo" />
-
-        {/* <Input name="email" placeholder="Email" type="email" autoFocus={true} /> */}
-        {/* <Input
-          name="password"
-          placeholder="Password"
-          type="password"
-          autoFocus={false}
-        />
-        <ButtonIcon icon="east" text="Login to your account" type="primary" /> */}
       </div>
     </>
   );

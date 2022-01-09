@@ -3,17 +3,8 @@ import type { AppProps } from "next/app";
 
 import "../styles/globals.scss";
 import Navbar from "../components/Navbar";
-
-const links = [
-  {
-    name: "Login",
-    link: "/Login",
-  },
-  {
-    name: "Sign Up",
-    link: "/SignUp",
-  },
-];
+import { useEffect, useReducer, useState } from "react";
+import axiosConfig from "@config/axios";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -21,7 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <link rel="shortcut icon" href="/favicon.png" />
       </Head>
-      <Navbar links={links} />
+      <Navbar />
       <div className="container">
         <Component {...pageProps} />
       </div>

@@ -1,13 +1,50 @@
+import axiosConfig from "@config/axios";
 import Link from "next/link";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 
 import navigationStyle from "../styles/module/components/navbar.module.scss";
 
-type Props = {
-  links: { name: string; link: string }[];
-};
+const Navbar: FunctionComponent = () => {
+  const [links, setLinks] = useState([
+    {
+      name: "Login",
+      link: "/Login",
+    },
+    {
+      name: "Sign Up",
+      link: "/SignUp",
+    },
+  ]);
 
-const Navbar: FunctionComponent<Props> = (prop) => {
+  useState(async () => {
+    try {
+      const request: any = await axiosConfig.get("/user");
+      setLinks([
+        {
+          name: "Home",
+          link: "/",
+        },
+        {
+          name: request.data.data.name,
+          link: "/User",
+        },
+      ]);
+      console.log();
+    } catch (e: any) {
+      setLinks([
+        {
+          name: "Login",
+          link: "/Login",
+        },
+        {
+          name: "Sign Up",
+          link: "/SignUp",
+        },
+      ]);
+      console.log(e.response.data);
+    }
+  });
+
   return (
     <>
       <header className={navigationStyle.base}>
@@ -16,7 +53,7 @@ const Navbar: FunctionComponent<Props> = (prop) => {
         </Link>
 
         <div className={navigationStyle.link}>
-          {prop.links.map(({ name, link }, index) => (
+          {links.map(({ name, link }, index) => (
             <Link href={link} key={index}>
               <a className={navigationStyle.item}>{name}</a>
             </Link>
