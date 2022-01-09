@@ -4,17 +4,19 @@ import { FunctionComponent, useState } from "react";
 
 import navigationStyle from "../styles/module/components/navbar.module.scss";
 
+const defaultLinks = [
+  {
+    name: "Login",
+    link: "/Login",
+  },
+  {
+    name: "Sign Up",
+    link: "/SignUp",
+  },
+];
+
 const Navbar: FunctionComponent = () => {
-  const [links, setLinks] = useState([
-    {
-      name: "Login",
-      link: "/Login",
-    },
-    {
-      name: "Sign Up",
-      link: "/SignUp",
-    },
-  ]);
+  const [links, setLinks] = useState(defaultLinks);
 
   useState(async () => {
     try {
@@ -31,16 +33,7 @@ const Navbar: FunctionComponent = () => {
       ]);
       console.log();
     } catch (e: any) {
-      setLinks([
-        {
-          name: "Login",
-          link: "/Login",
-        },
-        {
-          name: "Sign Up",
-          link: "/SignUp",
-        },
-      ]);
+      setLinks(defaultLinks);
       console.log(e.response.data);
     }
   });
