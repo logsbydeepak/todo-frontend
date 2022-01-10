@@ -7,7 +7,7 @@ import { EventHandler, useState } from "react";
 import { useRouter } from "next/router";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
-import signUpStyle from "../styles/module/pages/SignUp.module.scss";
+import signUpStyle from "../styles/module/pages/LoginSignUp.module.scss";
 
 import axios from "@config/axios";
 
