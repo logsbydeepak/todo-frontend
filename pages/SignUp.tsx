@@ -7,6 +7,7 @@ import { EventHandler, useState } from "react";
 import { useRouter } from "next/router";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
+import signUpStyle from "../styles/module/pages/SignUp.module.scss";
 
 import axios from "@config/axios";
 
@@ -94,7 +95,7 @@ const SignUp: NextPage = () => {
       <Head>
         <title>TODO - SignUp</title>
       </Head>
-      <div>
+      <div className={signUpStyle.base}>
         <PageTitle
           title="Create Account"
           subtitle="Create your account to get started"
