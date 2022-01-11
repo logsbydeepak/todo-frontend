@@ -31,9 +31,10 @@ const SignUp: NextPage = () => {
   const [formData, setFormData] = useState(initialUserData);
   const [helper, setHelper] = useState(initialUserData);
   const [isError, setIsError] = useState(initialErrorData);
-  const [isHeadingError, setHeadingError] = useState({
+  const [isHeadingStatus, setHeadingStatus] = useState({
     status: false,
-    message: "Something went wrong. Please try again.",
+    message: "",
+    type: "error",
   });
 
   const formInputHandler = (e: any) => {
@@ -91,13 +92,18 @@ const SignUp: NextPage = () => {
     try {
       setLoading(true);
       await axiosRequest.post("/user", formData);
+      setHeadingStatus({
+        message: "User created successfully.",
+        status: true,
+        type: "success",
+      });
       router.push("/");
       changeAuth(true);
     } catch (e: any) {
-      setHeadingError({
-        ...isHeadingError,
+      setHeadingStatus({
         message: "Something went wrong. Please try again.",
         status: true,
+        type: "error",
       });
       setLoading(false);
     }
@@ -114,8 +120,13 @@ const SignUp: NextPage = () => {
           subtitle="Create your account to get started"
         />
 
-        {isHeadingError.status && (
-          <h1 className={signUpStyle.headingError}>{isHeadingError.message}</h1>
+        {isHeadingStatus.status && (
+          <h1
+            className={`
+              ${signUpStyle.heading} ${signUpStyle[isHeadingStatus.type]}`}
+          >
+            {isHeadingStatus.message}
+          </h1>
         )}
 
         <form>

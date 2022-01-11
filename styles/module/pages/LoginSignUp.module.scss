@@ -3,10 +3,17 @@
   margin-bottom: 16rem;
 }
 
-.headingError {
-  color: #ea4435;
+.heading {
   text-align: center;
   font-size: 1.8rem;
   margin-bottom: 4rem;
   font-weight: 400;
+}
+
+.error {
+  color: #ea4435;
+}
+
+.success {
+  color: #12b64e;
 }
