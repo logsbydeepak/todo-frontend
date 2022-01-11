@@ -12,6 +12,7 @@ type Props = {
   label: string;
   helper: string;
   isError: boolean;
+  disabled?: boolean;
 };
 
 const Input: FunctionComponent<Props> = ({
@@ -24,6 +25,7 @@ const Input: FunctionComponent<Props> = ({
   label,
   helper,
   isError,
+  disabled = false,
 }) => {
   return (
     <>
@@ -40,6 +42,7 @@ const Input: FunctionComponent<Props> = ({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
+          disabled={disabled}
         />
         <p className={inputStyle.helper}>{helper}</p>
       </div>

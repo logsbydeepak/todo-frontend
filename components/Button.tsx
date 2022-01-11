@@ -12,6 +12,7 @@ type ButtonIconProps = {
   text: string;
   type: "primary" | "warning";
   clickHandler: any;
+  loading: boolean;
 };
 
 export const ButtonSimple: FunctionComponent<ButtonSimpleProps> = ({
@@ -31,14 +32,18 @@ export const ButtonIcon: FunctionComponent<ButtonIconProps> = ({
   text,
   type,
   clickHandler,
+  loading = false,
 }) => {
   return (
     <>
       <button
         className={`${style.base} ${style.icon} ${style[type]}`}
         onClick={clickHandler}
+        disabled={loading}
       >
         {text}
+        {!loading && <i className="icon">{icon}</i>}
+        {loading && <div className={style.spinner}></div>}
       </button>
     </>
   );

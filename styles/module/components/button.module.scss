@@ -50,3 +50,27 @@
   background-color: #c9312e;
   box-shadow: 0rem 0rem 0.6rem 0rem #c9312e;
 }
+
+.spinner {
+  border: 0.4rem solid #fff;
+  border-radius: 50%;
+  border-top: 0.4rem solid rgba(255, 255, 255, 0);
+  width: 2.4rem;
+  height: 2.4rem;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.base:disabled {
+  background-color: #7b7b7b;
+  box-shadow: none;
+}

@@ -27,6 +27,7 @@ const initialErrorData = {
 const SignUp: NextPage = () => {
   const router = useRouter();
 
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState(initialUserData);
   const [helper, setHelper] = useState(initialUserData);
   const [isError, setIsError] = useState(initialErrorData);
@@ -45,7 +46,7 @@ const SignUp: NextPage = () => {
   const { changeAuth } = useContext(AuthContext);
   const clickHandler = async (e: any) => {
     e.preventDefault();
-
+    setLoading(true);
     const helperText = { ...initialUserData };
     const isErrorStatus = { ...initialErrorData };
 
@@ -77,6 +78,7 @@ const SignUp: NextPage = () => {
 
     setHelper(helperText);
     setIsError(isErrorStatus);
+    setLoading(false);
 
     if (
       formData.name.length === 0 ||
@@ -87,14 +89,17 @@ const SignUp: NextPage = () => {
     }
 
     try {
+      setLoading(true);
       await axiosRequest.post("/user", formData);
       router.push("/");
       changeAuth(true);
     } catch (e: any) {
       setHeadingError({
         ...isHeadingError,
+        message: "Something went wrong. Please try again.",
         status: true,
       });
+      setLoading(false);
     }
   };
 
@@ -124,6 +129,7 @@ const SignUp: NextPage = () => {
             helper={helper.name}
             placeholder="Your name"
             isError={isError.name}
+            disabled={loading}
           />
           <Input
             name="email"
@@ -134,6 +140,7 @@ const SignUp: NextPage = () => {
             helper={helper.email}
             placeholder="example@email.com"
             isError={isError.email}
+            disabled={loading}
           />
           <Input
             name="password"
@@ -144,12 +151,14 @@ const SignUp: NextPage = () => {
             helper={helper.password}
             placeholder="Minimum 8 character"
             isError={isError.password}
+            disabled={loading}
           />
           <ButtonIcon
             icon="east"
             text="Create your account"
             type="primary"
             clickHandler={clickHandler}
+            loading={loading}
           />
         </form>
       </div>

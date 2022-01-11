@@ -52,3 +52,7 @@
 .error .input::placeholder {
   color: #ea4435;
 }
+
+.input:disabled {
+  color: #c4c4c4;
+}
