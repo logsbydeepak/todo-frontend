@@ -1,4 +1,4 @@
-import axiosConfig from "@config/axios";
+import { axiosRequest } from "@config/axios";
 import { AuthContext } from "context/auth.context";
 import Link from "next/link";
 import {
@@ -31,7 +31,7 @@ const Navbar: FunctionComponent = () => {
     }
 
     try {
-      const request: any = await axiosConfig.get("/user");
+      const request: any = await axiosRequest.get("/user");
       setLinks([
         {
           name: "Home",

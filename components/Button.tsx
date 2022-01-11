@@ -39,7 +39,6 @@ export const ButtonIcon: FunctionComponent<ButtonIconProps> = ({
         onClick={clickHandler}
       >
         {text}
-        <i className="icon">{icon}</i>
       </button>
     </>
   );

@@ -9,28 +9,30 @@ import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 import signUpStyle from "../styles/module/pages/LoginSignUp.module.scss";
 
-import axios from "@config/axios";
+import { axiosRequest } from "@config/axios";
 import { AuthContext } from "context/auth.context";
+
+const initialUserData = {
+  name: "",
+  email: "",
+  password: "",
+};
+
+const initialErrorData = {
+  name: false,
+  email: false,
+  password: false,
+};
 
 const SignUp: NextPage = () => {
   const router = useRouter();
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-
-  const [helper, setHelper] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-
-  const [isError, setIsError] = useState({
-    name: false,
-    email: false,
-    password: false,
+  const [formData, setFormData] = useState(initialUserData);
+  const [helper, setHelper] = useState(initialUserData);
+  const [isError, setIsError] = useState(initialErrorData);
+  const [isHeadingError, setHeadingError] = useState({
+    status: false,
+    message: "Something went wrong. Please try again.",
   });
 
   const formInputHandler = (e: any) => {
@@ -44,8 +46,8 @@ const SignUp: NextPage = () => {
   const clickHandler = async (e: any) => {
     e.preventDefault();
 
-    const helperText = { name: "", email: "", password: "" };
-    const isErrorStatus = { name: false, email: false, password: false };
+    const helperText = { ...initialUserData };
+    const isErrorStatus = { ...initialErrorData };
 
     if (formData.name.length === 0) {
       helperText.name = "name is required";
@@ -85,11 +87,14 @@ const SignUp: NextPage = () => {
     }
 
     try {
-      await axios.post("/user", formData);
+      await axiosRequest.post("/user", formData);
       router.push("/");
       changeAuth(true);
     } catch (e: any) {
-      console.log(e);
+      setHeadingError({
+        ...isHeadingError,
+        status: true,
+      });
     }
   };
 
@@ -103,6 +108,10 @@ const SignUp: NextPage = () => {
           title="Create Account"
           subtitle="Create your account to get started"
         />
+
+        {isHeadingError.status && (
+          <h1 className={signUpStyle.headingError}>{isHeadingError.message}</h1>
+        )}
 
         <form>
           <Input
