@@ -3,19 +3,45 @@ import type { AppProps } from "next/app";
 
 import "../styles/globals.scss";
 import Navbar from "../components/Navbar";
-import { useEffect, useReducer, useState } from "react";
-import axiosConfig from "@config/axios";
+import { useLayoutEffect, useState } from "react";
+import { AuthContext } from "context/auth.context";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [auth, setAuth] = useState(false);
+
+  useLayoutEffect(() => {
+    const initialAuth = localStorage.getItem("auth");
+
+    if (initialAuth === null) {
+      localStorage.setItem("auth", "false");
+    }
+
+    setAuth(localStorage.getItem("auth") === "true");
+  });
+
+  const setStorage = (value: string) => {
+    localStorage.setItem("auth", value);
+  };
+
   return (
     <>
       <Head>
         <link rel="shortcut icon" href="/favicon.png" />
       </Head>
-      <Navbar />
-      <div className="container">
-        <Component {...pageProps} />
-      </div>
+      <AuthContext.Provider
+        value={{
+          auth,
+          changeAuth: (value: boolean) => {
+            setAuth(value);
+            localStorage.setItem("auth", value.toString());
+          },
+        }}
+      >
+        <Navbar />
+        <div className="container">
+          <Component {...pageProps} />
+        </div>
+      </AuthContext.Provider>
     </>
   );
 }

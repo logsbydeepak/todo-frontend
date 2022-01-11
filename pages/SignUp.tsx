@@ -3,13 +3,14 @@ import type { NextPage } from "next";
 import PageTitle from "../components/PageTitle";
 import Input from "../components/Input";
 import { ButtonIcon } from "../components/Button";
-import { EventHandler, useState } from "react";
+import { EventHandler, useContext, useState } from "react";
 import { useRouter } from "next/router";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 import signUpStyle from "../styles/module/pages/LoginSignUp.module.scss";
 
 import axios from "@config/axios";
+import { AuthContext } from "context/auth.context";
 
 const SignUp: NextPage = () => {
   const router = useRouter();
@@ -39,6 +40,7 @@ const SignUp: NextPage = () => {
     });
   };
 
+  const { changeAuth } = useContext(AuthContext);
   const clickHandler = async (e: any) => {
     e.preventDefault();
 
@@ -85,8 +87,9 @@ const SignUp: NextPage = () => {
     try {
       await axios.post("/user", formData);
       router.push("/");
+      changeAuth(true);
     } catch (e: any) {
-      console.log(e.request);
+      console.log(e);
     }
   };
 

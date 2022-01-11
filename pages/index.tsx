@@ -3,20 +3,15 @@ import type { NextPage } from "next";
 
 import landingPageStyle from "../styles/module/pages/Index.module.scss";
 import { ButtonSimple } from "../components/Button";
-import { useState } from "react";
-import axios from "@config/axios";
+import { useContext, useLayoutEffect, useState } from "react";
+import { AuthContext } from "context/auth.context";
 
 const Home: NextPage = () => {
   const [isLogin, setIsLogin] = useState(false);
+  const { auth } = useContext(AuthContext);
 
-  useState(async () => {
-    try {
-      const request = await axios.get("/todo?status=true&page=0");
-      setIsLogin(true);
-      console.log(request);
-    } catch (e: any) {
-      console.log(e.response.data);
-    }
+  useLayoutEffect(() => {
+    setIsLogin(auth);
   });
 
   return (

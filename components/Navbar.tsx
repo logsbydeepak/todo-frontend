@@ -1,6 +1,12 @@
 import axiosConfig from "@config/axios";
+import { AuthContext } from "context/auth.context";
 import Link from "next/link";
-import { FunctionComponent, useState } from "react";
+import {
+  FunctionComponent,
+  useContext,
+  useLayoutEffect,
+  useState,
+} from "react";
 
 import navigationStyle from "../styles/module/components/navbar.module.scss";
 
@@ -17,8 +23,13 @@ const defaultLinks = [
 
 const Navbar: FunctionComponent = () => {
   const [links, setLinks] = useState(defaultLinks);
+  const { auth } = useContext(AuthContext);
 
   useState(async () => {
+    if (!auth) {
+      return;
+    }
+
     try {
       const request: any = await axiosConfig.get("/user");
       setLinks([

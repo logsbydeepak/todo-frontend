@@ -5,11 +5,12 @@ import Input from "../components/Input";
 import PageTitle from "../components/PageTitle";
 import { ButtonIcon } from "../components/Button";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 import axiosConfig from "@config/axios";
 import loginStyle from "../styles/module/pages/LoginSignUp.module.scss";
+import { AuthContext } from "context/auth.context";
 
 const Login: NextPage = () => {
   const router = useRouter();
@@ -36,6 +37,7 @@ const Login: NextPage = () => {
     });
   };
 
+  const { changeAuth } = useContext(AuthContext);
   const clickHandler = async (e: any) => {
     e.preventDefault();
 
@@ -73,6 +75,7 @@ const Login: NextPage = () => {
     try {
       await axiosConfig.post("/session", formData);
       router.push("/");
+      changeAuth(true);
     } catch (e: any) {
       console.log(e.request);
     }
