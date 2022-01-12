@@ -4,6 +4,7 @@ import Link from "next/link";
 import {
   FunctionComponent,
   useContext,
+  useEffect,
   useLayoutEffect,
   useState,
 } from "react";
@@ -25,11 +26,7 @@ const Navbar: FunctionComponent = () => {
   const [links, setLinks] = useState(defaultLinks);
   const { auth } = useContext(AuthContext);
 
-  useState(async () => {
-    if (!auth) {
-      return;
-    }
-
+  const getUser = async () => {
     try {
       const request: any = await axiosRequest.get("/user");
       setLinks([
@@ -47,7 +44,18 @@ const Navbar: FunctionComponent = () => {
       setLinks(defaultLinks);
       console.log(e.response.data);
     }
-  });
+  };
+
+  useEffect(() => {
+    console.log(auth + "NAV");
+
+    if (!auth) {
+      setLinks(defaultLinks);
+      return;
+    }
+
+    getUser();
+  }, [auth]);
 
   return (
     <>

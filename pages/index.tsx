@@ -3,14 +3,20 @@ import type { NextPage } from "next";
 
 import landingPageStyle from "../styles/module/pages/Index.module.scss";
 import { ButtonSimple } from "../components/Button";
-import { useContext, useLayoutEffect, useState } from "react";
+import {
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useReducer,
+  useState,
+} from "react";
 import { AuthContext } from "context/auth.context";
 
 const Home: NextPage = () => {
   const [isLogin, setIsLogin] = useState(false);
   const { auth } = useContext(AuthContext);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setIsLogin(auth);
   });
 

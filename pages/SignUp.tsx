@@ -97,8 +97,9 @@ const SignUp: NextPage = () => {
         status: true,
         type: "success",
       });
-      router.push("/");
+
       changeAuth(true);
+      router.push("/");
     } catch (e: any) {
       setHeadingStatus({
         message: "Something went wrong. Please try again.",

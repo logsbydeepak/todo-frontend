@@ -3,13 +3,13 @@ import type { AppProps } from "next/app";
 
 import "../styles/globals.scss";
 import Navbar from "../components/Navbar";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useReducer, useState } from "react";
 import { AuthContext } from "context/auth.context";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [auth, setAuth] = useState(false);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const initialAuth = localStorage.getItem("auth");
 
     if (initialAuth === null) {
