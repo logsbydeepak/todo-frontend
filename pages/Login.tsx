@@ -1,15 +1,18 @@
+import { useContext, useState } from "react";
+
 import Head from "next/head";
 import type { NextPage } from "next";
-
-import Input from "../components/Input";
-import PageTitle from "../components/PageTitle";
-import { ButtonIcon } from "../components/Button";
 import { useRouter } from "next/router";
-import { EventHandler, useContext, useState } from "react";
+
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
+
+import Input from "components/Input";
+import PageTitle from "components/PageTitle";
+import { ButtonIcon } from "components/Button";
+import style from "styles/module/pages/LoginSignUp.module.scss";
+
 import { axiosRequest } from "@config/axios";
-import style from "../styles/module/pages/LoginSignUp.module.scss";
 import { AuthContext } from "context/auth.context";
 
 const initialUserData = {

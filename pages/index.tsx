@@ -3,13 +3,7 @@ import type { NextPage } from "next";
 
 import landingPageStyle from "../styles/module/pages/Index.module.scss";
 import { ButtonSimple } from "../components/Button";
-import {
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useReducer,
-  useState,
-} from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "context/auth.context";
 
 const Home: NextPage = () => {

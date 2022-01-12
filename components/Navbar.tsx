@@ -1,54 +1,28 @@
 import { axiosRequest } from "@config/axios";
 import { AuthContext } from "context/auth.context";
 import Link from "next/link";
-import {
-  FunctionComponent,
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useState,
-} from "react";
+import { FunctionComponent, useContext, useEffect, useState } from "react";
 
-import navigationStyle from "../styles/module/components/navbar.module.scss";
-
-const defaultLinks = [
-  {
-    name: "Login",
-    link: "/Login",
-  },
-  {
-    name: "Sign Up",
-    link: "/SignUp",
-  },
-];
+import style from "../styles/module/components/navbar.module.scss";
+import { AuthLink, NoAuthLink } from "./Link";
 
 const Navbar: FunctionComponent = () => {
-  const [links, setLinks] = useState(defaultLinks);
   const { auth } = useContext(AuthContext);
+  const [user, setUser] = useState("User");
 
   const getUser = async () => {
     try {
       const request: any = await axiosRequest.get("/user");
-      setLinks([
-        {
-          name: "Home",
-          link: "/",
-        },
-        {
-          name: request.data.data.name,
-          link: "/User",
-        },
-      ]);
-      console.log();
+      setUser(request.request.data.name);
     } catch (e: any) {
-      setLinks(defaultLinks);
       console.log(e.response.data);
     }
   };
 
+  const handelLogout = () => {};
+
   useEffect(() => {
     if (!auth) {
-      setLinks(defaultLinks);
       return;
     }
 
@@ -57,17 +31,19 @@ const Navbar: FunctionComponent = () => {
 
   return (
     <>
-      <header className={navigationStyle.base}>
+      <header className={style.base}>
         <Link href="/">
-          <a className={navigationStyle.logo}>TODO</a>
+          <a className={style.logo}>TODO</a>
         </Link>
 
-        <div className={navigationStyle.link}>
-          {links.map(({ name, link }, index) => (
-            <Link href={link} key={index}>
-              <a className={navigationStyle.item}>{name}</a>
-            </Link>
-          ))}
+        <div className={style.link}>
+          <ul>
+            {auth ? (
+              <AuthLink name={user} handelLogout={handelLogout} />
+            ) : (
+              <NoAuthLink />
+            )}
+          </ul>
         </div>
       </header>
     </>

@@ -9,10 +9,11 @@ import isStrongPassword from "validator/lib/isStrongPassword";
 
 import Input from "components/Input";
 import PageTitle from "components/PageTitle";
-import { axiosRequest } from "@config/axios";
 import { ButtonIcon } from "components/Button";
-import { AuthContext } from "context/auth.context";
 import style from "styles/module/pages/LoginSignUp.module.scss";
+
+import { axiosRequest } from "@config/axios";
+import { AuthContext } from "context/auth.context";
 
 const initialUserData = {
   name: "",
@@ -45,10 +46,10 @@ const SignUp: NextPage = () => {
   const [formData, setFormData] = useState(initialUserData);
   const [isHeadingStatus, setHeadingStatus] = useState(initialHeadingStatus);
 
-  const formInputHandler = (e: any) => {
+  const formInputHandler = (event: any) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     });
   };
 

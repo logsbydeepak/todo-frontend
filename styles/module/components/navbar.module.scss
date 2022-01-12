@@ -10,9 +10,18 @@
   font-weight: 700;
 }
 
-.item {
+.link ul li a {
   font-size: 1.6rem;
   color: #afafaf;
   font-weight: 500;
   margin-left: 2rem;
+}
+
+.link ul {
+  cursor: pointer;
+}
+
+.link ul {
+  display: flex;
+  flex-direction: row;
 }
