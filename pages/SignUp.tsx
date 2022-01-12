@@ -1,16 +1,18 @@
+import { useContext, useState } from "react";
+
 import Head from "next/head";
 import type { NextPage } from "next";
-import PageTitle from "../components/PageTitle";
-import Input from "../components/Input";
-import { ButtonIcon } from "../components/Button";
-import { EventHandler, useContext, useState } from "react";
 import { useRouter } from "next/router";
+
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
-import signUpStyle from "../styles/module/pages/LoginSignUp.module.scss";
 
+import Input from "components/Input";
+import PageTitle from "components/PageTitle";
 import { axiosRequest } from "@config/axios";
+import { ButtonIcon } from "components/Button";
 import { AuthContext } from "context/auth.context";
+import style from "styles/module/pages/LoginSignUp.module.scss";
 
 const initialUserData = {
   name: "",
@@ -24,18 +26,24 @@ const initialErrorData = {
   password: false,
 };
 
+const initialHeadingStatus: {
+  status: boolean;
+  message: string;
+  type: "error" | "success";
+} = {
+  status: false,
+  message: "",
+  type: "error",
+};
+
 const SignUp: NextPage = () => {
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState(initialUserData);
   const [helper, setHelper] = useState(initialUserData);
   const [isError, setIsError] = useState(initialErrorData);
-  const [isHeadingStatus, setHeadingStatus] = useState({
-    status: false,
-    message: "",
-    type: "error",
-  });
+  const [formData, setFormData] = useState(initialUserData);
+  const [isHeadingStatus, setHeadingStatus] = useState(initialHeadingStatus);
 
   const formInputHandler = (e: any) => {
     setFormData({
@@ -45,8 +53,9 @@ const SignUp: NextPage = () => {
   };
 
   const { changeAuth } = useContext(AuthContext);
-  const clickHandler = async (e: any) => {
-    e.preventDefault();
+
+  const clickHandler = async (event: Event) => {
+    event.preventDefault();
     setLoading(true);
     const helperText = { ...initialUserData };
     const isErrorStatus = { ...initialErrorData };
@@ -115,7 +124,7 @@ const SignUp: NextPage = () => {
       <Head>
         <title>TODO - SignUp</title>
       </Head>
-      <div className={signUpStyle.base}>
+      <div className={style.base}>
         <PageTitle
           title="Create Account"
           subtitle="Create your account to get started"
@@ -124,7 +133,7 @@ const SignUp: NextPage = () => {
         {isHeadingStatus.status && (
           <h1
             className={`
-              ${signUpStyle.heading} ${signUpStyle[isHeadingStatus.type]}`}
+              ${style.heading} ${style[isHeadingStatus.type]}`}
           >
             {isHeadingStatus.message}
           </h1>

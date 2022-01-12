@@ -47,8 +47,6 @@ const Navbar: FunctionComponent = () => {
   };
 
   useEffect(() => {
-    console.log(auth + "NAV");
-
     if (!auth) {
       setLinks(defaultLinks);
       return;
