@@ -3,7 +3,7 @@ import { AuthContext } from "context/auth.context";
 import Link from "next/link";
 import { FunctionComponent, useContext, useEffect, useState } from "react";
 
-import style from "../styles/module/components/navbar.module.scss";
+import style from "styles/module/components/navbar.module.scss";
 import { AuthLink, NoAuthLink } from "./Link";
 
 const Navbar: FunctionComponent = () => {
@@ -12,10 +12,10 @@ const Navbar: FunctionComponent = () => {
 
   const getUser = async () => {
     try {
-      const request: any = await axiosRequest.get("/user");
-      setUser(request.request.data.name);
+      // const request: any = await axiosRequest.get("/user");
+      // setUser(request.request.data.name);
     } catch (e: any) {
-      console.log(e.response.data);
+      // console.log(e.response.data);
     }
   };
 
