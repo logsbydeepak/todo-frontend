@@ -13,7 +13,7 @@ import { APIRequest } from "helper/APIRequest";
 import { json } from "stream/consumers";
 
 const Home: NextPage = () => {
-  const [todo, setTodo] = useState();
+  const [todo, setTodo] = useState([]);
   const { auth, changeAuth } = useContext(AuthContext);
 
   const router = useRouter();
@@ -28,33 +28,23 @@ const Home: NextPage = () => {
     setTodo(request);
   };
 
-  const refreshToken = async () => {
-    console.log(5);
-
-    try {
-      console.log(1);
-      const request = await axiosRequest.put("/session/refresh");
-      console.log(2);
-      console.log(request);
-      console.log(request.data.data);
-    } catch (error: any) {
-      console.log(3);
-      console.log(error.response.data);
-    }
-  };
-
   useEffect(() => {
     if (!auth) return;
-    // refreshToken();
     getTodo();
   }, [auth]);
 
   return (
     <>
       {auth ? (
-        <h1>{JSON.stringify(todo)}</h1>
+        <>
+          <h1>hi</h1>
+          {
+            <>
+              <h1>no todo</h1>
+            </>
+          }
+        </>
       ) : (
-        // <h1>Todo</h1>
         <>
           <Head>
             <title>TODO - Getting Started</title>
