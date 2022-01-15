@@ -1,4 +1,4 @@
-import { axiosRequest } from "@config/axios";
+import { axiosRequest } from "helper/axios";
 import { Method } from "axios";
 
 const serverRequest = async (method: Method, url: string, data?: any) => {

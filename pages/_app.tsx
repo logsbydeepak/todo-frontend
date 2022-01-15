@@ -4,7 +4,7 @@ import type { AppProps } from "next/app";
 import "../styles/globals.scss";
 import Navbar from "../components/Navbar";
 import { useEffect, useLayoutEffect, useReducer, useState } from "react";
-import { AuthContext } from "context/auth.context";
+import { AuthContext } from "helper/authContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [auth, setAuth] = useState(false);

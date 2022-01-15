@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import inputStyle from "../styles/module/components/input.module.scss";
+import style from "styles/module/components/input.module.scss";
 
 type Props = {
   name: string;
@@ -29,13 +29,13 @@ const Input: FunctionComponent<Props> = ({
 }) => {
   return (
     <>
-      <div className={`${inputStyle.base} ${isError && inputStyle.error}`}>
-        <label htmlFor={name} className={inputStyle.label}>
+      <div className={`${style.base} ${isError && style.error}`}>
+        <label htmlFor={name} className={style.label}>
           {label}
         </label>
         <input
           autoFocus={autoFocus}
-          className={inputStyle.input}
+          className={style.input}
           type={type}
           id={name}
           name={name}
@@ -44,7 +44,7 @@ const Input: FunctionComponent<Props> = ({
           placeholder={placeholder}
           disabled={disabled}
         />
-        <p className={inputStyle.helper}>{helper}</p>
+        <p className={style.helper}>{helper}</p>
       </div>
     </>
   );

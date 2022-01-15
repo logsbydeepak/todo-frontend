@@ -12,8 +12,8 @@ import PageTitle from "components/PageTitle";
 import { ButtonIcon } from "components/Button";
 import style from "styles/module/pages/LoginSignUp.module.scss";
 
-import { axiosRequest } from "@config/axios";
-import { AuthContext } from "context/auth.context";
+import { axiosRequest } from "helper/axios";
+import { AuthContext } from "helper/authContext";
 
 const initialUserData = {
   email: "",

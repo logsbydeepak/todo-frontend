@@ -1,5 +1,5 @@
-import { axiosRequest } from "@config/axios";
-import { AuthContext } from "context/auth.context";
+import { axiosRequest } from "helper/axios";
+import { AuthContext } from "helper/authContext";
 import Link from "next/link";
 import { FunctionComponent, useContext, useEffect, useState } from "react";
 
