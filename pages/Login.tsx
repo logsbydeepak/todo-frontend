@@ -138,6 +138,7 @@ const Login: NextPage = () => {
             placeholder="example@email.com"
             isError={isError.email}
             disabled={loading}
+            autoFocus={true}
           />
           <Input
             name="password"
