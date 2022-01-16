@@ -1,0 +1,77 @@
+.base {
+  border: 0.2rem solid #434343;
+  padding: 4rem;
+  border-radius: 0.4rem;
+  margin-top: 6rem;
+  margin-bottom: 4rem;
+}
+
+.base input {
+  width: 100%;
+  background-color: #222222;
+  outline: 0;
+  border-radius: 0.4rem;
+  font-size: 1.8rem;
+  padding: 1.6rem 3rem;
+  transition: all 0.2s;
+  margin-bottom: 3rem;
+  border: 0.2rem solid #434343;
+}
+
+.base input:focus {
+  border: 0.2rem solid #8a4feb;
+}
+
+.button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button div button {
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.button div button i {
+  font-size: 2.4rem;
+}
+
+.status button {
+  margin-right: 2rem;
+}
+
+.group button {
+  margin-left: 2rem;
+  padding: 1rem 1.2rem;
+  border-radius: 0.4rem;
+}
+
+.group button i {
+  font-size: 1rem;
+}
+
+.base .edit {
+  background-color: #fff;
+}
+
+.base .edit i {
+  color: #161616;
+  font-size: 2rem;
+}
+
+.base .close i {
+  font-size: 2rem;
+}
+
+.base .close {
+  background-color: #ea4335;
+}
+
+.completed i {
+  color: #ea4335;
+}
+
+.incomplete i {
+  color: #34a853;
+}

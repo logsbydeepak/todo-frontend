@@ -14,6 +14,8 @@ import { json } from "stream/consumers";
 import TodoMenu from "components/TodoMenu";
 
 import CreateTaskInput from "components/CreateTaskInput";
+import PageTitle from "components/PageTitle";
+import TaskInput from "components/TaskInput";
 
 const Home: NextPage = () => {
   const [todo, setTodo] = useState([]);
@@ -40,8 +42,10 @@ const Home: NextPage = () => {
     <>
       {auth ? (
         <>
+          <PageTitle title="Your Todos" subtitle="Manage your task" />
           <CreateTaskInput loading={false} />
           <TodoMenu />
+          <TaskInput status={false} task="task 1" edit={false} />
         </>
       ) : (
         <>
