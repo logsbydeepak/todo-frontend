@@ -1,0 +1,43 @@
+.base {
+  display: flex;
+  justify-content: space-between;
+  margin: 4rem 2rem;
+}
+
+.base button {
+  background-color: transparent;
+  padding: 1.4rem 3.2rem;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #afafaf;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.base button:hover {
+  background-color: #1b1b1b;
+}
+
+.base button:active {
+  background-color: #222222;
+}
+
+.completed i {
+  margin-right: 1rem;
+  color: #34a853;
+}
+
+.incomplete i {
+  margin-right: 1rem;
+  color: #ea4335;
+}
+
+.base .active {
+  background-color: #222222;
+  color: #fff;
+}

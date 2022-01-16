@@ -11,6 +11,7 @@ import Router, { useRouter } from "next/router";
 import { route } from "next/dist/server/router";
 import { APIRequest } from "helper/APIRequest";
 import { json } from "stream/consumers";
+import TodoMenu from "components/TodoMenu";
 
 import CreateTaskInput from "components/CreateTaskInput";
 
@@ -32,26 +33,21 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (!auth) return;
-    getTodo();
+    // getTodo();
   }, [auth]);
 
   return (
     <>
       {auth ? (
         <>
-          <h1>hi</h1>
-          {
-            <>
-              <h1>no todo</h1>
-            </>
-          }
+          <CreateTaskInput loading={false} />
+          <TodoMenu />
         </>
       ) : (
         <>
           <Head>
             <title>TODO - Getting Started</title>
           </Head>
-          <CreateTaskInput loading={false} />
           <div className={landingPageStyle.base}>
             <h1 className={landingPageStyle.title}>
               Finish Your Task with TODO
