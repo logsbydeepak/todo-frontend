@@ -1,0 +1,52 @@
+.base {
+  display: flex;
+}
+
+.input {
+  width: 100%;
+  background-color: #222222;
+  border: 0.2rem solid #434343;
+  border-radius: 0.4rem;
+  border-right: none;
+  font-size: 1.8rem;
+  padding: 1.6rem 3rem;
+  transition: all 0.2s;
+  border-start-end-radius: 0rem;
+  border-end-end-radius: 0rem;
+}
+
+.input:focus {
+  border-color: #8a4feb;
+}
+
+.button {
+  background-color: #722ae6;
+  border-start-end-radius: 0.4rem;
+  border-end-end-radius: 0.4rem;
+  padding: 2rem;
+  cursor: pointer;
+  box-shadow: 0rem 0rem 0.4rem 0rem #722ae6;
+}
+
+.spinner {
+  border: 0.3rem solid #fff;
+  border-radius: 50%;
+  border-top: 0.3rem solid rgba(255, 255, 255, 0);
+  width: 2.4rem;
+  height: 2.4rem;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.button:disabled {
+  box-shadow: none;
+}

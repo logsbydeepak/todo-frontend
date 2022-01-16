@@ -12,6 +12,8 @@ import { route } from "next/dist/server/router";
 import { APIRequest } from "helper/APIRequest";
 import { json } from "stream/consumers";
 
+import CreateTaskInput from "components/CreateTaskInput";
+
 const Home: NextPage = () => {
   const [todo, setTodo] = useState([]);
   const { auth, changeAuth } = useContext(AuthContext);
@@ -49,6 +51,7 @@ const Home: NextPage = () => {
           <Head>
             <title>TODO - Getting Started</title>
           </Head>
+          <CreateTaskInput loading={false} />
           <div className={landingPageStyle.base}>
             <h1 className={landingPageStyle.title}>
               Finish Your Task with TODO
