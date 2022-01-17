@@ -20,7 +20,10 @@ import TaskInput from "components/TaskInput";
 const Home: NextPage = () => {
   const [todo, setTodo] = useState([]);
   const { auth, changeAuth } = useContext(AuthContext);
+  const [status, changeStatus] = useState(false);
+  const [edit, setEdit] = useState(false);
 
+  const [active, setActive] = useState("all");
   const router = useRouter();
 
   const getTodo = async () => {
@@ -31,6 +34,11 @@ const Home: NextPage = () => {
       router
     );
     setTodo(request);
+  };
+
+  const handleChangeStatus = (e: any) => {
+    e.preventDefault();
+    changeStatus(!status);
   };
 
   useEffect(() => {
@@ -44,8 +52,14 @@ const Home: NextPage = () => {
         <>
           <PageTitle title="Your Todos" subtitle="Manage your task" />
           <CreateTaskInput loading={false} />
-          <TodoMenu />
-          <TaskInput status={false} task="task 1" edit={false} />
+          <TodoMenu active={active} setActive={setActive} />
+          <TaskInput
+            status={status}
+            task="task 1"
+            edit={edit}
+            handleChangeStatus={handleChangeStatus}
+            onEditHandle={() => setEdit(!edit)}
+          />
         </>
       ) : (
         <>
