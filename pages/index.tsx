@@ -16,24 +16,41 @@ import TodoMenu from "components/TodoMenu";
 import CreateTaskInput from "components/CreateTaskInput";
 import PageTitle from "components/PageTitle";
 import TaskInput from "components/TaskInput";
+import Loading from "components/Loading";
+import { ButtonIcon } from "../components/Button";
 
 const Home: NextPage = () => {
   const [todo, setTodo] = useState([]);
-  const { auth, changeAuth } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
   const [status, changeStatus] = useState(false);
   const [edit, setEdit] = useState(false);
+  const [focus, setFocus] = useState(false);
+  const [value, setValue] = useState("");
+  const [loadMore, setLoadMore] = useState(2);
+  const [loadingMore, setLoadingMore] = useState(false);
+
+  const { auth, changeAuth } = useContext(AuthContext);
 
   const [active, setActive] = useState("all");
   const router = useRouter();
 
+  const loadMoreHandle = (e: any) => {
+    e.preventDefault();
+    setLoadMore(loadMore + 2);
+  };
+
   const getTodo = async () => {
-    const request = await APIRequest(
+    setLoading(true);
+    const request: any = await APIRequest(
       "GET",
-      "/todo?status=false&page=0",
+      `/todo?status=${active}&page=${loadMore}`,
       changeAuth,
       router
     );
+
     setTodo(request);
+
+    setLoading(false);
   };
 
   const handleChangeStatus = (e: any) => {
@@ -43,8 +60,13 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (!auth) return;
-    // getTodo();
-  }, [auth]);
+    getTodo();
+  }, [auth, active, loadMore]);
+
+  const handleInputChange = (e: any) => {
+    setValue(e.target.value);
+    getTodo();
+  };
 
   return (
     <>
@@ -53,13 +75,33 @@ const Home: NextPage = () => {
           <PageTitle title="Your Todos" subtitle="Manage your task" />
           <CreateTaskInput loading={false} />
           <TodoMenu active={active} setActive={setActive} />
-          <TaskInput
-            status={status}
-            task="task 1"
-            edit={edit}
-            handleChangeStatus={handleChangeStatus}
-            onEditHandle={() => setEdit(!edit)}
-          />
+
+          {loading ? (
+            <Loading />
+          ) : (
+            todo.map((task: any) => {
+              return (
+                <TaskInput
+                  key={task._id}
+                  status={task.status}
+                  task={task.task}
+                  edit={edit}
+                  handleChangeStatus={handleChangeStatus}
+                  onEditHandle={() => setEdit(!edit)}
+                  handleInputChange={handleInputChange}
+                />
+              );
+            })
+          )}
+          {!loading && (
+            <ButtonIcon
+              icon="add"
+              text="Load more"
+              type="primary"
+              clickHandler={loadMoreHandle}
+              loading={loadingMore}
+            />
+          )}
         </>
       ) : (
         <>

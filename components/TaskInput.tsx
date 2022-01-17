@@ -7,6 +7,7 @@ interface Props {
   edit: boolean;
   handleChangeStatus: any;
   onEditHandle: any;
+  handleInputChange: any;
 }
 
 const TaskInput: FunctionComponent<Props> = ({
@@ -15,11 +16,18 @@ const TaskInput: FunctionComponent<Props> = ({
   edit,
   handleChangeStatus,
   onEditHandle,
+  handleInputChange,
 }) => {
   return (
     <>
       <div className={style.base}>
-        <input type="text" value={task} disabled={!edit} autoFocus={edit} />
+        <input
+          type="text"
+          value={task}
+          disabled={!edit}
+          autoFocus={!edit}
+          onChange={handleInputChange}
+        />
         <div className={style.button}>
           <div className={style.status}>
             <button className={style.completed} onClick={handleChangeStatus}>

@@ -19,19 +19,17 @@ const TodoMenu = ({ active, setActive }) => {
           All
         </button>
         <button
-          className={`${style.completed} ${
-            active === "complete" && style.active
-          }`}
-          value="complete"
+          className={`${style.completed} ${active === "true" && style.active}`}
+          value="true"
         >
           <i className="icon">radio_button_checked</i>
           Completed
         </button>
         <button
           className={`${style.incomplete} ${
-            active === "incomplete" && style.active
+            active === "false" && style.active
           }`}
-          value="incomplete"
+          value="false"
         >
           <i className="icon">radio_button_checked</i>
           Incomplete
