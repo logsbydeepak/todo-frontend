@@ -100,7 +100,17 @@ const Login: NextPage = () => {
 
       changeAuth(true);
       router.push("/");
-    } catch (e: any) {
+    } catch (error: any) {
+      if (error.response.data.error.message === "user do not exist") {
+        setHeadingStatus({
+          message: "Email or password is invalid",
+          status: true,
+          type: "error",
+        });
+        setLoading(false);
+        return;
+      }
+
       setHeadingStatus({
         message: "Something went wrong. Please try again.",
         status: true,
