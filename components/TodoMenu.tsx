@@ -1,15 +1,25 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, FunctionComponent, SetStateAction, useState } from "react";
 import style from "styles/module/components/todoMenu.module.scss";
 
 interface Props {
   active: string;
   setActive: Dispatch<SetStateAction<string>>;
+  setSkip: any;
+  setTodo: any;
 }
 
-const TodoMenu = ({ active, setActive }) => {
+const TodoMenu: FunctionComponent<Props> = ({
+  active,
+  setActive,
+  setSkip,
+  setTodo,
+}) => {
   const onChangeHandler = (e: any) => {
     e.preventDefault();
+    if (!e.target.value) return;
     setActive(e.target.value);
+    setTodo([]);
+    setSkip(0);
   };
 
   return (

@@ -20,36 +20,37 @@ import Loading from "components/Loading";
 import { ButtonIcon } from "../components/Button";
 
 const Home: NextPage = () => {
-  const [todo, setTodo] = useState([]);
+  const [todo, setTodo] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const [status, changeStatus] = useState(false);
   const [edit, setEdit] = useState(false);
-  const [focus, setFocus] = useState(false);
   const [value, setValue] = useState("");
-  const [loadMore, setLoadMore] = useState(2);
+  const [loadMore, setLoadMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [isLoadMoreButton, setIsLoadMoreButton] = useState(false);
 
   const { auth, changeAuth } = useContext(AuthContext);
+  const [skip, setSkip] = useState(0);
 
   const [active, setActive] = useState("all");
   const router = useRouter();
-
-  const loadMoreHandle = (e: any) => {
-    e.preventDefault();
-    setLoadMore(loadMore + 2);
-  };
 
   const getTodo = async () => {
     setLoading(true);
     const request: any = await APIRequest(
       "GET",
-      `/todo?status=${active}&page=${loadMore}`,
+      `/todo?status=${active}&skip=${skip}&limit=5`,
       changeAuth,
       router
     );
 
-    setTodo(request);
+    if (request.length < 5) {
+      setIsLoadMoreButton(false);
+    } else {
+      setIsLoadMoreButton(true);
+    }
 
+    setTodo([...todo, ...request]);
     setLoading(false);
   };
 
@@ -61,11 +62,15 @@ const Home: NextPage = () => {
   useEffect(() => {
     if (!auth) return;
     getTodo();
-  }, [auth, active, loadMore]);
+  }, [auth, skip, active]);
+
+  const loadMoreHandle = (e: any) => {
+    e.preventDefault();
+    setSkip(todo.length);
+  };
 
   const handleInputChange = (e: any) => {
     setValue(e.target.value);
-    getTodo();
   };
 
   return (
@@ -74,8 +79,12 @@ const Home: NextPage = () => {
         <>
           <PageTitle title="Your Todos" subtitle="Manage your task" />
           <CreateTaskInput loading={false} />
-          <TodoMenu active={active} setActive={setActive} />
-
+          <TodoMenu
+            active={active}
+            setActive={setActive}
+            setSkip={setSkip}
+            setTodo={setTodo}
+          />
           {loading ? (
             <Loading />
           ) : (
@@ -93,7 +102,10 @@ const Home: NextPage = () => {
               );
             })
           )}
-          {!loading && (
+          {todo.length === 0 && (
+            <p className={landingPageStyle.noTodo}>No task to show.</p>
+          )}
+          {isLoadMoreButton && todo.length !== 0 ? (
             <ButtonIcon
               icon="add"
               text="Load more"
@@ -101,6 +113,10 @@ const Home: NextPage = () => {
               clickHandler={loadMoreHandle}
               loading={loadingMore}
             />
+          ) : (
+            <p className={landingPageStyle.noTodo}>
+              {todo.length !== 0 && "No task left"}
+            </p>
           )}
         </>
       ) : (

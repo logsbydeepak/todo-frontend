@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import React, { FunctionComponent } from "react";
 import style from "styles/module/components/taskInput.module.scss";
 
 interface Props {
@@ -19,7 +19,7 @@ const TaskInput: FunctionComponent<Props> = ({
   handleInputChange,
 }) => {
   return (
-    <>
+    <React.Fragment>
       <div className={style.base}>
         <input
           type="text"
@@ -51,7 +51,7 @@ const TaskInput: FunctionComponent<Props> = ({
           </div>
         </div>
       </div>
-    </>
+    </React.Fragment>
   );
 };
 
