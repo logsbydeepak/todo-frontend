@@ -17,6 +17,7 @@ const TodoMenu: FunctionComponent<Props> = ({
   const onChangeHandler = (e: any) => {
     e.preventDefault();
     if (!e.target.value) return;
+    if (active === e.target.value) return;
     setActive(e.target.value);
     setTodo([]);
     setSkip(0);
@@ -25,16 +26,6 @@ const TodoMenu: FunctionComponent<Props> = ({
   return (
     <>
       <form className={style.base} onClick={onChangeHandler}>
-        <button className={`${active === "all" && style.active}`} value="all">
-          All
-        </button>
-        <button
-          className={`${style.completed} ${active === "true" && style.active}`}
-          value="true"
-        >
-          <i className="icon">radio_button_checked</i>
-          Completed
-        </button>
         <button
           className={`${style.incomplete} ${
             active === "false" && style.active
@@ -43,6 +34,16 @@ const TodoMenu: FunctionComponent<Props> = ({
         >
           <i className="icon">radio_button_checked</i>
           Incomplete
+        </button>
+        <button
+          className={`${style.completed} ${active === "true" && style.active}`}
+          value="true"
+        >
+          <i className="icon">radio_button_checked</i>
+          Completed
+        </button>
+        <button className={`${active === "all" && style.active}`} value="all">
+          All
         </button>
       </form>
     </>

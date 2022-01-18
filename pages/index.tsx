@@ -32,7 +32,7 @@ const Home: NextPage = () => {
   const { auth, changeAuth } = useContext(AuthContext);
   const [skip, setSkip] = useState(0);
 
-  const [active, setActive] = useState("all");
+  const [active, setActive] = useState("false");
   const router = useRouter();
 
   const getTodo = async () => {
