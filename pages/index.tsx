@@ -60,6 +60,12 @@ const Home: NextPage = () => {
     setTodo([...newTodo]);
   };
 
+  const handleRemoveTask = (e: any, id: any) => {
+    e.preventDefault();
+    const newTodo = todo.filter((task: number, index: number) => index !== id);
+    setTodo(newTodo);
+  };
+
   useEffect(() => {
     if (!auth) return;
     getTodo();
@@ -93,13 +99,14 @@ const Home: NextPage = () => {
               return (
                 <TaskInput
                   key={task._id}
-                  id={index}
+                  index={index}
                   status={task.status}
                   task={task.task}
                   edit={edit}
                   handleChangeStatus={handleChangeStatus}
                   onEditHandle={() => setEdit(!edit)}
                   handleInputChange={handleInputChange}
+                  handleRemoveTask={handleRemoveTask}
                 />
               );
             })

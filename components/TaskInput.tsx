@@ -8,7 +8,8 @@ interface Props {
   handleChangeStatus: any;
   onEditHandle: any;
   handleInputChange: any;
-  id: any;
+  index: any;
+  handleRemoveTask: any;
 }
 
 const TaskInput: FunctionComponent<Props> = ({
@@ -18,7 +19,8 @@ const TaskInput: FunctionComponent<Props> = ({
   handleChangeStatus,
   onEditHandle,
   handleInputChange,
-  id,
+  index,
+  handleRemoveTask,
 }) => {
   return (
     <>
@@ -34,9 +36,12 @@ const TaskInput: FunctionComponent<Props> = ({
           <input
             type="checkbox"
             checked={status}
-            onChange={() => handleChangeStatus(id)}
+            onChange={() => handleChangeStatus(index)}
           />
-          <button className={style.close}>
+          <button
+            className={style.close}
+            onClick={(e: any) => handleRemoveTask(e, index)}
+          >
             <i className="icon">close</i>
           </button>
         </div>
