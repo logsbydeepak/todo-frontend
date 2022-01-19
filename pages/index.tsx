@@ -76,8 +76,11 @@ const Home: NextPage = () => {
     setSkip(todo.length);
   };
 
-  const handleInputChange = (e: any) => {
-    setValue(e.target.value);
+  const handleInputChange = (e: any, index: any) => {
+    const newTodo = [...todo];
+    console.log(e.target.value);
+    newTodo[index].task = e.target.value;
+    setTodo([...newTodo]);
   };
 
   return (

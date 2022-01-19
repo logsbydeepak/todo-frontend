@@ -28,9 +28,8 @@ const TaskInput: FunctionComponent<Props> = ({
         <input
           type="text"
           value={task}
-          disabled={!edit}
           autoFocus={!edit}
-          onChange={handleInputChange}
+          onChange={(e: any) => handleInputChange(e, index)}
         />
         <div className={style.button}>
           <input
