@@ -8,6 +8,7 @@ interface Props {
   handleChangeStatus: any;
   onEditHandle: any;
   handleInputChange: any;
+  id: any;
 }
 
 const TaskInput: FunctionComponent<Props> = ({
@@ -17,9 +18,10 @@ const TaskInput: FunctionComponent<Props> = ({
   handleChangeStatus,
   onEditHandle,
   handleInputChange,
+  id,
 }) => {
   return (
-    <React.Fragment>
+    <>
       <div className={style.base}>
         <input
           type="text"
@@ -29,29 +31,17 @@ const TaskInput: FunctionComponent<Props> = ({
           onChange={handleInputChange}
         />
         <div className={style.button}>
-          <div className={style.status}>
-            <button className={style.completed} onClick={handleChangeStatus}>
-              <i className="icon">
-                {!status ? "radio_button_checked" : "radio_button_unchecked"}
-              </i>
-            </button>
-            <button className={style.incomplete} onClick={handleChangeStatus}>
-              <i className="icon">
-                {status ? "radio_button_checked" : "radio_button_unchecked"}
-              </i>
-            </button>
-          </div>
-          <div className={style.group}>
-            <button className={style.edit} onClick={onEditHandle}>
-              <i className="icon">{edit ? "done_all" : "edit"}</i>
-            </button>
-            <button className={style.close}>
-              <i className="icon">close</i>
-            </button>
-          </div>
+          <input
+            type="checkbox"
+            checked={status}
+            onChange={() => handleChangeStatus(id)}
+          />
+          <button className={style.close}>
+            <i className="icon">close</i>
+          </button>
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

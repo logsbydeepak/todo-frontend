@@ -54,9 +54,10 @@ const Home: NextPage = () => {
     setLoading(false);
   };
 
-  const handleChangeStatus = (e: any) => {
-    e.preventDefault();
-    changeStatus(!status);
+  const handleChangeStatus = (id: any) => {
+    const newTodo = [...todo];
+    newTodo[id].status = !newTodo[id].status;
+    setTodo([...newTodo]);
   };
 
   useEffect(() => {
@@ -88,10 +89,11 @@ const Home: NextPage = () => {
           {loading ? (
             <Loading />
           ) : (
-            todo.map((task: any) => {
+            todo.map((task: any, index: number) => {
               return (
                 <TaskInput
                   key={task._id}
+                  id={index}
                   status={task.status}
                   task={task.task}
                   edit={edit}
