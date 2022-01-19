@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import style from "styles/module/components/taskInput.module.scss";
 
 interface Props {
@@ -22,28 +22,39 @@ const TaskInput: FunctionComponent<Props> = ({
   index,
   handleRemoveTask,
 }) => {
+  const [focus, setFocus] = useState(false);
+  const [tick, setTick] = useState(false);
   return (
     <>
-      <div className={style.base}>
+      <div className={`${style.base} ${focus && style.baseFocus}`}>
+        <input
+          type="checkbox"
+          checked={status}
+          onChange={() => handleChangeStatus(index)}
+          className={style.status}
+        />
         <input
           type="text"
           value={task}
-          autoFocus={!edit}
-          onChange={(e: any) => handleInputChange(e, index)}
+          onChange={(e: any) => {
+            handleInputChange(e, index);
+            setTick(true);
+          }}
+          className={style.task}
+          onFocus={() => setFocus(!focus)}
+          onBlur={() => setFocus(!focus)}
         />
-        <div className={style.button}>
-          <input
-            type="checkbox"
-            checked={status}
-            onChange={() => handleChangeStatus(index)}
-          />
-          <button
-            className={style.close}
-            onClick={(e: any) => handleRemoveTask(e, index)}
-          >
-            <i className="icon">close</i>
+        {tick && (
+          <button className={style.done}>
+            <i className="icon">done_all</i>
           </button>
-        </div>
+        )}
+        <button
+          className={style.close}
+          onClick={(e: any) => handleRemoveTask(e, index)}
+        >
+          <i className="icon">delete_outline</i>
+        </button>
       </div>
     </>
   );
