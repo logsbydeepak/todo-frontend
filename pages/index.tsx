@@ -1,31 +1,25 @@
+import { useContext, useEffect, useState } from "react";
+
 import Head from "next/head";
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
 
-import landingPageStyle from "../styles/module/pages/Index.module.scss";
-import { ButtonSimple } from "../components/Button";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "helper/authContext";
-import { axiosRequest } from "helper/axios";
-import { captureRejectionSymbol } from "stream";
-import Router, { useRouter } from "next/router";
-import { route } from "next/dist/server/router";
-import { APIRequest } from "helper/APIRequest";
-import { json } from "stream/consumers";
+import Loading from "components/Loading";
 import TodoMenu from "components/TodoMenu";
-
-import CreateTaskInput from "components/CreateTaskInput";
 import PageTitle from "components/PageTitle";
 import TaskInput from "components/TaskInput";
-import Loading from "components/Loading";
-import { ButtonIcon } from "../components/Button";
+import { ButtonSimple } from "components/Button";
+import { ButtonIcon } from "components/Button";
+import CreateTaskInput from "components/CreateTaskInput";
+
+import { APIRequest } from "helper/APIRequest";
+import { AuthContext } from "helper/authContext";
+
+import landingPageStyle from "styles/module/pages/Index.module.scss";
 
 const Home: NextPage = () => {
   const [todo, setTodo] = useState<any>([]);
   const [loading, setLoading] = useState(true);
-  const [status, changeStatus] = useState(false);
-  const [edit, setEdit] = useState(false);
-  const [value, setValue] = useState("");
-  const [loadMore, setLoadMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [isLoadMoreButton, setIsLoadMoreButton] = useState(false);
 
@@ -74,6 +68,7 @@ const Home: NextPage = () => {
   }, [auth, skip, active]);
 
   const loadMoreHandle = (e: any) => {
+    console.log("hi");
     e.preventDefault();
     setSkip(todo.length);
   };
@@ -82,7 +77,7 @@ const Home: NextPage = () => {
     const newTodo = [...todo];
     console.log(e.target.value);
     newTodo[index].task = e.target.value;
-    setTodo([...newTodo]);
+    setTodo(newTodo);
   };
 
   const handleChangeTask = (
@@ -119,9 +114,7 @@ const Home: NextPage = () => {
                   index={index}
                   status={task.status}
                   task={task.task}
-                  edit={edit}
                   handleChangeStatus={handleChangeStatus}
-                  onEditHandle={() => setEdit(!edit)}
                   handleInputChange={handleInputChange}
                   handleRemoveTask={handleRemoveTask}
                   handleChangeTask={handleChangeTask}

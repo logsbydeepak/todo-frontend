@@ -4,9 +4,7 @@ import style from "styles/module/components/taskInput.module.scss";
 interface Props {
   status: boolean;
   task: string;
-  edit: boolean;
   handleChangeStatus: any;
-  onEditHandle: any;
   handleInputChange: any;
   index: any;
   handleRemoveTask: any;
@@ -16,9 +14,7 @@ interface Props {
 const TaskInput: FunctionComponent<Props> = ({
   status,
   task,
-  edit,
   handleChangeStatus,
-  onEditHandle,
   handleInputChange,
   index,
   handleRemoveTask,
