@@ -85,6 +85,18 @@ const Home: NextPage = () => {
     setTodo([...newTodo]);
   };
 
+  const handleChangeTask = (
+    e: any,
+    index: any,
+    loading: any,
+    setLoading: any,
+    setTick: any
+  ) => {
+    e.preventDefault();
+    setTick(false);
+    setLoading({ ...loading, task: false });
+  };
+
   return (
     <>
       {auth ? (
@@ -112,6 +124,7 @@ const Home: NextPage = () => {
                   onEditHandle={() => setEdit(!edit)}
                   handleInputChange={handleInputChange}
                   handleRemoveTask={handleRemoveTask}
+                  handleChangeTask={handleChangeTask}
                 />
               );
             })

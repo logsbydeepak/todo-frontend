@@ -10,6 +10,7 @@ interface Props {
   handleInputChange: any;
   index: any;
   handleRemoveTask: any;
+  handleChangeTask: any;
 }
 
 const TaskInput: FunctionComponent<Props> = ({
@@ -21,6 +22,7 @@ const TaskInput: FunctionComponent<Props> = ({
   handleInputChange,
   index,
   handleRemoveTask,
+  handleChangeTask,
 }) => {
   const [focus, setFocus] = useState(false);
   const [tick, setTick] = useState(false);
@@ -60,8 +62,14 @@ const TaskInput: FunctionComponent<Props> = ({
         />
         {tick && (
           <div className={style.boxDiv}>
-            <button className={style.done}>
-              {!loading.task && <i className="icon">done_all</i>}
+            <button
+              className={style.done}
+              onClick={(e: any) => {
+                setLoading({ ...loading, task: true });
+                handleChangeTask(e, index, loading, setLoading, setTick);
+              }}
+            >
+              {!loading.task && tick && <i className="icon">done_all</i>}
               {loading.task && <div className={style.spinner}></div>}
             </button>
           </div>
@@ -70,8 +78,8 @@ const TaskInput: FunctionComponent<Props> = ({
           <button
             className={style.close}
             onClick={(e: any) => {
-              handleRemoveTask(e, index, loading, setLoading);
               setLoading({ ...loading, delete: true });
+              handleRemoveTask(e, index, loading, setLoading);
             }}
           >
             {!loading.delete && <i className="icon">delete_outline</i>}
