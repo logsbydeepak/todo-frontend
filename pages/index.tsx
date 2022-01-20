@@ -54,10 +54,11 @@ const Home: NextPage = () => {
     setLoading(false);
   };
 
-  const handleChangeStatus = (id: any) => {
+  const handleChangeStatus = (id: any, loading: any, setLoading: any) => {
     const newTodo = [...todo];
     newTodo[id].status = !newTodo[id].status;
     setTodo([...newTodo]);
+    setLoading({ ...loading, status: false });
   };
 
   const handleRemoveTask = (e: any, id: any) => {

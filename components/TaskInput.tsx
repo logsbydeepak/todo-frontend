@@ -24,15 +24,29 @@ const TaskInput: FunctionComponent<Props> = ({
 }) => {
   const [focus, setFocus] = useState(false);
   const [tick, setTick] = useState(false);
+  const [loading, setLoading] = useState({
+    status: false,
+    task: false,
+    delete: false,
+  });
+
   return (
     <>
       <div className={`${style.base} ${focus && style.baseFocus}`}>
-        <input
-          type="checkbox"
-          checked={status}
-          onChange={() => handleChangeStatus(index)}
-          className={style.status}
-        />
+        <div className={style.statusDiv}>
+          {loading.status && <div className={style.spinner}></div>}
+          {!loading.status && (
+            <input
+              type="checkbox"
+              checked={status}
+              onChange={() => {
+                setLoading({ ...loading, status: true });
+                handleChangeStatus(index, loading, setLoading);
+              }}
+              className={style.status}
+            />
+          )}
+        </div>
         <input
           type="text"
           value={task}

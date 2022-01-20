@@ -12,8 +12,8 @@
 
 .task {
   background-color: #222222;
-  width: 100%;
   outline: 0;
+  width: 100%;
   border-radius: 0.4rem;
   font-size: 1.6rem;
   padding: 1.6rem 2rem;
@@ -45,5 +45,31 @@
 }
 
 .status {
-  background-color: red;
+}
+
+.statusDiv {
+  min-width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  border: 0.3rem solid #fff;
+  border-radius: 50%;
+  border-top: 0.3rem solid rgba(255, 255, 255, 0);
+  width: 2rem;
+  height: 2rem;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
