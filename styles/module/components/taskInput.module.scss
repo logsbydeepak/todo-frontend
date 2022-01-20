@@ -22,13 +22,13 @@
 }
 
 .baseFocus {
-  border: 0.2rem solid #8a4feb;
+  border-color: #8a4feb;
 }
 
 .base button {
-  padding: 0.6rem 0.7rem;
   background-color: #222222;
-  border-radius: 0.2rem;
+  width: 2rem;
+  height: 2rem;
   cursor: pointer;
 }
 
@@ -36,20 +36,17 @@
   font-size: 2rem;
 }
 
-.close {
-  margin-left: 1rem;
+.base .left {
+  margin-left: 2rem;
 }
 
 .close i {
   color: #ea4435;
 }
 
-.status {
-}
-
-.statusDiv {
+.boxDiv {
   min-width: 2rem;
-  height: 2rem;
+  min-height: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;

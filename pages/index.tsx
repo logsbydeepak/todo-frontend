@@ -61,10 +61,11 @@ const Home: NextPage = () => {
     setLoading({ ...loading, status: false });
   };
 
-  const handleRemoveTask = (e: any, id: any) => {
+  const handleRemoveTask = (e: any, id: any, loading: any, setLoading: any) => {
     e.preventDefault();
     const newTodo = todo.filter((task: number, index: number) => index !== id);
     setTodo(newTodo);
+    setLoading({ ...loading, delete: false });
   };
 
   useEffect(() => {

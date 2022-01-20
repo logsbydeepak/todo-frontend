@@ -33,7 +33,7 @@ const TaskInput: FunctionComponent<Props> = ({
   return (
     <>
       <div className={`${style.base} ${focus && style.baseFocus}`}>
-        <div className={style.statusDiv}>
+        <div className={style.boxDiv}>
           {loading.status && <div className={style.spinner}></div>}
           {!loading.status && (
             <input
@@ -59,16 +59,25 @@ const TaskInput: FunctionComponent<Props> = ({
           onBlur={() => setFocus(!focus)}
         />
         {tick && (
-          <button className={style.done}>
-            <i className="icon">done_all</i>
-          </button>
+          <div className={style.boxDiv}>
+            <button className={style.done}>
+              {!loading.task && <i className="icon">done_all</i>}
+              {loading.task && <div className={style.spinner}></div>}
+            </button>
+          </div>
         )}
-        <button
-          className={style.close}
-          onClick={(e: any) => handleRemoveTask(e, index)}
-        >
-          <i className="icon">delete_outline</i>
-        </button>
+        <div className={`${style.boxDiv} ${style.left} `}>
+          <button
+            className={style.close}
+            onClick={(e: any) => {
+              handleRemoveTask(e, index, loading, setLoading);
+              setLoading({ ...loading, delete: true });
+            }}
+          >
+            {!loading.delete && <i className="icon">delete_outline</i>}
+            {loading.delete && <div className={style.spinner}></div>}
+          </button>
+        </div>
       </div>
     </>
   );
