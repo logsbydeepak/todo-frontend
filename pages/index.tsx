@@ -48,7 +48,7 @@ const Home: NextPage = () => {
   };
 
   const updateTask = async (taskData: any) => {
-    const request = await APIRequest("PUT", "/todo", changeAuth, router, {
+    await APIRequest("PUT", "/todo", changeAuth, router, {
       id: taskData._id,
       task: taskData.task,
       status: taskData.status,
@@ -62,14 +62,14 @@ const Home: NextPage = () => {
     newTodo[id].status = !newTodo[id].status;
 
     switch (active) {
-      case "false" || "true":
-        updateTaskData = todo.filter(
-          (task: number, index: number) => index !== id
-        );
+      case "all":
+        updateTaskData = newTodo;
         break;
 
       default:
-        updateTaskData = newTodo;
+        updateTaskData = todo.filter(
+          (task: number, index: number) => index !== id
+        );
         break;
     }
 
