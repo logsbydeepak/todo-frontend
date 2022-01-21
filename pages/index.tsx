@@ -30,7 +30,6 @@ const Home: NextPage = () => {
   const router = useRouter();
 
   const getTodo = async () => {
-    setLoading(true);
     const request: any = await APIRequest(
       "GET",
       `/todo?status=${active}&skip=${skip}&limit=5`,
@@ -48,11 +47,35 @@ const Home: NextPage = () => {
     setLoading(false);
   };
 
-  const handleChangeStatus = (id: any, loading: any, setLoading: any) => {
+  const updateTask = async (taskData: any) => {
+    const request = await APIRequest("PUT", "/todo", changeAuth, router, {
+      id: taskData._id,
+      task: taskData.task,
+      status: taskData.status,
+    });
+  };
+
+  const handleChangeStatus = async (id: any, loading: any, setLoading: any) => {
     const newTodo = [...todo];
+    let updateTaskData;
+
     newTodo[id].status = !newTodo[id].status;
-    setTodo([...newTodo]);
+
+    switch (active) {
+      case "false" || "true":
+        updateTaskData = todo.filter(
+          (task: number, index: number) => index !== id
+        );
+        break;
+
+      default:
+        updateTaskData = newTodo;
+        break;
+    }
+
+    await updateTask(newTodo[id]);
     setLoading({ ...loading, status: false });
+    setTodo([...updateTaskData]);
   };
 
   const handleRemoveTask = (e: any, id: any, loading: any, setLoading: any) => {
@@ -64,18 +87,21 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (!auth) return;
+    setLoading(true);
     getTodo();
+    return () => {
+      setTodo([]);
+      setLoading(false);
+    };
   }, [auth, skip, active]);
 
   const loadMoreHandle = (e: any) => {
-    console.log("hi");
     e.preventDefault();
     setSkip(todo.length);
   };
 
   const handleInputChange = (e: any, index: any) => {
     const newTodo = [...todo];
-    console.log(e.target.value);
     newTodo[index].task = e.target.value;
     setTodo(newTodo);
   };
