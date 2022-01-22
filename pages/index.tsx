@@ -117,7 +117,7 @@ const Home: NextPage = () => {
     setTodo(newTodo);
   };
 
-  const handleChangeTask = (
+  const handleChangeTask = async (
     e: any,
     index: any,
     loading: any,
@@ -125,6 +125,8 @@ const Home: NextPage = () => {
     setTick: any
   ) => {
     e.preventDefault();
+    const newTodo = [...todo];
+    await updateTask(newTodo[index]);
     setTick(false);
     setLoading({ ...loading, task: false });
   };
