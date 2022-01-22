@@ -89,11 +89,13 @@ const Home: NextPage = () => {
     setLoading: any
   ) => {
     e.preventDefault();
-    let newTodo = [...todo];
-    await removeTask(newTodo[id]._id);
-    newTodo = todo.filter((task: number, index: number) => index !== id);
-    setTodo(newTodo);
+    await removeTask(todo[id]._id);
+    const newTodo = [...todo];
+    const updatedTodo = newTodo.filter(
+      (task: number, index: number) => index !== id
+    );
     setLoading({ ...loading, delete: false });
+    setTodo([...updatedTodo]);
   };
 
   useEffect(() => {
