@@ -129,12 +129,33 @@ const Home: NextPage = () => {
     setLoading({ ...loading, task: false });
   };
 
+  const handleAddTask = async (
+    e: any,
+    task: any,
+    setTask: any,
+    loading: any,
+    setLoading: any
+  ) => {
+    e.preventDefault();
+    const newTodo = [...todo];
+    const request = await APIRequest("POST", "/todo", changeAuth, router, {
+      task,
+      status: false,
+    });
+    setTodo([
+      { _id: request.id, task: request.task, status: request.status },
+      ...newTodo,
+    ]);
+    setTask("");
+    setLoading(false);
+  };
+
   return (
     <>
       {auth ? (
         <>
           <PageTitle title="Your Todos" subtitle="Manage your task" />
-          <CreateTaskInput loading={false} />
+          <CreateTaskInput handleAddTask={handleAddTask} />
           <TodoMenu
             active={active}
             setActive={setActive}
