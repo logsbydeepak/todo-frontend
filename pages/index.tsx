@@ -78,9 +78,20 @@ const Home: NextPage = () => {
     setTodo([...updateTaskData]);
   };
 
-  const handleRemoveTask = (e: any, id: any, loading: any, setLoading: any) => {
+  const removeTask = async (id: any) => {
+    await APIRequest("DELETE", `/todo?id=${id}`, changeAuth, router);
+  };
+
+  const handleRemoveTask = async (
+    e: any,
+    id: any,
+    loading: any,
+    setLoading: any
+  ) => {
     e.preventDefault();
-    const newTodo = todo.filter((task: number, index: number) => index !== id);
+    let newTodo = [...todo];
+    await removeTask(newTodo[id]._id);
+    newTodo = todo.filter((task: number, index: number) => index !== id);
     setTodo(newTodo);
     setLoading({ ...loading, delete: false });
   };
