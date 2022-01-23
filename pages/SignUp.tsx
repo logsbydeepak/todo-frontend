@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import Head from "next/head";
 import type { NextPage } from "next";
@@ -53,7 +53,13 @@ const SignUp: NextPage = () => {
     });
   };
 
-  const { changeAuth } = useContext(AuthContext);
+  const { auth, changeAuth } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (auth) {
+      router.push("/");
+    }
+  });
 
   const clickHandler = async (event: Event) => {
     event.preventDefault();
