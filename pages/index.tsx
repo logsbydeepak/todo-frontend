@@ -146,6 +146,11 @@ const Home: NextPage = () => {
       task,
       status: false,
     });
+
+    if (active === "true") {
+      setActive("false");
+    }
+
     setTodo([
       { _id: request.id, task: request.task, status: request.status },
       ...newTodo,
