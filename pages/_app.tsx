@@ -6,22 +6,19 @@ import Navbar from "../components/Navbar";
 import { useEffect, useLayoutEffect, useReducer, useState } from "react";
 import { AuthContext } from "helper/authContext";
 
+const myUseLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
 function MyApp({ Component, pageProps }: AppProps) {
   const [auth, setAuth] = useState(false);
 
-  useEffect(() => {
+  myUseLayoutEffect(() => {
     const initialAuth = localStorage.getItem("auth");
-
     if (initialAuth === null) {
       localStorage.setItem("auth", "false");
     }
-
     setAuth(localStorage.getItem("auth") === "true");
   });
-
-  const setStorage = (value: string) => {
-    localStorage.setItem("auth", value);
-  };
 
   return (
     <>
