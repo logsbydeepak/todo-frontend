@@ -5,6 +5,7 @@ import "../styles/globals.scss";
 import Navbar from "../components/Navbar";
 import { useEffect, useLayoutEffect, useReducer, useState } from "react";
 import { AuthContext } from "helper/authContext";
+import Notification from "components/Notification";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -25,20 +26,22 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <link rel="shortcut icon" href="/favicon.png" />
       </Head>
-      <AuthContext.Provider
-        value={{
-          auth,
-          changeAuth: (value: boolean) => {
-            setAuth(value);
-            localStorage.setItem("auth", value.toString());
-          },
-        }}
-      >
-        <Navbar />
-        <div className="container">
-          <Component {...pageProps} />
-        </div>
-      </AuthContext.Provider>
+      <Notification>
+        <AuthContext.Provider
+          value={{
+            auth,
+            changeAuth: (value: boolean) => {
+              setAuth(value);
+              localStorage.setItem("auth", value.toString());
+            },
+          }}
+        >
+          <Navbar />
+          <div className="container">
+            <Component {...pageProps} />
+          </div>
+        </AuthContext.Provider>
+      </Notification>
     </>
   );
 }

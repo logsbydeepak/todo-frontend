@@ -15,6 +15,9 @@ import style from "styles/module/pages/LoginSignUp.module.scss";
 import { axiosRequest } from "helper/axios";
 import { AuthContext } from "helper/authContext";
 
+import { v4 } from "uuid";
+import { NotificationContext } from "components/Notification";
+
 const initialUserData = {
   email: "",
   password: "",
@@ -58,6 +61,9 @@ const Login: NextPage = () => {
       router.push("/");
     }
   });
+
+  const { notificationMessage, setNotificationMessage } =
+    useContext(NotificationContext);
 
   const clickHandler = async (event: Event) => {
     event.preventDefault();
@@ -103,6 +109,11 @@ const Login: NextPage = () => {
         status: true,
         type: "success",
       });
+
+      setNotificationMessage([
+        { status: "SUCCESS", text: "User sign in successfully", id: v4() },
+        ...notificationMessage,
+      ]);
 
       changeAuth(true);
       router.push("/");
