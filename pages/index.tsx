@@ -16,6 +16,8 @@ import { APIRequest } from "helper/APIRequest";
 import { AuthContext } from "helper/authContext";
 
 import landingPageStyle from "styles/module/pages/Index.module.scss";
+import { NotificationContext } from "components/Notification";
+import { v4 } from "uuid";
 
 const Home: NextPage = () => {
   const [todo, setTodo] = useState<any>([]);
@@ -74,6 +76,10 @@ const Home: NextPage = () => {
     }
 
     await updateTask(newTodo[id]);
+    setNotificationMessage([
+      { status: "SUCCESS", text: "Status changed", id: v4() },
+      ...notificationMessage,
+    ]);
     setLoading({ ...loading, status: false });
     setTodo([...updateTaskData]);
   };
@@ -94,6 +100,10 @@ const Home: NextPage = () => {
     const updatedTodo = newTodo.filter(
       (task: number, index: number) => index !== id
     );
+    setNotificationMessage([
+      { status: "SUCCESS", text: "Task removed", id: v4() },
+      ...notificationMessage,
+    ]);
     setLoading({ ...loading, delete: false });
     setTodo([...updatedTodo]);
   };
@@ -129,9 +139,16 @@ const Home: NextPage = () => {
     e.preventDefault();
     const newTodo = [...todo];
     await updateTask(newTodo[index]);
+    setNotificationMessage([
+      { status: "SUCCESS", text: "Task updated", id: v4() },
+      ...notificationMessage,
+    ]);
     setTick(false);
     setLoading({ ...loading, task: false });
   };
+
+  const { notificationMessage, setNotificationMessage } =
+    useContext(NotificationContext);
 
   const handleAddTask = async (
     e: any,
@@ -146,6 +163,11 @@ const Home: NextPage = () => {
       task,
       status: false,
     });
+
+    setNotificationMessage([
+      { status: "SUCCESS", text: "Task added", id: v4() },
+      ...notificationMessage,
+    ]);
 
     if (active === "true") {
       setActive("false");
