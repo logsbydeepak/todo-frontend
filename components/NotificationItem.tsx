@@ -19,7 +19,7 @@ const NotificationItem: FunctionComponent<{
   }, [timeFrame]);
 
   useEffect(() => {
-    if (timeFrame === 100) {
+    if (timeFrame >= 100) {
       const newMessage = notificationMessage.filter(
         (mess: any) => mess.id !== data.id
       );
@@ -31,6 +31,7 @@ const NotificationItem: FunctionComponent<{
     <>
       <div className={`${style.base} ${style[data.status]}`}>
         <h1>{data.text}</h1>
+        <div className={style.bar} style={{ width: `${timeFrame}%` }}></div>
       </div>
     </>
   );
