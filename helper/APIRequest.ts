@@ -26,8 +26,20 @@ export const APIRequest = async (
         const request = await serverRequest(method, url, data);
         return request.data.data;
       } catch (error: any) {
-        changeAuth(false);
-        router.push("/");
+        if (
+          error.response.data.error.message === "access token is not expired"
+        ) {
+          try {
+            const request = await serverRequest(method, url, data);
+            return request.data.data;
+          } catch (error: any) {
+            changeAuth(false);
+            router.push("/");
+          }
+        } else {
+          changeAuth(false);
+          router.push("/");
+        }
       }
     } else {
       changeAuth(false);
