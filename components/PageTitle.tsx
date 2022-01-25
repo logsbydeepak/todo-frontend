@@ -11,8 +11,8 @@ const PageTitle: FunctionComponent<Props> = ({ title, subtitle }) => {
   return (
     <>
       <div className={pageTitleStyle.base}>
-        <h1 className={pageTitleStyle.title}>{title}</h1>
-        <h3 className={pageTitleStyle.subtitle}>{subtitle}</h3>
+        <h1>{title}</h1>
+        <h3>{subtitle}</h3>
       </div>
     </>
   );

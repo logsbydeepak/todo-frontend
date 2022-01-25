@@ -3,18 +3,45 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 2rem;
 }
 
-.logo {
+.logo,
+.logo span {
   font-size: 2.4rem;
   font-weight: 700;
+  letter-spacing: 0.2rem;
+  transition: all 0.3s;
+}
+
+.logo span {
+  color: #b794f6;
+}
+
+.logo:hover {
+  letter-spacing: 0.4rem;
+  color: #d4bff9;
+}
+
+.logo:active {
+  color: #b794f6;
+  letter-spacing: 0.3rem;
 }
 
 .link ul li a {
   font-size: 1.6rem;
-  color: #afafaf;
   font-weight: 500;
-  margin-left: 2rem;
+  margin-left: 4rem;
+  transition: all 0.3s;
+  color: #9d9d9d;
+
+  &:hover {
+    color: #f5f5f5;
+  }
+
+  &:active {
+    color: #d9d9d9;
+  }
 }
 
 .link ul {

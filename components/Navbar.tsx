@@ -20,7 +20,10 @@ const Navbar: FunctionComponent = () => {
     <>
       <header className={style.base}>
         <Link href="/">
-          <a className={style.logo}>TODO</a>
+          <a className={style.logo}>
+            TODO
+            <span>.</span>
+          </a>
         </Link>
 
         <div className={style.link}>
