@@ -4,30 +4,28 @@
 
 .label {
   font-size: 1.6rem;
-  margin-bottom: 0.6rem;
-  font-weight: 400;
+  margin-bottom: 0.8rem;
+  font-weight: 500;
   display: inline-block;
 }
 
 .input {
   width: 100%;
-  background-color: #222222;
-  border: 0.2rem solid #434343;
+  background-color: #121212;
+  border: 0.2rem solid #262626;
   border-radius: 0.4rem;
-  font-size: 1.8rem;
-  padding: 1.6rem 3rem;
+  font-size: 1.6rem;
+  padding: 1.8rem 3rem;
   transition: all 0.2s;
   margin-bottom: 0.6rem;
 }
 
 .input::placeholder {
-  color: #9f9f9f;
-  font-weight: 400;
+  color: #818181;
 }
 
 .input:focus {
-  background-color: #292929;
-  border-color: #8a4feb;
+  border-color: #b794f6;
 }
 
 .helper {
