@@ -235,7 +235,10 @@ const Home: NextPage = () => {
           </Head>
           <div className={landingPageStyle.base}>
             <h1 className={landingPageStyle.title}>
-              Finish Your Task with TODO
+              Finish Your Task with{" "}
+              <span>
+                TODO<span>.</span>
+              </span>
             </h1>
             <ButtonSimple link="/SignUp" />
           </div>

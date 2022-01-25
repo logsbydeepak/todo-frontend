@@ -2,16 +2,20 @@
 
 .base {
   font-size: 1.8rem;
+
   border-radius: 0.4rem;
   padding: 2rem 3rem;
   width: 100%;
   text-align: center;
   transition: all 0.3s;
   cursor: pointer;
+  color: #121212;
+  font-weight: 600;
 }
 
 .base i {
   font-size: 3rem;
+  color: #121212;
 }
 
 .icon {
@@ -22,18 +26,18 @@
 }
 
 .primary {
-  background-color: #722ae6;
-  box-shadow: 0rem 0rem 0.4rem 0rem #722ae6;
+  background-color: #bd9cf3;
+  // box-shadow: 0rem 0rem 0.4rem 0rem #bd9cf3;
 }
 
 .primary:hover {
-  background-color: #6725e0;
-  box-shadow: 0rem 0rem 0.8rem 0rem #6725e0;
+  background-color: #a172ef;
+  // box-shadow: 0rem 0rem 0.8rem 0rem #a172ef;
 }
 
 .primary:active {
-  background-color: #561bd7;
-  box-shadow: 0rem 0rem 0.6rem 0rem #561bd7;
+  background-color: #8a4feb;
+  // box-shadow: 0rem 0rem 0.6rem 0rem #8a4feb;
 }
 
 .warning {

@@ -9,10 +9,24 @@
 }
 
 .title {
+  margin-bottom: 6rem;
+}
+
+.title,
+.title span,
+.title span span {
+  display: inline-block;
   text-align: center;
   font-size: 6.4rem;
   font-weight: 600;
-  margin-bottom: 6rem;
+}
+
+.title span {
+  letter-spacing: 0.4rem;
+}
+
+.title span span {
+  color: #bd9cf3;
 }
 
 .btn {
