@@ -2,6 +2,7 @@ import Link from "next/link";
 import { FunctionComponent } from "react";
 
 import style from "styles/module/components/button.module.scss";
+import Spinner from "./Spinner";
 
 type ButtonSimpleProps = {
   link: string;
@@ -43,7 +44,7 @@ export const ButtonIcon: FunctionComponent<ButtonIconProps> = ({
       >
         {text}
         {!loading && <i className="icon">{icon}</i>}
-        {loading && <div className={style.spinner}></div>}
+        {loading && <Spinner />}
       </button>
     </>
   );

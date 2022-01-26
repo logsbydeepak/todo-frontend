@@ -14,8 +14,8 @@
 }
 
 .base i {
-  font-size: 3rem;
   color: #121212;
+  font-size: 3rem;
 }
 
 .icon {
@@ -47,25 +47,6 @@
 
 .warning:active {
   background-color: #e84853;
-}
-
-.spinner {
-  border: 0.3rem solid #121212;
-  border-radius: 50%;
-  border-top: 0.3rem solid rgba(255, 255, 255, 0);
-  width: 2.4rem;
-  height: 2.4rem;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 .base:disabled {

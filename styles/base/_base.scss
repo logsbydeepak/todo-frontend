@@ -38,8 +38,8 @@ button {
   border: 0;
 }
 
-.icon,
-.icon-spinner {
+.icon {
+  font-family: "Material Icons Round";
   font-weight: normal;
   font-style: normal;
   font-size: 2.4rem;
@@ -51,13 +51,11 @@ button {
   word-wrap: normal;
 }
 
-.icon {
-  font-family: "Material Icons Round";
-}
-
 .icon-spinner {
-  font-family: "Spinner";
-  animation: spin 1s linear infinite;
+  padding: 0.2rem;
+  width: 2.4rem;
+  height: auto;
+  animation: spin 1s infinite;
 }
 
 @keyframes spin {

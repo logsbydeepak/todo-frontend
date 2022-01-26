@@ -2,6 +2,7 @@ import { FunctionComponent, useState } from "react";
 import style from "styles/module/components/createTaskInput.module.scss";
 import inputStyle from "styles/module/components/input.module.scss";
 import buttonStyle from "styles/module/components/button.module.scss";
+import Spinner from "./Spinner";
 
 interface Props {
   handleAddTask: any;
@@ -9,7 +10,7 @@ interface Props {
 
 const CreateTaskInput: FunctionComponent<Props> = ({ handleAddTask }) => {
   const [task, setTask] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   return (
     <>
       <div className={style.base}>
@@ -33,7 +34,7 @@ const CreateTaskInput: FunctionComponent<Props> = ({ handleAddTask }) => {
           }}
         >
           {!loading && <i className="icon">arrow_forward_ios</i>}
-          {loading && <i className="icon-spinner">s</i>}
+          {loading && <Spinner className={style.spinner} />}
         </button>
       </div>
     </>
