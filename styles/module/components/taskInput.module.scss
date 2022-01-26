@@ -3,30 +3,30 @@
   margin-top: 4rem;
   margin-bottom: 4rem;
   display: flex;
-  background-color: #222222;
-  border: 0.2rem solid #434343;
+  background-color: #121212;
+  border: 0.2rem solid #262626;
   padding: 0 2rem;
   flex-direction: row;
   align-items: center;
+  transition: all 0.2s;
 }
 
 .task {
-  background-color: #222222;
+  background-color: #121212;
   outline: 0;
   width: 100%;
   border-radius: 0.4rem;
   font-size: 1.6rem;
-  padding: 1.6rem 2rem;
-  transition: all 0.2s;
+  padding: 1.8rem 2rem;
   border: 0;
 }
 
 .baseFocus {
-  border-color: #8a4feb;
+  border-color: #b794f6;
 }
 
 .base button {
-  background-color: #222222;
+  background-color: #12121212;
   width: 2rem;
   height: 2rem;
   cursor: pointer;
@@ -40,8 +40,16 @@
   margin-left: 2rem;
 }
 
+.base .boxDiv button i {
+  transition: all 0.2s;
+}
+
 .close i {
-  color: #ea4435;
+  color: #ea959b;
+}
+
+.close i:hover {
+  color: #de6c74;
 }
 
 .boxDiv {

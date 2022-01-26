@@ -160,7 +160,7 @@ const Home: NextPage = () => {
     setError: any
   ) => {
     e.preventDefault();
-    if (task.length === 0) {
+    if (task.trim().length === 0) {
       setError(true);
       return;
     }
