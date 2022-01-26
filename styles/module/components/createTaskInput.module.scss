@@ -11,7 +11,7 @@
 }
 
 .base .button {
-  padding: 2rem;
+  padding: 0 2.4rem;
   width: auto;
   height: auto;
   border-start-start-radius: 0rem;
@@ -19,24 +19,5 @@
 }
 
 .base button i {
-  font-size: 2rem;
-}
-
-.spinner {
-  border: 0.3rem solid #fff;
-  border-radius: 50%;
-  border-top: 0.3rem solid rgba(255, 255, 255, 0);
-  width: 2.4rem;
-  height: 2.4rem;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  font-size: 2.4rem;
 }

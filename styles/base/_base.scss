@@ -38,17 +38,35 @@ button {
   border: 0;
 }
 
-.icon {
-  font-family: "Material Icons Round";
+.icon,
+.icon-spinner {
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;
+  font-size: 2.4rem;
   line-height: 1;
   letter-spacing: normal;
   text-transform: none;
   display: inline-block;
   white-space: nowrap;
   word-wrap: normal;
+}
+
+.icon {
+  font-family: "Material Icons Round";
+}
+
+.icon-spinner {
+  font-family: "Spinner";
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 ul,

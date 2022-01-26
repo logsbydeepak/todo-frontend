@@ -33,7 +33,7 @@ const CreateTaskInput: FunctionComponent<Props> = ({ handleAddTask }) => {
           }}
         >
           {!loading && <i className="icon">arrow_forward_ios</i>}
-          {loading && <div className={style.spinner}></div>}
+          {loading && <i className="icon-spinner">s</i>}
         </button>
       </div>
     </>
