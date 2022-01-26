@@ -1,31 +1,25 @@
 .base {
   display: flex;
+  margin-bottom: 6rem;
 }
 
-.input {
-  width: 100%;
-  background-color: #222222;
-  border: 0.2rem solid #434343;
-  border-radius: 0.4rem;
-  border-right: none;
-  font-size: 1.8rem;
-  padding: 1.6rem 3rem;
-  transition: all 0.2s;
+.base .input {
   border-start-end-radius: 0rem;
   border-end-end-radius: 0rem;
+  margin-bottom: 0;
+  border-right: 0;
 }
 
-.input:focus {
-  border-color: #8a4feb;
-}
-
-.button {
-  background-color: #722ae6;
-  border-start-end-radius: 0.4rem;
-  border-end-end-radius: 0.4rem;
+.base .button {
   padding: 2rem;
-  cursor: pointer;
-  box-shadow: 0rem 0rem 0.4rem 0rem #722ae6;
+  width: auto;
+  height: auto;
+  border-start-start-radius: 0rem;
+  border-end-start-radius: 0rem;
+}
+
+.base button i {
+  font-size: 2rem;
 }
 
 .spinner {
@@ -45,8 +39,4 @@
   100% {
     transform: rotate(360deg);
   }
-}
-
-.button:disabled {
-  box-shadow: none;
 }

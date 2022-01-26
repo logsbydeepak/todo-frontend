@@ -104,11 +104,6 @@ const Login: NextPage = () => {
     try {
       setLoading(true);
       await axiosRequest.post("/session", formData);
-      setHeadingStatus({
-        message: "User sign in successfully.",
-        status: true,
-        type: "success",
-      });
 
       setNotificationMessage([
         { status: "SUCCESS", text: "User sign in successfully", id: v4() },

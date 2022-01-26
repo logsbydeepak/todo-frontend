@@ -1,5 +1,7 @@
 import { FunctionComponent, useState } from "react";
 import style from "styles/module/components/createTaskInput.module.scss";
+import inputStyle from "styles/module/components/input.module.scss";
+import buttonStyle from "styles/module/components/button.module.scss";
 
 interface Props {
   handleAddTask: any;
@@ -13,7 +15,7 @@ const CreateTaskInput: FunctionComponent<Props> = ({ handleAddTask }) => {
       <div className={style.base}>
         <input
           type="text"
-          className={style.input}
+          className={`${style.input} ${inputStyle.input}`}
           placeholder="Add new task"
           autoFocus={true}
           disabled={loading}
@@ -23,7 +25,7 @@ const CreateTaskInput: FunctionComponent<Props> = ({ handleAddTask }) => {
           }}
         />
         <button
-          className={style.button}
+          className={`${buttonStyle.base} ${buttonStyle.icon} ${buttonStyle.primary} ${style.button}`}
           disabled={loading}
           onClick={(e: any) => {
             setLoading(true);
