@@ -17,7 +17,7 @@
   font-size: 1.6rem;
   padding: 1.8rem 3rem;
   transition: all 0.2s;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.8rem;
 }
 
 .input::placeholder {
@@ -29,28 +29,32 @@
 }
 
 .helper {
-  margin: 0 1rem;
+  margin: 0 2rem;
   font-size: 1.4rem;
   font-weight: 400;
   color: #9f9f9f;
 }
 
 .error .input {
-  border: 0.2rem solid #ea4435;
+  border: 0.2rem solid #ea959b;
 }
 
 .error .label {
-  color: #ea4435;
+  color: #ea959b;
 }
 
 .error .helper {
-  color: #ea4435;
+  color: #ea959b;
 }
 
-.error .input::placeholder {
-  color: #ea4435;
+.error .input:focus {
+  border-color: #fdeaee;
 }
 
 .input:disabled {
-  color: #c4c4c4;
+  color: #c2c2c2;
+}
+
+.input:disabled::placeholder {
+  color: #3c3c3c;
 }

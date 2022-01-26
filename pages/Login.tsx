@@ -119,20 +119,22 @@ const Login: NextPage = () => {
       router.push("/");
     } catch (error: any) {
       if (error.response.data.error.message === "user do not exist") {
-        setHeadingStatus({
-          message: "Email or password is invalid",
-          status: true,
-          type: "error",
-        });
+        setNotificationMessage([
+          { status: "ERROR", text: "Email or password is invalid", id: v4() },
+          ...notificationMessage,
+        ]);
         setLoading(false);
         return;
       }
 
-      setHeadingStatus({
-        message: "Something went wrong. Please try again.",
-        status: true,
-        type: "error",
-      });
+      setNotificationMessage([
+        {
+          status: "ERROR",
+          text: "Something went wrong. Please try again.",
+          id: v4(),
+        },
+        ...notificationMessage,
+      ]);
       setLoading(false);
     }
   };

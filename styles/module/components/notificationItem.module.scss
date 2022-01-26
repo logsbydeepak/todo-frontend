@@ -1,9 +1,9 @@
 .base {
-  padding: 1.6rem;
-  width: 30rem;
-  margin-bottom: 1rem;
+  padding: 1.6rem 2rem;
+  width: 32rem;
+  margin-bottom: 2rem;
   border-radius: 0.4rem;
-  transition: all 10s;
+  transition: all 0.3s;
 }
 
 .SUCCESS {
@@ -11,12 +11,12 @@
 }
 
 .ERROR {
-  background-color: #ea4335;
+  background-color: #ea959b;
 }
 
 .bar {
-  margin-top: 0.4rem;
-  background-color: #fff;
-  height: 0.4rem;
-  border-radius: 2rem;
+  margin-top: 0.3rem;
+  background-color: #121212;
+  height: 0.3rem;
+  border-radius: 0.4rem;
 }
