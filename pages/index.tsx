@@ -155,9 +155,18 @@ const Home: NextPage = () => {
     task: any,
     setTask: any,
     loading: any,
-    setLoading: any
+    setLoading: any,
+    setHelper: any,
+    setError: any
   ) => {
     e.preventDefault();
+    if (task.length === 0) {
+      setError(true);
+      return;
+    }
+    setLoading(true);
+    setError(false);
+    setHelper("");
     const newTodo = [...todo];
     const request = await APIRequest("POST", "/todo", changeAuth, router, {
       task,

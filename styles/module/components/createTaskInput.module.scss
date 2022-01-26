@@ -1,13 +1,21 @@
-.base {
+.base div {
   display: flex;
+}
+
+.base {
   margin-bottom: 6rem;
 }
 
-.base .input {
+.base .input,
+.base div .input {
   border-start-end-radius: 0rem;
   border-end-end-radius: 0rem;
   margin-bottom: 0;
   border-right: 0;
+}
+
+.base p {
+  margin-top: 0.6rem;
 }
 
 .base .button {
