@@ -207,16 +207,18 @@ const Home: NextPage = () => {
           ) : (
             todo.map((task: any, index: number) => {
               return (
-                <TaskInput
-                  key={task._id}
-                  index={index}
-                  status={task.status}
-                  task={task.task}
-                  handleChangeStatus={handleChangeStatus}
-                  handleInputChange={handleInputChange}
-                  handleRemoveTask={handleRemoveTask}
-                  handleChangeTask={handleChangeTask}
-                />
+                <form>
+                  <TaskInput
+                    key={task._id}
+                    index={index}
+                    status={task.status}
+                    task={task.task}
+                    handleChangeStatus={handleChangeStatus}
+                    handleInputChange={handleInputChange}
+                    handleRemoveTask={handleRemoveTask}
+                    handleChangeTask={handleChangeTask}
+                  />
+                </form>
               );
             })
           )}

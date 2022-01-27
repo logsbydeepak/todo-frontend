@@ -15,7 +15,7 @@ const CreateTaskInput: FunctionComponent<Props> = ({ handleAddTask }) => {
   const [isError, setError] = useState(false);
   return (
     <>
-      <div className={`${style.base} ${isError && inputStyle.error}`}>
+      <form className={`${style.base} ${isError && inputStyle.error}`}>
         <div>
           <input
             type="text"
@@ -54,7 +54,7 @@ const CreateTaskInput: FunctionComponent<Props> = ({ handleAddTask }) => {
         <p className={`${inputStyle.helper}`}>
           {isError && "Task can't be empty"}
         </p>
-      </div>
+      </form>
     </>
   );
 };
