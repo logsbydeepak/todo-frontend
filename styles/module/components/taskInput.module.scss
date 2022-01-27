@@ -1,7 +1,6 @@
 .base {
   border-radius: 0.4rem;
-  margin-top: 4rem;
-  margin-bottom: 4rem;
+  margin: 4rem 0rem;
   display: flex;
   background-color: #121212;
   border: 0.2rem solid #262626;
@@ -50,6 +49,22 @@
 
 .close i:hover {
   color: #de6c74;
+}
+
+.close i:active {
+  color: #e84853;
+}
+
+.done i {
+  color: #a2dbae;
+}
+
+.done i:hover {
+  color: #7bce8e;
+}
+
+.done i:active {
+  color: #5cc275;
 }
 
 .boxDiv {

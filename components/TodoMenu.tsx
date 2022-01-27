@@ -32,14 +32,12 @@ const TodoMenu: FunctionComponent<Props> = ({
           }`}
           value="false"
         >
-          <i className="icon">radio_button_checked</i>
           Incomplete
         </button>
         <button
           className={`${style.completed} ${active === "true" && style.active}`}
           value="true"
         >
-          <i className="icon">radio_button_checked</i>
           Completed
         </button>
         <button className={`${active === "all" && style.active}`} value="all">
