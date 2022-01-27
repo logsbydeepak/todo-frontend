@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useState } from "react";
 import style from "styles/module/components/taskInput.module.scss";
+import Spinner from "./Spinner";
 
 interface Props {
   status: boolean;
@@ -32,7 +33,7 @@ const TaskInput: FunctionComponent<Props> = ({
     <>
       <div className={`${style.base} ${focus && style.baseFocus}`}>
         <div className={style.boxDiv}>
-          {loading.status && <div className={style.spinner}></div>}
+          {loading.status && <Spinner className={style.spinner} />}
           {!loading.status && (
             <input
               type="checkbox"
@@ -66,7 +67,7 @@ const TaskInput: FunctionComponent<Props> = ({
               }}
             >
               {!loading.task && tick && <i className="icon">done_all</i>}
-              {loading.task && <div className={style.spinner}></div>}
+              {loading.task && <Spinner className={style.spinner} />}
             </button>
           </div>
         )}
@@ -79,7 +80,7 @@ const TaskInput: FunctionComponent<Props> = ({
             }}
           >
             {!loading.delete && <i className="icon">delete_outline</i>}
-            {loading.delete && <div className={style.spinner}></div>}
+            {loading.delete && <Spinner className={style.spinner} />}
           </button>
         </div>
       </div>
