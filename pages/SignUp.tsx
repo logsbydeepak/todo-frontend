@@ -1,4 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import React, {
+  ChangeEvent,
+  FormEvent,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 import Head from "next/head";
 import type { NextPage } from "next";
@@ -14,6 +20,7 @@ import style from "styles/module/pages/LoginSignUp.module.scss";
 
 import { axiosRequest } from "helper/axios";
 import { AuthContext } from "helper/authContext";
+import { useNotificationContext } from "components/Notification";
 
 const initialUserData = {
   name: "",
@@ -27,16 +34,6 @@ const initialErrorData = {
   password: false,
 };
 
-const initialHeadingStatus: {
-  status: boolean;
-  message: string;
-  type: "error" | "success";
-} = {
-  status: false,
-  message: "",
-  type: "error",
-};
-
 const SignUp: NextPage = () => {
   const router = useRouter();
 
@@ -44,25 +41,26 @@ const SignUp: NextPage = () => {
   const [helper, setHelper] = useState(initialUserData);
   const [isError, setIsError] = useState(initialErrorData);
   const [formData, setFormData] = useState(initialUserData);
-  const [isHeadingStatus, setHeadingStatus] = useState(initialHeadingStatus);
 
-  const formInputHandler = (event: any) => {
+  const { auth, changeAuth } = useContext(AuthContext);
+  const { dispatchNotification } = useNotificationContext();
+
+  useEffect(() => {
+    if (auth) {
+      router.push("/");
+    }
+  }, []);
+
+  const formInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
     });
   };
 
-  const { auth, changeAuth } = useContext(AuthContext);
-
-  useEffect(() => {
-    if (auth) {
-      router.push("/");
-    }
-  });
-
-  const clickHandler = async (event: Event) => {
+  const clickHandler = async (event: FormEvent) => {
     event.preventDefault();
+
     setLoading(true);
     const helperText = { ...initialUserData };
     const isErrorStatus = { ...initialErrorData };
@@ -101,26 +99,23 @@ const SignUp: NextPage = () => {
       formData.name.length === 0 ||
       !isEmail(formData.email) ||
       !isStrongPassword(formData.password)
-    ) {
+    )
       return;
-    }
 
     try {
       setLoading(true);
       await axiosRequest.post("/user", formData);
-      setHeadingStatus({
-        message: "User created successfully.",
-        status: true,
-        type: "success",
+      dispatchNotification({
+        type: "SUCCESS",
+        text: "User created successfully",
       });
 
       changeAuth(true);
       router.push("/");
     } catch (e: any) {
-      setHeadingStatus({
-        message: "Something went wrong. Please try again.",
-        status: true,
-        type: "error",
+      dispatchNotification({
+        type: "ERROR",
+        text: "Something went wrong",
       });
       setLoading(false);
     }
@@ -136,15 +131,6 @@ const SignUp: NextPage = () => {
           title="Create Account"
           subtitle="Create your account to get started"
         />
-
-        {isHeadingStatus.status && (
-          <h1
-            className={`
-              ${style.heading} ${style[isHeadingStatus.type]}`}
-          >
-            {isHeadingStatus.message}
-          </h1>
-        )}
 
         <form>
           <Input

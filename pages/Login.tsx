@@ -14,12 +14,7 @@ import style from "styles/module/pages/LoginSignUp.module.scss";
 
 import { axiosRequest } from "helper/axios";
 import { AuthContext } from "helper/authContext";
-
-import { v4 } from "uuid";
-import {
-  NotificationContext,
-  useNotificationContext,
-} from "components/Notification";
+import { useNotificationContext } from "components/Notification";
 
 const initialUserData = {
   email: "",
@@ -31,16 +26,6 @@ const initialErrorData = {
   password: false,
 };
 
-const initialHeadingStatus: {
-  status: boolean;
-  message: string;
-  type: "error" | "success";
-} = {
-  status: false,
-  message: "",
-  type: "error",
-};
-
 const Login: NextPage = () => {
   const router = useRouter();
 
@@ -48,7 +33,15 @@ const Login: NextPage = () => {
   const [helper, setHelper] = useState(initialUserData);
   const [isError, setIsError] = useState(initialErrorData);
   const [formData, setFormData] = useState(initialUserData);
-  const [isHeadingStatus, setHeadingStatus] = useState(initialHeadingStatus);
+
+  const { auth, changeAuth } = useContext(AuthContext);
+  const { dispatchNotification } = useNotificationContext();
+
+  useEffect(() => {
+    if (auth) {
+      router.push("/");
+    }
+  }, []);
 
   const formInputHandler = (e: any) => {
     setFormData({
@@ -56,16 +49,6 @@ const Login: NextPage = () => {
       [e.target.name]: e.target.value,
     });
   };
-
-  const { auth, changeAuth } = useContext(AuthContext);
-
-  useEffect(() => {
-    if (auth) {
-      router.push("/");
-    }
-  });
-
-  const { dispatchNotification } = useNotificationContext();
 
   const clickHandler = async (event: Event) => {
     event.preventDefault();
@@ -99,9 +82,8 @@ const Login: NextPage = () => {
     setIsError(isErrorStatus);
     setLoading(false);
 
-    if (!isEmail(formData.email) || !isStrongPassword(formData.password)) {
+    if (!isEmail(formData.email) || !isStrongPassword(formData.password))
       return;
-    }
 
     try {
       setLoading(true);
@@ -142,15 +124,6 @@ const Login: NextPage = () => {
       <div className={style.base}>
         <PageTitle title="Login Account" subtitle="Access your created todo" />
 
-        {isHeadingStatus.status && (
-          <h1
-            className={`
-              ${style.heading} ${style[isHeadingStatus.type]}`}
-          >
-            {isHeadingStatus.message}
-          </h1>
-        )}
-
         <form>
           <Input
             name="email"
@@ -164,6 +137,7 @@ const Login: NextPage = () => {
             disabled={loading}
             autoFocus={true}
           />
+
           <Input
             name="password"
             label="Password"
@@ -175,6 +149,7 @@ const Login: NextPage = () => {
             isError={isError.password}
             disabled={loading}
           />
+
           <ButtonIcon
             icon="east"
             text="Create your account"
