@@ -9,10 +9,10 @@ import style from "styles/module/components/notification.module.scss";
 import NotificationItem from "components/NotificationItem";
 import { v4 } from "uuid";
 
-type NotificationState = { id: string; text: string; status: string }[];
+type NotificationState = { id: string; message: string; status: string }[];
 
 type NotificationAction =
-  | { type: "ERROR" | "SUCCESS"; text: string }
+  | { type: "ERROR" | "SUCCESS"; message: string }
   | { type: "REMOVE"; id: string };
 
 type NotificationContext = {
@@ -36,9 +36,12 @@ const notificationReducer = (
 ) => {
   switch (action.type) {
     case "SUCCESS":
-      return [{ id: v4(), status: "SUCCESS", text: action.text }, ...state];
+      return [
+        { id: v4(), status: "SUCCESS", message: action.message },
+        ...state,
+      ];
     case "ERROR":
-      return [{ id: v4(), status: "ERROR", text: action.text }, ...state];
+      return [{ id: v4(), status: "ERROR", message: action.message }, ...state];
 
     case "REMOVE":
       return state.filter(

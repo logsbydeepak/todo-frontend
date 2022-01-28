@@ -78,7 +78,7 @@ const Home: NextPage = () => {
     }
 
     await updateTask(newTodo[id]);
-    dispatchNotification({ type: "SUCCESS", text: "Status changed" });
+    dispatchNotification({ type: "SUCCESS", message: "Status changed" });
 
     setLoading({ ...loading, status: false });
     setTodo([...updateTaskData]);
@@ -103,7 +103,7 @@ const Home: NextPage = () => {
 
     dispatchNotification({
       type: "SUCCESS",
-      text: "Task removed",
+      message: "Task removed",
     });
 
     setLoading({ ...loading, delete: false });
@@ -144,7 +144,7 @@ const Home: NextPage = () => {
 
     dispatchNotification({
       type: "SUCCESS",
-      text: "Task updated",
+      message: "Task updated",
     });
 
     setTick(false);
@@ -176,7 +176,7 @@ const Home: NextPage = () => {
 
     dispatchNotification({
       type: "SUCCESS",
-      text: "Task added",
+      message: "Task added",
     });
 
     if (active === "true") {

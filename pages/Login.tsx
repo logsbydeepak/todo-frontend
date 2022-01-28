@@ -91,7 +91,7 @@ const Login: NextPage = () => {
 
       dispatchNotification({
         type: "SUCCESS",
-        text: "User sign in successfully",
+        message: "User sign in successfully",
       });
 
       changeAuth(true);
@@ -100,7 +100,7 @@ const Login: NextPage = () => {
       if (error.response.data.error.message === "user do not exist") {
         dispatchNotification({
           type: "ERROR",
-          text: "Email or password is invalid",
+          message: "Email or password is invalid",
         });
 
         setLoading(false);
@@ -109,7 +109,7 @@ const Login: NextPage = () => {
 
       dispatchNotification({
         type: "ERROR",
-        text: "Something went wrong. Please try again",
+        message: "Something went wrong. Please try again",
       });
 
       setLoading(false);

@@ -107,7 +107,7 @@ const SignUp: NextPage = () => {
       await axiosRequest.post("/user", formData);
       dispatchNotification({
         type: "SUCCESS",
-        text: "User created successfully",
+        message: "User created successfully",
       });
 
       changeAuth(true);
@@ -115,7 +115,7 @@ const SignUp: NextPage = () => {
     } catch (e: any) {
       dispatchNotification({
         type: "ERROR",
-        text: "Something went wrong",
+        message: "Something went wrong",
       });
       setLoading(false);
     }
