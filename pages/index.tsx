@@ -13,11 +13,11 @@ import { ButtonIcon } from "components/Button";
 import CreateTaskInput from "components/CreateTaskInput";
 
 import { APIRequest } from "helper/APIRequest";
-import { AuthContext } from "helper/authContext";
+
+import { useAuthContext } from "context/AuthContext";
+import { useNotificationContext } from "context/NotificationContext";
 
 import landingPageStyle from "styles/module/pages/Index.module.scss";
-import { useNotificationContext } from "components/Notification";
-import { v4 } from "uuid";
 
 const Home: NextPage = () => {
   const [todo, setTodo] = useState<any>([]);
@@ -25,7 +25,7 @@ const Home: NextPage = () => {
   const [loadingMore, setLoadingMore] = useState(false);
   const [isLoadMoreButton, setIsLoadMoreButton] = useState(false);
 
-  const { auth, changeAuth } = useContext(AuthContext);
+  const { auth, changeAuth } = useAuthContext();
   const [skip, setSkip] = useState(0);
 
   const [active, setActive] = useState("false");

@@ -19,8 +19,8 @@ import { ButtonIcon } from "components/Button";
 import style from "styles/module/pages/LoginSignUp.module.scss";
 
 import { axiosRequest } from "helper/axios";
-import { AuthContext } from "helper/authContext";
-import { useNotificationContext } from "components/Notification";
+import { useAuthContext } from "context/AuthContext";
+import { useNotificationContext } from "context/NotificationContext";
 
 const initialUserData = {
   name: "",
@@ -42,14 +42,14 @@ const SignUp: NextPage = () => {
   const [isError, setIsError] = useState(initialErrorData);
   const [formData, setFormData] = useState(initialUserData);
 
-  const { auth, changeAuth } = useContext(AuthContext);
+  const { auth, changeAuth } = useAuthContext();
   const { dispatchNotification } = useNotificationContext();
 
   useEffect(() => {
     if (auth) {
       router.push("/");
     }
-  }, []);
+  }, [auth]);
 
   const formInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setFormData({

@@ -52,7 +52,7 @@ const notificationReducer = (
 
 const initialNotificationState: NotificationState = [];
 
-const Notification: FunctionComponent = ({ children }) => {
+const NotificationProvider: FunctionComponent = ({ children }) => {
   const [state, dispatchNotification] = useReducer(
     notificationReducer,
     initialNotificationState
@@ -76,4 +76,4 @@ const Notification: FunctionComponent = ({ children }) => {
   );
 };
 
-export default Notification;
+export default NotificationProvider;

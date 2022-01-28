@@ -1,47 +1,26 @@
 import Head from "next/head";
 import type { AppProps } from "next/app";
 
-import "../styles/globals.scss";
-import Navbar from "../components/Navbar";
-import { useEffect, useLayoutEffect, useReducer, useState } from "react";
-import { AuthContext } from "helper/authContext";
-import Notification from "components/Notification";
+import "styles/globals.scss";
+import Navbar from "components/Navbar";
 
-const myUseLayoutEffect =
-  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+import NotificationProvider from "context/NotificationContext";
+import AuthProvider from "context/AuthContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [auth, setAuth] = useState(false);
-
-  myUseLayoutEffect(() => {
-    const initialAuth = localStorage.getItem("auth");
-    if (initialAuth === null) {
-      localStorage.setItem("auth", "false");
-    }
-    setAuth(localStorage.getItem("auth") === "true");
-  });
-
   return (
     <>
       <Head>
         <link rel="shortcut icon" href="/favicon.png" />
       </Head>
-      <Notification>
-        <AuthContext.Provider
-          value={{
-            auth,
-            changeAuth: (value: boolean) => {
-              setAuth(value);
-              localStorage.setItem("auth", value.toString());
-            },
-          }}
-        >
+      <NotificationProvider>
+        <AuthProvider>
           <Navbar />
           <div className="container">
             <Component {...pageProps} />
           </div>
-        </AuthContext.Provider>
-      </Notification>
+        </AuthProvider>
+      </NotificationProvider>
     </>
   );
 }
