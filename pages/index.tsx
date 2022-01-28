@@ -208,9 +208,8 @@ const Home: NextPage = () => {
           ) : (
             todo.map((task: any, index: number) => {
               return (
-                <form>
+                <form key={task._id}>
                   <TaskInput
-                    key={task._id}
                     index={index}
                     status={task.status}
                     task={task.task}
