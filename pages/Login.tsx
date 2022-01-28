@@ -16,7 +16,10 @@ import { axiosRequest } from "helper/axios";
 import { AuthContext } from "helper/authContext";
 
 import { v4 } from "uuid";
-import { NotificationContext } from "components/Notification";
+import {
+  NotificationContext,
+  useNotificationContext,
+} from "components/Notification";
 
 const initialUserData = {
   email: "",
@@ -62,8 +65,7 @@ const Login: NextPage = () => {
     }
   });
 
-  const { notificationMessage, setNotificationMessage } =
-    useContext(NotificationContext);
+  const { dispatchNotification } = useNotificationContext();
 
   const clickHandler = async (event: Event) => {
     event.preventDefault();
@@ -105,31 +107,29 @@ const Login: NextPage = () => {
       setLoading(true);
       await axiosRequest.post("/session", formData);
 
-      setNotificationMessage([
-        { status: "SUCCESS", text: "User sign in successfully", id: v4() },
-        ...notificationMessage,
-      ]);
+      dispatchNotification({
+        type: "SUCCESS",
+        text: "User sign in successfully",
+      });
 
       changeAuth(true);
       router.push("/");
     } catch (error: any) {
       if (error.response.data.error.message === "user do not exist") {
-        setNotificationMessage([
-          { status: "ERROR", text: "Email or password is invalid", id: v4() },
-          ...notificationMessage,
-        ]);
+        dispatchNotification({
+          type: "ERROR",
+          text: "Email or password is invalid",
+        });
+
         setLoading(false);
         return;
       }
 
-      setNotificationMessage([
-        {
-          status: "ERROR",
-          text: "Something went wrong. Please try again.",
-          id: v4(),
-        },
-        ...notificationMessage,
-      ]);
+      dispatchNotification({
+        type: "ERROR",
+        text: "Something went wrong. Please try again",
+      });
+
       setLoading(false);
     }
   };

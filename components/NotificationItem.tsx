@@ -2,10 +2,9 @@ import { FunctionComponent, useEffect, useState } from "react";
 import style from "styles/module/components/notificationItem.module.scss";
 
 const NotificationItem: FunctionComponent<{
-  notificationMessage: any;
-  setNotificationMessage: any;
-  data: any;
-}> = ({ notificationMessage, setNotificationMessage, data }) => {
+  dispatchNotification: any;
+  notification: any;
+}> = ({ dispatchNotification, notification }) => {
   const [timeFrame, setTimeFrame] = useState(0);
 
   useEffect(() => {
@@ -20,17 +19,17 @@ const NotificationItem: FunctionComponent<{
 
   useEffect(() => {
     if (timeFrame >= 100) {
-      const newMessage = notificationMessage.filter(
-        (mess: any) => mess.id !== data.id
-      );
-      setNotificationMessage(newMessage);
+      dispatchNotification({
+        type: "REMOVE",
+        id: notification.id,
+      });
     }
   }, [timeFrame]);
 
   return (
     <>
-      <div className={`${style.base} ${style[data.status]}`}>
-        <p>{data.text}</p>
+      <div className={`${style.base} ${style[notification.status]}`}>
+        <p>{notification.text}</p>
         <div className={style.bar} style={{ width: `${timeFrame}%` }}></div>
       </div>
     </>

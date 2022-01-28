@@ -16,7 +16,7 @@ import { APIRequest } from "helper/APIRequest";
 import { AuthContext } from "helper/authContext";
 
 import landingPageStyle from "styles/module/pages/Index.module.scss";
-import { NotificationContext } from "components/Notification";
+import { useNotificationContext } from "components/Notification";
 import { v4 } from "uuid";
 
 const Home: NextPage = () => {
@@ -30,6 +30,8 @@ const Home: NextPage = () => {
 
   const [active, setActive] = useState("false");
   const router = useRouter();
+
+  const { dispatchNotification } = useNotificationContext();
 
   const getTodo = async () => {
     const request: any = await APIRequest(
@@ -76,10 +78,8 @@ const Home: NextPage = () => {
     }
 
     await updateTask(newTodo[id]);
-    setNotificationMessage([
-      { status: "SUCCESS", text: "Status changed", id: v4() },
-      ...notificationMessage,
-    ]);
+    dispatchNotification({ type: "SUCCESS", text: "Status changed" });
+
     setLoading({ ...loading, status: false });
     setTodo([...updateTaskData]);
   };
@@ -100,10 +100,12 @@ const Home: NextPage = () => {
     const updatedTodo = newTodo.filter(
       (task: number, index: number) => index !== id
     );
-    setNotificationMessage([
-      { status: "SUCCESS", text: "Task removed", id: v4() },
-      ...notificationMessage,
-    ]);
+
+    dispatchNotification({
+      type: "SUCCESS",
+      text: "Task removed",
+    });
+
     setLoading({ ...loading, delete: false });
     setTodo([...updatedTodo]);
   };
@@ -139,16 +141,15 @@ const Home: NextPage = () => {
     e.preventDefault();
     const newTodo = [...todo];
     await updateTask(newTodo[index]);
-    setNotificationMessage([
-      { status: "SUCCESS", text: "Task updated", id: v4() },
-      ...notificationMessage,
-    ]);
+
+    dispatchNotification({
+      type: "SUCCESS",
+      text: "Task updated",
+    });
+
     setTick(false);
     setLoading({ ...loading, task: false });
   };
-
-  const { notificationMessage, setNotificationMessage } =
-    useContext(NotificationContext);
 
   const handleAddTask = async (
     e: any,
@@ -173,10 +174,10 @@ const Home: NextPage = () => {
       status: false,
     });
 
-    setNotificationMessage([
-      { status: "SUCCESS", text: "Task added", id: v4() },
-      ...notificationMessage,
-    ]);
+    dispatchNotification({
+      type: "SUCCESS",
+      text: "Task added",
+    });
 
     if (active === "true") {
       setActive("false");

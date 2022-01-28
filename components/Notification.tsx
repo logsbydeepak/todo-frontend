@@ -1,24 +1,72 @@
-import { createContext, FunctionComponent, useReducer, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  FunctionComponent,
+  useContext,
+  useReducer,
+} from "react";
 import style from "styles/module/components/notification.module.scss";
 import NotificationItem from "components/NotificationItem";
+import { v4 } from "uuid";
 
-export const NotificationContext = createContext<any>(null);
+type NotificationState = { id: string; text: string; status: string }[];
+
+type NotificationAction =
+  | { type: "ERROR" | "SUCCESS"; text: string }
+  | { type: "REMOVE"; id: string };
+
+type NotificationContext = {
+  dispatchNotification: Dispatch<NotificationAction>;
+} | null;
+
+export const NotificationContext = createContext<NotificationContext>(null);
+
+export const useNotificationContext = () => {
+  const context = useContext(NotificationContext);
+  if (context === null) {
+    throw new Error("out of context");
+  }
+
+  return context;
+};
+
+const notificationReducer = (
+  state: NotificationState,
+  action: NotificationAction
+) => {
+  switch (action.type) {
+    case "SUCCESS":
+      return [{ id: v4(), status: "SUCCESS", text: action.text }, ...state];
+    case "ERROR":
+      return [{ id: v4(), status: "ERROR", text: action.text }, ...state];
+
+    case "REMOVE":
+      return state.filter(
+        (notification: { id: string }) => notification.id !== action.id
+      );
+
+    default:
+      return state;
+  }
+};
+
+const initialNotificationState: NotificationState = [];
 
 const Notification: FunctionComponent = ({ children }) => {
-  const [notificationMessage, setNotificationMessage] = useState([]);
+  const [state, dispatchNotification] = useReducer(
+    notificationReducer,
+    initialNotificationState
+  );
 
   return (
     <>
-      <NotificationContext.Provider
-        value={{ notificationMessage, setNotificationMessage }}
-      >
+      <NotificationContext.Provider value={{ dispatchNotification }}>
         <div className={style.base}>
-          {notificationMessage.map((data: any) => (
+          {state.map((data: any) => (
             <NotificationItem
               key={data.id}
-              notificationMessage={notificationMessage}
-              setNotificationMessage={setNotificationMessage}
-              data={data}
+              dispatchNotification={dispatchNotification}
+              notification={data}
             />
           ))}
         </div>
