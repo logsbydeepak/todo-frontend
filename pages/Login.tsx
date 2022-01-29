@@ -153,7 +153,6 @@ const Login: NextPage = () => {
           <ButtonIcon
             icon="east"
             text="Create your account"
-            type="primary"
             clickHandler={clickHandler}
             loading={loading}
           />

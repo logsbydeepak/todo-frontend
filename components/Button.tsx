@@ -11,9 +11,9 @@ type ButtonSimpleProps = {
 type ButtonIconProps = {
   icon: string;
   text: string;
-  type: "primary" | "warning";
   clickHandler: any;
   loading: boolean;
+  warning?: boolean;
 };
 
 export const ButtonSimple: FunctionComponent<ButtonSimpleProps> = ({
@@ -22,7 +22,7 @@ export const ButtonSimple: FunctionComponent<ButtonSimpleProps> = ({
   return (
     <>
       <Link href={link}>
-        <a className={`${style.base} ${style.primary}`}>Get Started</a>
+        <a className={`button_link`}>Get Started</a>
       </Link>
     </>
   );
@@ -31,19 +31,19 @@ export const ButtonSimple: FunctionComponent<ButtonSimpleProps> = ({
 export const ButtonIcon: FunctionComponent<ButtonIconProps> = ({
   icon,
   text,
-  type,
   clickHandler,
+  warning = false,
   loading = false,
 }) => {
   return (
     <>
       <button
-        className={`${style.base} ${style.icon} ${style[type]}`}
+        className={`${warning && style.warning}`}
         onClick={clickHandler}
         disabled={loading}
       >
         {text}
-        {!loading && <i className="icon">{icon}</i>}
+        {!loading && <i className={`icon ${style.icon}`}>{icon}</i>}
         {loading && <Spinner />}
       </button>
     </>

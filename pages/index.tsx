@@ -229,7 +229,6 @@ const Home: NextPage = () => {
             <ButtonIcon
               icon="add"
               text="Load more"
-              type="primary"
               clickHandler={loadMoreHandle}
               loading={loadingMore}
             />

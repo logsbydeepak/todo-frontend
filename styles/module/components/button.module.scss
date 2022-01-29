@@ -1,55 +1,17 @@
-@import "../../utilities/variables";
+@import "styles/utilities/variables";
 
-.base {
-  font-size: 1.8rem;
-
-  border-radius: 0.4rem;
-  padding: 2rem 3rem;
-  width: 100%;
-  text-align: center;
-  transition: all 0.3s;
-  cursor: pointer;
-  color: #121212;
-  font-weight: 600;
-}
-
-.base i {
-  color: #121212;
+.icon {
   font-size: 3rem;
 }
 
-.icon {
-  background-color: #ea959b;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.primary {
-  background-color: #bd9cf3;
-}
-
-.primary:hover {
-  background-color: #a172ef;
-}
-
-.primary:active {
-  background-color: #8a4feb;
-}
-
 .warning {
-  background-color: #ea959b;
-}
+  background-color: $color-warning;
 
-.warning:hover {
-  background-color: #de6c74;
-}
+  &:hover {
+    background-color: $color-warning-dark-1;
+  }
 
-.warning:active {
-  background-color: #e84853;
-}
-
-.base:disabled {
-  background-color: #818181;
-  box-shadow: none;
+  &:active {
+    background-color: $color-warning-dark-2;
+  }
 }
