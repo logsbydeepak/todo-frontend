@@ -1,25 +1,18 @@
 import {
   createContext,
-  Dispatch,
   FunctionComponent,
   useContext,
   useReducer,
 } from "react";
-import style from "styles/module/components/notification.module.scss";
+
 import NotificationItem from "components/NotificationItem";
-import { v4 } from "uuid";
+import { notificationReducer } from "reducer/Notification";
 
-type NotificationState = { id: string; message: string; status: string }[];
+import style from "styles/module/components/notification.module.scss";
 
-type NotificationAction =
-  | { type: "ERROR" | "SUCCESS"; message: string }
-  | { type: "REMOVE"; id: string };
+import { NotificationContextType, NotificationStateType } from "types";
 
-type NotificationContext = {
-  dispatchNotification: Dispatch<NotificationAction>;
-} | null;
-
-export const NotificationContext = createContext<NotificationContext>(null);
+export const NotificationContext = createContext<NotificationContextType>(null);
 
 export const useNotificationContext = () => {
   const context = useContext(NotificationContext);
@@ -30,30 +23,7 @@ export const useNotificationContext = () => {
   return context;
 };
 
-const notificationReducer = (
-  state: NotificationState,
-  action: NotificationAction
-) => {
-  switch (action.type) {
-    case "SUCCESS":
-      return [
-        { id: v4(), status: "SUCCESS", message: action.message },
-        ...state,
-      ];
-    case "ERROR":
-      return [{ id: v4(), status: "ERROR", message: action.message }, ...state];
-
-    case "REMOVE":
-      return state.filter(
-        (notification: { id: string }) => notification.id !== action.id
-      );
-
-    default:
-      return state;
-  }
-};
-
-const initialNotificationState: NotificationState = [];
+const initialNotificationState: NotificationStateType = [];
 
 const NotificationProvider: FunctionComponent = ({ children }) => {
   const [state, dispatchNotification] = useReducer(
