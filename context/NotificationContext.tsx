@@ -6,11 +6,14 @@ import {
 } from "react";
 
 import NotificationItem from "components/NotificationItem";
-import { notificationReducer } from "reducer/Notification";
+import { notificationReducer } from "reducer/notificationReducer";
 
 import style from "styles/module/components/notification.module.scss";
 
-import { NotificationContextType, NotificationStateType } from "types";
+import {
+  NotificationContextType,
+  NotificationStateType,
+} from "types/notificationContextType";
 
 export const NotificationContext = createContext<NotificationContextType>(null);
 

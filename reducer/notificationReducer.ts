@@ -1,6 +1,9 @@
 import { v4 } from "uuid";
 
-import { NotificationStateType, NotificationActionType } from "types";
+import {
+  NotificationStateType,
+  NotificationActionType,
+} from "types/notificationContextType";
 
 export const notificationReducer = (
   state: NotificationStateType,
