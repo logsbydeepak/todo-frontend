@@ -1,3 +1,5 @@
+@import "styles/utilities/variables";
+
 .base {
   display: flex;
   justify-content: space-between;
@@ -5,28 +7,27 @@
 }
 
 .base button {
-  background-color: #121212;
+  width: auto;
+  background-color: $color-black;
   padding: 1.4rem 3.2rem;
   font-size: 1.6rem;
   font-weight: 500;
-  color: #9d9d9d;
-  display: flex;
+  color: $color-grey-3;
+
   cursor: pointer;
   border: 0.2rem solid transparent;
-  border-radius: 0.4rem;
-  transition: all 0.3s;
 }
 
 .base button:hover {
   border: 0.2rem solid #262626;
-  color: #d9d9d9;
+  color: $color-grey-2;
 }
 
 .base button:active {
-  color: #ffffff;
+  color: $color-white;
 }
 
 .base .active {
-  background-color: #262626;
-  color: #ffffff;
+  background-color: $color-grey-4;
+  color: $color-white;
 }

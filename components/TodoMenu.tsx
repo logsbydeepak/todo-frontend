@@ -27,21 +27,16 @@ const TodoMenu: FunctionComponent<Props> = ({
     <>
       <form className={style.base} onClick={onChangeHandler}>
         <button
-          className={`${style.incomplete} ${
-            active === "false" && style.active
-          }`}
+          className={`${active === "false" && style.active}`}
           value="false"
         >
           Incomplete
         </button>
-        <button
-          className={`${style.completed} ${active === "true" && style.active}`}
-          value="true"
-        >
-          Completed
-        </button>
         <button className={`${active === "all" && style.active}`} value="all">
           All
+        </button>
+        <button className={`${active === "true" && style.active}`} value="true">
+          Completed
         </button>
       </form>
     </>
