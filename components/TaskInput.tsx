@@ -66,12 +66,14 @@ const TaskInput: FunctionComponent<Props> = ({
                 handleChangeTask(e, index, loading, setLoading, setTick);
               }}
             >
-              {!loading.task && tick && <i className="icon">done_all</i>}
-              {loading.task && <Spinner className={style.spinner} />}
+              <div className={style.boxDiv}>
+                {!loading.task && tick && <i className="icon">done_all</i>}
+                {loading.task && <Spinner className={style.spinner} />}
+              </div>
             </button>
           </div>
         )}
-        <div className={`${style.boxDiv} ${style.left} `}>
+        <div className={style.left}>
           <button
             className={style.close}
             onClick={(e: any) => {
@@ -79,8 +81,10 @@ const TaskInput: FunctionComponent<Props> = ({
               handleRemoveTask(e, index, loading, setLoading);
             }}
           >
-            {!loading.delete && <i className="icon">delete_outline</i>}
-            {loading.delete && <Spinner className={style.spinner} />}
+            <div className={style.boxDiv}>
+              {!loading.delete && <i className="icon">delete_outline</i>}
+              {loading.delete && <Spinner className={style.spinner} />}
+            </div>
           </button>
         </div>
       </div>

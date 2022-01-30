@@ -1,9 +1,11 @@
+@import "styles/utilities/variables";
+
 .base {
   border-radius: 0.4rem;
   margin: 4rem 0rem;
   display: flex;
-  background-color: #121212;
-  border: 0.2rem solid #262626;
+  background-color: $color-black;
+  border: 0.2rem solid $color-grey-4;
   padding: 0 2rem;
   flex-direction: row;
   align-items: center;
@@ -11,24 +13,19 @@
 }
 
 .task {
-  background-color: #121212;
-  outline: 0;
-  width: 100%;
-  border-radius: 0.4rem;
   font-size: 1.6rem;
   padding: 1.8rem 2rem;
   border: 0;
 }
 
 .baseFocus {
-  border-color: #b794f6;
+  border-color: $color-primary-light;
 }
 
 .base button {
-  background-color: #12121212;
+  background-color: $color-black;
   width: 2rem;
   height: 2rem;
-  cursor: pointer;
 }
 
 .base button i {
@@ -36,7 +33,7 @@
 }
 
 .base .left {
-  margin-left: 2rem;
+  margin-left: 1rem;
 }
 
 .base .boxDiv button i {
@@ -44,27 +41,27 @@
 }
 
 .close i {
-  color: #ea959b;
+  color: $color-warning;
 }
 
 .close i:hover {
-  color: #de6c74;
+  color: $color-warning-dark-1;
 }
 
 .close i:active {
-  color: #e84853;
+  color: $color-warning-dark-2;
 }
 
 .done i {
-  color: #a2dbae;
+  color: $color-success;
 }
 
 .done i:hover {
-  color: #7bce8e;
+  color: $color-success-dark-1;
 }
 
 .done i:active {
-  color: #5cc275;
+  color: $color-success-dark-2;
 }
 
 .boxDiv {
@@ -76,9 +73,9 @@
 }
 
 .spinner {
-  width: 2rem;
+  // width: 2rem;
 }
 
 .spinner path {
-  fill: #ffffff;
+  fill: $color-white;
 }
