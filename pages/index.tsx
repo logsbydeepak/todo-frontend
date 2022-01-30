@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import Head from "next/head";
 import type { NextPage } from "next";
@@ -142,10 +142,7 @@ const Home: NextPage = () => {
     const newTodo = [...todo];
     await updateTask(newTodo[index]);
 
-    dispatchNotification({
-      type: "SUCCESS",
-      message: "Task updated",
-    });
+    dispatchNotification({ type: "SUCCESS", message: "Task updated" });
 
     setTick(false);
     setLoading({ ...loading, task: false });
