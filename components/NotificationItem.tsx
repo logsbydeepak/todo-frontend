@@ -29,7 +29,7 @@ const NotificationItem: FunctionComponent<{
   return (
     <>
       <div className={`${style.base} ${style[notification.status]}`}>
-        <p>{notification.message}</p>
+        <p className={style.text}>{notification.message}</p>
         <div className={style.bar} style={{ width: `${timeFrame}%` }}></div>
       </div>
     </>
