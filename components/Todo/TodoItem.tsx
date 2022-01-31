@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FunctionComponent, useState } from "react";
 import style from "styles/module/components/taskInput.module.scss";
-import Spinner from "./Spinner";
+import Spinner from "components/Spinner";
 
 interface Props {
   status: boolean;

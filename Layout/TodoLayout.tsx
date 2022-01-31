@@ -1,18 +1,22 @@
-import { ButtonIcon } from "components/Button";
-import CreateTaskInput from "components/CreateTaskInput";
+import { useEffect, useReducer } from "react";
+
+import Head from "next/head";
+import { useRouter } from "next/router";
+
 import Loading from "components/Loading";
 import PageTitle from "components/PageTitle";
-import TaskInput from "components/TaskInput";
-import TodoMenu from "components/TodoMenu";
-import { useEffect, useReducer } from "react";
+import { ButtonIcon } from "components/Button";
+
+import TodoItem from "components/Todo/TodoItem";
+import TodoMenu from "components/Todo/TodoMenu";
+import TodoCreate from "components/Todo/TodoCreate";
+
+import { APIRequest } from "helper/APIRequest";
 import { todoReducer } from "reducer/todoReducer";
+import { useAuthContext } from "context/AuthContext";
 import { TodoStateType } from "types/todoReducerType";
 
 import style from "styles/module/pages/Index.module.scss";
-import Head from "next/head";
-import { useAuthContext } from "context/AuthContext";
-import { useRouter } from "next/router";
-import { APIRequest } from "helper/APIRequest";
 
 const initialTodoState: TodoStateType = {
   todo: [],
@@ -81,14 +85,14 @@ const TodoLayout = () => {
         <title>TODO - Get work done</title>
       </Head>
       <PageTitle title="Your Todos" subtitle="Manage your task" />
-      <CreateTaskInput handleAddTask={handleAddTask} />
+      <TodoCreate handleAddTask={handleAddTask} />
       <TodoMenu dispatchTodoAction={dispatchTodoAction} todoState={todoState} />
       {todoState.isLoading ? (
         <Loading />
       ) : (
         todoState.todo.map((task: any, index: number) => {
           return (
-            <TaskInput
+            <TodoItem
               key={task._id}
               index={index}
               status={task.status}
