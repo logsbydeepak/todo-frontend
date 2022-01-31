@@ -1,18 +1,18 @@
 import { useNotificationContext } from "context/NotificationContext";
-import { TaskActionType, TaskStateType } from "types/taskReducer";
+import { TodoActionType, TodoStateType } from "types/todoReducerType";
 
-const { dispatchNotification } = useNotificationContext();
+// const { dispatchNotification } = useNotificationContext();
 
-export const taskReducer = (
-  state: TaskStateType,
-  action: TaskActionType
-): TaskStateType => {
+export const todoReducer = (
+  state: TodoStateType,
+  action: TodoActionType
+): TodoStateType => {
   switch (action.type) {
     case "ADD_TODO_FROM_TOP":
-      dispatchNotification({
-        type: "SUCCESS",
-        message: "Task added",
-      });
+      // dispatchNotification({
+      //   type: "SUCCESS",
+      //   message: "Task added",
+      // });
 
       return {
         ...state,
@@ -27,17 +27,17 @@ export const taskReducer = (
       };
 
     case "REMOVE_TODO":
-      dispatchNotification({
-        type: "SUCCESS",
-        message: "Task removed",
-      });
+      // dispatchNotification({
+      //   type: "SUCCESS",
+      //   message: "Task removed",
+      // });
 
       const removeTodo = state.todo;
       removeTodo.splice(action.index, 1);
       return { ...state, todo: [...removeTodo] };
 
     case "UPDATE_TODO_TASK":
-      dispatchNotification({ type: "SUCCESS", message: "Task updated" });
+      // dispatchNotification({ type: "SUCCESS", message: "Task updated" });
 
       const cloneTodo = state;
       let updateTaskTodo;
@@ -63,7 +63,7 @@ export const taskReducer = (
       return updateTaskTodo;
 
     case "UPDATE_TODO_STATUS":
-      dispatchNotification({ type: "SUCCESS", message: "Task updated" });
+      // dispatchNotification({ type: "SUCCESS", message: "Task updated" });
 
       const updateStatusTodo = state.todo;
       updateStatusTodo[action.index].status = action.status;

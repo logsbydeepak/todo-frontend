@@ -1,43 +1,68 @@
-import { Dispatch, FunctionComponent, SetStateAction, useState } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  DOMAttributes,
+  FormEvent,
+  FunctionComponent,
+  MouseEvent,
+  MouseEventHandler,
+} from "react";
 import style from "styles/module/components/todoMenu.module.scss";
+import { TodoActionType, TodoStateType } from "types/todoReducerType";
 
 interface Props {
-  active: string;
-  setActive: Dispatch<SetStateAction<string>>;
-  setSkip: any;
-  setTodo: any;
+  dispatchTodoAction: Dispatch<TodoActionType>;
+  todoState: TodoStateType;
 }
 
 const TodoMenu: FunctionComponent<Props> = ({
-  active,
-  setActive,
-  setSkip,
-  setTodo,
+  dispatchTodoAction,
+  todoState,
 }) => {
-  const onChangeHandler = (e: any) => {
-    e.preventDefault();
-    if (!e.target.value) return;
-    if (active === e.target.value) return;
-    setActive(e.target.value);
-    setTodo([]);
-    setSkip(0);
+  const handleOnActiveMenuChange = (event: ChangeEvent<HTMLFormElement>) => {
+    const activeMenu: string = event.target.value;
+
+    if (activeMenu !== "true" && activeMenu !== "false" && activeMenu !== "all")
+      return;
+
+    dispatchTodoAction({
+      type: "UPDATE_ACTIVE_MENU",
+      activeMenu,
+    });
   };
 
   return (
     <>
-      <form className={style.base} onClick={onChangeHandler}>
-        <button
-          className={`${active === "false" && style.active}`}
-          value="false"
+      <form className={style.menu} onChange={handleOnActiveMenuChange}>
+        <label
+          className={`button ${style.menu_item} ${
+            todoState.activeMenu === "false" && style.menu_active
+          }`}
+          htmlFor="false"
         >
           Incomplete
-        </button>
-        <button className={`${active === "all" && style.active}`} value="all">
+        </label>
+        <input type="radio" value="false" name="menu" id="false" />
+
+        <label
+          className={`button ${style.menu_item} ${
+            todoState.activeMenu === "all" && style.menu_active
+          }`}
+          htmlFor="all"
+        >
           All
-        </button>
-        <button className={`${active === "true" && style.active}`} value="true">
+        </label>
+        <input type="radio" value="all" name="menu" id="all" />
+
+        <label
+          className={`button ${style.menu_item} ${
+            todoState.activeMenu === "true" && style.menu_active
+          }`}
+          htmlFor="true"
+        >
           Completed
-        </button>
+        </label>
+        <input type="radio" value="true" name="menu" id="true" />
       </form>
     </>
   );

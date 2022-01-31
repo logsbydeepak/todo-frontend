@@ -1,33 +1,42 @@
 @import "styles/utilities/variables";
 
-.base {
+.menu {
   display: flex;
   justify-content: space-between;
   margin: 6rem 4rem;
-}
 
-.base button {
-  width: auto;
-  background-color: $color-black;
-  padding: 1.4rem 3.2rem;
-  font-size: 1.6rem;
-  font-weight: 500;
-  color: $color-grey-3;
+  & input {
+    display: none;
+  }
 
-  cursor: pointer;
-  border: 0.2rem solid transparent;
-}
+  &_item {
+    width: auto;
+    background-color: $color-black;
+    padding: 1.4rem 3.2rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: $color-grey-3;
+    border: 0.2rem solid $color-black;
 
-.base button:hover {
-  border: 0.2rem solid $color-grey-4;
-  color: $color-grey-2;
-}
+    &:hover {
+      color: $color-grey-2;
+      border-color: $color-grey-4;
+      background-color: $color-black;
+    }
 
-.base button:active {
-  color: $color-white;
-}
+    &:active {
+      color: $color-white;
+      background-color: $color-black;
+    }
+  }
 
-.base .active {
-  background-color: $color-grey-4;
-  color: $color-white;
+  &_active {
+    color: $color-white;
+    background-color: $color-grey-4;
+    border: 0.2rem solid $color-grey-4;
+
+    &:hover {
+      background-color: $color-grey-4;
+    }
+  }
 }

@@ -6,7 +6,7 @@ interface TodoType {
 
 type TodoMenu = "false" | "true" | "all";
 
-export type TaskActionType =
+export type TodoActionType =
   | {
       type: "ADD_TODO_FROM_BOTTOM";
       todo: TodoType[];
@@ -20,7 +20,7 @@ export type TaskActionType =
   | { type: "LOADING"; isLoading: boolean }
   | { type: "UPDATE_ACTIVE_MENU"; activeMenu: TodoMenu };
 
-export interface TaskStateType {
+export interface TodoStateType {
   todo: TodoType[];
   activeMenu: TodoMenu;
   isLoading: boolean;
