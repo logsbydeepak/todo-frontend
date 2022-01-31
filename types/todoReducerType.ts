@@ -12,7 +12,11 @@ export type TodoActionType =
       todo: TodoType[];
     }
   | { type: "ADD_TODO_FROM_TOP"; todo: TodoType }
-  | { type: "REMOVE_TODO"; index: number }
+  | { type: "EMPTY_TODO" }
+  | {
+      type: "REMOVE_TODO";
+      index: number;
+    }
   | { type: "UPDATE_TODO_STATUS"; index: number; status: boolean }
   | { type: "UPDATE_TODO_TASK"; index: number; task: string }
   | { type: "LOAD_MORE"; isLoadingMore: boolean }

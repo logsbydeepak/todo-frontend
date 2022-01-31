@@ -4,11 +4,15 @@ import Loading from "components/Loading";
 import PageTitle from "components/PageTitle";
 import TaskInput from "components/TaskInput";
 import TodoMenu from "components/TodoMenu";
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { todoReducer } from "reducer/todoReducer";
 import { TodoStateType } from "types/todoReducerType";
 
 import style from "styles/module/pages/Index.module.scss";
+import Head from "next/head";
+import { useAuthContext } from "context/AuthContext";
+import { useRouter } from "next/router";
+import { APIRequest } from "helper/APIRequest";
 
 const initialTodoState: TodoStateType = {
   todo: [],
@@ -23,6 +27,41 @@ const TodoLayout = () => {
     todoReducer,
     initialTodoState
   );
+  const router = useRouter();
+
+  const getTodo = async () => {
+    const response = await APIRequest(
+      "GET",
+      `/todo?status=${todoState.activeMenu}&skip=${todoState.todo.length}&limit=5`,
+      changeAuth,
+      router
+    );
+
+    dispatchTodoAction({
+      type: "ADD_TODO_FROM_BOTTOM",
+      todo: response,
+    });
+
+    dispatchTodoAction({
+      type: "LOADING",
+      isLoading: false,
+    });
+  };
+
+  const { changeAuth } = useAuthContext();
+
+  useEffect(() => {
+    dispatchTodoAction({
+      type: "EMPTY_TODO",
+    });
+
+    dispatchTodoAction({
+      type: "LOADING",
+      isLoading: true,
+    });
+
+    getTodo();
+  }, [todoState.activeMenu]);
 
   const handleAddTask = () => {};
 
@@ -38,6 +77,9 @@ const TodoLayout = () => {
 
   return (
     <>
+      <Head>
+        <title>TODO - Get work done</title>
+      </Head>
       <PageTitle title="Your Todos" subtitle="Manage your task" />
       <CreateTaskInput handleAddTask={handleAddTask} />
       <TodoMenu dispatchTodoAction={dispatchTodoAction} todoState={todoState} />

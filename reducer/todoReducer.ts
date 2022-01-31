@@ -1,19 +1,17 @@
-import { useNotificationContext } from "context/NotificationContext";
 import { TodoActionType, TodoStateType } from "types/todoReducerType";
-
-// const { dispatchNotification } = useNotificationContext();
 
 export const todoReducer = (
   state: TodoStateType,
   action: TodoActionType
 ): TodoStateType => {
   switch (action.type) {
-    case "ADD_TODO_FROM_TOP":
-      // dispatchNotification({
-      //   type: "SUCCESS",
-      //   message: "Task added",
-      // });
+    case "EMPTY_TODO":
+      return {
+        ...state,
+        todo: [],
+      };
 
+    case "ADD_TODO_FROM_TOP":
       return {
         ...state,
         todo: [action.todo, ...state.todo],
@@ -27,18 +25,11 @@ export const todoReducer = (
       };
 
     case "REMOVE_TODO":
-      // dispatchNotification({
-      //   type: "SUCCESS",
-      //   message: "Task removed",
-      // });
-
       const removeTodo = state.todo;
       removeTodo.splice(action.index, 1);
       return { ...state, todo: [...removeTodo] };
 
     case "UPDATE_TODO_TASK":
-      // dispatchNotification({ type: "SUCCESS", message: "Task updated" });
-
       const cloneTodo = state;
       let updateTaskTodo;
 
@@ -63,8 +54,6 @@ export const todoReducer = (
       return updateTaskTodo;
 
     case "UPDATE_TODO_STATUS":
-      // dispatchNotification({ type: "SUCCESS", message: "Task updated" });
-
       const updateStatusTodo = state.todo;
       updateStatusTodo[action.index].status = action.status;
       return { ...state, todo: [...updateStatusTodo] };
