@@ -41,11 +41,16 @@ const TaskInput: FunctionComponent<Props> = ({
     setFocus(!focus);
   };
 
+  const handleInputReset = () => {
+    setLocalTask(task);
+    setTick(false);
+  };
+
   return (
     <>
-      <form className={`${style.base} ${focus && style.baseFocus}`}>
-        <div className={style.boxDiv}>
-          {loading.status && <Spinner className={style.spinner} />}
+      <form className={`${style.taskForm} ${focus && style.taskForm__focus}`}>
+        <div className={style.taskForm__button}>
+          {loading.status && <Spinner className={style.taskForm__spinner} />}
           {!loading.status && (
             <input
               type="checkbox"
@@ -54,48 +59,66 @@ const TaskInput: FunctionComponent<Props> = ({
                 setLoading({ ...loading, status: true });
                 handleChangeStatus(index, loading, setLoading);
               }}
-              className={style.status}
+              className={style.taskForm__checkbox}
             />
           )}
         </div>
+
         <input
+          className={style.taskForm__taskInput}
           type="text"
           value={localTask}
           onChange={handleInputChange}
-          className={style.task}
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
         />
         {tick && (
-          <div className={style.boxDiv}>
-            <button
-              className={style.done}
-              onClick={(e: any) => {
-                setLoading({ ...loading, task: true });
-                handleChangeTask(e, index, loading, setLoading, setTick);
-              }}
-            >
-              <div className={style.boxDiv}>
-                {!loading.task && tick && <i className="icon">done_all</i>}
-                {loading.task && <Spinner className={style.spinner} />}
-              </div>
-            </button>
-          </div>
-        )}
-        <div className={style.left}>
           <button
-            className={style.close}
+            className={style.taskForm__button}
             onClick={(e: any) => {
-              setLoading({ ...loading, delete: true });
-              handleRemoveTask(e, index, loading, setLoading);
+              setLoading({ ...loading, task: true });
+              handleChangeTask(e, index, loading, setLoading, setTick);
             }}
           >
-            <div className={style.boxDiv}>
-              {!loading.delete && <i className="icon">delete_outline</i>}
-              {loading.delete && <Spinner className={style.spinner} />}
-            </div>
+            {!loading.task && tick && (
+              <i
+                className={`icon ${style.taskForm__icon} ${style.taskForm__icon__done}`}
+              >
+                done_all
+              </i>
+            )}
+            {loading.task && <Spinner className={style.taskForm__spinner} />}
           </button>
-        </div>
+        )}
+
+        {tick && (
+          <button className={style.taskForm__button} onClick={handleInputReset}>
+            {!loading.task && tick && (
+              <i
+                className={`icon ${style.taskForm__icon} ${style.taskForm__icon__reset}`}
+              >
+                settings_backup_restore
+              </i>
+            )}
+          </button>
+        )}
+
+        <button
+          className={style.taskForm__button}
+          onClick={(e: any) => {
+            setLoading({ ...loading, delete: true });
+            handleRemoveTask(e, index, loading, setLoading);
+          }}
+        >
+          {!loading.delete && (
+            <i
+              className={`icon ${style.taskForm__icon} ${style.taskForm__icon__delete}`}
+            >
+              delete_outline
+            </i>
+          )}
+          {loading.delete && <Spinner className={style.taskForm__spinner} />}
+        </button>
       </form>
     </>
   );

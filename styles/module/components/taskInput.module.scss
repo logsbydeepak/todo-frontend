@@ -1,85 +1,88 @@
 @import "styles/utilities/variables";
 
-.base {
-  border-radius: 0.4rem;
-  margin: 4rem 0rem;
+.taskForm {
   display: flex;
-  background-color: $color-black;
+  align-items: center;
   border: 0.2rem solid $color-grey-4;
-  padding: 0 2rem;
-  flex-direction: row;
-  align-items: center;
-  transition: all 0.2s;
-}
+  border-radius: 0.4rem;
+  padding: 1rem 1.2rem;
 
-.task {
-  font-size: 1.6rem;
-  padding: 1.8rem 2rem;
-  border: 0;
-}
+  &__focus {
+    border-color: $color-primary;
+  }
 
-.baseFocus {
-  border-color: $color-primary-light;
-}
+  &__icon {
+    font-size: 2rem;
+    transition: all 0.2s;
 
-.base button {
-  background-color: $color-black;
-  width: 2rem;
-  height: 2rem;
-}
+    &__delete {
+      color: $color-warning;
 
-.base button i {
-  font-size: 2rem;
-}
+      &:hover {
+        color: $color-warning-dark-1;
+      }
 
-.base .left {
-  margin-left: 1rem;
-}
+      &:active {
+        color: $color-warning-dark-2;
+      }
+    }
 
-.base .boxDiv button i {
-  transition: all 0.2s;
-}
+    &__done {
+      color: $color-white;
 
-.close i {
-  color: $color-warning;
-}
+      &:hover {
+        color: $color-grey-2;
+      }
 
-.close i:hover {
-  color: $color-warning-dark-1;
-}
+      &:active {
+        color: $color-grey-3;
+      }
+    }
 
-.close i:active {
-  color: $color-warning-dark-2;
-}
+    &__reset {
+      color: $color-success;
 
-.done i {
-  color: $color-success;
-}
+      &:hover {
+        color: $color-success-dark-1;
+      }
 
-.done i:hover {
-  color: $color-success-dark-1;
-}
+      &:active {
+        color: $color-success-dark-2;
+      }
+    }
+  }
 
-.done i:active {
-  color: $color-success-dark-2;
-}
+  &__button:first-child {
+    min-width: 4rem;
+  }
 
-.boxDiv {
-  min-width: 2rem;
-  min-height: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  &__button {
+    max-width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background-color: $color-black;
 
-.boxDiv button {
-  padding: 0;
-}
+    &:hover {
+      background-color: $color-black;
+    }
 
-.left button {
-  padding: 0;
-}
+    &:active {
+      background-color: $color-black;
+    }
+  }
 
-.spinner path {
-  fill: $color-white;
+  &__taskInput {
+    padding: 0 1rem;
+  }
+
+  &__spinner {
+    width: 2rem;
+  }
+
+  &__spinner path {
+    fill: $color-white;
+  }
 }
