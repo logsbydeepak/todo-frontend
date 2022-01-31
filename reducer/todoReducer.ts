@@ -29,7 +29,7 @@ export const todoReducer = (
       removeTodo.splice(action.index, 1);
       return { ...state, todo: [...removeTodo] };
 
-    case "UPDATE_TODO_TASK":
+    case "UPDATE_TODO_STATUS":
       const cloneTodo = state;
       let updateTaskTodo;
 
@@ -53,9 +53,9 @@ export const todoReducer = (
       }
       return updateTaskTodo;
 
-    case "UPDATE_TODO_STATUS":
+    case "UPDATE_TODO_TASK":
       const updateStatusTodo = state.todo;
-      updateStatusTodo[action.index].status = action.status;
+      updateStatusTodo[action.index].task = action.task;
       return { ...state, todo: [...updateStatusTodo] };
 
     case "LOADING":

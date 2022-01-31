@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { ChangeEvent, FunctionComponent, useState } from "react";
 import style from "styles/module/components/taskInput.module.scss";
 import Spinner from "./Spinner";
 
@@ -6,7 +6,6 @@ interface Props {
   status: boolean;
   task: string;
   handleChangeStatus: any;
-  handleInputChange: any;
   index: any;
   handleRemoveTask: any;
   handleChangeTask: any;
@@ -16,7 +15,6 @@ const TaskInput: FunctionComponent<Props> = ({
   status,
   task,
   handleChangeStatus,
-  handleInputChange,
   index,
   handleRemoveTask,
   handleChangeTask,
@@ -28,10 +26,24 @@ const TaskInput: FunctionComponent<Props> = ({
     task: false,
     delete: false,
   });
+  const [localTask, setLocalTask] = useState(task);
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setLocalTask(event.target.value);
+    setTick(true);
+  };
+
+  const handleInputFocus = () => {
+    setFocus(!focus);
+  };
+
+  const handleInputBlur = () => {
+    setFocus(!focus);
+  };
 
   return (
     <>
-      <div className={`${style.base} ${focus && style.baseFocus}`}>
+      <form className={`${style.base} ${focus && style.baseFocus}`}>
         <div className={style.boxDiv}>
           {loading.status && <Spinner className={style.spinner} />}
           {!loading.status && (
@@ -48,14 +60,11 @@ const TaskInput: FunctionComponent<Props> = ({
         </div>
         <input
           type="text"
-          value={task}
-          onChange={(e: any) => {
-            handleInputChange(e, index);
-            setTick(true);
-          }}
+          value={localTask}
+          onChange={handleInputChange}
           className={style.task}
-          onFocus={() => setFocus(!focus)}
-          onBlur={() => setFocus(!focus)}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
         />
         {tick && (
           <div className={style.boxDiv}>
@@ -87,7 +96,7 @@ const TaskInput: FunctionComponent<Props> = ({
             </div>
           </button>
         </div>
-      </div>
+      </form>
     </>
   );
 };
