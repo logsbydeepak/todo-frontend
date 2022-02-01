@@ -21,7 +21,8 @@ export const todoReducer = (
     case "ADD_TODO_FROM_BOTTOM":
       return {
         ...state,
-        todo: [...action.todo, ...state.todo],
+        todo: [...state.todo, ...action.todo],
+        showLoadMoreButton: action.todo.length >= 5,
       };
 
     case "REMOVE_TODO":

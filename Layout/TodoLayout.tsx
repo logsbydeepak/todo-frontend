@@ -17,6 +17,7 @@ import { useAuthContext } from "context/AuthContext";
 import { TodoStateType } from "types/todoReducerType";
 
 import style from "styles/module/pages/Index.module.scss";
+import { useNotificationContext } from "context/NotificationContext";
 
 const initialTodoState: TodoStateType = {
   todo: [],
@@ -32,11 +33,12 @@ const TodoLayout = () => {
     initialTodoState
   );
   const router = useRouter();
+  const { dispatchNotification } = useNotificationContext();
 
   const getTodo = async () => {
     const response = await APIRequest(
       "GET",
-      `/todo?status=${todoState.activeMenu}&skip=${todoState.todo.length}&limit=5`,
+      `/todo?status=${todoState.activeMenu}&skip=${0}&limit=5`,
       changeAuth,
       router
     );
@@ -50,6 +52,42 @@ const TodoLayout = () => {
       type: "LOADING",
       isLoading: false,
     });
+  };
+
+  const getMoreTodo = async (skip: number) => {
+    dispatchTodoAction({
+      type: "LOAD_MORE",
+      isLoadingMore: true,
+    });
+
+    const response = await APIRequest(
+      "GET",
+      `/todo?status=${todoState.activeMenu}&skip=${skip}&limit=5`,
+      changeAuth,
+      router
+    );
+
+    dispatchTodoAction({
+      type: "ADD_TODO_FROM_BOTTOM",
+      todo: response,
+    });
+
+    dispatchTodoAction({
+      type: "LOAD_MORE",
+      isLoadingMore: false,
+    });
+
+    if (!(response.length >= 5)) {
+      dispatchNotification({
+        type: "SUCCESS",
+        message: "No task left",
+      });
+    } else {
+      dispatchNotification({
+        type: "SUCCESS",
+        message: "Task fetch successful",
+      });
+    }
   };
 
   const { changeAuth } = useAuthContext();
@@ -77,7 +115,9 @@ const TodoLayout = () => {
 
   const handleRemoveTask = () => {};
 
-  const loadMoreHandle = () => {};
+  const loadMoreHandle = async () => {
+    getMoreTodo(todoState.todo.length);
+  };
 
   return (
     <>
@@ -112,7 +152,7 @@ const TodoLayout = () => {
           icon="add"
           text="Load more"
           clickHandler={loadMoreHandle}
-          loading={false}
+          loading={todoState.isLoadingMore}
         />
       ) : (
         <p className={style.noTodo}>
