@@ -1,12 +1,17 @@
-import React, { ChangeEvent, FunctionComponent, useState } from "react";
+import React, {
+  ChangeEvent,
+  FunctionComponent,
+  MouseEvent,
+  useState,
+} from "react";
 import style from "styles/module/components/taskInput.module.scss";
 import Spinner from "components/Spinner";
 
 interface Props {
   status: boolean;
   task: string;
+  index: number;
   handleChangeStatus: any;
-  index: any;
   handleRemoveTask: any;
   handleChangeTask: any;
 }
@@ -21,11 +26,12 @@ const TaskInput: FunctionComponent<Props> = ({
 }) => {
   const [focus, setFocus] = useState(false);
   const [tick, setTick] = useState(false);
-  const [loading, setLoading] = useState({
+  const [loadingIcon, setLoadingIcon] = useState({
     status: false,
     task: false,
     delete: false,
   });
+
   const [localTask, setLocalTask] = useState(task);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -49,20 +55,49 @@ const TaskInput: FunctionComponent<Props> = ({
   return (
     <>
       <form className={`${style.taskForm} ${focus && style.taskForm__focus}`}>
-        <div className={style.taskForm__button}>
-          {loading.status && <Spinner className={style.taskForm__spinner} />}
-          {!loading.status && (
-            <input
-              type="checkbox"
-              checked={status}
-              onChange={() => {
-                setLoading({ ...loading, status: true });
-                handleChangeStatus(index, loading, setLoading);
-              }}
-              className={style.taskForm__checkbox}
-            />
+        <button
+          className={style.taskForm__button}
+          onClick={(
+            event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+          ) => {
+            event.preventDefault();
+            setLoadingIcon({ ...loadingIcon, status: true });
+            handleChangeStatus(index, setLoadingIcon);
+          }}
+        >
+          {!loadingIcon.status && (
+            <i
+              className={`icon ${style.taskForm__icon} ${style.taskForm__icon__check}`}
+            >
+              {status ? "check_circle_outline" : "radio_button_unchecked"}
+            </i>
           )}
-        </div>
+          {loadingIcon.status && (
+            <Spinner className={style.taskForm__spinner} />
+          )}
+        </button>
+
+        {/* <div className={style.taskForm__button}>
+          {loadingIcon.status && (
+            <Spinner className={style.taskForm__spinner} />
+          )}
+          {!loadingIcon.status && (
+            <i
+              className={`icon ${style.taskForm__icon} ${style.taskForm__icon__done}`}
+            >
+              {status ? "check_circle_outline" : "check"}
+            </i>
+            // <input
+            //   type="checkbox"
+            //   checked={status}
+            //   onChange={() => {
+            //     setLoadingIcon({ ...loadingIcon, status: true });
+            //     handleChangeStatus(index, setLoadingIcon);
+            //   }}
+            //   className={style.taskForm__checkbox}
+            // />
+          )}
+        </div> */}
 
         <input
           className={style.taskForm__taskInput}
@@ -76,24 +111,26 @@ const TaskInput: FunctionComponent<Props> = ({
           <button
             className={style.taskForm__button}
             onClick={(e: any) => {
-              setLoading({ ...loading, task: true });
-              handleChangeTask(e, index, loading, setLoading, setTick);
+              setLoadingIcon({ ...loadingIcon, task: true });
+              handleChangeTask(e, index, loadingIcon, setLoadingIcon, setTick);
             }}
           >
-            {!loading.task && tick && (
+            {!loadingIcon.task && tick && (
               <i
                 className={`icon ${style.taskForm__icon} ${style.taskForm__icon__done}`}
               >
                 done_all
               </i>
             )}
-            {loading.task && <Spinner className={style.taskForm__spinner} />}
+            {loadingIcon.task && (
+              <Spinner className={style.taskForm__spinner} />
+            )}
           </button>
         )}
 
         {tick && (
           <button className={style.taskForm__button} onClick={handleInputReset}>
-            {!loading.task && tick && (
+            {!loadingIcon.task && tick && (
               <i
                 className={`icon ${style.taskForm__icon} ${style.taskForm__icon__reset}`}
               >
@@ -106,18 +143,20 @@ const TaskInput: FunctionComponent<Props> = ({
         <button
           className={style.taskForm__button}
           onClick={(e: any) => {
-            setLoading({ ...loading, delete: true });
-            handleRemoveTask(e, index, loading, setLoading);
+            setLoadingIcon({ ...loadingIcon, delete: true });
+            handleRemoveTask(e, index, loadingIcon, setLoadingIcon);
           }}
         >
-          {!loading.delete && (
+          {!loadingIcon.delete && (
             <i
               className={`icon ${style.taskForm__icon} ${style.taskForm__icon__delete}`}
             >
               delete_outline
             </i>
           )}
-          {loading.delete && <Spinner className={style.taskForm__spinner} />}
+          {loadingIcon.delete && (
+            <Spinner className={style.taskForm__spinner} />
+          )}
         </button>
       </form>
     </>

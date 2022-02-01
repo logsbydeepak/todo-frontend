@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { Dispatch, SetStateAction, useEffect, useReducer } from "react";
 
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -14,7 +14,7 @@ import TodoCreate from "components/Todo/TodoCreate";
 import { APIRequest } from "helper/APIRequest";
 import { todoReducer } from "reducer/todoReducer";
 import { useAuthContext } from "context/AuthContext";
-import { TodoStateType } from "types/todoReducerType";
+import { TodoStateType, TodoType } from "types/todoReducerType";
 
 import style from "styles/module/pages/Index.module.scss";
 import { useNotificationContext } from "context/NotificationContext";
@@ -107,11 +107,41 @@ const TodoLayout = () => {
 
   const handleAddTask = () => {};
 
-  const handleChangeStatus = () => {};
+  const updateTodo = async (data: {
+    _id: string;
+    task: string;
+    status: boolean;
+  }) =>
+    await APIRequest("PUT", "/todo", changeAuth, router, {
+      id: data._id,
+      status: data.status,
+      task: data.task,
+    });
+
+  const handleChangeStatus = async (
+    index: number,
+    setLoadingIcon: Dispatch<
+      SetStateAction<{
+        status: boolean;
+        task: boolean;
+        delete: boolean;
+      }>
+    >
+  ) => {
+    const cloneTodo = [...todoState.todo];
+    await updateTodo({
+      ...todoState.todo[index],
+      status: !cloneTodo[index].status,
+    });
+
+    dispatchTodoAction({ type: "UPDATE_TODO_STATUS", index });
+    if (todoState.activeMenu === "all") {
+      setLoadingIcon((preValue) => ({ ...preValue, status: false }));
+    }
+    dispatchNotification({ type: "SUCCESS", message: "Status changed" });
+  };
 
   const handleChangeTask = () => {};
-
-  const handleInputChange = () => {};
 
   const handleRemoveTask = () => {};
 
@@ -130,7 +160,7 @@ const TodoLayout = () => {
       {todoState.isLoading ? (
         <Loading />
       ) : (
-        todoState.todo.map((task: any, index: number) => {
+        todoState.todo.map((task: TodoType, index: number) => {
           return (
             <TodoItem
               key={task._id}

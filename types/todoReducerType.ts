@@ -1,4 +1,4 @@
-interface TodoType {
+export interface TodoType {
   _id: string;
   task: string;
   status: boolean;
@@ -17,7 +17,7 @@ export type TodoActionType =
       type: "REMOVE_TODO";
       index: number;
     }
-  | { type: "UPDATE_TODO_STATUS"; index: number; status: boolean }
+  | { type: "UPDATE_TODO_STATUS"; index: number }
   | { type: "UPDATE_TODO_TASK"; index: number; task: string }
   | { type: "LOAD_MORE"; isLoadingMore: boolean }
   | { type: "LOAD_MORE_BUTTON"; showLoadMoreButton: boolean }

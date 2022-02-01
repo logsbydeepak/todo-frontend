@@ -16,6 +16,18 @@
     font-size: 2rem;
     transition: all 0.2s;
 
+    &__check {
+      color: $color-primary;
+
+      &:hover {
+        color: $color-primary-dark-1;
+      }
+
+      &:active {
+        color: $color-primary-dark-2;
+      }
+    }
+
     &__delete {
       color: $color-warning;
 
@@ -51,10 +63,6 @@
         color: $color-success-dark-2;
       }
     }
-  }
-
-  &__button:first-child {
-    min-width: 4rem;
   }
 
   &__button {

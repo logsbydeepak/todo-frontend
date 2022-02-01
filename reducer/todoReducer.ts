@@ -31,28 +31,23 @@ export const todoReducer = (
       return { ...state, todo: [...removeTodo] };
 
     case "UPDATE_TODO_STATUS":
-      const cloneTodo = state;
-      let updateTaskTodo;
-
-      cloneTodo.todo[action.index].status =
-        !cloneTodo.todo[action.index].status;
+      const cloneTodo = { ...state };
 
       switch (state.activeMenu) {
         case "all":
-          updateTaskTodo = { ...state, todo: [...cloneTodo.todo] };
-          break;
+          cloneTodo.todo[action.index].status =
+            !state.todo[action.index].status;
+          return { ...cloneTodo };
 
         default:
           const filterTodo = state.todo.filter(
             (_: any, index: number) => index !== action.index
           );
-          updateTaskTodo = {
-            ...state,
+          return {
+            ...cloneTodo,
             todo: [...filterTodo],
           };
-          break;
       }
-      return updateTaskTodo;
 
     case "UPDATE_TODO_TASK":
       const updateStatusTodo = state.todo;
