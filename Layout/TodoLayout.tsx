@@ -170,7 +170,28 @@ const TodoLayout = () => {
     dispatchNotification({ type: "SUCCESS", message: "Status changed" });
   };
 
-  const handleChangeTask = () => {};
+  const handleChangeTask = async (
+    index: number,
+    setLoadingIcon: Dispatch<
+      SetStateAction<{
+        status: boolean;
+        task: boolean;
+        delete: boolean;
+      }>
+    >,
+    setTick: Dispatch<SetStateAction<boolean>>,
+    localTask: string
+  ) => {
+    await updateTodo({
+      ...todoState.todo[index],
+      task: localTask,
+    });
+
+    dispatchTodoAction({ type: "UPDATE_TODO_TASK", index, task: localTask });
+    setLoadingIcon((preValue) => ({ ...preValue, task: false }));
+    dispatchNotification({ type: "SUCCESS", message: "Task updated" });
+    setTick(false);
+  };
 
   const handleRemoveTask = async (
     index: number,

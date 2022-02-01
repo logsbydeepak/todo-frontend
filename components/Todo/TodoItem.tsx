@@ -86,11 +86,25 @@ const TaskInput: FunctionComponent<Props> = ({
           onBlur={handleInputBlur}
         />
         {tick && (
+          <button className={style.taskForm__button} onClick={handleInputReset}>
+            {!loadingIcon.task && tick && (
+              <i
+                className={`icon ${style.taskForm__icon} ${style.taskForm__icon__reset}`}
+              >
+                settings_backup_restore
+              </i>
+            )}
+          </button>
+        )}
+        {tick && (
           <button
             className={style.taskForm__button}
-            onClick={(e: any) => {
+            onClick={(
+              event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+            ) => {
+              event.preventDefault();
               setLoadingIcon({ ...loadingIcon, task: true });
-              handleChangeTask(e, index, loadingIcon, setLoadingIcon, setTick);
+              handleChangeTask(index, setLoadingIcon, setTick, localTask);
             }}
           >
             {!loadingIcon.task && tick && (
@@ -102,18 +116,6 @@ const TaskInput: FunctionComponent<Props> = ({
             )}
             {loadingIcon.task && (
               <Spinner className={style.taskForm__spinner} />
-            )}
-          </button>
-        )}
-
-        {tick && (
-          <button className={style.taskForm__button} onClick={handleInputReset}>
-            {!loadingIcon.task && tick && (
-              <i
-                className={`icon ${style.taskForm__icon} ${style.taskForm__icon__reset}`}
-              >
-                settings_backup_restore
-              </i>
             )}
           </button>
         )}
