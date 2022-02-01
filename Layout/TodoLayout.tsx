@@ -33,7 +33,15 @@ const TodoLayout = () => {
     initialTodoState
   );
   const router = useRouter();
+
+  const { changeAuth } = useAuthContext();
   const { dispatchNotification } = useNotificationContext();
+
+  const createTodo = async (task: string) =>
+    await APIRequest("POST", `/todo`, changeAuth, router, {
+      status: false,
+      task,
+    });
 
   const getTodo = async () => {
     const response = await APIRequest(
@@ -90,8 +98,6 @@ const TodoLayout = () => {
     }
   };
 
-  const { changeAuth } = useAuthContext();
-
   useEffect(() => {
     dispatchTodoAction({
       type: "EMPTY_TODO",
@@ -105,8 +111,6 @@ const TodoLayout = () => {
     getTodo();
   }, [todoState.activeMenu]);
 
-  const handleAddTask = () => {};
-
   const updateTodo = async (data: {
     _id: string;
     task: string;
@@ -117,6 +121,27 @@ const TodoLayout = () => {
       status: data.status,
       task: data.task,
     });
+
+  const handleAddTask = async (
+    task: string,
+    setTask: Dispatch<SetStateAction<string>>,
+    setLoading: Dispatch<SetStateAction<boolean>>,
+    setError: Dispatch<SetStateAction<boolean>>
+  ) => {
+    if (task.length === 0) {
+      setError(true);
+      setLoading(false);
+      return;
+    }
+    const response = await createTodo(task);
+    dispatchTodoAction({
+      type: "ADD_TODO_FROM_TOP",
+      todo: { _id: response.id, task: response.task, status: false },
+    });
+    setTask("");
+    setLoading(false);
+    setError(false);
+  };
 
   const handleChangeStatus = async (
     index: number,

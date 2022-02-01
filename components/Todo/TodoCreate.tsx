@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useState, MouseEvent } from "react";
 import style from "styles/module/components/createTaskInput.module.scss";
 import inputStyle from "styles/module/components/input.module.scss";
 import buttonStyle from "styles/module/components/button.module.scss";
@@ -11,7 +11,6 @@ interface Props {
 const TodoCreate: FunctionComponent<Props> = ({ handleAddTask }) => {
   const [task, setTask] = useState("");
   const [loading, setLoading] = useState(false);
-  const [helper, setHelper] = useState("");
   const [isError, setError] = useState(false);
   return (
     <>
@@ -34,17 +33,12 @@ const TodoCreate: FunctionComponent<Props> = ({ handleAddTask }) => {
               isError ? buttonStyle.warning : buttonStyle.primary
             } ${style.button}`}
             disabled={loading}
-            onClick={(e: any) => {
-              handleAddTask(
-                e,
-                task,
-                setTask,
-                loading,
-                setLoading,
-                setHelper,
-                setError,
-                setLoading
-              );
+            onClick={(
+              event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+            ) => {
+              event.preventDefault();
+
+              handleAddTask(task, setTask, setLoading, setError);
             }}
           >
             {!loading && <i className="icon">arrow_forward_ios</i>}
