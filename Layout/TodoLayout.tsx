@@ -62,6 +62,9 @@ const TodoLayout = () => {
     });
   };
 
+  const removeTodo = async (id: string) =>
+    await APIRequest("DELETE", `/todo?id=${id}`, changeAuth, router);
+
   const getMoreTodo = async (skip: number) => {
     dispatchTodoAction({
       type: "LOAD_MORE",
@@ -138,6 +141,7 @@ const TodoLayout = () => {
       type: "ADD_TODO_FROM_TOP",
       todo: { _id: response.id, task: response.task, status: false },
     });
+    dispatchNotification({ type: "SUCCESS", message: "Task added" });
     setTask("");
     setLoading(false);
     setError(false);
@@ -168,7 +172,20 @@ const TodoLayout = () => {
 
   const handleChangeTask = () => {};
 
-  const handleRemoveTask = () => {};
+  const handleRemoveTask = async (
+    index: number,
+    setLoadingIcon: Dispatch<
+      SetStateAction<{ status: boolean; task: boolean; delete: boolean }>
+    >
+  ) => {
+    await removeTodo(todoState.todo[index]._id);
+    dispatchTodoAction({
+      type: "REMOVE_TODO",
+      index,
+    });
+    dispatchNotification({ type: "SUCCESS", message: "Task removed" });
+    // setLoadingIcon((preValue) => ({ ...preValue, delete: false }));
+  };
 
   const loadMoreHandle = async () => {
     getMoreTodo(todoState.todo.length);

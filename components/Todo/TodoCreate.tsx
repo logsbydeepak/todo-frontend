@@ -37,7 +37,7 @@ const TodoCreate: FunctionComponent<Props> = ({ handleAddTask }) => {
               event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
             ) => {
               event.preventDefault();
-
+              setLoading(true);
               handleAddTask(task, setTask, setLoading, setError);
             }}
           >

@@ -77,28 +77,6 @@ const TaskInput: FunctionComponent<Props> = ({
           )}
         </button>
 
-        {/* <div className={style.taskForm__button}>
-          {loadingIcon.status && (
-            <Spinner className={style.taskForm__spinner} />
-          )}
-          {!loadingIcon.status && (
-            <i
-              className={`icon ${style.taskForm__icon} ${style.taskForm__icon__done}`}
-            >
-              {status ? "check_circle_outline" : "check"}
-            </i>
-            // <input
-            //   type="checkbox"
-            //   checked={status}
-            //   onChange={() => {
-            //     setLoadingIcon({ ...loadingIcon, status: true });
-            //     handleChangeStatus(index, setLoadingIcon);
-            //   }}
-            //   className={style.taskForm__checkbox}
-            // />
-          )}
-        </div> */}
-
         <input
           className={style.taskForm__taskInput}
           type="text"
@@ -142,9 +120,12 @@ const TaskInput: FunctionComponent<Props> = ({
 
         <button
           className={style.taskForm__button}
-          onClick={(e: any) => {
+          onClick={(
+            event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+          ) => {
+            event.preventDefault();
             setLoadingIcon({ ...loadingIcon, delete: true });
-            handleRemoveTask(e, index, loadingIcon, setLoadingIcon);
+            handleRemoveTask(index, setLoadingIcon);
           }}
         >
           {!loadingIcon.delete && (
