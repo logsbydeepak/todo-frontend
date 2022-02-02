@@ -18,6 +18,7 @@ import { TodoStateType, TodoType } from "types/todoReducerType";
 import style from "styles/module/pages/Index.module.scss";
 import { useNotificationContext } from "context/NotificationContext";
 import Spinner from "components/Spinner";
+import { handleDeleteTodo } from "helper/request/deleteTodo";
 
 const initialTodoState: TodoStateType = {
   todo: [],
@@ -183,20 +184,6 @@ const TodoLayout = () => {
     setTick(false);
   };
 
-  const handleRemoveTask = async (
-    index: number,
-    setLoadingIcon: Dispatch<
-      SetStateAction<{ status: boolean; task: boolean; delete: boolean }>
-    >
-  ) => {
-    await removeTodo(todo[index]._id);
-    dispatchTodoAction({
-      type: "REMOVE_TODO",
-      index,
-    });
-    dispatchNotification({ type: "SUCCESS", message: "Task removed" });
-  };
-
   const loadMoreHandle = async () => {
     getMoreTodo(todo.length);
   };
@@ -225,7 +212,16 @@ const TodoLayout = () => {
               status={task.status}
               task={task.task}
               handleChangeStatus={handleChangeStatus}
-              handleRemoveTask={handleRemoveTask}
+              handleRemoveTask={(index: number) =>
+                handleDeleteTodo(
+                  index,
+                  changeAuth,
+                  router,
+                  dispatchNotification,
+                  dispatchTodoAction,
+                  todo
+                )
+              }
               handleChangeTask={handleChangeTask}
             />
           );
