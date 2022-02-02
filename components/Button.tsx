@@ -1,22 +1,30 @@
 import Link from "next/link";
-import { FunctionComponent } from "react";
+import { FunctionComponent, MouseEvent } from "react";
 
 import style from "styles/module/components/button.module.scss";
 import Spinner from "./Spinner";
 
-type ButtonSimpleProps = {
+interface ButtonWithLInkProps {
   link: string;
-};
+}
 
-type ButtonIconProps = {
+interface ButtonWithTextAndIconProps {
   icon: string;
   text: string;
   clickHandler: any;
   loading: boolean;
   warning?: boolean;
-};
+}
 
-export const ButtonSimple: FunctionComponent<ButtonSimpleProps> = ({
+interface ButtonWithIconProps {
+  loading: boolean;
+  isError: boolean;
+  handleOnClick: (
+    event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  ) => Promise<void>;
+}
+
+export const ButtonWithLInk: FunctionComponent<ButtonWithLInkProps> = ({
   link,
 }) => {
   return (
@@ -28,13 +36,9 @@ export const ButtonSimple: FunctionComponent<ButtonSimpleProps> = ({
   );
 };
 
-export const ButtonIcon: FunctionComponent<ButtonIconProps> = ({
-  icon,
-  text,
-  clickHandler,
-  warning = false,
-  loading = false,
-}) => {
+export const ButtonWithTextAndIcon: FunctionComponent<
+  ButtonWithTextAndIconProps
+> = ({ icon, text, clickHandler, warning = false, loading = false }) => {
   return (
     <>
       <button
@@ -45,6 +49,27 @@ export const ButtonIcon: FunctionComponent<ButtonIconProps> = ({
         {text}
         {!loading && <i className={`icon ${style.icon}`}>{icon}</i>}
         {loading && <Spinner />}
+      </button>
+    </>
+  );
+};
+
+export const ButtonWithIcon: FunctionComponent<ButtonWithIconProps> = ({
+  loading,
+  isError,
+  handleOnClick,
+}) => {
+  return (
+    <>
+      <button
+        className={`${style.base} ${style.icon} ${
+          isError ? style.warning : style.primary
+        } ${style.button__icon}`}
+        disabled={loading}
+        onClick={handleOnClick}
+      >
+        {!loading && <i className="icon">arrow_forward_ios</i>}
+        {loading && <Spinner className={style.spinner} />}
       </button>
     </>
   );

@@ -1,4 +1,4 @@
-import { ButtonSimple } from "components/Button";
+import { ButtonWithLInk } from "components/Button";
 import Head from "next/head";
 
 import style from "styles/module/pages/Index.module.scss";
@@ -16,7 +16,7 @@ const LandingLayout = () => {
             TODO<span>.</span>
           </span>
         </h1>
-        <ButtonSimple link="/SignUp" />
+        <ButtonWithLInk link="/SignUp" />
       </div>
     </>
   );

@@ -9,7 +9,7 @@ import isStrongPassword from "validator/lib/isStrongPassword";
 
 import Input from "components/Input";
 import PageTitle from "components/PageTitle";
-import { ButtonIcon } from "components/Button";
+import { ButtonWithTextAndIcon } from "components/Button";
 import style from "styles/module/pages/LoginSignUp.module.scss";
 
 import { axiosRequest } from "helper/axios";
@@ -150,7 +150,7 @@ const Login: NextPage = () => {
             disabled={loading}
           />
 
-          <ButtonIcon
+          <ButtonWithTextAndIcon
             icon="east"
             text="Create your account"
             clickHandler={clickHandler}

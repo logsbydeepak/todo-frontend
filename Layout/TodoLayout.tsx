@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 import Loading from "components/Loading";
 import PageTitle from "components/PageTitle";
-import { ButtonIcon } from "components/Button";
+import { ButtonWithTextAndIcon } from "components/Button";
 
 import TodoItem from "components/Todo/TodoItem";
 import TodoMenu from "components/Todo/TodoMenu";
@@ -36,12 +36,6 @@ const TodoLayout = () => {
 
   const { changeAuth } = useAuthContext();
   const { dispatchNotification } = useNotificationContext();
-
-  const createTodo = async (task: string) =>
-    await APIRequest("POST", `/todo`, changeAuth, router, {
-      status: false,
-      task,
-    });
 
   const getTodo = async () => {
     const response = await APIRequest(
@@ -125,28 +119,6 @@ const TodoLayout = () => {
       task: data.task,
     });
 
-  const handleAddTask = async (
-    task: string,
-    setTask: Dispatch<SetStateAction<string>>,
-    setLoading: Dispatch<SetStateAction<boolean>>,
-    setError: Dispatch<SetStateAction<boolean>>
-  ) => {
-    if (task.length === 0) {
-      setError(true);
-      setLoading(false);
-      return;
-    }
-    const response = await createTodo(task);
-    dispatchTodoAction({
-      type: "ADD_TODO_FROM_TOP",
-      todo: { _id: response.id, task: response.task, status: false },
-    });
-    dispatchNotification({ type: "SUCCESS", message: "Task added" });
-    setTask("");
-    setLoading(false);
-    setError(false);
-  };
-
   const handleChangeStatus = async (
     index: number,
     setLoadingIcon: Dispatch<
@@ -218,7 +190,7 @@ const TodoLayout = () => {
         <title>TODO - Get work done</title>
       </Head>
       <PageTitle title="Your Todos" subtitle="Manage your task" />
-      <TodoCreate handleAddTask={handleAddTask} />
+      <TodoCreate dispatchTodoAction={dispatchTodoAction} />
       <TodoMenu dispatchTodoAction={dispatchTodoAction} todoState={todoState} />
       {todoState.isLoading ? (
         <Loading />
@@ -241,7 +213,7 @@ const TodoLayout = () => {
         <p className={style.noTodo}>No task to show.</p>
       )}
       {todoState.showLoadMoreButton && todoState.todo.length !== 0 ? (
-        <ButtonIcon
+        <ButtonWithTextAndIcon
           icon="add"
           text="Load more"
           clickHandler={loadMoreHandle}
