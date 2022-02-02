@@ -46,8 +46,11 @@ const TodoLayout = () => {
       "GET",
       `/todo?status=${activeMenu}&skip=${0}&limit=5`,
       changeAuth,
-      router
+      router,
+      dispatchNotification
     );
+
+    if (!response) return;
 
     dispatchTodoAction({
       type: "ADD_TODO_FROM_BOTTOM",
@@ -61,7 +64,13 @@ const TodoLayout = () => {
   };
 
   const removeTodo = async (id: string) =>
-    await APIRequest("DELETE", `/todo?id=${id}`, changeAuth, router);
+    await APIRequest(
+      "DELETE",
+      `/todo?id=${id}`,
+      changeAuth,
+      router,
+      dispatchNotification
+    );
 
   const getMoreTodo = async (skip: number) => {
     dispatchTodoAction({
@@ -73,7 +82,8 @@ const TodoLayout = () => {
       "GET",
       `/todo?status=${activeMenu}&skip=${skip}&limit=5`,
       changeAuth,
-      router
+      router,
+      dispatchNotification
     );
 
     dispatchTodoAction({
@@ -117,7 +127,7 @@ const TodoLayout = () => {
     task: string;
     status: boolean;
   }) =>
-    await APIRequest("PUT", "/todo", changeAuth, router, {
+    await APIRequest("PUT", "/todo", changeAuth, router, dispatchNotification, {
       id: data._id,
       status: data.status,
       task: data.task,

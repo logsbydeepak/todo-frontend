@@ -32,10 +32,17 @@ const TodoCreate: FunctionComponent<Props> = ({ dispatchTodoAction }) => {
   const router = useRouter();
 
   const createTodo = async (task: string) =>
-    await APIRequest("POST", `/todo`, changeAuth, router, {
-      status: false,
-      task,
-    });
+    await APIRequest(
+      "POST",
+      `/todo`,
+      changeAuth,
+      router,
+      dispatchNotification,
+      {
+        status: false,
+        task,
+      }
+    );
 
   const handleAddTask = async (
     event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
@@ -49,15 +56,25 @@ const TodoCreate: FunctionComponent<Props> = ({ dispatchTodoAction }) => {
       return;
     }
 
-    const response = await createTodo(task);
-    dispatchTodoAction({
-      type: "ADD_TODO_FROM_TOP",
-      todo: { _id: response.id, task: response.task, status: false },
-    });
-    dispatchNotification({ type: "SUCCESS", message: "Task added" });
-    setTask("");
-    setIsLoading(false);
-    setIsError(false);
+    try {
+      const response = await createTodo(task);
+      if (!response) {
+        throw response;
+      }
+      dispatchTodoAction({
+        type: "ADD_TODO_FROM_TOP",
+        todo: { _id: response.id, task: response.task, status: false },
+      });
+      dispatchNotification({ type: "SUCCESS", message: "Task added" });
+      setTask("");
+      setIsLoading(false);
+      setIsError(false);
+    } catch (error: any) {
+      dispatchNotification({
+        type: "ERROR",
+        message: "",
+      });
+    }
   };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
