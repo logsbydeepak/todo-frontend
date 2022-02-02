@@ -16,6 +16,7 @@ import { useNotificationContext } from "context/NotificationContext";
 import { ButtonWithIcon } from "components/Button";
 import inputStyle from "styles/module/components/input.module.scss";
 import style from "styles/module/components/createTaskInput.module.scss";
+import { handleCreateTodo } from "helper/request/createTodo";
 
 interface Props {
   dispatchTodoAction: Dispatch<TodoActionType>;
@@ -30,52 +31,6 @@ const TodoCreate: FunctionComponent<Props> = ({ dispatchTodoAction }) => {
 
   const { changeAuth } = useAuthContext();
   const router = useRouter();
-
-  const createTodo = async (task: string) =>
-    await APIRequest(
-      "POST",
-      `/todo`,
-      changeAuth,
-      router,
-      dispatchNotification,
-      {
-        status: false,
-        task,
-      }
-    );
-
-  const handleAddTask = async (
-    event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) => {
-    event.preventDefault();
-    setIsLoading(true);
-
-    if (task.length === 0) {
-      setIsError(true);
-      setIsLoading(false);
-      return;
-    }
-
-    try {
-      const response = await createTodo(task);
-      if (!response) {
-        throw response;
-      }
-      dispatchTodoAction({
-        type: "ADD_TODO_FROM_TOP",
-        todo: { _id: response.id, task: response.task, status: false },
-      });
-      dispatchNotification({ type: "SUCCESS", message: "Task added" });
-      setTask("");
-      setIsLoading(false);
-      setIsError(false);
-    } catch (error: any) {
-      dispatchNotification({
-        type: "ERROR",
-        message: "",
-      });
-    }
-  };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTask(event.target.value);
@@ -97,7 +52,21 @@ const TodoCreate: FunctionComponent<Props> = ({ dispatchTodoAction }) => {
           <ButtonWithIcon
             loading={isLoading}
             isError={isError}
-            handleOnClick={handleAddTask}
+            handleOnClick={(
+              event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+            ) => {
+              event.preventDefault();
+              handleCreateTodo(
+                setIsLoading,
+                setIsError,
+                setTask,
+                task,
+                changeAuth,
+                router,
+                dispatchNotification,
+                dispatchTodoAction
+              );
+            }}
           />
         </div>
         <p className={`${inputStyle.helper}`}>

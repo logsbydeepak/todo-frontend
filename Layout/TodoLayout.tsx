@@ -86,6 +86,8 @@ const TodoLayout = () => {
       dispatchNotification
     );
 
+    if (!response) return;
+
     dispatchTodoAction({
       type: "ADD_TODO_FROM_BOTTOM",
       todo: response,
@@ -144,10 +146,12 @@ const TodoLayout = () => {
     >
   ) => {
     const cloneTodo = [...todo];
-    await updateTodo({
+    const update = await updateTodo({
       ...todo[index],
       status: !cloneTodo[index].status,
     });
+
+    if (!update) return;
 
     dispatchTodoAction({ type: "UPDATE_TODO_STATUS", index });
     if (activeMenu === "all") {
@@ -191,7 +195,6 @@ const TodoLayout = () => {
       index,
     });
     dispatchNotification({ type: "SUCCESS", message: "Task removed" });
-    // setLoadingIcon((preValue) => ({ ...preValue, delete: false }));
   };
 
   const loadMoreHandle = async () => {
