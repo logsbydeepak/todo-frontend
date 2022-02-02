@@ -43,4 +43,19 @@
 .noTodo {
   font-size: 1.6rem;
   text-align: center;
+  padding: 4rem;
+}
+
+.spinner {
+  width: 4rem;
+
+  &__container {
+    margin: 10rem;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.spinner path {
+  fill: $color-white;
 }

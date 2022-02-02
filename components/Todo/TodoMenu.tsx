@@ -1,19 +1,15 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  FunctionComponent,
-} from "react";
+import { ChangeEvent, Dispatch, FunctionComponent } from "react";
 import style from "styles/module/components/todoMenu.module.scss";
-import { TodoActionType, TodoStateType } from "types/todoReducerType";
+import { TodoActionType } from "types/todoReducerType";
 
 interface Props {
   dispatchTodoAction: Dispatch<TodoActionType>;
-  todoState: TodoStateType;
+  activeMenu: "true" | "false" | "all";
 }
 
 const TodoMenu: FunctionComponent<Props> = ({
   dispatchTodoAction,
-  todoState,
+  activeMenu,
 }) => {
   const handleOnActiveMenuChange = (event: ChangeEvent<HTMLFormElement>) => {
     const activeMenu: string = event.target.value;
@@ -32,7 +28,7 @@ const TodoMenu: FunctionComponent<Props> = ({
       <form className={style.menu} onChange={handleOnActiveMenuChange}>
         <label
           className={`button ${style.menu_item} ${
-            todoState.activeMenu === "false" && style.menu_active
+            activeMenu === "false" && style.menu_active
           }`}
           htmlFor="false"
         >
@@ -42,7 +38,7 @@ const TodoMenu: FunctionComponent<Props> = ({
 
         <label
           className={`button ${style.menu_item} ${
-            todoState.activeMenu === "all" && style.menu_active
+            activeMenu === "all" && style.menu_active
           }`}
           htmlFor="all"
         >
@@ -52,7 +48,7 @@ const TodoMenu: FunctionComponent<Props> = ({
 
         <label
           className={`button ${style.menu_item} ${
-            todoState.activeMenu === "true" && style.menu_active
+            activeMenu === "true" && style.menu_active
           }`}
           htmlFor="true"
         >

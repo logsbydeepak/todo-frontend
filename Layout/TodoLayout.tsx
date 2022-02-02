@@ -3,7 +3,6 @@ import { Dispatch, SetStateAction, useEffect, useReducer } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import Loading from "components/Loading";
 import PageTitle from "components/PageTitle";
 import { ButtonWithTextAndIcon } from "components/Button";
 
@@ -18,6 +17,7 @@ import { TodoStateType, TodoType } from "types/todoReducerType";
 
 import style from "styles/module/pages/Index.module.scss";
 import { useNotificationContext } from "context/NotificationContext";
+import Spinner from "components/Spinner";
 
 const initialTodoState: TodoStateType = {
   todo: [],
@@ -32,6 +32,10 @@ const TodoLayout = () => {
     todoReducer,
     initialTodoState
   );
+
+  const { todo, activeMenu, isLoading, isLoadingMore, showLoadMoreButton } =
+    todoState;
+
   const router = useRouter();
 
   const { changeAuth } = useAuthContext();
@@ -40,7 +44,7 @@ const TodoLayout = () => {
   const getTodo = async () => {
     const response = await APIRequest(
       "GET",
-      `/todo?status=${todoState.activeMenu}&skip=${0}&limit=5`,
+      `/todo?status=${activeMenu}&skip=${0}&limit=5`,
       changeAuth,
       router
     );
@@ -67,7 +71,7 @@ const TodoLayout = () => {
 
     const response = await APIRequest(
       "GET",
-      `/todo?status=${todoState.activeMenu}&skip=${skip}&limit=5`,
+      `/todo?status=${activeMenu}&skip=${skip}&limit=5`,
       changeAuth,
       router
     );
@@ -106,7 +110,7 @@ const TodoLayout = () => {
     });
 
     getTodo();
-  }, [todoState.activeMenu]);
+  }, [activeMenu]);
 
   const updateTodo = async (data: {
     _id: string;
@@ -129,14 +133,14 @@ const TodoLayout = () => {
       }>
     >
   ) => {
-    const cloneTodo = [...todoState.todo];
+    const cloneTodo = [...todo];
     await updateTodo({
-      ...todoState.todo[index],
+      ...todo[index],
       status: !cloneTodo[index].status,
     });
 
     dispatchTodoAction({ type: "UPDATE_TODO_STATUS", index });
-    if (todoState.activeMenu === "all") {
+    if (activeMenu === "all") {
       setLoadingIcon((preValue) => ({ ...preValue, status: false }));
     }
     dispatchNotification({ type: "SUCCESS", message: "Status changed" });
@@ -155,7 +159,7 @@ const TodoLayout = () => {
     localTask: string
   ) => {
     await updateTodo({
-      ...todoState.todo[index],
+      ...todo[index],
       task: localTask,
     });
 
@@ -171,7 +175,7 @@ const TodoLayout = () => {
       SetStateAction<{ status: boolean; task: boolean; delete: boolean }>
     >
   ) => {
-    await removeTodo(todoState.todo[index]._id);
+    await removeTodo(todo[index]._id);
     dispatchTodoAction({
       type: "REMOVE_TODO",
       index,
@@ -181,7 +185,7 @@ const TodoLayout = () => {
   };
 
   const loadMoreHandle = async () => {
-    getMoreTodo(todoState.todo.length);
+    getMoreTodo(todo.length);
   };
 
   return (
@@ -191,11 +195,16 @@ const TodoLayout = () => {
       </Head>
       <PageTitle title="Your Todos" subtitle="Manage your task" />
       <TodoCreate dispatchTodoAction={dispatchTodoAction} />
-      <TodoMenu dispatchTodoAction={dispatchTodoAction} todoState={todoState} />
-      {todoState.isLoading ? (
-        <Loading />
+      <TodoMenu
+        dispatchTodoAction={dispatchTodoAction}
+        activeMenu={activeMenu}
+      />
+      {isLoading ? (
+        <div className={style.spinner__container}>
+          <Spinner className={style.spinner} />
+        </div>
       ) : (
-        todoState.todo.map((task: TodoType, index: number) => {
+        todo.map((task: TodoType, index: number) => {
           return (
             <TodoItem
               key={task._id}
@@ -209,20 +218,15 @@ const TodoLayout = () => {
           );
         })
       )}
-      {todoState.todo.length === 0 && (
-        <p className={style.noTodo}>No task to show.</p>
-      )}
-      {todoState.showLoadMoreButton && todoState.todo.length !== 0 ? (
+      {todo.length === 0 && <p className={style.noTodo}>No task to show</p>}
+
+      {showLoadMoreButton && (
         <ButtonWithTextAndIcon
           icon="add"
           text="Load more"
           clickHandler={loadMoreHandle}
-          loading={todoState.isLoadingMore}
+          loading={isLoadingMore}
         />
-      ) : (
-        <p className={style.noTodo}>
-          {todoState.todo.length !== 0 && "No task left"}
-        </p>
       )}
     </>
   );

@@ -23,8 +23,8 @@ interface Props {
 
 const TodoCreate: FunctionComponent<Props> = ({ dispatchTodoAction }) => {
   const [task, setTask] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [isError, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const { dispatchNotification } = useNotificationContext();
 
@@ -41,12 +41,14 @@ const TodoCreate: FunctionComponent<Props> = ({ dispatchTodoAction }) => {
     event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) => {
     event.preventDefault();
-    setLoading(true);
+    setIsLoading(true);
+
     if (task.length === 0) {
-      setError(true);
-      setLoading(false);
+      setIsError(true);
+      setIsLoading(false);
       return;
     }
+
     const response = await createTodo(task);
     dispatchTodoAction({
       type: "ADD_TODO_FROM_TOP",
@@ -54,8 +56,8 @@ const TodoCreate: FunctionComponent<Props> = ({ dispatchTodoAction }) => {
     });
     dispatchNotification({ type: "SUCCESS", message: "Task added" });
     setTask("");
-    setLoading(false);
-    setError(false);
+    setIsLoading(false);
+    setIsError(false);
   };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -71,12 +73,12 @@ const TodoCreate: FunctionComponent<Props> = ({ dispatchTodoAction }) => {
             className={`${style.input} ${inputStyle.input}`}
             placeholder="Add new task"
             autoFocus={true}
-            disabled={loading}
+            disabled={isLoading}
             value={task}
             onChange={handleInputChange}
           />
           <ButtonWithIcon
-            loading={loading}
+            loading={isLoading}
             isError={isError}
             handleOnClick={handleAddTask}
           />
