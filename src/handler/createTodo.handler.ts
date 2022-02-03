@@ -1,10 +1,11 @@
-import { APIRequest } from "helper/APIRequest";
+import { apiRequest } from "helper/apiRequest.helper";
 import { NextRouter } from "next/router";
 import { Dispatch, MouseEvent, SetStateAction } from "react";
 import { NotificationActionType } from "types/notificationContextType";
 import { TodoActionType } from "types/todoReducerType";
 
 export const handleCreateTodo = async (
+  event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
   setIsLoading: Dispatch<SetStateAction<boolean>>,
   setIsError: Dispatch<SetStateAction<boolean>>,
   setTask: Dispatch<SetStateAction<string>>,
@@ -14,6 +15,7 @@ export const handleCreateTodo = async (
   dispatchNotification: Dispatch<NotificationActionType>,
   dispatchTodoAction: Dispatch<TodoActionType>
 ) => {
+  event.preventDefault();
   setIsLoading(true);
 
   if (task.length === 0) {
@@ -23,7 +25,7 @@ export const handleCreateTodo = async (
   }
 
   try {
-    const response = await APIRequest(
+    const response = await apiRequest(
       "POST",
       `/todo`,
       changeAuth,

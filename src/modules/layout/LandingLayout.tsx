@@ -1,4 +1,4 @@
-import { ButtonWithLInk } from "components/Button";
+import { ButtonWithLInk } from "modules/components/Button";
 import Head from "next/head";
 
 import style from "styles/module/pages/Index.module.scss";

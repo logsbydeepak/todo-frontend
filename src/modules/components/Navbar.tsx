@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { FunctionComponent, useContext, useEffect } from "react";
 
-import style from "src/styles/module/components/navbar.module.scss";
+import style from "styles/module/components/navbar.module.scss";
 import { AuthLink, NoAuthLink } from "./Link";
-import { useAuthContext } from "context/AuthContext";
+import { useAuthContext } from "modules/context/AuthContext";
 
 const Navbar: FunctionComponent = () => {
   const { auth } = useAuthContext();

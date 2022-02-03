@@ -1,4 +1,4 @@
-import { APIRequest } from "helper/APIRequest";
+import { apiRequest } from "helper/apiRequest.helper";
 import { NextRouter } from "next/router";
 import { Dispatch } from "react";
 import { NotificationActionType } from "types/notificationContextType";
@@ -13,7 +13,7 @@ export const handleDeleteTodo = async (
   dispatchTodoAction: Dispatch<TodoActionType>,
   todo: any
 ) => {
-  await APIRequest(
+  await apiRequest(
     "DELETE",
     `/todo?id=${todo[index]._id}`,
     changeAuth,

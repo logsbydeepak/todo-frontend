@@ -3,22 +3,22 @@ import { Dispatch, SetStateAction, useEffect, useReducer } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import PageTitle from "components/PageTitle";
-import { ButtonWithTextAndIcon } from "components/Button";
+import PageTitle from "modules/components/PageTitle";
+import { ButtonWithTextAndIcon } from "modules/components/Button";
 
-import TodoItem from "components/Todo/TodoItem";
-import TodoMenu from "components/Todo/TodoMenu";
-import TodoCreate from "components/Todo/TodoCreate";
+import TodoItem from "modules/components/Todo/TodoItem";
+import TodoMenu from "modules/components/Todo/TodoMenu";
+import TodoCreate from "modules/components/Todo/TodoCreate";
 
-import { APIRequest } from "helper/APIRequest";
+import { apiRequest } from "helper/apiRequest.helper";
 import { todoReducer } from "reducer/todoReducer";
-import { useAuthContext } from "context/AuthContext";
+import { useAuthContext } from "modules/context/AuthContext";
 import { TodoStateType, TodoType } from "types/todoReducerType";
 
 import style from "styles/module/pages/Index.module.scss";
-import { useNotificationContext } from "context/NotificationContext";
-import Spinner from "components/Spinner";
-import { handleDeleteTodo } from "helper/request/deleteTodo";
+import { useNotificationContext } from "modules/context/NotificationContext";
+import Spinner from "modules/components/Spinner";
+import { handleDeleteTodo } from "handler/deleteTodo.handler";
 
 const initialTodoState: TodoStateType = {
   todo: [],
@@ -43,7 +43,7 @@ const TodoLayout = () => {
   const { dispatchNotification } = useNotificationContext();
 
   const getTodo = async () => {
-    const response = await APIRequest(
+    const response = await apiRequest(
       "GET",
       `/todo?status=${activeMenu}&skip=${0}&limit=5`,
       changeAuth,
@@ -65,7 +65,7 @@ const TodoLayout = () => {
   };
 
   const removeTodo = async (id: string) =>
-    await APIRequest(
+    await apiRequest(
       "DELETE",
       `/todo?id=${id}`,
       changeAuth,
@@ -79,7 +79,7 @@ const TodoLayout = () => {
       isLoadingMore: true,
     });
 
-    const response = await APIRequest(
+    const response = await apiRequest(
       "GET",
       `/todo?status=${activeMenu}&skip=${skip}&limit=5`,
       changeAuth,
@@ -130,7 +130,7 @@ const TodoLayout = () => {
     task: string;
     status: boolean;
   }) =>
-    await APIRequest("PUT", "/todo", changeAuth, router, dispatchNotification, {
+    await apiRequest("PUT", "/todo", changeAuth, router, dispatchNotification, {
       id: data._id,
       status: data.status,
       task: data.task,

@@ -5,7 +5,7 @@ import React, {
   useState,
 } from "react";
 import style from "styles/module/components/taskInput.module.scss";
-import Spinner from "components/Spinner";
+import Spinner from "modules/components/Spinner";
 
 interface Props {
   status: boolean;

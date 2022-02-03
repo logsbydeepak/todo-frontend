@@ -1,4 +1,4 @@
-import { axiosRequest } from "helper/axios";
+import { axiosRequest } from "helper/axios.helper";
 import { Method } from "axios";
 import { NextRouter } from "next/router";
 import { Dispatch } from "react";
@@ -25,7 +25,7 @@ const removeAuth = (
   });
 };
 
-export const APIRequest = async (
+export const apiRequest = async (
   method: Method,
   url: string,
   changeAuth: (value: boolean) => void,

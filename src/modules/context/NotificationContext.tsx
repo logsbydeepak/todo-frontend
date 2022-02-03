@@ -5,7 +5,7 @@ import {
   useReducer,
 } from "react";
 
-import NotificationItem from "components/NotificationItem";
+import NotificationItem from "modules/components/NotificationItem";
 import { notificationReducer } from "reducer/notificationReducer";
 
 import style from "styles/module/components/notification.module.scss";

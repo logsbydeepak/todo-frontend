@@ -2,10 +2,10 @@ import Head from "next/head";
 import type { AppProps } from "next/app";
 
 import "styles/globals.scss";
-import Navbar from "components/Navbar";
+import Navbar from "modules/components/Navbar";
 
-import NotificationProvider from "context/NotificationContext";
-import AuthProvider from "context/AuthContext";
+import NotificationProvider from "modules/context/NotificationContext";
+import AuthProvider from "modules/context/AuthContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

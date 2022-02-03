@@ -8,15 +8,14 @@ import {
 
 import { useRouter } from "next/router";
 
-import { APIRequest } from "helper/APIRequest";
-import { useAuthContext } from "context/AuthContext";
+import { useAuthContext } from "modules/context/AuthContext";
 import { TodoActionType } from "types/todoReducerType";
-import { useNotificationContext } from "context/NotificationContext";
+import { useNotificationContext } from "modules/context/NotificationContext";
 
-import { ButtonWithIcon } from "components/Button";
+import { ButtonWithIcon } from "modules/components/Button";
 import inputStyle from "styles/module/components/input.module.scss";
 import style from "styles/module/components/createTaskInput.module.scss";
-import { handleCreateTodo } from "helper/request/createTodo";
+import { handleCreateTodo } from "handler/createTodo.handler";
 
 interface Props {
   dispatchTodoAction: Dispatch<TodoActionType>;
@@ -54,9 +53,9 @@ const TodoCreate: FunctionComponent<Props> = ({ dispatchTodoAction }) => {
             isError={isError}
             handleOnClick={(
               event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-            ) => {
-              event.preventDefault();
+            ) =>
               handleCreateTodo(
+                event,
                 setIsLoading,
                 setIsError,
                 setTask,
@@ -65,8 +64,8 @@ const TodoCreate: FunctionComponent<Props> = ({ dispatchTodoAction }) => {
                 router,
                 dispatchNotification,
                 dispatchTodoAction
-              );
-            }}
+              )
+            }
           />
         </div>
         <p className={`${inputStyle.helper}`}>
