@@ -1,4 +1,4 @@
-import { TodoActionType, TodoStateType } from "types/todoReducerType";
+import { TodoActionType, TodoStateType } from "types";
 
 export const todoReducer = (
   state: TodoStateType,

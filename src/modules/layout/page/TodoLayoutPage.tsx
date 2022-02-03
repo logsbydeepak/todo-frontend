@@ -11,7 +11,7 @@ import TodoMenu from "modules/layout/components/TodoMenu";
 import TodoCreate from "modules/layout/components/TodoCreate";
 
 import { apiRequest } from "helper/apiRequest.helper";
-import { todoReducer } from "reducer/todoReducer";
+import { todoReducer } from "reducer/todo.reducer";
 import { useAuthContext } from "modules/context/AuthContext";
 import { TodoStateType, TodoType } from "types/todoReducerType";
 

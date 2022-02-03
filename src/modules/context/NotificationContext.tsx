@@ -6,7 +6,7 @@ import {
 } from "react";
 
 import NotificationItem from "modules/common/NotificationItem";
-import { notificationReducer } from "reducer/notificationReducer";
+import { notificationReducer } from "reducer/notification.reducer";
 
 import style from "styles/module/components/notification.module.scss";
 
