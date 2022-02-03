@@ -7,9 +7,9 @@ import { useRouter } from "next/router";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 
-import Input from "modules/components/Input";
-import PageTitle from "modules/components/PageTitle";
-import { ButtonWithTextAndIcon } from "modules/components/Button";
+import Input from "modules/common/Input";
+import PageTitle from "modules/common/PageTitle";
+import { ButtonWithTextAndIcon } from "modules/common/Button";
 import style from "styles/module/pages/LoginSignUp.module.scss";
 
 import { axiosRequest } from "helper/axios.helper";

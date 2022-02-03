@@ -3,12 +3,12 @@ import { Dispatch, SetStateAction, useEffect, useReducer } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import PageTitle from "modules/components/PageTitle";
-import { ButtonWithTextAndIcon } from "modules/components/Button";
+import PageTitle from "modules/common/PageTitle";
+import { ButtonWithTextAndIcon } from "modules/common/Button";
 
-import TodoItem from "modules/components/Todo/TodoItem";
-import TodoMenu from "modules/components/Todo/TodoMenu";
-import TodoCreate from "modules/components/Todo/TodoCreate";
+import TodoItem from "modules/layout/components/TodoItem";
+import TodoMenu from "modules/layout/components/TodoMenu";
+import TodoCreate from "modules/layout/components/TodoCreate";
 
 import { apiRequest } from "helper/apiRequest.helper";
 import { todoReducer } from "reducer/todoReducer";
@@ -17,7 +17,7 @@ import { TodoStateType, TodoType } from "types/todoReducerType";
 
 import style from "styles/module/pages/Index.module.scss";
 import { useNotificationContext } from "modules/context/NotificationContext";
-import Spinner from "modules/components/Spinner";
+import Spinner from "modules/common/Spinner";
 import { handleDeleteTodo } from "handler/deleteTodo.handler";
 
 const initialTodoState: TodoStateType = {

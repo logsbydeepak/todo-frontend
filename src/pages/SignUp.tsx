@@ -1,10 +1,4 @@
-import React, {
-  ChangeEvent,
-  FormEvent,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
 import Head from "next/head";
 import type { NextPage } from "next";
@@ -13,12 +7,12 @@ import { useRouter } from "next/router";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 
-import Input from "modules/components/Input";
-import PageTitle from "modules/components/PageTitle";
-import { ButtonWithTextAndIcon } from "modules/components/Button";
+import Input from "modules/common/Input";
+import PageTitle from "modules/common/PageTitle";
+import { ButtonWithTextAndIcon } from "modules/common/Button";
 import style from "styles/module/pages/LoginSignUp.module.scss";
 
-import { axiosRequest } from "helper/axios";
+import { axiosRequest } from "helper/axios.helper";
 import { useAuthContext } from "modules/context/AuthContext";
 import { useNotificationContext } from "modules/context/NotificationContext";
 

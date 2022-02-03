@@ -2,7 +2,7 @@ import Head from "next/head";
 import type { AppProps } from "next/app";
 
 import "styles/globals.scss";
-import Navbar from "modules/components/Navbar";
+import Navbar from "modules/common/Navbar";
 
 import NotificationProvider from "modules/context/NotificationContext";
 import AuthProvider from "modules/context/AuthContext";
