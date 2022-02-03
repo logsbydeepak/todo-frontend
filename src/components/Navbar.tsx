@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FunctionComponent, useContext, useEffect } from "react";
 
-import style from "styles/module/components/navbar.module.scss";
+import style from "src/styles/module/components/navbar.module.scss";
 import { AuthLink, NoAuthLink } from "./Link";
 import { useAuthContext } from "context/AuthContext";
 
