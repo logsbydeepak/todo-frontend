@@ -1,13 +1,13 @@
 import type { NextPage } from "next";
 
-import TodoLayout from "modules/layout/page/TodoLayoutPage";
-import LandingLayout from "modules/layout/page/LandingPageLayout";
 import { useAuthContext } from "modules/context/AuthContext";
+import TodoPageLayout from "modules/layout/pages/TodoLayoutPage";
+import LandingPageLayout from "modules/layout/pages/LandingPageLayout";
 
 const Home: NextPage = () => {
   const { auth } = useAuthContext();
 
-  return <>{auth ? <TodoLayout /> : <LandingLayout />}</>;
+  return <>{auth ? <TodoPageLayout /> : <LandingPageLayout />}</>;
 };
 
 export default Home;

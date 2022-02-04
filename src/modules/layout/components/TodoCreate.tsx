@@ -13,8 +13,8 @@ import { TodoActionType } from "types/todoReducerType";
 import { useNotificationContext } from "modules/context/NotificationContext";
 
 import { ButtonWithIcon } from "modules/common/Button";
-import inputStyle from "styles/module/components/input.module.scss";
-import style from "styles/module/components/createTaskInput.module.scss";
+import inputStyle from "styles/modules/common/input.module.scss";
+import style from "styles/modules/common/createTaskInput.module.scss";
 import { handleCreateTodo } from "handler/createTodo.handler";
 
 interface Props {

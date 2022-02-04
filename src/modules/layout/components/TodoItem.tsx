@@ -4,7 +4,7 @@ import React, {
   MouseEvent,
   useState,
 } from "react";
-import style from "styles/module/components/taskInput.module.scss";
+import style from "styles/modules/common/taskInput.module.scss";
 import Spinner from "modules/common/Spinner";
 
 interface Props {

@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import style from "styles/module/components/input.module.scss";
+import style from "styles/modules/common/input.module.scss";
 
 type Props = {
   name: string;

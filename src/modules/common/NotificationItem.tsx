@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import style from "styles/module/components/notificationItem.module.scss";
+import style from "styles/modules/common/notificationItem.module.scss";
 
 const NotificationItem: FunctionComponent<{
   dispatchNotification: any;

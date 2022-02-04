@@ -8,7 +8,7 @@ import {
 import NotificationItem from "modules/common/NotificationItem";
 import { notificationReducer } from "reducer/notification.reducer";
 
-import style from "styles/module/components/notification.module.scss";
+import style from "styles/modules/common/notification.module.scss";
 
 import {
   NotificationContextType,

@@ -15,7 +15,7 @@ import { todoReducer } from "reducer/todo.reducer";
 import { useAuthContext } from "modules/context/AuthContext";
 import { TodoStateType, TodoType } from "types/todoReducerType";
 
-import style from "styles/module/pages/Index.module.scss";
+import style from "styles/modules/layout/pages/Index.module.scss";
 import { useNotificationContext } from "modules/context/NotificationContext";
 import Spinner from "modules/common/Spinner";
 import { handleDeleteTodo } from "handler/deleteTodo.handler";
@@ -29,7 +29,7 @@ const initialTodoState: TodoStateType = {
   showLoadMoreButton: false,
 };
 
-const TodoLayout = () => {
+const TodoPageLayout = () => {
   const [todoState, dispatchTodoAction] = useReducer(
     todoReducer,
     initialTodoState
@@ -253,4 +253,4 @@ const TodoLayout = () => {
   );
 };
 
-export default TodoLayout;
+export default TodoPageLayout;

@@ -1,9 +1,9 @@
 import { ButtonWithLInk } from "modules/common/Button";
 import Head from "next/head";
 
-import style from "styles/module/pages/Index.module.scss";
+import style from "styles/modules/layout/pages/Index.module.scss";
 
-const LandingLayout = () => {
+const LandingPageLayout = () => {
   return (
     <>
       <Head>
@@ -22,4 +22,4 @@ const LandingLayout = () => {
   );
 };
 
-export default LandingLayout;
+export default LandingPageLayout;
