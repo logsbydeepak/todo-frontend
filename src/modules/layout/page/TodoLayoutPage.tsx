@@ -19,6 +19,7 @@ import style from "styles/module/pages/Index.module.scss";
 import { useNotificationContext } from "modules/context/NotificationContext";
 import Spinner from "modules/common/Spinner";
 import { handleDeleteTodo } from "handler/deleteTodo.handler";
+import { useAPICall } from "helper/useFetch.helper";
 
 const initialTodoState: TodoStateType = {
   todo: [],
@@ -33,6 +34,8 @@ const TodoLayout = () => {
     todoReducer,
     initialTodoState
   );
+
+  const [setAPIRequestData] = useAPICall(null);
 
   const { todo, activeMenu, isLoading, isLoadingMore, showLoadMoreButton } =
     todoState;
@@ -136,7 +139,7 @@ const TodoLayout = () => {
       task: data.task,
     });
 
-  const handleChangeStatus = async (
+  const handleChangeStatus = (
     index: number,
     setLoadingIcon: Dispatch<
       SetStateAction<{
@@ -146,19 +149,28 @@ const TodoLayout = () => {
       }>
     >
   ) => {
-    const cloneTodo = [...todo];
-    const update = await updateTodo({
-      ...todo[index],
-      status: !cloneTodo[index].status,
+    const indexTodo = todo[index];
+    setAPIRequestData({
+      data: {
+        url: `/todo`,
+        method: "PUT",
+        data: {
+          id: indexTodo._id,
+          task: indexTodo.task,
+          status: !indexTodo.status,
+        },
+      },
+      response: {
+        onSuccess: (response: any) => {
+          setLoadingIcon((preValue) => ({ ...preValue, status: false }));
+          dispatchTodoAction({ type: "UPDATE_TODO_STATUS", index });
+          dispatchNotification({ type: "SUCCESS", message: "Status changed" });
+        },
+        onError: () => {
+          setLoadingIcon((preValue) => ({ ...preValue, status: false }));
+        },
+      },
     });
-
-    if (!update) return;
-
-    dispatchTodoAction({ type: "UPDATE_TODO_STATUS", index });
-    if (activeMenu === "all") {
-      setLoadingIcon((preValue) => ({ ...preValue, status: false }));
-    }
-    dispatchNotification({ type: "SUCCESS", message: "Status changed" });
   };
 
   const handleChangeTask = async (
