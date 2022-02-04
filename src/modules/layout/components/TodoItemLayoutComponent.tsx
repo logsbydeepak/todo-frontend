@@ -16,7 +16,7 @@ interface Props {
   handleChangeTask: any;
 }
 
-const TaskInput: FunctionComponent<Props> = ({
+const TaskInputLayoutComponent: FunctionComponent<Props> = ({
   status,
   task,
   handleChangeStatus,
@@ -146,4 +146,4 @@ const TaskInput: FunctionComponent<Props> = ({
   );
 };
 
-export default TaskInput;
+export default TaskInputLayoutComponent;

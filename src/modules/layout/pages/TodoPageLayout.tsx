@@ -6,9 +6,9 @@ import { useRouter } from "next/router";
 import PageTitle from "modules/common/PageTitle";
 import { ButtonWithTextAndIcon } from "modules/common/Button";
 
-import TodoItem from "modules/layout/components/TodoItem";
-import TodoMenu from "modules/layout/components/TodoMenu";
-import TodoCreate from "modules/layout/components/TodoCreate";
+import TodoItem from "modules/layout/components/TodoItemLayoutComponent";
+import TodoMenu from "modules/layout/components/TodoMenuLayoutComponent";
+import TodoCreate from "modules/layout/components/TodoCreateLayoutComponent";
 
 import { apiRequest } from "helper/apiRequest.helper";
 import { todoReducer } from "reducer/todo.reducer";

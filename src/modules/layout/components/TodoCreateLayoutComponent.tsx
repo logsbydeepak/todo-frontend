@@ -21,7 +21,9 @@ interface Props {
   dispatchTodoAction: Dispatch<TodoActionType>;
 }
 
-const TodoCreate: FunctionComponent<Props> = ({ dispatchTodoAction }) => {
+const TodoCreateLayoutComponent: FunctionComponent<Props> = ({
+  dispatchTodoAction,
+}) => {
   const [task, setTask] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -76,4 +78,4 @@ const TodoCreate: FunctionComponent<Props> = ({ dispatchTodoAction }) => {
   );
 };
 
-export default TodoCreate;
+export default TodoCreateLayoutComponent;
