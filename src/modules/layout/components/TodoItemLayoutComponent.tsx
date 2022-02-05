@@ -9,6 +9,7 @@ import Spinner from "modules/common/Spinner";
 import { handleDeleteTodo } from "handler/deleteTodo.handler";
 import { useAPICall } from "helper/useAPICall.helper";
 import { handleChangeTodoStatus } from "handler/changeTodoStatus.handler";
+import { handleChangeTodoTask } from "handler/changeTodoTask.handler";
 
 interface Props {
   status: boolean;
@@ -113,7 +114,15 @@ const TaskInputLayoutComponent: FunctionComponent<Props> = ({
             ) => {
               event.preventDefault();
               setLoadingIcon({ ...loadingIcon, task: true });
-              // handleChangeTask(index, setLoadingIcon, setTick, localTask);
+              handleChangeTodoTask(
+                setAPIRequestData,
+                index,
+                setLoadingIcon,
+                setTick,
+                localTask,
+                todo,
+                dispatchTodoAction
+              );
             }}
           >
             {!loadingIcon.task && tick && (
