@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction } from "react";
-import { NotificationActionType } from "types";
 import { requestDataType } from "types/hooks.types";
 import { TodoActionType } from "types/todoReducerType";
 

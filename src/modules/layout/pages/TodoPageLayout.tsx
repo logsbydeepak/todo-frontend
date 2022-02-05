@@ -18,7 +18,6 @@ import { TodoStateType, TodoType } from "types/todoReducerType";
 import style from "styles/modules/layout/pages/Index.module.scss";
 import { useNotificationContext } from "modules/context/NotificationContext";
 import Spinner from "modules/common/Spinner";
-import { handleDeleteTodo } from "handler/deleteTodo.handler";
 import { useAPICall } from "helper/useAPICall.helper";
 
 const initialTodoState: TodoStateType = {
@@ -222,18 +221,8 @@ const TodoPageLayout = () => {
               index={index}
               status={task.status}
               task={task.task}
-              handleChangeStatus={handleChangeStatus}
-              handleRemoveTask={(index: number) =>
-                handleDeleteTodo(
-                  index,
-                  changeAuth,
-                  router,
-                  dispatchNotification,
-                  dispatchTodoAction,
-                  todo
-                )
-              }
-              handleChangeTask={handleChangeTask}
+              dispatchTodoAction={dispatchTodoAction}
+              todo={todo}
             />
           );
         })

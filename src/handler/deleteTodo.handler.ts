@@ -1,28 +1,34 @@
-import { apiRequest } from "helper/apiRequest.helper";
-import { NextRouter } from "next/router";
-import { Dispatch } from "react";
-import { NotificationActionType } from "types/notificationContextType";
+import { Dispatch, useDebugValue } from "react";
 import { TodoActionType } from "types/todoReducerType";
 
 export const handleDeleteTodo = async (
+  setAPIRequestData: any,
   index: number,
-
-  changeAuth: (value: boolean) => void,
-  router: NextRouter,
-  dispatchNotification: Dispatch<NotificationActionType>,
   dispatchTodoAction: Dispatch<TodoActionType>,
-  todo: any
+  todo: any,
+  setLoadingIcon: React.Dispatch<
+    React.SetStateAction<{
+      status: boolean;
+      task: boolean;
+      delete: boolean;
+    }>
+  >
 ) => {
-  await apiRequest(
-    "DELETE",
-    `/todo?id=${todo[index]._id}`,
-    changeAuth,
-    router,
-    dispatchNotification
-  );
-  dispatchTodoAction({
-    type: "REMOVE_TODO",
-    index,
+  setAPIRequestData({
+    data: {
+      method: "DELETE",
+      url: `/todo?id=${todo[index]._id}`,
+    },
+    response: {
+      onSuccess: () => {
+        dispatchTodoAction({
+          type: "REMOVE_TODO",
+          index,
+        });
+      },
+      onError: () => {
+        setLoadingIcon((preValue) => ({ ...preValue, delete: false }));
+      },
+    },
   });
-  dispatchNotification({ type: "SUCCESS", message: "Task removed" });
 };

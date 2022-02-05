@@ -6,23 +6,23 @@ import React, {
 } from "react";
 import style from "styles/modules/common/taskInput.module.scss";
 import Spinner from "modules/common/Spinner";
+import { handleDeleteTodo } from "handler/deleteTodo.handler";
+import { useAPICall } from "helper/useAPICall.helper";
 
 interface Props {
   status: boolean;
   task: string;
   index: number;
-  handleChangeStatus: any;
-  handleRemoveTask: any;
-  handleChangeTask: any;
+  dispatchTodoAction: any;
+  todo: any;
 }
 
 const TaskInputLayoutComponent: FunctionComponent<Props> = ({
   status,
   task,
-  handleChangeStatus,
   index,
-  handleRemoveTask,
-  handleChangeTask,
+  dispatchTodoAction,
+  todo,
 }) => {
   const [focus, setFocus] = useState(false);
   const [tick, setTick] = useState(false);
@@ -31,6 +31,8 @@ const TaskInputLayoutComponent: FunctionComponent<Props> = ({
     task: false,
     delete: false,
   });
+
+  const [setAPIRequestData] = useAPICall(null);
 
   const [localTask, setLocalTask] = useState(task);
 
@@ -62,7 +64,7 @@ const TaskInputLayoutComponent: FunctionComponent<Props> = ({
           ) => {
             event.preventDefault();
             setLoadingIcon({ ...loadingIcon, status: true });
-            handleChangeStatus(index, setLoadingIcon);
+            // handleChangeStatus(index, setLoadingIcon);
           }}
         >
           {!loadingIcon.status && (
@@ -104,7 +106,7 @@ const TaskInputLayoutComponent: FunctionComponent<Props> = ({
             ) => {
               event.preventDefault();
               setLoadingIcon({ ...loadingIcon, task: true });
-              handleChangeTask(index, setLoadingIcon, setTick, localTask);
+              // handleChangeTask(index, setLoadingIcon, setTick, localTask);
             }}
           >
             {!loadingIcon.task && tick && (
@@ -127,7 +129,13 @@ const TaskInputLayoutComponent: FunctionComponent<Props> = ({
           ) => {
             event.preventDefault();
             setLoadingIcon({ ...loadingIcon, delete: true });
-            handleRemoveTask(index, setLoadingIcon);
+            handleDeleteTodo(
+              setAPIRequestData,
+              index,
+              dispatchTodoAction,
+              todo,
+              setLoadingIcon
+            );
           }}
         >
           {!loadingIcon.delete && (
