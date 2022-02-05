@@ -8,6 +8,7 @@ import style from "styles/modules/common/taskInput.module.scss";
 import Spinner from "modules/common/Spinner";
 import { handleDeleteTodo } from "handler/deleteTodo.handler";
 import { useAPICall } from "helper/useAPICall.helper";
+import { handleChangeTodoStatus } from "handler/changeTodoStatus.handler";
 
 interface Props {
   status: boolean;
@@ -64,7 +65,13 @@ const TaskInputLayoutComponent: FunctionComponent<Props> = ({
           ) => {
             event.preventDefault();
             setLoadingIcon({ ...loadingIcon, status: true });
-            // handleChangeStatus(index, setLoadingIcon);
+            handleChangeTodoStatus(
+              setAPIRequestData,
+              index,
+              setLoadingIcon,
+              dispatchTodoAction,
+              todo
+            );
           }}
         >
           {!loadingIcon.status && (
