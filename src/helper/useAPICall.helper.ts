@@ -54,6 +54,7 @@ export const useAPICall = (requestData: requestDataType) => {
                   method,
                   data,
                 }).then((successResponse) => {
+                  console.log("hi");
                   onSuccess(successResponse.data.data);
                   return;
                 });
@@ -73,6 +74,7 @@ export const useAPICall = (requestData: requestDataType) => {
                   });
                 }
               });
+            return;
           }
           changeAuth(false);
           router.push("/");

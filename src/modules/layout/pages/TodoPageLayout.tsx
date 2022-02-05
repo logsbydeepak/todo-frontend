@@ -19,6 +19,7 @@ import style from "styles/modules/layout/pages/Index.module.scss";
 import { useNotificationContext } from "modules/context/NotificationContext";
 import Spinner from "modules/common/Spinner";
 import { useAPICall } from "helper/useAPICall.helper";
+import { handleGetTodoOnMenuChange } from "handler/getTodoOnMenuChange.handler";
 
 const initialTodoState: TodoStateType = {
   todo: [],
@@ -43,37 +44,6 @@ const TodoPageLayout = () => {
 
   const { changeAuth } = useAuthContext();
   const { dispatchNotification } = useNotificationContext();
-
-  const getTodo = async () => {
-    const response = await apiRequest(
-      "GET",
-      `/todo?status=${activeMenu}&skip=${0}&limit=5`,
-      changeAuth,
-      router,
-      dispatchNotification
-    );
-
-    if (!response) return;
-
-    dispatchTodoAction({
-      type: "ADD_TODO_FROM_BOTTOM",
-      todo: response,
-    });
-
-    dispatchTodoAction({
-      type: "LOADING",
-      isLoading: false,
-    });
-  };
-
-  const removeTodo = async (id: string) =>
-    await apiRequest(
-      "DELETE",
-      `/todo?id=${id}`,
-      changeAuth,
-      router,
-      dispatchNotification
-    );
 
   const getMoreTodo = async (skip: number) => {
     dispatchTodoAction({
@@ -115,16 +85,11 @@ const TodoPageLayout = () => {
   };
 
   useEffect(() => {
-    dispatchTodoAction({
-      type: "EMPTY_TODO",
-    });
-
-    dispatchTodoAction({
-      type: "LOADING",
-      isLoading: true,
-    });
-
-    getTodo();
+    handleGetTodoOnMenuChange(
+      setAPIRequestData,
+      dispatchTodoAction,
+      activeMenu
+    );
   }, [activeMenu]);
 
   const loadMoreHandle = async () => {
