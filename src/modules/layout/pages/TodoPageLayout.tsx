@@ -20,6 +20,7 @@ import { useNotificationContext } from "modules/context/NotificationContext";
 import Spinner from "modules/common/Spinner";
 import { useAPICall } from "helper/useAPICall.helper";
 import { handleGetTodoOnMenuChange } from "handler/getTodoOnMenuChange.handler";
+import { handleGetMoreTodo } from "handler/loadMoreTodo.handler";
 
 const initialTodoState: TodoStateType = {
   todo: [],
@@ -45,45 +46,6 @@ const TodoPageLayout = () => {
   const { changeAuth } = useAuthContext();
   const { dispatchNotification } = useNotificationContext();
 
-  const getMoreTodo = async (skip: number) => {
-    dispatchTodoAction({
-      type: "LOAD_MORE",
-      isLoadingMore: true,
-    });
-
-    const response = await apiRequest(
-      "GET",
-      `/todo?status=${activeMenu}&skip=${skip}&limit=5`,
-      changeAuth,
-      router,
-      dispatchNotification
-    );
-
-    if (!response) return;
-
-    dispatchTodoAction({
-      type: "ADD_TODO_FROM_BOTTOM",
-      todo: response,
-    });
-
-    dispatchTodoAction({
-      type: "LOAD_MORE",
-      isLoadingMore: false,
-    });
-
-    if (!(response.length >= 5)) {
-      dispatchNotification({
-        type: "SUCCESS",
-        message: "No task left",
-      });
-    } else {
-      dispatchNotification({
-        type: "SUCCESS",
-        message: "Task fetch successful",
-      });
-    }
-  };
-
   useEffect(() => {
     handleGetTodoOnMenuChange(
       setAPIRequestData,
@@ -91,10 +53,6 @@ const TodoPageLayout = () => {
       activeMenu
     );
   }, [activeMenu]);
-
-  const loadMoreHandle = async () => {
-    getMoreTodo(todo.length);
-  };
 
   return (
     <>
@@ -131,7 +89,15 @@ const TodoPageLayout = () => {
         <ButtonWithTextAndIcon
           icon="add"
           text="Load more"
-          clickHandler={loadMoreHandle}
+          clickHandler={() =>
+            handleGetMoreTodo(
+              dispatchTodoAction,
+              setAPIRequestData,
+              activeMenu,
+              todo.length,
+              dispatchNotification
+            )
+          }
           loading={isLoadingMore}
         />
       )}
