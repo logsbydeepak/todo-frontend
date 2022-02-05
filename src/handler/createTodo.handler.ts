@@ -1,56 +1,57 @@
-import { apiRequest } from "helper/apiRequest.helper";
-import { NextRouter } from "next/router";
-import { Dispatch, MouseEvent, SetStateAction } from "react";
-import { NotificationActionType } from "types/notificationContextType";
+import { Dispatch, SetStateAction } from "react";
+import { NotificationActionType } from "types";
+import { requestDataType } from "types/hooks.types";
 import { TodoActionType } from "types/todoReducerType";
 
 export const handleCreateTodo = async (
-  event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
-  setIsLoading: Dispatch<SetStateAction<boolean>>,
-  setIsError: Dispatch<SetStateAction<boolean>>,
-  setTask: Dispatch<SetStateAction<string>>,
-  task: string,
-  changeAuth: (value: boolean) => void,
-  router: NextRouter,
-  dispatchNotification: Dispatch<NotificationActionType>,
+  setAPIRequestData: Dispatch<SetStateAction<requestDataType>>,
+  inputState: {
+    textInput: string;
+    isLoading: boolean;
+    isError: boolean;
+  },
+  setInputState: Dispatch<
+    SetStateAction<{
+      textInput: string;
+      isLoading: boolean;
+      isError: boolean;
+    }>
+  >,
   dispatchTodoAction: Dispatch<TodoActionType>
 ) => {
-  event.preventDefault();
-  setIsLoading(true);
+  const { textInput } = inputState;
+  setInputState({ ...inputState, isLoading: true });
 
-  if (task.length === 0) {
-    setIsError(true);
-    setIsLoading(false);
+  if (textInput.length === 0) {
+    setInputState({ ...inputState, isError: true, isLoading: false });
     return;
   }
 
-  try {
-    const response = await apiRequest(
-      "POST",
-      `/todo`,
-      changeAuth,
-      router,
-      dispatchNotification,
-      {
+  setAPIRequestData({
+    data: {
+      method: "POST",
+      url: "/todo",
+      data: {
+        task: textInput,
         status: false,
-        task,
-      }
-    );
-    if (!response) {
-      throw response;
-    }
-    dispatchTodoAction({
-      type: "ADD_TODO_FROM_TOP",
-      todo: { _id: response.id, task: response.task, status: false },
-    });
-    dispatchNotification({ type: "SUCCESS", message: "Task added" });
-    setTask("");
-    setIsLoading(false);
-    setIsError(false);
-  } catch (error: any) {
-    dispatchNotification({
-      type: "ERROR",
-      message: "",
-    });
-  }
+      },
+    },
+    response: {
+      onSuccess: (successResponse: any) => {
+        setInputState({ textInput: "", isLoading: false, isError: false });
+        dispatchTodoAction({
+          type: "ADD_TODO_FROM_TOP",
+          todo: {
+            _id: successResponse.id,
+            task: successResponse.task,
+            status: false,
+          },
+        });
+      },
+
+      onError: () => {
+        setInputState({ textInput: "", isLoading: false, isError: false });
+      },
+    },
+  });
 };

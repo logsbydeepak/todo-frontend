@@ -19,7 +19,7 @@ import style from "styles/modules/layout/pages/Index.module.scss";
 import { useNotificationContext } from "modules/context/NotificationContext";
 import Spinner from "modules/common/Spinner";
 import { handleDeleteTodo } from "handler/deleteTodo.handler";
-import { useAPICall } from "helper/useFetch.helper";
+import { useAPICall } from "helper/useAPICall.helper";
 
 const initialTodoState: TodoStateType = {
   todo: [],
@@ -164,7 +164,6 @@ const TodoPageLayout = () => {
         onSuccess: (response: any) => {
           setLoadingIcon((preValue) => ({ ...preValue, status: false }));
           dispatchTodoAction({ type: "UPDATE_TODO_STATUS", index });
-          dispatchNotification({ type: "SUCCESS", message: "Status changed" });
         },
         onError: () => {
           setLoadingIcon((preValue) => ({ ...preValue, status: false }));

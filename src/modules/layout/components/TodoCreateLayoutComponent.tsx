@@ -8,14 +8,13 @@ import {
 
 import { useRouter } from "next/router";
 
-import { useAuthContext } from "modules/context/AuthContext";
 import { TodoActionType } from "types/todoReducerType";
-import { useNotificationContext } from "modules/context/NotificationContext";
 
 import { ButtonWithIcon } from "modules/common/Button";
 import inputStyle from "styles/modules/common/input.module.scss";
 import style from "styles/modules/common/createTaskInput.module.scss";
 import { handleCreateTodo } from "handler/createTodo.handler";
+import { useAPICall } from "helper/useAPICall.helper";
 
 interface Props {
   dispatchTodoAction: Dispatch<TodoActionType>;
@@ -24,17 +23,17 @@ interface Props {
 const TodoCreateLayoutComponent: FunctionComponent<Props> = ({
   dispatchTodoAction,
 }) => {
-  const [task, setTask] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [inputState, setInputState] = useState({
+    textInput: "",
+    isLoading: false,
+    isError: false,
+  });
 
-  const { dispatchNotification } = useNotificationContext();
-
-  const { changeAuth } = useAuthContext();
-  const router = useRouter();
+  const [setAPIRequestData] = useAPICall(null);
+  const { textInput, isLoading, isError } = inputState;
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setTask(event.target.value);
+    setInputState({ ...inputState, textInput: event.target.value });
   };
 
   return (
@@ -47,27 +46,23 @@ const TodoCreateLayoutComponent: FunctionComponent<Props> = ({
             placeholder="Add new task"
             autoFocus={true}
             disabled={isLoading}
-            value={task}
+            value={textInput}
             onChange={handleInputChange}
           />
           <ButtonWithIcon
             loading={isLoading}
             isError={isError}
-            handleOnClick={(
+            handleOnClick={async (
               event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-            ) =>
+            ) => {
+              event.preventDefault();
               handleCreateTodo(
-                event,
-                setIsLoading,
-                setIsError,
-                setTask,
-                task,
-                changeAuth,
-                router,
-                dispatchNotification,
+                setAPIRequestData,
+                inputState,
+                setInputState,
                 dispatchTodoAction
-              )
-            }
+              );
+            }}
           />
         </div>
         <p className={`${inputStyle.helper}`}>

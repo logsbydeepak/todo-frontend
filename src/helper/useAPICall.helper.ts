@@ -1,26 +1,13 @@
 import { AxiosResponse, Method } from "axios";
 import { useAuthContext, useNotificationContext } from "modules/context";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { text } from "stream/consumers";
-import { apiRequest } from "./apiRequest.helper";
+import { useEffect, useState } from "react";
+import { requestDataType } from "types/hooks.types";
 import { axiosRequest } from "./axios.helper";
-
-type requestDataType = {
-  data: {
-    method: Method;
-    url: string;
-    data?: Object;
-  };
-  response: {
-    onSuccess: (value: Object) => void;
-    onError: () => void;
-  };
-} | null;
 
 export const useAPICall = (requestData: requestDataType) => {
   const { dispatchNotification } = useNotificationContext();
-  const { auth, changeAuth } = useAuthContext();
+  const { changeAuth } = useAuthContext();
 
   const router = useRouter();
   const [APIRequestData, setAPIRequestData] =
