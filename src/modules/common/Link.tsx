@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { ButtonWithSmallIcon } from "./Button";
+
+import style from "styles/modules/common/navbar.module.scss";
 
 export const NoAuthLink = () => (
   <>
@@ -15,21 +18,19 @@ export const NoAuthLink = () => (
   </>
 );
 
-export const AuthLink = ({
-  name,
-  handelLogout,
-}: {
-  name: string;
-  handelLogout: any;
-}) => (
+export const AuthLink = ({ handelLogout }: { handelLogout: any }) => (
   <>
-    <li>
-      <Link href="/Profile">
-        <a>{name}</a>
-      </Link>
-    </li>
-    <li onClick={handelLogout}>
-      <a>Logout</a>
-    </li>
+    <ButtonWithSmallIcon
+      icon="manage_accounts"
+      isLoading={false}
+      handleOnClick={() => {}}
+      className={style.button}
+    />
+    <ButtonWithSmallIcon
+      icon="logout"
+      isLoading={false}
+      handleOnClick={handelLogout}
+      className={style.button}
+    />
   </>
 );

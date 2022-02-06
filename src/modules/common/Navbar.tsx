@@ -4,17 +4,18 @@ import { FunctionComponent, useContext, useEffect } from "react";
 import style from "styles/modules/common/navbar.module.scss";
 import { AuthLink, NoAuthLink } from "./Link";
 import { useAuthContext } from "modules/context/AuthContext";
+import { useAPICall } from "helper/useAPICall.helper";
 
 const Navbar: FunctionComponent = () => {
   const { auth } = useAuthContext();
+
+  const [setAPIRequestData] = useAPICall(null);
 
   useEffect(() => {
     if (!auth) return;
   }, [auth]);
 
-  const handelLogout = async (e: any) => {
-    e.preventDefault();
-  };
+  const handelLogout = async () => {};
 
   return (
     <>
@@ -28,11 +29,7 @@ const Navbar: FunctionComponent = () => {
 
         <div className={style.link}>
           <ul>
-            {auth ? (
-              <AuthLink name="Account" handelLogout={handelLogout} />
-            ) : (
-              <NoAuthLink />
-            )}
+            {auth ? <AuthLink handelLogout={handelLogout} /> : <NoAuthLink />}
           </ul>
         </div>
       </header>

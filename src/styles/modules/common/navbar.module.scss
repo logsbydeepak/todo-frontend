@@ -1,4 +1,4 @@
-@import "src/styles/utilities/variables";
+@import "styles/utilities/variables";
 
 .base {
   height: 16rem;
@@ -53,4 +53,39 @@
 .link ul {
   display: flex;
   flex-direction: row;
+}
+
+.link ul button {
+  margin-left: 1rem;
+}
+
+.link ul button i {
+  font-size: 2.2rem;
+}
+
+.button {
+  min-width: 4.4rem;
+  min-height: 4.4rem;
+  border: 0.2rem solid $color-black;
+  border-radius: 100%;
+
+  &:hover {
+    border: 0.2rem solid $color-grey-4;
+  }
+}
+
+.button svg {
+  width: 2.2rem;
+}
+
+.button i {
+  color: $color-grey-3;
+
+  &:hover {
+    color: $color-grey-2;
+  }
+
+  &:active {
+    color: $color-grey-1;
+  }
 }
