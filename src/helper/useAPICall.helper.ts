@@ -54,7 +54,6 @@ export const useAPICall = (requestData: requestDataType) => {
                   method,
                   data,
                 }).then((successResponse) => {
-                  console.log("hi");
                   onSuccess(successResponse.data.data);
                   return;
                 });

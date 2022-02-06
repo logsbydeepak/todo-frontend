@@ -41,7 +41,7 @@ const Login: NextPage = () => {
     if (auth) {
       router.push("/");
     }
-  }, [auth]);
+  }, [auth, router]);
 
   const formInputHandler = (e: any) => {
     setFormData({

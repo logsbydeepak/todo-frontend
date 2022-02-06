@@ -1,4 +1,10 @@
-import { Dispatch, SetStateAction, useEffect, useReducer } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useMemo,
+  useReducer,
+} from "react";
 
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -41,17 +47,18 @@ const TodoPageLayout = () => {
   const { todo, activeMenu, isLoading, isLoadingMore, showLoadMoreButton } =
     todoState;
 
-  const router = useRouter();
-
-  const { changeAuth } = useAuthContext();
   const { dispatchNotification } = useNotificationContext();
 
-  useEffect(() => {
+  const useMemoHandleGetTodoOnMenuChange = useMemo(() => {
     handleGetTodoOnMenuChange(
       setAPIRequestData,
       dispatchTodoAction,
       activeMenu
     );
+  }, [activeMenu]);
+
+  useEffect(() => {
+    useMemoHandleGetTodoOnMenuChange;
   }, [activeMenu]);
 
   return (
