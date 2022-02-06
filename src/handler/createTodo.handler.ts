@@ -1,22 +1,16 @@
-import { Dispatch, SetStateAction } from "react";
-import { requestDataType } from "types/hooks.types";
-import { TodoActionType } from "types/todoReducerType";
+import { SetAPIRequestDataType } from "types/hooks.types";
+
+import {
+  DispatchTodoActionType,
+  InputStateType,
+  SetInputStateType,
+} from "types";
 
 export const handleCreateTodo = async (
-  setAPIRequestData: Dispatch<SetStateAction<requestDataType>>,
-  inputState: {
-    textInput: string;
-    isLoading: boolean;
-    isError: boolean;
-  },
-  setInputState: Dispatch<
-    SetStateAction<{
-      textInput: string;
-      isLoading: boolean;
-      isError: boolean;
-    }>
-  >,
-  dispatchTodoAction: Dispatch<TodoActionType>
+  setAPIRequestData: SetAPIRequestDataType,
+  inputState: InputStateType,
+  setInputState: SetInputStateType,
+  dispatchTodoAction: DispatchTodoActionType
 ) => {
   const { textInput } = inputState;
   setInputState({ ...inputState, isLoading: true });

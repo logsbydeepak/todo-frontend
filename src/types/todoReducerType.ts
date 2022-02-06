@@ -1,10 +1,12 @@
+import { Dispatch } from "react";
+
 export interface TodoType {
   _id: string;
   task: string;
   status: boolean;
 }
 
-type TodoMenu = "false" | "true" | "all";
+export type TodoMenu = "false" | "true" | "all";
 
 export type TodoActionType =
   | {
@@ -31,3 +33,5 @@ export interface TodoStateType {
   isLoadingMore: boolean;
   showLoadMoreButton: boolean;
 }
+
+export type DispatchTodoActionType = Dispatch<TodoActionType>;

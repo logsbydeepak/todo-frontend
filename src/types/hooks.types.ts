@@ -1,6 +1,7 @@
 import { Method } from "axios";
+import { Dispatch, SetStateAction } from "react";
 
-export type requestDataType = {
+export type APIRequestDataType = {
   data: {
     method: Method;
     url: string;
@@ -12,3 +13,7 @@ export type requestDataType = {
   };
 } | null;
 console.log("hi");
+
+export type SetAPIRequestDataType = Dispatch<
+  SetStateAction<APIRequestDataType>
+>;

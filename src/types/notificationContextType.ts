@@ -13,3 +13,5 @@ export type NotificationActionType =
 export type NotificationContextType = {
   dispatchNotification: Dispatch<NotificationActionType>;
 } | null;
+
+export type DispatchNotificationType = Dispatch<NotificationActionType>;

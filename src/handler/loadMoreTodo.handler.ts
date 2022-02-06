@@ -1,9 +1,16 @@
+import {
+  DispatchNotificationType,
+  DispatchTodoActionType,
+  SetAPIRequestDataType,
+  TodoMenu,
+} from "types";
+
 export const handleGetMoreTodo = (
-  dispatchTodoAction: any,
-  setAPIRequestData: any,
-  activeMenu: any,
+  dispatchTodoAction: DispatchTodoActionType,
+  setAPIRequestData: SetAPIRequestDataType,
+  activeMenu: TodoMenu,
   skip: number,
-  dispatchNotification: any
+  dispatchNotification: DispatchNotificationType
 ) => {
   dispatchTodoAction({
     type: "LOAD_MORE",

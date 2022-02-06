@@ -1,23 +1,14 @@
-import {
-  FunctionComponent,
-  useState,
-  MouseEvent,
-  Dispatch,
-  ChangeEvent,
-} from "react";
-
-import { useRouter } from "next/router";
-
-import { TodoActionType } from "types/todoReducerType";
+import { FunctionComponent, useState, MouseEvent, ChangeEvent } from "react";
 
 import { ButtonWithIcon } from "modules/common/Button";
 import inputStyle from "styles/modules/common/input.module.scss";
 import style from "styles/modules/common/createTaskInput.module.scss";
 import { handleCreateTodo } from "handler/createTodo.handler";
 import { useAPICall } from "helper/useAPICall.helper";
+import { DispatchTodoActionType } from "types";
 
 interface Props {
-  dispatchTodoAction: Dispatch<TodoActionType>;
+  dispatchTodoAction: DispatchTodoActionType;
 }
 
 const TodoCreateLayoutComponent: FunctionComponent<Props> = ({

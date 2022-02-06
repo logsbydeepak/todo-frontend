@@ -1,20 +1,19 @@
 import { Dispatch, SetStateAction } from "react";
-import { requestDataType, TodoType } from "types";
+import {
+  DispatchTodoActionType,
+  SetAPIRequestDataType,
+  SetLoadingIconType,
+  TodoType,
+} from "types";
 
 export const handleChangeTodoTask = (
-  setAPIRequestData: Dispatch<SetStateAction<requestDataType>>,
+  setAPIRequestData: SetAPIRequestDataType,
   index: number,
-  setLoadingIcon: Dispatch<
-    SetStateAction<{
-      status: boolean;
-      task: boolean;
-      delete: boolean;
-    }>
-  >,
+  setLoadingIcon: SetLoadingIconType,
   setTick: Dispatch<SetStateAction<boolean>>,
   localTask: string,
   todoItem: TodoType,
-  dispatchTodoAction: any
+  dispatchTodoAction: DispatchTodoActionType
 ) => {
   setAPIRequestData({
     data: {

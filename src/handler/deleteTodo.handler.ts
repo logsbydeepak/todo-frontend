@@ -1,19 +1,18 @@
 import { Dispatch } from "react";
 import { TodoActionType } from "types/todoReducerType";
-import { TodoType } from "types";
+import {
+  SetAPIRequestDataType,
+  TodoType,
+  DispatchTodoActionType,
+  SetLoadingIconType,
+} from "types";
 
 export const handleDeleteTodo = async (
-  setAPIRequestData: any,
+  setAPIRequestData: SetAPIRequestDataType,
   index: number,
-  dispatchTodoAction: Dispatch<TodoActionType>,
+  dispatchTodoAction: DispatchTodoActionType,
   todoItem: TodoType,
-  setLoadingIcon: React.Dispatch<
-    React.SetStateAction<{
-      status: boolean;
-      task: boolean;
-      delete: boolean;
-    }>
-  >
+  setLoadingIcon: SetLoadingIconType
 ) => {
   setAPIRequestData({
     data: {

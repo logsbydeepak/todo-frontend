@@ -10,15 +10,9 @@ import { handleDeleteTodo } from "handler/deleteTodo.handler";
 import { useAPICall } from "helper/useAPICall.helper";
 import { handleChangeTodoStatus } from "handler/changeTodoStatus.handler";
 import { handleChangeTodoTask } from "handler/changeTodoTask.handler";
-import { TodoType } from "types";
+import { TodoItemPropsType, TodoType } from "types";
 
-interface Props {
-  index: number;
-  dispatchTodoAction: any;
-  todoItem: TodoType;
-}
-
-const TaskInputLayoutComponent: FunctionComponent<Props> = ({
+const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
   index,
   dispatchTodoAction,
   todoItem,

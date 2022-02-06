@@ -1,9 +1,8 @@
-import { Dispatch, SetStateAction } from "react";
-import { requestDataType } from "types";
+import { DispatchTodoActionType, SetAPIRequestDataType } from "types";
 
 export const handleGetTodoOnMenuChange = async (
-  setAPIRequestData: Dispatch<SetStateAction<requestDataType>>,
-  dispatchTodoAction: any,
+  setAPIRequestData: SetAPIRequestDataType,
+  dispatchTodoAction: DispatchTodoActionType,
   activeMenu: any
 ) => {
   dispatchTodoAction({
