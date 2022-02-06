@@ -1,8 +1,8 @@
 import {
-  DispatchTodoActionType,
-  SetLoadingIconType,
   TodoType,
+  SetLoadingIconType,
   SetAPIRequestDataType,
+  DispatchTodoActionType,
 } from "types";
 
 export const handleChangeTodoStatus = (

@@ -54,56 +54,41 @@ const Login: NextPage = () => {
     event.preventDefault();
 
     setLoading(true);
-    const helperText = { ...initialUserData };
-    const isErrorStatus = { ...initialErrorData };
+    setHelper(initialUserData);
+    setIsError(initialErrorData);
 
-    if (!isEmail(formData.email)) {
-      helperText.email = "invalid email";
-      isErrorStatus.email = true;
-    }
-
-    if (formData.email.length === 0) {
-      helperText.email = "email is required";
-      isErrorStatus.email = true;
-    }
-
-    if (!isStrongPassword(formData.password)) {
-      helperText.password =
-        "min of 8 characters, 1 lower case, upper case, symbol";
-      isErrorStatus.password = true;
-    }
-
-    if (formData.password.length === 0) {
-      helperText.password = "password is required";
-      isErrorStatus.password = true;
-    }
-
-    setHelper(helperText);
-    setIsError(isErrorStatus);
-    setLoading(false);
-
-    if (!isEmail(formData.email) || !isStrongPassword(formData.password))
+    if (!isEmail(formData.email) || !isStrongPassword(formData.password)) {
+      setTimeout(() => {
+        setHelper({
+          email: "email or password is invalid",
+          password: "email or password is invalid",
+        });
+        setIsError({ email: true, password: true });
+        setLoading(false);
+      }, 1000);
       return;
+    }
 
     try {
-      setLoading(true);
       await axiosRequest.post("/session", formData);
 
+      changeAuth(true);
       dispatchNotification({
         type: "SUCCESS",
         message: "User sign in successfully",
       });
 
-      changeAuth(true);
       router.push("/");
     } catch (error: any) {
       if (error.response.data.error.message === "user do not exist") {
-        dispatchNotification({
-          type: "ERROR",
-          message: "Email or password is invalid",
-        });
-
-        setLoading(false);
+        setTimeout(() => {
+          setHelper({
+            email: "email or password is invalid",
+            password: "email or password is invalid",
+          });
+          setIsError({ email: true, password: true });
+          setLoading(false);
+        }, 1000);
         return;
       }
 

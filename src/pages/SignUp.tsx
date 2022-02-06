@@ -56,6 +56,8 @@ const SignUp: NextPage = () => {
     event.preventDefault();
 
     setLoading(true);
+    setHelper(initialUserData);
+    setIsError(initialErrorData);
     const helperText = { ...initialUserData };
     const isErrorStatus = { ...initialErrorData };
 
@@ -85,9 +87,11 @@ const SignUp: NextPage = () => {
       isErrorStatus.password = true;
     }
 
-    setHelper(helperText);
-    setIsError(isErrorStatus);
-    setLoading(false);
+    setTimeout(() => {
+      setHelper(helperText);
+      setIsError(isErrorStatus);
+      setLoading(false);
+    }, 1000);
 
     if (
       formData.name.length === 0 ||
@@ -97,7 +101,6 @@ const SignUp: NextPage = () => {
       return;
 
     try {
-      setLoading(true);
       await axiosRequest.post("/user", formData);
       dispatchNotification({
         type: "SUCCESS",
