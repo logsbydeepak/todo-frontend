@@ -1,13 +1,5 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useMemo,
-  useReducer,
-} from "react";
-
 import Head from "next/head";
-import { useRouter } from "next/router";
+import { useEffect, useMemo, useReducer } from "react";
 
 import PageTitle from "modules/common/PageTitle";
 import { ButtonWithTextAndIcon } from "modules/common/Button";
@@ -16,17 +8,16 @@ import TodoItem from "modules/layout/components/TodoItemLayoutComponent";
 import TodoMenu from "modules/layout/components/TodoMenuLayoutComponent";
 import TodoCreate from "modules/layout/components/TodoCreateLayoutComponent";
 
-import { apiRequest } from "helper/apiRequest.helper";
 import { todoReducer } from "reducer/todo.reducer";
-import { useAuthContext } from "modules/context/AuthContext";
 import { TodoStateType, TodoType } from "types/todoReducerType";
 
-import style from "styles/modules/layout/pages/Index.module.scss";
-import { useNotificationContext } from "modules/context/NotificationContext";
 import Spinner from "modules/common/Spinner";
 import { useAPICall } from "helper/useAPICall.helper";
-import { handleGetTodoOnMenuChange } from "handler/getTodoOnMenuChange.handler";
 import { handleGetMoreTodo } from "handler/loadMoreTodo.handler";
+import { useNotificationContext } from "modules/context/NotificationContext";
+import { handleGetTodoOnMenuChange } from "handler/getTodoOnMenuChange.handler";
+
+import style from "styles/modules/layout/pages/TodoPageLayout.module.scss";
 
 const initialTodoState: TodoStateType = {
   todo: [],
@@ -42,11 +33,10 @@ const TodoPageLayout = () => {
     initialTodoState
   );
 
-  const [setAPIRequestData] = useAPICall(null);
-
   const { todo, activeMenu, isLoading, isLoadingMore, showLoadMoreButton } =
     todoState;
 
+  const [setAPIRequestData] = useAPICall(null);
   const { dispatchNotification } = useNotificationContext();
 
   const useMemoHandleGetTodoOnMenuChange = useMemo(() => {
@@ -73,19 +63,17 @@ const TodoPageLayout = () => {
         activeMenu={activeMenu}
       />
       {isLoading ? (
-        <div className={style.spinner__container}>
-          <Spinner className={style.spinner} />
+        <div className={style.spinner}>
+          <Spinner className={style.spinner__container} />
         </div>
       ) : (
-        todo.map((task: TodoType, index: number) => {
+        todo.map((todoItem: TodoType, index: number) => {
           return (
             <TodoItem
-              key={task._id}
               index={index}
-              status={task.status}
-              task={task.task}
+              key={todoItem._id}
+              todoItem={todoItem}
               dispatchTodoAction={dispatchTodoAction}
-              todo={todo}
             />
           );
         })

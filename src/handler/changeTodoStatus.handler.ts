@@ -13,17 +13,16 @@ export const handleChangeTodoStatus = (
     }>
   >,
   dispatchTodoAction: Dispatch<SetStateAction<TodoActionType>>,
-  todo: TodoType[]
+  todoItem: TodoType
 ) => {
-  const indexTodo = todo[index];
   setAPIRequestData({
     data: {
       url: `/todo`,
       method: "PUT",
       data: {
-        id: indexTodo._id,
-        task: indexTodo.task,
-        status: !indexTodo.status,
+        id: todoItem._id,
+        task: todoItem.task,
+        status: !todoItem.status,
       },
     },
     response: {

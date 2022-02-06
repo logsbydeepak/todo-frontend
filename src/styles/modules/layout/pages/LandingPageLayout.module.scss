@@ -1,0 +1,30 @@
+@import "styles/utilities/variables";
+
+.base {
+  margin: 0 auto;
+  margin-top: 10rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  margin-bottom: 6rem;
+}
+
+.title,
+.title span,
+.title span span {
+  display: inline-block;
+  text-align: center;
+  font-size: 6.4rem;
+  font-weight: 600;
+}
+
+.title span {
+  letter-spacing: 0.4rem;
+}
+
+.title span span {
+  color: #bd9cf3;
+}

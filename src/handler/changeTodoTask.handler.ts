@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { requestDataType } from "types";
+import { requestDataType, TodoType } from "types";
 
 export const handleChangeTodoTask = (
   setAPIRequestData: Dispatch<SetStateAction<requestDataType>>,
@@ -13,17 +13,16 @@ export const handleChangeTodoTask = (
   >,
   setTick: Dispatch<SetStateAction<boolean>>,
   localTask: string,
-  todo: any,
+  todoItem: TodoType,
   dispatchTodoAction: any
 ) => {
-  const indexTodo = todo[index];
   setAPIRequestData({
     data: {
       method: "PUT",
       url: "/todo",
       data: {
-        id: indexTodo._id,
-        status: indexTodo.status,
+        id: todoItem._id,
+        status: todoItem.status,
         task: localTask,
       },
     },

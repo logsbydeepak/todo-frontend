@@ -1,11 +1,12 @@
 import { Dispatch } from "react";
 import { TodoActionType } from "types/todoReducerType";
+import { TodoType } from "types";
 
 export const handleDeleteTodo = async (
   setAPIRequestData: any,
   index: number,
   dispatchTodoAction: Dispatch<TodoActionType>,
-  todo: any,
+  todoItem: TodoType,
   setLoadingIcon: React.Dispatch<
     React.SetStateAction<{
       status: boolean;
@@ -17,7 +18,7 @@ export const handleDeleteTodo = async (
   setAPIRequestData({
     data: {
       method: "DELETE",
-      url: `/todo?id=${todo[index]._id}`,
+      url: `/todo?id=${todoItem._id}`,
     },
     response: {
       onSuccess: () => {

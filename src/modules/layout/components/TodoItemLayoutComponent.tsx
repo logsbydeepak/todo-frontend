@@ -10,21 +10,18 @@ import { handleDeleteTodo } from "handler/deleteTodo.handler";
 import { useAPICall } from "helper/useAPICall.helper";
 import { handleChangeTodoStatus } from "handler/changeTodoStatus.handler";
 import { handleChangeTodoTask } from "handler/changeTodoTask.handler";
+import { TodoType } from "types";
 
 interface Props {
-  status: boolean;
-  task: string;
   index: number;
   dispatchTodoAction: any;
-  todo: any;
+  todoItem: TodoType;
 }
 
 const TaskInputLayoutComponent: FunctionComponent<Props> = ({
-  status,
-  task,
   index,
   dispatchTodoAction,
-  todo,
+  todoItem,
 }) => {
   const [focus, setFocus] = useState(false);
   const [tick, setTick] = useState(false);
@@ -33,6 +30,8 @@ const TaskInputLayoutComponent: FunctionComponent<Props> = ({
     task: false,
     delete: false,
   });
+
+  const { task, status } = todoItem;
 
   const [setAPIRequestData] = useAPICall(null);
 
@@ -71,7 +70,7 @@ const TaskInputLayoutComponent: FunctionComponent<Props> = ({
               index,
               setLoadingIcon,
               dispatchTodoAction,
-              todo
+              todoItem
             );
           }}
         >
@@ -120,7 +119,7 @@ const TaskInputLayoutComponent: FunctionComponent<Props> = ({
                 setLoadingIcon,
                 setTick,
                 localTask,
-                todo,
+                todoItem,
                 dispatchTodoAction
               );
             }}
@@ -149,7 +148,7 @@ const TaskInputLayoutComponent: FunctionComponent<Props> = ({
               setAPIRequestData,
               index,
               dispatchTodoAction,
-              todo,
+              todoItem,
               setLoadingIcon
             );
           }}
