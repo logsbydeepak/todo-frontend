@@ -26,8 +26,9 @@ export const todoReducer = (
       };
 
     case "REMOVE_TODO":
-      const removeTodo = state.todo;
-      removeTodo.splice(action.index, 1);
+      const removeTodo = state.todo.filter(
+        (_: any, index: number) => index !== action.index
+      );
       return { ...state, todo: [...removeTodo] };
 
     case "UPDATE_TODO_STATUS":

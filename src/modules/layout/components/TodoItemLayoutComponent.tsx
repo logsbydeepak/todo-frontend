@@ -1,21 +1,17 @@
-import React, {
-  ChangeEvent,
-  FunctionComponent,
-  MouseEvent,
-  useState,
-} from "react";
+import React, { ChangeEvent, FunctionComponent, useState } from "react";
 import style from "styles/modules/common/taskInput.module.scss";
-import Spinner from "modules/common/Spinner";
 import { handleDeleteTodo } from "handler/deleteTodo.handler";
 import { useAPICall } from "helper/useAPICall.helper";
 import { handleChangeTodoStatus } from "handler/changeTodoStatus.handler";
 import { handleChangeTodoTask } from "handler/changeTodoTask.handler";
-import { TodoItemPropsType, TodoType } from "types";
+import { TodoItemPropsType } from "types";
+import { ButtonWithSmallIcon } from "modules/common/Button";
 
 const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
   index,
   dispatchTodoAction,
   todoItem,
+  setAPIRequestData,
 }) => {
   const [focus, setFocus] = useState(false);
   const [tick, setTick] = useState(false);
@@ -26,9 +22,6 @@ const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
   });
 
   const { task, status } = todoItem;
-
-  const [setAPIRequestData] = useAPICall(null);
-
   const [localTask, setLocalTask] = useState(task);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -52,12 +45,11 @@ const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
   return (
     <>
       <form className={`${style.taskForm} ${focus && style.taskForm__focus}`}>
-        <button
-          className={style.taskForm__button}
-          onClick={(
-            event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-          ) => {
-            event.preventDefault();
+        <ButtonWithSmallIcon
+          icon={status ? "check_circle_outline" : "radio_button_unchecked"}
+          isLoading={loadingIcon.status}
+          className={`${style.taskForm__icon__check}`}
+          handleOnClick={() => {
             setLoadingIcon({ ...loadingIcon, status: true });
             handleChangeTodoStatus(
               setAPIRequestData,
@@ -67,18 +59,7 @@ const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
               todoItem
             );
           }}
-        >
-          {!loadingIcon.status && (
-            <i
-              className={`icon ${style.taskForm__icon} ${style.taskForm__icon__check}`}
-            >
-              {status ? "check_circle_outline" : "radio_button_unchecked"}
-            </i>
-          )}
-          {loadingIcon.status && (
-            <Spinner className={style.taskForm__spinner} />
-          )}
-        </button>
+        />
 
         <input
           className={style.taskForm__taskInput}
@@ -88,55 +69,41 @@ const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
         />
+
         {tick && (
-          <button className={style.taskForm__button} onClick={handleInputReset}>
-            {!loadingIcon.task && tick && (
-              <i
-                className={`icon ${style.taskForm__icon} ${style.taskForm__icon__reset}`}
-              >
-                settings_backup_restore
-              </i>
-            )}
-          </button>
-        )}
-        {tick && (
-          <button
-            className={style.taskForm__button}
-            onClick={(
-              event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-            ) => {
-              event.preventDefault();
-              setLoadingIcon({ ...loadingIcon, task: true });
-              handleChangeTodoTask(
-                setAPIRequestData,
-                index,
-                setLoadingIcon,
-                setTick,
-                localTask,
-                todoItem,
-                dispatchTodoAction
-              );
-            }}
-          >
-            {!loadingIcon.task && tick && (
-              <i
-                className={`icon ${style.taskForm__icon} ${style.taskForm__icon__done}`}
-              >
-                done_all
-              </i>
-            )}
-            {loadingIcon.task && (
-              <Spinner className={style.taskForm__spinner} />
-            )}
-          </button>
+          <>
+            <ButtonWithSmallIcon
+              icon="settings_backup_restore"
+              isLoading={false}
+              className={`${style.taskForm__icon__reset}`}
+              handleOnClick={handleInputReset}
+            />
+
+            <ButtonWithSmallIcon
+              icon="done_all"
+              isLoading={loadingIcon.task}
+              className={`${style.taskForm__icon__done}`}
+              handleOnClick={() => {
+                setLoadingIcon({ ...loadingIcon, task: true });
+                handleChangeTodoTask(
+                  setAPIRequestData,
+                  index,
+                  setLoadingIcon,
+                  setTick,
+                  localTask,
+                  todoItem,
+                  dispatchTodoAction
+                );
+              }}
+            />
+          </>
         )}
 
-        <button
-          className={style.taskForm__button}
-          onClick={(
-            event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-          ) => {
-            event.preventDefault();
+        <ButtonWithSmallIcon
+          icon="delete_outline"
+          isLoading={loadingIcon.delete}
+          className={`${style.taskForm__icon__delete}`}
+          handleOnClick={() => {
             setLoadingIcon({ ...loadingIcon, delete: true });
             handleDeleteTodo(
               setAPIRequestData,
@@ -146,18 +113,7 @@ const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
               setLoadingIcon
             );
           }}
-        >
-          {!loadingIcon.delete && (
-            <i
-              className={`icon ${style.taskForm__icon} ${style.taskForm__icon__delete}`}
-            >
-              delete_outline
-            </i>
-          )}
-          {loadingIcon.delete && (
-            <Spinner className={style.taskForm__spinner} />
-          )}
-        </button>
+        />
       </form>
     </>
   );

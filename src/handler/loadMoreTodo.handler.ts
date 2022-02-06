@@ -2,13 +2,13 @@ import {
   DispatchNotificationType,
   DispatchTodoActionType,
   SetAPIRequestDataType,
-  TodoMenu,
+  TodoMenuType,
 } from "types";
 
 export const handleGetMoreTodo = (
   dispatchTodoAction: DispatchTodoActionType,
   setAPIRequestData: SetAPIRequestDataType,
-  activeMenu: TodoMenu,
+  activeMenu: TodoMenuType,
   skip: number,
   dispatchNotification: DispatchNotificationType
 ) => {

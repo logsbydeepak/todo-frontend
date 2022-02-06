@@ -6,7 +6,7 @@ export interface TodoType {
   status: boolean;
 }
 
-export type TodoMenu = "false" | "true" | "all";
+export type TodoMenuType = "false" | "true" | "all";
 
 export type TodoActionType =
   | {
@@ -24,11 +24,11 @@ export type TodoActionType =
   | { type: "LOAD_MORE"; isLoadingMore: boolean }
   | { type: "LOAD_MORE_BUTTON"; showLoadMoreButton: boolean }
   | { type: "LOADING"; isLoading: boolean }
-  | { type: "UPDATE_ACTIVE_MENU"; activeMenu: TodoMenu };
+  | { type: "UPDATE_ACTIVE_MENU"; activeMenu: TodoMenuType };
 
 export interface TodoStateType {
   todo: TodoType[];
-  activeMenu: TodoMenu;
+  activeMenu: TodoMenuType;
   isLoading: boolean;
   isLoadingMore: boolean;
   showLoadMoreButton: boolean;

@@ -1,5 +1,3 @@
-import { Dispatch } from "react";
-import { TodoActionType } from "types/todoReducerType";
 import {
   SetAPIRequestDataType,
   TodoType,

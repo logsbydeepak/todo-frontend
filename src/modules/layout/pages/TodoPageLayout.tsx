@@ -74,6 +74,7 @@ const TodoPageLayout = () => {
               key={todoItem._id}
               todoItem={todoItem}
               dispatchTodoAction={dispatchTodoAction}
+              setAPIRequestData={setAPIRequestData}
             />
           );
         })

@@ -24,4 +24,35 @@
     border-start-start-radius: 0rem;
     border-end-start-radius: 0rem;
   }
+
+  &__small {
+    max-width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background-color: $color-black;
+
+    &:hover {
+      background-color: $color-black;
+    }
+    &:active {
+      background-color: $color-black;
+    }
+
+    &__icon {
+      transition: all 0.3s;
+      font-size: 2rem;
+      color: $color-white;
+    }
+
+    &__spinner {
+      width: 2rem;
+    }
+
+    &__spinner path {
+      fill: $color-white;
+    }
+  }
 }

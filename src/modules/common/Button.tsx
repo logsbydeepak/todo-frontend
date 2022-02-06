@@ -24,6 +24,13 @@ interface ButtonWithIconProps {
   ) => Promise<void>;
 }
 
+interface ButtonWithSmallIconProps {
+  icon: string;
+  isLoading: boolean;
+  className?: string;
+  handleOnClick: () => void;
+}
+
 export const ButtonWithLInk: FunctionComponent<ButtonWithLInkProps> = ({
   link,
 }) => {
@@ -70,6 +77,30 @@ export const ButtonWithIcon: FunctionComponent<ButtonWithIconProps> = ({
       >
         {!loading && <i className="icon">arrow_forward_ios</i>}
         {loading && <Spinner className={style.spinner} />}
+      </button>
+    </>
+  );
+};
+
+export const ButtonWithSmallIcon: FunctionComponent<
+  ButtonWithSmallIconProps
+> = ({ icon, isLoading, className, handleOnClick }) => {
+  return (
+    <>
+      <button
+        className={`${style.button__small} ${className}`}
+        onClick={(
+          event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+        ) => {
+          event.preventDefault();
+          handleOnClick();
+        }}
+      >
+        {isLoading ? (
+          <Spinner className={style.button__small__spinner} />
+        ) : (
+          <i className={`icon ${style.button__small__icon}`}>{icon}</i>
+        )}
       </button>
     </>
   );

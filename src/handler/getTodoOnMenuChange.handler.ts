@@ -1,9 +1,13 @@
-import { DispatchTodoActionType, SetAPIRequestDataType } from "types";
+import {
+  DispatchTodoActionType,
+  SetAPIRequestDataType,
+  TodoMenuType,
+} from "types";
 
 export const handleGetTodoOnMenuChange = async (
   setAPIRequestData: SetAPIRequestDataType,
   dispatchTodoAction: DispatchTodoActionType,
-  activeMenu: any
+  activeMenu: TodoMenuType
 ) => {
   dispatchTodoAction({
     type: "EMPTY_TODO",
