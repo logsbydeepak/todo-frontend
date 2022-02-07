@@ -3,6 +3,7 @@ import { ButtonWithSmallIcon } from "./Button";
 
 import style from "styles/modules/common/navbar.module.scss";
 import { useState } from "react";
+import Router, { useRouter } from "next/router";
 
 export const NoAuthLink = () => (
   <>
@@ -21,12 +22,16 @@ export const NoAuthLink = () => (
 
 export const AuthLink = ({ handelLogout }: { handelLogout: any }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const handleOnUserClick = () => {
+    router.push("/User");
+  };
   return (
     <>
       <ButtonWithSmallIcon
         icon="manage_accounts"
         isLoading={false}
-        handleOnClick={() => {}}
+        handleOnClick={handleOnUserClick}
         className={style.button}
       />
       <ButtonWithSmallIcon
