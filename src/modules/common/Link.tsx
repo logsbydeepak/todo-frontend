@@ -26,6 +26,7 @@ export const AuthLink = ({ handelLogout }: { handelLogout: any }) => {
   const handleOnUserClick = () => {
     router.push("/User");
   };
+
   return (
     <>
       <ButtonWithSmallIcon

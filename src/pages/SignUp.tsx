@@ -46,7 +46,7 @@ const SignUp: NextPage = () => {
     }
   }, []);
 
-  const formInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  const formInputHandler = async (event: ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
@@ -88,18 +88,18 @@ const SignUp: NextPage = () => {
       isErrorStatus.password = true;
     }
 
-    setTimeout(() => {
-      setHelper(helperText);
-      setIsError(isErrorStatus);
-      setLoading(false);
-    }, 1000);
-
     if (
       formData.name.length === 0 ||
       !isEmail(formData.email) ||
       !isStrongPassword(formData.password)
-    )
+    ) {
+      setTimeout(() => {
+        setHelper(helperText);
+        setIsError(isErrorStatus);
+        setLoading(false);
+      }, 1000);
       return;
+    }
 
     axiosRequest({
       method: "POST",
@@ -107,12 +107,12 @@ const SignUp: NextPage = () => {
       data: formData,
     })
       .then(() => {
+        changeAuth(true);
         dispatchNotification({
           type: "SUCCESS",
           message: "User created successfully",
         });
 
-        changeAuth(true);
         router.push("/");
       })
       .catch(() => {
