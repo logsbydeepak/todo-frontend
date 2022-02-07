@@ -18,6 +18,7 @@ import { useNotificationContext } from "modules/context/NotificationContext";
 import { handleGetTodoOnMenuChange } from "handler/getTodoOnMenuChange.handler";
 
 import style from "styles/modules/layout/pages/TodoPageLayout.module.scss";
+import { useAuthContext } from "modules/context";
 
 const initialTodoState: TodoStateType = {
   todo: [],
@@ -28,6 +29,7 @@ const initialTodoState: TodoStateType = {
 };
 
 const TodoPageLayout = () => {
+  const { auth } = useAuthContext();
   const [todoState, dispatchTodoAction] = useReducer(
     todoReducer,
     initialTodoState
@@ -48,8 +50,9 @@ const TodoPageLayout = () => {
   }, [activeMenu]);
 
   useEffect(() => {
+    if (!auth) return;
     useMemoHandleGetTodoOnMenuChange;
-  }, [activeMenu]);
+  }, [auth]);
 
   return (
     <>

@@ -25,7 +25,7 @@ export const useAPICall = (requestData: APIRequestDataType) => {
         data,
       })
         .then((successResponse: AxiosResponse<any>) => {
-          onSuccess(successResponse.data.data);
+          onSuccess(successResponse.data?.data);
           return;
         })
         .catch((errorResponse) => {

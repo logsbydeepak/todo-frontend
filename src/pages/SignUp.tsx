@@ -15,6 +15,7 @@ import style from "styles/modules/layout/pages/LoginSignUp.module.scss";
 import { axiosRequest } from "helper/axios.helper";
 import { useAuthContext } from "modules/context/AuthContext";
 import { useNotificationContext } from "modules/context/NotificationContext";
+import axios from "axios";
 
 const initialUserData = {
   name: "",
@@ -43,7 +44,7 @@ const SignUp: NextPage = () => {
     if (auth) {
       router.push("/");
     }
-  }, [auth, router]);
+  }, []);
 
   const formInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -52,7 +53,7 @@ const SignUp: NextPage = () => {
     });
   };
 
-  const clickHandler = async (event: FormEvent) => {
+  const clickHandler = (event: FormEvent) => {
     event.preventDefault();
 
     setLoading(true);
@@ -100,22 +101,27 @@ const SignUp: NextPage = () => {
     )
       return;
 
-    try {
-      await axiosRequest.post("/user", formData);
-      dispatchNotification({
-        type: "SUCCESS",
-        message: "User created successfully",
-      });
+    axiosRequest({
+      method: "POST",
+      url: "/user",
+      data: formData,
+    })
+      .then(() => {
+        dispatchNotification({
+          type: "SUCCESS",
+          message: "User created successfully",
+        });
 
-      changeAuth(true);
-      router.push("/");
-    } catch (e: any) {
-      dispatchNotification({
-        type: "ERROR",
-        message: "Something went wrong",
+        changeAuth(true);
+        router.push("/");
+      })
+      .catch(() => {
+        dispatchNotification({
+          type: "ERROR",
+          message: "Something went wrong",
+        });
+        setLoading(false);
       });
-      setLoading(false);
-    }
   };
 
   return (
