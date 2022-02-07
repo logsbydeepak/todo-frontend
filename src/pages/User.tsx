@@ -1,7 +1,9 @@
+import PageTitle from "modules/common/PageTitle";
+
 const User = () => {
   return (
     <>
-      <h1>User Page</h1>
+      <PageTitle title="Your Account" subtitle="Manage your account details" />
     </>
   );
 };
