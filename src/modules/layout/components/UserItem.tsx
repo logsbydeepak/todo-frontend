@@ -7,13 +7,24 @@ interface Props {
   value: string;
   placeHolder: string;
   type: string;
+  showButton?: boolean;
+  helper: string;
+  isError: boolean;
+  isLoading: boolean;
 }
 
-const UserItem: FunctionComponent<Props> = ({ value, placeHolder, type }) => {
+const UserItem: FunctionComponent<Props> = ({
+  value,
+  placeHolder,
+  type,
+  showButton = true,
+  helper,
+  isError,
+  isLoading,
+}) => {
   const [tick, setTick] = useState(false);
   const [focus, setFocus] = useState(false);
   const [localValue, setLocalValue] = useState(value);
-  const [isError, setIsError] = useState(false);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setLocalValue(event.target.value);
@@ -42,23 +53,27 @@ const UserItem: FunctionComponent<Props> = ({ value, placeHolder, type }) => {
             onBlur={handleInputFocus}
             placeholder={placeHolder}
           />
-          {tick && (
+          {showButton && (
             <>
-              <ButtonWithSmallIcon
-                icon="settings_backup_restore"
-                isLoading={false}
-                handleOnClick={handleReset}
-              />
+              {tick && (
+                <>
+                  <ButtonWithSmallIcon
+                    icon="settings_backup_restore"
+                    isLoading={false}
+                    handleOnClick={handleReset}
+                  />
 
-              <ButtonWithSmallIcon
-                icon="done_all"
-                isLoading={false}
-                handleOnClick={() => {}}
-              />
+                  <ButtonWithSmallIcon
+                    icon="done_all"
+                    isLoading={isLoading}
+                    handleOnClick={() => {}}
+                  />
+                </>
+              )}
             </>
           )}
         </form>
-        <p className={style.helper}>{isError && "helper"}</p>
+        <p className={style.helper}>{isError && helper}</p>
       </div>
     </>
   );

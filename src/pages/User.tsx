@@ -5,18 +5,40 @@ import Spinner from "modules/common/Spinner";
 import { useAuthContext } from "modules/context";
 import UserItem from "modules/layout/components/UserItem";
 import Head from "next/head";
-import Router, { useRouter } from "next/router";
-import { setUncaughtExceptionCaptureCallback } from "process";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useRouter } from "next/router";
+import {
+  useEffect,
+  useImperativeHandle,
+  useLayoutEffect,
+  useState,
+} from "react";
 import style from "styles/modules/Pages/user.page.module.scss";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
+const initialBoolean = {
+  name: false,
+  email: false,
+  password: false,
+  currentPassword: false,
+};
+
+const initialText = {
+  name: "",
+  email: "",
+  password: "",
+  currentPassword: "",
+};
+
 const User = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [userInfo, setUserInfo] = useState(initialText);
   const [setAPIRequestData] = useAPICall(null);
-  const [userInfo, setUserInfo] = useState({ name: "", email: "email" });
+
+  const [isError, setIsError] = useState(initialBoolean);
+  const [helper, setHelper] = useState(initialText);
+  const [isInputLoading, setIsInputLoading] = useState(initialBoolean);
 
   const { auth } = useAuthContext();
   const router = useRouter();
@@ -37,6 +59,7 @@ const User = () => {
       response: {
         onSuccess: (successResponse: any) => {
           setUserInfo({
+            ...userInfo,
             name: successResponse.name,
             email: successResponse.email,
           });
@@ -52,7 +75,15 @@ const User = () => {
     getUser();
   }, []);
 
-  const handleLogoutAll = () => {};
+  const handleLogoutAll = () => {
+    if (userInfo.currentPassword.length === 0) {
+      setIsError({ ...isError, currentPassword: true });
+      setHelper({
+        ...helper,
+        currentPassword: "current password can't be empty",
+      });
+    }
+  };
 
   const handleDeleteAccount = () => {};
 
@@ -69,17 +100,38 @@ const User = () => {
         </div>
       ) : (
         <>
-          <UserItem value={userInfo.name} placeHolder={"Name"} type={"text"} />
+          <UserItem
+            value={userInfo.name}
+            placeHolder={"Name"}
+            type={"text"}
+            helper={helper.name}
+            isError={isError.name}
+            isLoading={isInputLoading.name}
+          />
           <UserItem
             value={userInfo.email}
             placeHolder={"Email"}
             type={"text"}
+            helper={helper.email}
+            isError={isError.email}
+            isLoading={isInputLoading.email}
           />
-          <UserItem value={""} placeHolder={"Password"} type={"password"} />
+          <UserItem
+            value={""}
+            placeHolder={"Password"}
+            type={"password"}
+            helper={helper.password}
+            isError={isError.password}
+            isLoading={isInputLoading.password}
+          />
           <UserItem
             value={""}
             placeHolder={"Current Password"}
             type={"password"}
+            showButton={false}
+            helper={helper.currentPassword}
+            isError={isError.currentPassword}
+            isLoading={isInputLoading.currentPassword}
           />
           <div className={style.button}>
             <ButtonWithTextAndIcon
