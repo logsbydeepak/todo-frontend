@@ -7,7 +7,7 @@ import { axiosRequest } from "./axios.helper";
 
 export const useAPICall = (requestData: APIRequestDataType) => {
   const { dispatchNotification } = useNotificationContext();
-  const { changeAuth } = useAuthContext();
+  const { auth, changeAuth } = useAuthContext();
 
   const router = useRouter();
   const [APIRequestData, setAPIRequestData] =
@@ -75,6 +75,7 @@ export const useAPICall = (requestData: APIRequestDataType) => {
               });
             return;
           }
+
           changeAuth(false);
           router.push("/");
           dispatchNotification({

@@ -30,16 +30,16 @@ const AuthProvider: FunctionComponent = ({ children }) => {
   const [auth, setAuth] = useState(false);
 
   myUseLayoutEffect(() => {
-    const initialAuth = localStorage.getItem("auth");
-    if (initialAuth === null) {
-      localStorage.setItem("auth", "false");
-    }
     setAuth(localStorage.getItem("auth") === "true");
   });
 
   const changeAuth = (value: boolean) => {
+    if (value) {
+      localStorage.setItem("auth", value.toString());
+    } else {
+      localStorage.clear();
+    }
     setAuth(value);
-    localStorage.setItem("auth", value.toString());
   };
 
   return (
