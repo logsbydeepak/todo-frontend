@@ -36,8 +36,8 @@ const User = () => {
   const [userInfo, setUserInfo] = useState(initialText);
   const [setAPIRequestData] = useAPICall(null);
 
-  const [isError, setIsError] = useState(initialBoolean);
-  const [helper, setHelper] = useState(initialText);
+  const [isInputError, setIsInputError] = useState(initialBoolean);
+  const [inputHelper, setInputHelper] = useState(initialText);
   const [isInputLoading, setIsInputLoading] = useState(initialBoolean);
 
   const { auth } = useAuthContext();
@@ -77,9 +77,9 @@ const User = () => {
 
   const handleLogoutAll = () => {
     if (userInfo.currentPassword.length === 0) {
-      setIsError({ ...isError, currentPassword: true });
-      setHelper({
-        ...helper,
+      setIsInputError({ ...isInputError, currentPassword: true });
+      setInputHelper({
+        ...inputHelper,
         currentPassword: "current password can't be empty",
       });
     }
@@ -104,24 +104,24 @@ const User = () => {
             value={userInfo.name}
             placeHolder={"Name"}
             type={"text"}
-            helper={helper.name}
-            isError={isError.name}
+            helper={inputHelper.name}
+            isError={isInputError.name}
             isLoading={isInputLoading.name}
           />
           <UserItem
             value={userInfo.email}
             placeHolder={"Email"}
             type={"text"}
-            helper={helper.email}
-            isError={isError.email}
+            helper={inputHelper.email}
+            isError={isInputError.email}
             isLoading={isInputLoading.email}
           />
           <UserItem
             value={""}
             placeHolder={"Password"}
             type={"password"}
-            helper={helper.password}
-            isError={isError.password}
+            helper={inputHelper.password}
+            isError={isInputError.password}
             isLoading={isInputLoading.password}
           />
           <UserItem
@@ -129,8 +129,8 @@ const User = () => {
             placeHolder={"Current Password"}
             type={"password"}
             showButton={false}
-            helper={helper.currentPassword}
-            isError={isError.currentPassword}
+            helper={inputHelper.currentPassword}
+            isError={isInputError.currentPassword}
             isLoading={isInputLoading.currentPassword}
           />
           <div className={style.button}>
