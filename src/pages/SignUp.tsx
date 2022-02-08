@@ -44,7 +44,7 @@ const SignUp: NextPage = () => {
     if (auth) {
       router.push("/");
     }
-  }, []);
+  }, [auth, router]);
 
   const formInputHandler = async (event: ChangeEvent<HTMLInputElement>) => {
     setFormData({

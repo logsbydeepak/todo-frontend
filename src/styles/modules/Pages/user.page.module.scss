@@ -1,0 +1,22 @@
+@import "styles/utilities/variables";
+
+.spinner {
+  margin: 10rem;
+  display: flex;
+  justify-content: center;
+  &__container {
+    width: 4rem;
+  }
+}
+
+.spinner path {
+  fill: $color-white;
+}
+
+.button {
+  margin-top: 5rem;
+}
+
+.button button {
+  margin-bottom: 3rem;
+}

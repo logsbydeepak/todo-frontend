@@ -1,0 +1,18 @@
+@import "styles/utilities/variables";
+
+.userForm {
+  display: flex;
+  align-items: center;
+  border: 0.2rem solid $color-grey-4;
+  border-radius: 0.4rem;
+  padding: 0rem 1.2rem;
+  margin-bottom: 3rem;
+
+  &__focus {
+    border-color: $color-primary;
+  }
+
+  &__userInput {
+    padding: 1.8rem 1rem;
+  }
+}

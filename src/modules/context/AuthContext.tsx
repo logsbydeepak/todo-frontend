@@ -8,7 +8,7 @@ import {
 } from "react";
 
 type AuthContext = {
-  auth: boolean;
+  auth: boolean | null;
   changeAuth: (value: boolean) => void;
 } | null;
 
@@ -27,11 +27,11 @@ const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 const AuthProvider: FunctionComponent = ({ children }) => {
-  const [auth, setAuth] = useState(false);
+  const [auth, setAuth] = useState<boolean | null>(null);
 
   myUseLayoutEffect(() => {
     setAuth(localStorage.getItem("auth") === "true");
-  });
+  }, []);
 
   const changeAuth = (value: boolean) => {
     if (value) {

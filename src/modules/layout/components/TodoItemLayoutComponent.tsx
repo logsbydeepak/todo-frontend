@@ -1,7 +1,6 @@
 import React, { ChangeEvent, FunctionComponent, useState } from "react";
 import style from "styles/modules/common/taskInput.module.scss";
 import { handleDeleteTodo } from "handler/deleteTodo.handler";
-import { useAPICall } from "helper/useAPICall.helper";
 import { handleChangeTodoStatus } from "handler/changeTodoStatus.handler";
 import { handleChangeTodoTask } from "handler/changeTodoTask.handler";
 import { TodoItemPropsType } from "types";
@@ -62,12 +61,13 @@ const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
         />
 
         <input
-          className={style.taskForm__taskInput}
           type="text"
           value={localTask}
-          onChange={handleInputChange}
-          onFocus={handleInputFocus}
+          placeholder={"Task"}
           onBlur={handleInputBlur}
+          onFocus={handleInputFocus}
+          onChange={handleInputChange}
+          className={style.taskForm__taskInput}
         />
 
         {tick && (
