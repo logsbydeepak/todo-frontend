@@ -52,6 +52,10 @@ const User = () => {
     getUser();
   }, []);
 
+  const handleLogoutAll = () => {};
+
+  const handleDeleteAccount = () => {};
+
   return (
     <>
       <Head>
@@ -81,14 +85,14 @@ const User = () => {
             <ButtonWithTextAndIcon
               icon="logout"
               text="LOGOUT ALL"
-              clickHandler={() => {}}
+              clickHandler={handleLogoutAll}
               loading={false}
             />
 
             <ButtonWithTextAndIcon
               icon="delete_outline"
               text="DELETE ACCOUNT"
-              clickHandler={() => {}}
+              clickHandler={handleDeleteAccount}
               warning={true}
               loading={false}
             />

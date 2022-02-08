@@ -13,6 +13,7 @@ const UserItem: FunctionComponent<Props> = ({ value, placeHolder, type }) => {
   const [tick, setTick] = useState(false);
   const [focus, setFocus] = useState(false);
   const [localValue, setLocalValue] = useState(value);
+  const [isError, setIsError] = useState(false);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setLocalValue(event.target.value);
@@ -30,32 +31,35 @@ const UserItem: FunctionComponent<Props> = ({ value, placeHolder, type }) => {
 
   return (
     <>
-      <form className={`${style.userForm} ${focus && style.userForm__focus}`}>
-        <input
-          type={type}
-          className={style.userForm__userInput}
-          value={localValue}
-          onChange={handleChange}
-          onFocus={handleInputFocus}
-          onBlur={handleInputFocus}
-          placeholder={placeHolder}
-        />
-        {tick && (
-          <>
-            <ButtonWithSmallIcon
-              icon="settings_backup_restore"
-              isLoading={false}
-              handleOnClick={handleReset}
-            />
+      <div className={`${style.container} ${isError && style.error}`}>
+        <form className={`${style.userForm} ${focus && style.userForm__focus}`}>
+          <input
+            type={type}
+            className={style.userForm__userInput}
+            value={localValue}
+            onChange={handleChange}
+            onFocus={handleInputFocus}
+            onBlur={handleInputFocus}
+            placeholder={placeHolder}
+          />
+          {tick && (
+            <>
+              <ButtonWithSmallIcon
+                icon="settings_backup_restore"
+                isLoading={false}
+                handleOnClick={handleReset}
+              />
 
-            <ButtonWithSmallIcon
-              icon="done_all"
-              isLoading={false}
-              handleOnClick={() => {}}
-            />
-          </>
-        )}
-      </form>
+              <ButtonWithSmallIcon
+                icon="done_all"
+                isLoading={false}
+                handleOnClick={() => {}}
+              />
+            </>
+          )}
+        </form>
+        <p className={style.helper}>{isError && "helper"}</p>
+      </div>
     </>
   );
 };
