@@ -10,7 +10,7 @@ import isStrongPassword from "validator/lib/isStrongPassword";
 import Input from "components/common/Input";
 import PageTitle from "components/common/PageTitle";
 import { ButtonWithTextAndIcon } from "components/common/Button";
-import style from "styles/pages/LoginSignUp.module.scss";
+import style from "styles/pages/loginSignUp.page.module.scss";
 
 import { axiosRequest } from "lib/helper/axios.helper";
 import { useAuthContext } from "lib/context/AuthContext";
