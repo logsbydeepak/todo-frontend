@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { Dispatch, FunctionComponent, SetStateAction, useEffect } from "react";
 
-import style from "./styles/navbar.module.scss";
-import { AuthLink, NoAuthLink } from "./Link";
+import style from "./styles/navbar.element.module.scss";
+import { AuthLink, NoAuthLink } from "components/common/Link";
 import { useAuthContext } from "lib/context/AuthContext";
 import { useAPICall } from "lib/helper/useAPICall.helper";
 import { useNotificationContext } from "lib/context";

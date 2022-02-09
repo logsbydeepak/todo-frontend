@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ButtonWithSmallIcon } from "./Button";
 
-import style from "./styles/navbar.module.scss";
+import style from "components/elements/styles/navbar.element.module.scss";
 import { useState } from "react";
 import Router, { useRouter } from "next/router";
 
