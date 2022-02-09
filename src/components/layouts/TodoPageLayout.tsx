@@ -48,7 +48,8 @@ const TodoPageLayout = () => {
       activeMenu
     );
   }, [activeMenu]);
-
+  const ab = "hi";
+  console.log("hi");
   useEffect(() => {
     if (!auth) return;
     useMemoHandleGetTodoOnMenuChange;

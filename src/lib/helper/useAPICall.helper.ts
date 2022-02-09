@@ -1,4 +1,4 @@
-import { AxiosResponse, Method } from "axios";
+import { AxiosResponse } from "axios";
 import { useAuthContext, useNotificationContext } from "lib/context";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -7,7 +7,7 @@ import { axiosRequest } from "./axios.helper";
 
 export const useAPICall = (requestData: APIRequestDataType) => {
   const { dispatchNotification } = useNotificationContext();
-  const { auth, changeAuth } = useAuthContext();
+  const { changeAuth } = useAuthContext();
 
   const router = useRouter();
   const [APIRequestData, setAPIRequestData] =
