@@ -7,8 +7,9 @@
   border-radius: 0.4rem;
   padding: 0rem 1.2rem;
   margin-bottom: 3rem;
+  transition: all 0.2s;
 
-  &__focus {
+  &:focus-within {
     border-color: $color-primary;
   }
 

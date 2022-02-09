@@ -12,7 +12,6 @@ const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
   todoItem,
   setAPIRequestData,
 }) => {
-  const [focus, setFocus] = useState(false);
   const [tick, setTick] = useState(false);
   const [loadingIcon, setLoadingIcon] = useState({
     status: false,
@@ -28,14 +27,6 @@ const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
     setTick(true);
   };
 
-  const handleInputFocus = () => {
-    setFocus(!focus);
-  };
-
-  const handleInputBlur = () => {
-    setFocus(!focus);
-  };
-
   const handleInputReset = () => {
     setLocalTask(task);
     setTick(false);
@@ -43,7 +34,7 @@ const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
 
   return (
     <>
-      <form className={`${style.taskForm} ${focus && style.taskForm__focus}`}>
+      <form className={`${style.taskForm}`}>
         <ButtonWithSmallIcon
           icon={status ? "check_circle_outline" : "radio_button_unchecked"}
           isLoading={loadingIcon.status}
@@ -64,8 +55,6 @@ const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
           type="text"
           value={localTask}
           placeholder={"Task"}
-          onBlur={handleInputBlur}
-          onFocus={handleInputFocus}
           onChange={handleInputChange}
           className={style.taskForm__taskInput}
         />
