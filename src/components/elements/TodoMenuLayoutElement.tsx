@@ -1,5 +1,5 @@
 import { ChangeEvent, Dispatch, FunctionComponent } from "react";
-import style from "styles/modules/common/todoMenu.module.scss";
+import style from "./styles/todoMenu.element.module.scss";
 import { TodoActionType } from "types/todoReducerType";
 
 interface Props {

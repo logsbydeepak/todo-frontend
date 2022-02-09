@@ -5,10 +5,10 @@ import {
   useReducer,
 } from "react";
 
-import NotificationItem from "modules/common/NotificationItem";
-import { notificationReducer } from "reducer/notification.reducer";
+import NotificationItem from "components/common/NotificationItem";
+import { notificationReducer } from "lib/reducer/notification.reducer";
 
-import style from "styles/modules/common/notification.module.scss";
+import style from "components/common/styles/notification.module.scss";
 
 import {
   NotificationContextType,

@@ -1,10 +1,10 @@
 import React, { ChangeEvent, FunctionComponent, useState } from "react";
-import style from "styles/modules/common/taskInput.module.scss";
-import { handleDeleteTodo } from "handler/deleteTodo.handler";
-import { handleChangeTodoStatus } from "handler/changeTodoStatus.handler";
-import { handleChangeTodoTask } from "handler/changeTodoTask.handler";
+import style from "./styles/todoItem.element.module.scss";
+import { handleDeleteTodo } from "lib/handler/deleteTodo.handler";
+import { handleChangeTodoStatus } from "lib/handler/changeTodoStatus.handler";
+import { handleChangeTodoTask } from "lib/handler/changeTodoTask.handler";
 import { TodoItemPropsType } from "types";
-import { ButtonWithSmallIcon } from "modules/common/Button";
+import { ButtonWithSmallIcon } from "components/common/Button";
 
 const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
   index,

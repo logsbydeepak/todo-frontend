@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import style from "styles/modules/common/pageTitle.module.scss";
+import style from "./styles/pageTitle.module.scss";
 
 interface Props {
   title: string;

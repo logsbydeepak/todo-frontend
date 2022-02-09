@@ -1,7 +1,7 @@
-import { ButtonWithLInk } from "modules/common/Button";
+import { ButtonWithLInk } from "components/common/Button";
 import Head from "next/head";
 
-import style from "styles/modules/layout/pages/LandingPageLayout.module.scss";
+import style from "./styles/landingPage.layout.module.scss";
 
 const LandingPageLayout = () => {
   return (

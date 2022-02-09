@@ -1,7 +1,7 @@
-import { ButtonWithSmallIcon } from "modules/common/Button";
+import { ButtonWithSmallIcon } from "components/common/Button";
 import { ChangeEvent, FunctionComponent, useState } from "react";
 
-import style from "styles/modules/layout/components/userItem.layout.component.module.scss";
+import style from "./styles/userItem.element.module.scss";
 
 interface Props {
   value: string;

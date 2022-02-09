@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { Dispatch, FunctionComponent, SetStateAction, useEffect } from "react";
 
-import style from "styles/modules/common/navbar.module.scss";
+import style from "./styles/navbar.module.scss";
 import { AuthLink, NoAuthLink } from "./Link";
-import { useAuthContext } from "modules/context/AuthContext";
-import { useAPICall } from "helper/useAPICall.helper";
-import { useNotificationContext } from "modules/context";
+import { useAuthContext } from "lib/context/AuthContext";
+import { useAPICall } from "lib/helper/useAPICall.helper";
+import { useNotificationContext } from "lib/context";
 import { useRouter } from "next/router";
 
 const Navbar: FunctionComponent = () => {

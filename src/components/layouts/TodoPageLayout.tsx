@@ -1,24 +1,24 @@
 import Head from "next/head";
 import { useEffect, useMemo, useReducer } from "react";
 
-import PageTitle from "modules/common/PageTitle";
-import { ButtonWithTextAndIcon } from "modules/common/Button";
+import PageTitle from "components/common/PageTitle";
+import { ButtonWithTextAndIcon } from "components/common/Button";
 
-import TodoItem from "modules/layout/components/TodoItemLayoutComponent";
-import TodoMenu from "modules/layout/components/TodoMenuLayoutComponent";
-import TodoCreate from "modules/layout/components/TodoCreateLayoutComponent";
+import TodoItem from "../elements/TodoItemElement";
+import TodoMenu from "../elements/TodoMenuLayoutElement";
+import TodoCreate from "../elements/TodoCreateElement";
 
-import { todoReducer } from "reducer/todo.reducer";
+import { todoReducer } from "lib/reducer/todo.reducer";
 import { TodoStateType, TodoType } from "types/todoReducerType";
 
-import Spinner from "modules/common/Spinner";
-import { useAPICall } from "helper/useAPICall.helper";
-import { handleGetMoreTodo } from "handler/loadMoreTodo.handler";
-import { useNotificationContext } from "modules/context/NotificationContext";
-import { handleGetTodoOnMenuChange } from "handler/getTodoOnMenuChange.handler";
+import Spinner from "components/common/Spinner";
+import { useAPICall } from "lib/helper/useAPICall.helper";
+import { handleGetMoreTodo } from "lib/handler/loadMoreTodo.handler";
+import { useNotificationContext } from "lib/context/NotificationContext";
+import { handleGetTodoOnMenuChange } from "lib/handler/getTodoOnMenuChange.handler";
 
-import style from "styles/modules/layout/pages/TodoPageLayout.module.scss";
-import { useAuthContext } from "modules/context";
+import style from "./styles/todoPage.layout.module.scss";
+import { useAuthContext } from "lib/context";
 
 const initialTodoState: TodoStateType = {
   todo: [],

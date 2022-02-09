@@ -7,15 +7,14 @@ import { useRouter } from "next/router";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 
-import Input from "modules/common/Input";
-import PageTitle from "modules/common/PageTitle";
-import { ButtonWithTextAndIcon } from "modules/common/Button";
-import style from "styles/modules/layout/pages/LoginSignUp.module.scss";
+import Input from "components/common/Input";
+import PageTitle from "components/common/PageTitle";
+import { ButtonWithTextAndIcon } from "components/common/Button";
+import style from "styles/pages/LoginSignUp.module.scss";
 
-import { axiosRequest } from "helper/axios.helper";
-import { useAuthContext } from "modules/context/AuthContext";
-import { useNotificationContext } from "modules/context/NotificationContext";
-import axios from "axios";
+import { axiosRequest } from "lib/helper/axios.helper";
+import { useAuthContext } from "lib/context/AuthContext";
+import { useNotificationContext } from "lib/context/NotificationContext";
 
 const initialUserData = {
   name: "",

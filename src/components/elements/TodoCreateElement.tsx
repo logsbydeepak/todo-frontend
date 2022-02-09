@@ -1,10 +1,10 @@
 import { FunctionComponent, useState, MouseEvent, ChangeEvent } from "react";
 
-import { ButtonWithIcon } from "modules/common/Button";
-import inputStyle from "styles/modules/common/input.module.scss";
-import style from "styles/modules/common/createTaskInput.module.scss";
-import { handleCreateTodo } from "handler/createTodo.handler";
-import { useAPICall } from "helper/useAPICall.helper";
+import { ButtonWithIcon } from "components/common/Button";
+import inputStyle from "components/common/styles/input.module.scss";
+import style from "./styles/todoCreate.element.module.scss";
+import { handleCreateTodo } from "lib/handler/createTodo.handler";
+import { useAPICall } from "lib/helper/useAPICall.helper";
 import { DispatchTodoActionType } from "types";
 
 interface Props {

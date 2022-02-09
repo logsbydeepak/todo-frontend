@@ -1,12 +1,11 @@
-import { StrictMode } from "react";
 import Head from "next/head";
 import type { AppProps } from "next/app";
 
 import "styles/globals.scss";
-import Navbar from "modules/common/Navbar";
+import Navbar from "components/common/Navbar";
 
-import NotificationProvider from "modules/context/NotificationContext";
-import AuthProvider from "modules/context/AuthContext";
+import NotificationProvider from "lib/context/NotificationContext";
+import AuthProvider from "lib/context/AuthContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

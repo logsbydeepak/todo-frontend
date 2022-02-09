@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { FunctionComponent, MouseEvent } from "react";
 
-import style from "styles/modules/common/button.module.scss";
-import Spinner from "./Spinner";
+import style from "./styles/button.module.scss";
+import Spinner from "components/common/Spinner";
 
 interface ButtonWithLInkProps {
   link: string;
