@@ -1,23 +1,17 @@
-import { useAPICall } from "lib/helper/useAPICall.helper";
-import {
-  ButtonWithIcon,
-  ButtonWithSmallIcon,
-  ButtonWithTextAndIcon,
-} from "components/common/Button";
-import PageTitle from "components/common/PageTitle";
-import Spinner from "components/common/Spinner";
-import { useAuthContext } from "lib/context";
-import UserItem from "components/elements/UserItemElement";
+import { useEffect, useLayoutEffect, useState } from "react";
+
 import Head from "next/head";
 import { useRouter } from "next/router";
-import {
-  useEffect,
-  useImperativeHandle,
-  useLayoutEffect,
-  useState,
-} from "react";
+
+import { useAuthContext } from "lib/context";
+import { useAPICall } from "lib/helper/useAPICall.helper";
+
+import Spinner from "components/common/Spinner";
+import PageTitle from "components/common/PageTitle";
+import UserItem from "components/elements/UserItemElement";
+import { ButtonWithTextAndIcon } from "components/common/Button";
+
 import style from "styles/pages/user.page.module.scss";
-import { InputWithIcon } from "components/common/Input";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -98,29 +92,6 @@ const User = () => {
         <title>TODO - User</title>
       </Head>
       <PageTitle title="Your Account" subtitle="Manage your account details" />
-
-      <InputWithIcon
-        type="text"
-        helper=""
-        isError={false}
-        isDisabled={false}
-        placeholder={"Name"}
-      >
-        <div className="left">
-          <ButtonWithSmallIcon
-            icon="done_all"
-            isLoading={false}
-            handleOnClick={() => {}}
-          />
-        </div>
-        <div className="right">
-          <ButtonWithSmallIcon
-            icon="done_all"
-            isLoading={false}
-            handleOnClick={() => {}}
-          />
-        </div>
-      </InputWithIcon>
 
       {isLoading ? (
         <div className={style.spinner}>
