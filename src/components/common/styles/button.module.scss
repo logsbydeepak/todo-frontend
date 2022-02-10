@@ -26,13 +26,10 @@
   }
 
   &__small {
-    max-width: 4rem;
-    height: 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
+    padding: 1rem 1rem;
+    // display: block;
     background-color: $color-black;
+    width: auto;
 
     &:hover {
       background-color: $color-black;

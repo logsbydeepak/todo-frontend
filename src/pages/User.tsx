@@ -1,20 +1,12 @@
 import { useAPICall } from "lib/helper/useAPICall.helper";
-import {
-  ButtonWithSmallIcon,
-  ButtonWithTextAndIcon,
-} from "components/common/Button";
+import { ButtonWithTextAndIcon } from "components/common/Button";
 import PageTitle from "components/common/PageTitle";
 import Spinner from "components/common/Spinner";
 import { useAuthContext } from "lib/context";
 import UserItem from "components/elements/UserItemElement";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import {
-  useEffect,
-  useImperativeHandle,
-  useLayoutEffect,
-  useState,
-} from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import style from "styles/pages/user.page.module.scss";
 import { InputWithIcon } from "components/common/Input";
 
