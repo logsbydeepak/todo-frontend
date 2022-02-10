@@ -31,8 +31,9 @@
   }
 
   &__icon {
-    padding: 0;
+    padding: 0 1rem;
     display: flex;
+    align-items: center;
 
     & input {
       padding: 1.8rem 1rem;

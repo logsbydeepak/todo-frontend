@@ -1,12 +1,21 @@
 import { useAPICall } from "lib/helper/useAPICall.helper";
-import { ButtonWithTextAndIcon } from "components/common/Button";
+import {
+  ButtonWithIcon,
+  ButtonWithSmallIcon,
+  ButtonWithTextAndIcon,
+} from "components/common/Button";
 import PageTitle from "components/common/PageTitle";
 import Spinner from "components/common/Spinner";
 import { useAuthContext } from "lib/context";
 import UserItem from "components/elements/UserItemElement";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useLayoutEffect, useState } from "react";
+import {
+  useEffect,
+  useImperativeHandle,
+  useLayoutEffect,
+  useState,
+} from "react";
 import style from "styles/pages/user.page.module.scss";
 import { InputWithIcon } from "components/common/Input";
 
@@ -96,7 +105,22 @@ const User = () => {
         isError={false}
         isDisabled={false}
         placeholder={"Name"}
-      />
+      >
+        <div className="left">
+          <ButtonWithSmallIcon
+            icon="done_all"
+            isLoading={false}
+            handleOnClick={() => {}}
+          />
+        </div>
+        <div className="right">
+          <ButtonWithSmallIcon
+            icon="done_all"
+            isLoading={false}
+            handleOnClick={() => {}}
+          />
+        </div>
+      </InputWithIcon>
 
       {isLoading ? (
         <div className={style.spinner}>
