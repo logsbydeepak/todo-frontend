@@ -123,3 +123,11 @@ h3 {
     transform: rotate(360deg);
   }
 }
+
+.left {
+  order: 1;
+}
+
+.right {
+  order: 3;
+}

@@ -50,4 +50,34 @@ const Input: FunctionComponent<Props> = ({
   );
 };
 
+interface InputWithIconProps {
+  type: string;
+  helper: string;
+  isError: boolean;
+  placeholder: string;
+  isDisabled: boolean;
+}
+export const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
+  type,
+  helper,
+  isError,
+  isDisabled,
+  placeholder,
+  children,
+}) => {
+  return (
+    <>
+      <div
+        className={`${isError && style.error} ${isDisabled && style.disabled}`}
+      >
+        <form className={`${style.input} ${style.input__icon}`}>
+          <input type={type} disabled={isDisabled} placeholder={placeholder} />
+          {children}
+        </form>
+        <p className={style.helper}>{helper}</p>
+      </div>
+    </>
+  );
+};
+
 export default Input;

@@ -20,14 +20,25 @@
   padding: 1.8rem 3rem;
   transition: all 0.2s;
   margin-bottom: 0.8rem;
-}
 
-.input::placeholder {
-  color: #818181;
-}
+  &::placeholder {
+    color: #818181;
+  }
 
-.input:focus {
-  border-color: #b794f6;
+  &:focus,
+  &:focus-within {
+    border-color: #b794f6;
+  }
+
+  &__icon {
+    padding: 0;
+    display: flex;
+
+    & input {
+      padding: 1.8rem 1rem;
+      order: 2;
+    }
+  }
 }
 
 .helper {

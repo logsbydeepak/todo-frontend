@@ -1,5 +1,8 @@
 import { useAPICall } from "lib/helper/useAPICall.helper";
-import { ButtonWithTextAndIcon } from "components/common/Button";
+import {
+  ButtonWithSmallIcon,
+  ButtonWithTextAndIcon,
+} from "components/common/Button";
 import PageTitle from "components/common/PageTitle";
 import Spinner from "components/common/Spinner";
 import { useAuthContext } from "lib/context";
@@ -13,6 +16,7 @@ import {
   useState,
 } from "react";
 import style from "styles/pages/user.page.module.scss";
+import { InputWithIcon } from "components/common/Input";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -93,6 +97,14 @@ const User = () => {
         <title>TODO - User</title>
       </Head>
       <PageTitle title="Your Account" subtitle="Manage your account details" />
+
+      <InputWithIcon
+        type="text"
+        helper=""
+        isError={false}
+        isDisabled={false}
+        placeholder={"Name"}
+      />
 
       {isLoading ? (
         <div className={style.spinner}>
