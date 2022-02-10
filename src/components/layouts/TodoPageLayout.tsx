@@ -48,8 +48,7 @@ const TodoPageLayout = () => {
       activeMenu
     );
   }, [activeMenu]);
-  const ab = "hi";
-  console.log("hi");
+
   useEffect(() => {
     if (!auth) return;
     useMemoHandleGetTodoOnMenuChange;
@@ -60,7 +59,7 @@ const TodoPageLayout = () => {
       <Head>
         <title>TODO - Get work done</title>
       </Head>
-      <PageTitle title="Your Todos" subtitle="Manage your task" />
+      <PageTitle title="Your Todo" subtitle="Manage your task" />
       <TodoCreate dispatchTodoAction={dispatchTodoAction} />
       <TodoMenu
         dispatchTodoAction={dispatchTodoAction}
