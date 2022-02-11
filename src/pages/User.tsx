@@ -16,7 +16,7 @@ import {
 } from "components/common/Button";
 
 import style from "styles/pages/user.page.module.scss";
-import { InputWithIcon } from "components/common/Input";
+import Input, { InputWithIcon } from "components/common/Input";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -124,23 +124,52 @@ const User = () => {
               />
             </div>
           </InputWithIcon>
-          <UserItem
+
+          <InputWithIcon
+            value={userInfo.email}
+            handleOnChange={() => {}}
+            helper={inputHelper.email}
+            type="email"
+            placeholder="Email"
+          >
+            <div className="right">
+              <ButtonWithSmallIcon
+                icon="settings_backup_restore"
+                isLoading={false}
+                handleOnClick={() => {}}
+              />
+              <ButtonWithSmallIcon
+                icon="done_all"
+                isLoading={isInputLoading.email}
+                handleOnClick={() => {}}
+              />
+            </div>
+          </InputWithIcon>
+
+          <InputWithIcon
             value={""}
-            placeHolder={"Password"}
-            type={"password"}
-            helper={inputHelper.password}
-            isError={isInputError.password}
-            isLoading={isInputLoading.password}
-          />
-          <UserItem
+            handleOnChange={() => {}}
+            helper={inputHelper.email}
+            type="password"
+            placeholder="Password"
+          >
+            <div className="right">
+              <ButtonWithSmallIcon
+                icon="done_all"
+                isLoading={isInputLoading.password}
+                handleOnClick={() => {}}
+              />
+            </div>
+          </InputWithIcon>
+
+          <InputWithIcon
             value={""}
-            placeHolder={"Current Password"}
-            type={"password"}
-            showButton={false}
+            handleOnChange={() => {}}
             helper={inputHelper.currentPassword}
-            isError={isInputError.currentPassword}
-            isLoading={isInputLoading.currentPassword}
+            type="password"
+            placeholder="Current Password"
           />
+
           <div className={style.button}>
             <ButtonWithTextAndIcon
               icon="logout"
