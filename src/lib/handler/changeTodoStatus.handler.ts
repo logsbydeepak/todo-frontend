@@ -3,6 +3,7 @@ import {
   SetLoadingIconType,
   SetAPIRequestDataType,
   DispatchTodoActionType,
+  SetIsDisabled,
 } from "types";
 
 export const handleChangeTodoStatus = (
@@ -10,7 +11,8 @@ export const handleChangeTodoStatus = (
   index: number,
   setLoadingIcon: SetLoadingIconType,
   dispatchTodoAction: DispatchTodoActionType,
-  todoItem: TodoType
+  todoItem: TodoType,
+  setIsDisabled: SetIsDisabled
 ) => {
   setAPIRequestData({
     data: {
@@ -24,10 +26,12 @@ export const handleChangeTodoStatus = (
     },
     response: {
       onSuccess: () => {
+        setIsDisabled(false);
         setLoadingIcon((preValue) => ({ ...preValue, status: false }));
         dispatchTodoAction({ type: "UPDATE_TODO_STATUS", index });
       },
       onError: () => {
+        setIsDisabled(false);
         setLoadingIcon((preValue) => ({ ...preValue, status: false }));
       },
     },

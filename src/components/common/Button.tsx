@@ -29,6 +29,7 @@ interface ButtonWithSmallIconProps {
   isLoading: boolean;
   className?: string;
   handleOnClick: () => void;
+  isDisabled?: boolean;
 }
 
 export const ButtonWithLInk: FunctionComponent<ButtonWithLInkProps> = ({
@@ -84,11 +85,12 @@ export const ButtonWithIcon: FunctionComponent<ButtonWithIconProps> = ({
 
 export const ButtonWithSmallIcon: FunctionComponent<
   ButtonWithSmallIconProps
-> = ({ icon, isLoading, className, handleOnClick }) => {
+> = ({ icon, isLoading, className, handleOnClick, isDisabled }) => {
   return (
     <>
       <button
         className={`${style.button__small} ${className}`}
+        disabled={isDisabled}
         onClick={(
           event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
         ) => {

@@ -21,12 +21,13 @@
   transition: all 0.2s;
   margin-bottom: 0.8rem;
 
-  &::placeholder {
+  i &::placeholder {
     color: #818181;
   }
 
   &:focus,
-  &:focus-within {
+  &:focus-within,
+  &:hover {
     border-color: #b794f6;
   }
 

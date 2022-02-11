@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import {
   DispatchTodoActionType,
   SetAPIRequestDataType,
+  SetIsDisabled,
   SetLoadingIconType,
   TodoType,
 } from "types";
@@ -13,7 +14,8 @@ export const handleChangeTodoTask = (
   setTick: Dispatch<SetStateAction<boolean>>,
   localTask: string,
   todoItem: TodoType,
-  dispatchTodoAction: DispatchTodoActionType
+  dispatchTodoAction: DispatchTodoActionType,
+  setIsDisabled: SetIsDisabled
 ) => {
   setAPIRequestData({
     data: {
@@ -32,11 +34,13 @@ export const handleChangeTodoTask = (
           index,
           task: localTask,
         });
+        setIsDisabled(false);
         setLoadingIcon((preValue) => ({ ...preValue, task: false }));
         setTick(false);
       },
 
       onError: () => {
+        setIsDisabled(false);
         setLoadingIcon((preValue) => ({ ...preValue, task: false }));
       },
     },

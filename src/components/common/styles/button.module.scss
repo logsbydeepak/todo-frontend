@@ -27,9 +27,12 @@
 
   &__small {
     padding: 1rem 1rem;
-    // display: block;
     background-color: $color-black;
     width: auto;
+
+    &:disabled {
+      background-color: $color-black;
+    }
 
     &:hover {
       background-color: $color-black;

@@ -3,6 +3,7 @@ import {
   TodoType,
   DispatchTodoActionType,
   SetLoadingIconType,
+  SetIsDisabled,
 } from "types";
 
 export const handleDeleteTodo = async (
@@ -10,7 +11,8 @@ export const handleDeleteTodo = async (
   index: number,
   dispatchTodoAction: DispatchTodoActionType,
   todoItem: TodoType,
-  setLoadingIcon: SetLoadingIconType
+  setLoadingIcon: SetLoadingIconType,
+  setIsDisabled: SetIsDisabled
 ) => {
   setAPIRequestData({
     data: {
@@ -25,6 +27,7 @@ export const handleDeleteTodo = async (
         });
       },
       onError: () => {
+        setIsDisabled(false);
         setLoadingIcon((preValue) => ({ ...preValue, delete: false }));
       },
     },

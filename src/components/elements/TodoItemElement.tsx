@@ -17,6 +17,7 @@ const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
   setAPIRequestData,
 }) => {
   const [tick, setTick] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
   const [loadingIcon, setLoadingIcon] = useState({
     status: false,
     task: false,
@@ -36,12 +37,54 @@ const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
     setTick(false);
   };
 
+  const handleOnCheckClick = () => {
+    setIsDisabled(true);
+    setLoadingIcon({ ...loadingIcon, status: true });
+    handleChangeTodoStatus(
+      setAPIRequestData,
+      index,
+      setLoadingIcon,
+      dispatchTodoAction,
+      todoItem,
+      setIsDisabled
+    );
+  };
+
+  const handleOnDoneClick = () => {
+    setIsDisabled(true);
+    setLoadingIcon({ ...loadingIcon, task: true });
+    handleChangeTodoTask(
+      setAPIRequestData,
+      index,
+      setLoadingIcon,
+      setTick,
+      localTask,
+      todoItem,
+      dispatchTodoAction,
+      setIsDisabled
+    );
+  };
+
+  const handleOnDeleteClick = () => {
+    setIsDisabled(true);
+    setLoadingIcon({ ...loadingIcon, delete: true });
+    handleDeleteTodo(
+      setAPIRequestData,
+      index,
+      dispatchTodoAction,
+      todoItem,
+      setLoadingIcon,
+      setIsDisabled
+    );
+  };
+
   return (
     <>
       <InputWithIcon
         placeholder={"Task"}
         value={localTask}
         handleOnChange={handleInputChange}
+        isDisabled={isDisabled}
         className={`${style.form}`}
       >
         <div className="left">
@@ -49,16 +92,8 @@ const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
             icon={status ? "check_circle_outline" : "radio_button_unchecked"}
             isLoading={loadingIcon.status}
             className={style.icon__check}
-            handleOnClick={() => {
-              setLoadingIcon({ ...loadingIcon, status: true });
-              handleChangeTodoStatus(
-                setAPIRequestData,
-                index,
-                setLoadingIcon,
-                dispatchTodoAction,
-                todoItem
-              );
-            }}
+            isDisabled={isDisabled}
+            handleOnClick={handleOnCheckClick}
           />
         </div>
         <div className="right">
@@ -69,42 +104,25 @@ const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
                 isLoading={false}
                 className={style.icon__reset}
                 handleOnClick={handleInputReset}
+                isDisabled={isDisabled}
               />
 
               <ButtonWithSmallIcon
                 icon="done_all"
                 isLoading={loadingIcon.task}
                 className={style.icon__done}
-                handleOnClick={() => {
-                  setLoadingIcon({ ...loadingIcon, task: true });
-                  handleChangeTodoTask(
-                    setAPIRequestData,
-                    index,
-                    setLoadingIcon,
-                    setTick,
-                    localTask,
-                    todoItem,
-                    dispatchTodoAction
-                  );
-                }}
+                isDisabled={isDisabled}
+                handleOnClick={handleOnDoneClick}
               />
             </>
           )}
 
           <ButtonWithSmallIcon
             icon="delete_outline"
+            isDisabled={isDisabled}
             isLoading={loadingIcon.delete}
             className={style.icon__delete}
-            handleOnClick={() => {
-              setLoadingIcon({ ...loadingIcon, delete: true });
-              handleDeleteTodo(
-                setAPIRequestData,
-                index,
-                dispatchTodoAction,
-                todoItem,
-                setLoadingIcon
-              );
-            }}
+            handleOnClick={handleOnDeleteClick}
           />
         </div>
       </InputWithIcon>

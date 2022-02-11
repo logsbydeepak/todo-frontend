@@ -16,3 +16,5 @@ export type SetLoadingIconType = Dispatch<
     delete: boolean;
   }>
 >;
+
+export type SetIsDisabled = Dispatch<SetStateAction<boolean>>;
