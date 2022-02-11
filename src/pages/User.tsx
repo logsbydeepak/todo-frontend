@@ -9,9 +9,14 @@ import { useAPICall } from "lib/helper/useAPICall.helper";
 import Spinner from "components/common/Spinner";
 import PageTitle from "components/common/PageTitle";
 import UserItem from "components/elements/UserItemElement";
-import { ButtonWithTextAndIcon } from "components/common/Button";
+import {
+  ButtonWithIcon,
+  ButtonWithSmallIcon,
+  ButtonWithTextAndIcon,
+} from "components/common/Button";
 
 import style from "styles/pages/user.page.module.scss";
+import { InputWithIcon } from "components/common/Input";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -99,22 +104,26 @@ const User = () => {
         </div>
       ) : (
         <>
-          <UserItem
+          <InputWithIcon
             value={userInfo.name}
-            placeHolder={"Name"}
-            type={"text"}
+            handleOnChange={() => {}}
             helper={inputHelper.name}
-            isError={isInputError.name}
-            isLoading={isInputLoading.name}
-          />
-          <UserItem
-            value={userInfo.email}
-            placeHolder={"Email"}
-            type={"text"}
-            helper={inputHelper.email}
-            isError={isInputError.email}
-            isLoading={isInputLoading.email}
-          />
+            type="text"
+            placeholder="Name"
+          >
+            <div className="right">
+              <ButtonWithSmallIcon
+                icon="settings_backup_restore"
+                isLoading={isInputLoading.name}
+                handleOnClick={() => {}}
+              />
+              <ButtonWithSmallIcon
+                icon="done_all"
+                isLoading={isInputLoading.name}
+                handleOnClick={() => {}}
+              />
+            </div>
+          </InputWithIcon>
           <UserItem
             value={""}
             placeHolder={"Password"}
