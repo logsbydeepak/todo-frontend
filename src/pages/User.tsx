@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { ChangeEvent, useEffect, useLayoutEffect, useState } from "react";
 
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -8,15 +8,13 @@ import { useAPICall } from "lib/helper/useAPICall.helper";
 
 import Spinner from "components/common/Spinner";
 import PageTitle from "components/common/PageTitle";
-import UserItem from "components/elements/UserItemElement";
 import {
-  ButtonWithIcon,
   ButtonWithSmallIcon,
   ButtonWithTextAndIcon,
 } from "components/common/Button";
 
 import style from "styles/pages/user.page.module.scss";
-import Input, { InputWithIcon } from "components/common/Input";
+import { InputWithIcon } from "components/common/Input";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -91,6 +89,21 @@ const User = () => {
 
   const handleDeleteAccount = () => {};
 
+  const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
+    setUserInfo({ ...userInfo, name: event.target.value });
+  };
+
+  const handleChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
+    setUserInfo({ ...userInfo, email: event.target.value });
+  };
+  const handleChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+    setUserInfo({ ...userInfo, password: event.target.value });
+  };
+  const handleChangeCurrentPassword = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setUserInfo({ ...userInfo, currentPassword: event.target.value });
+  };
   return (
     <>
       <Head>
@@ -106,7 +119,7 @@ const User = () => {
         <>
           <InputWithIcon
             value={userInfo.name}
-            handleOnChange={() => {}}
+            handleOnChange={handleChangeName}
             helper={inputHelper.name}
             type="text"
             placeholder="Name"
@@ -127,7 +140,7 @@ const User = () => {
 
           <InputWithIcon
             value={userInfo.email}
-            handleOnChange={() => {}}
+            handleOnChange={handleChangeEmail}
             helper={inputHelper.email}
             type="email"
             placeholder="Email"
@@ -147,8 +160,8 @@ const User = () => {
           </InputWithIcon>
 
           <InputWithIcon
-            value={""}
-            handleOnChange={() => {}}
+            value={userInfo.password}
+            handleOnChange={handleChangePassword}
             helper={inputHelper.email}
             type="password"
             placeholder="Password"
@@ -163,8 +176,8 @@ const User = () => {
           </InputWithIcon>
 
           <InputWithIcon
-            value={""}
-            handleOnChange={() => {}}
+            value={userInfo.currentPassword}
+            handleOnChange={handleChangeCurrentPassword}
             helper={inputHelper.currentPassword}
             type="password"
             placeholder="Current Password"
