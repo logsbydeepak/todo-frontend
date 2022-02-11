@@ -39,13 +39,10 @@ const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
   return (
     <>
       <InputWithIcon
-        helper={""}
-        isError={false}
-        type={"text"}
         placeholder={"Task"}
-        isDisabled={false}
         value={localTask}
         handleOnChange={handleInputChange}
+        className={`${style.form}`}
       >
         <div className="left">
           <ButtonWithSmallIcon

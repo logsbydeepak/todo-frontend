@@ -56,20 +56,22 @@ const Input: FunctionComponent<Props> = ({
 };
 
 interface InputWithIconProps {
-  type: string;
-  helper: string;
-  isError: boolean;
-  placeholder: string;
-  isDisabled: boolean;
+  type?: string;
+  helper?: string;
+  isError?: boolean;
+  isDisabled?: boolean;
+  placeholder?: string;
+  className?: string;
   value: string;
   handleOnChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 export const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
-  type,
-  helper,
-  isError,
-  isDisabled,
-  placeholder,
+  type = "text",
+  helper = "",
+  isError = false,
+  isDisabled = false,
+  placeholder = "Input",
+  className = "",
   children,
   value,
   handleOnChange,
@@ -77,7 +79,9 @@ export const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
   return (
     <>
       <div
-        className={`${isError && style.error} ${isDisabled && style.disabled}`}
+        className={`${isError && style.error} ${
+          isDisabled && style.disabled
+        } ${className}`}
       >
         <form className={`${style.input} ${style.input__icon}`}>
           <input

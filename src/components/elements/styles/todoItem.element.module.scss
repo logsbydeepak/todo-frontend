@@ -1,5 +1,9 @@
 @import "styles/utilities/variables";
 
+.form {
+  margin-bottom: 3rem;
+}
+
 .icon {
   &__check i {
     color: $color-primary;
