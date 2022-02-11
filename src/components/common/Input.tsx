@@ -1,4 +1,9 @@
-import { FunctionComponent } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  FunctionComponent,
+  SetStateAction,
+} from "react";
 
 import style from "./styles/input.module.scss";
 
@@ -56,6 +61,8 @@ interface InputWithIconProps {
   isError: boolean;
   placeholder: string;
   isDisabled: boolean;
+  value: string;
+  handleOnChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 export const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
   type,
@@ -64,6 +71,8 @@ export const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
   isDisabled,
   placeholder,
   children,
+  value,
+  handleOnChange,
 }) => {
   return (
     <>
@@ -71,7 +80,13 @@ export const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
         className={`${isError && style.error} ${isDisabled && style.disabled}`}
       >
         <form className={`${style.input} ${style.input__icon}`}>
-          <input type={type} disabled={isDisabled} placeholder={placeholder} />
+          <input
+            type={type}
+            disabled={isDisabled}
+            placeholder={placeholder}
+            value={value}
+            onChange={handleOnChange}
+          />
           {children}
         </form>
         <p className={style.helper}>{helper}</p>

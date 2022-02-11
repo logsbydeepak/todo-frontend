@@ -1,87 +1,51 @@
 @import "styles/utilities/variables";
 
-.taskForm {
-  display: flex;
-  align-items: center;
-  border: 0.2rem solid $color-grey-4;
-  border-radius: 0.4rem;
-  padding: 0rem 1.2rem;
-  margin-bottom: 3rem;
-  transition: all 0.2s;
-
-  &:focus-within {
-    border-color: $color-primary;
-  }
-
-  &__icon {
-    &__check i {
-      color: $color-primary;
-
-      &:hover {
-        color: $color-primary-dark-1;
-      }
-
-      &:active {
-        color: $color-primary-dark-2;
-      }
-    }
-
-    &__delete i {
-      color: $color-warning;
-
-      &:hover {
-        color: $color-warning-dark-1;
-      }
-
-      &:active {
-        color: $color-warning-dark-2;
-      }
-    }
-
-    &__done i {
-      color: $color-white;
-
-      &:hover {
-        color: $color-grey-2;
-      }
-
-      &:active {
-        color: $color-grey-3;
-      }
-    }
-
-    &__reset i {
-      color: $color-success;
-
-      &:hover {
-        color: $color-success-dark-1;
-      }
-
-      &:active {
-        color: $color-success-dark-2;
-      }
-    }
-  }
-
-  &__button {
-    max-width: 4rem;
-    height: 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    background-color: $color-black;
+.icon {
+  &__check i {
+    color: $color-primary;
 
     &:hover {
-      background-color: $color-black;
+      color: $color-primary-dark-1;
     }
 
     &:active {
-      background-color: $color-black;
+      color: $color-primary-dark-2;
     }
   }
 
-  &__taskInput {
-    padding: 1.8rem 1rem;
+  &__delete i {
+    color: $color-warning;
+
+    &:hover {
+      color: $color-warning-dark-1;
+    }
+
+    &:active {
+      color: $color-warning-dark-2;
+    }
+  }
+
+  &__done i {
+    color: $color-white;
+
+    &:hover {
+      color: $color-grey-2;
+    }
+
+    &:active {
+      color: $color-grey-3;
+    }
+  }
+
+  &__reset i {
+    color: $color-success;
+
+    &:hover {
+      color: $color-success-dark-1;
+    }
+
+    &:active {
+      color: $color-success-dark-2;
+    }
   }
 }
