@@ -178,7 +178,69 @@ const User = () => {
     });
   };
 
-  const handleDeleteAccount = () => {};
+  const handleDeleteAccount = () => {
+    setIsLoadingDeleteButton(true);
+    setIsDisabledForm(true);
+    setInputHelper(initialText);
+    setIsInputError(initialBoolean);
+
+    if (inputValue.currentPassword.length === 0) {
+      setIsInputError({ ...isInputError, currentPassword: true });
+      setInputHelper({
+        ...inputHelper,
+        currentPassword: "current password can't be empty",
+      });
+      setIsLoadingDeleteButton(false);
+      setIsDisabledForm(false);
+
+      return;
+    }
+
+    if (!isStrongPassword(inputValue.currentPassword)) {
+      setTimeout(() => {
+        setIsInputError({ ...isInputError, currentPassword: true });
+        setInputHelper({
+          ...inputHelper,
+          currentPassword: "invalid password",
+        });
+        setIsLoadingDeleteButton(false);
+        setIsDisabledForm(false);
+      }, 1000);
+      return;
+    }
+
+    setAPIRequestData({
+      data: {
+        method: "DELETE",
+        url: "/user",
+        data: {
+          currentPassword: inputValue.currentPassword,
+        },
+      },
+      showErrorDefaultNotification: false,
+      response: {
+        onSuccess: () => {
+          changeAuth(false);
+          dispatchNotification({
+            type: "SUCCESS",
+            message: "User deleted",
+          });
+        },
+        onError: () => {
+          setTimeout(() => {
+            setIsInputError({ ...isInputError, currentPassword: true });
+            setInputHelper({
+              ...inputHelper,
+              currentPassword: "invalid password",
+            });
+            setIsLoadingDeleteButton(false);
+            setIsDisabledForm(false);
+          }, 1000);
+          return;
+        },
+      },
+    });
+  };
 
   const handleNameRest = () => {
     setInputValue({ ...inputValue, name: userInfo.name });

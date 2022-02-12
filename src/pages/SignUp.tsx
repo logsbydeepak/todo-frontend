@@ -176,6 +176,7 @@ const SignUp: NextPage = () => {
             text="Create your account"
             clickHandler={clickHandler}
             loading={loading}
+            isDisabled={loading}
           />
         </form>
       </div>
