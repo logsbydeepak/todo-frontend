@@ -1,5 +1,6 @@
 import { AxiosResponse } from "axios";
 import { useAuthContext, useNotificationContext } from "lib/context";
+import { apiResolver } from "next/dist/server/api-utils";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { APIRequestDataType } from "types/hooks.types";
@@ -17,6 +18,10 @@ export const useAPICall = (requestData: APIRequestDataType) => {
     if (!APIRequestData) return;
     const { method, url, data } = APIRequestData.data;
     const { onSuccess, onError } = APIRequestData.response;
+    const showErrorDefaultNotification =
+      typeof APIRequestData.showErrorDefaultNotification === "boolean"
+        ? APIRequestData.showErrorDefaultNotification
+        : true;
 
     const fetch = async () => {
       axiosRequest({
@@ -30,13 +35,16 @@ export const useAPICall = (requestData: APIRequestDataType) => {
         })
         .catch((errorResponse) => {
           if (
-            errorResponse.response.data.error.messageType === "BODY_PARSE" ||
-            errorResponse.response.data.error.messageType === "QUERY_PARSE"
+            errorResponse.response.data.error.title === "BODY_PARSE" ||
+            errorResponse.response.data.error.title === "QUERY_PARSE"
           ) {
-            dispatchNotification({
-              type: "ERROR",
-              message: "Something went wrong in request",
-            });
+            console.log(showErrorDefaultNotification);
+            if (showErrorDefaultNotification) {
+              dispatchNotification({
+                type: "ERROR",
+                message: "Something went wrong in request",
+              });
+            }
             onError();
             return;
           }

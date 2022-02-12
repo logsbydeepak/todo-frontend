@@ -7,6 +7,7 @@ export type APIRequestDataType = {
     url: string;
     data?: Object;
   };
+  showErrorDefaultNotification?: boolean;
   response: {
     onSuccess: (value: Object) => void;
     onError: () => void;

@@ -65,7 +65,8 @@
   color: #ea959b;
 }
 
-.error .input:focus {
+.error .input:focus,
+.error .input:focus-within {
   border-color: #fdeaee;
 }
 

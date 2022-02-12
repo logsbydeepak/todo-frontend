@@ -1,9 +1,15 @@
-import { ChangeEvent, useEffect, useLayoutEffect, useState } from "react";
+import {
+  ChangeEvent,
+  Fragment,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react";
 
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import { useAuthContext } from "lib/context";
+import { useAuthContext, useNotificationContext } from "lib/context";
 import { useAPICall } from "lib/helper/useAPICall.helper";
 
 import Spinner from "components/common/Spinner";
@@ -16,6 +22,8 @@ import {
 import { InputWithIcon } from "components/common/Input";
 import iconStyle from "components/common/styles/iconColor.module.scss";
 import style from "styles/pages/user.page.module.scss";
+import { on } from "stream";
+import isStrongPassword from "validator/lib/isStrongPassword";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -59,8 +67,15 @@ const User = () => {
   const [isInputLoading, setIsInputLoading] = useState(initialBoolean);
   const [isDisabledForm, setIsDisabledForm] = useState(false);
 
+  const [isLoadingLogoutAllButton, setIsLoadingLogoutAllButton] =
+    useState(false);
+  const [isLoadingDeleteButton, setIsLoadingDeleteButton] = useState(false);
+
   const { auth } = useAuthContext();
   const router = useRouter();
+
+  const { dispatchNotification } = useNotificationContext();
+  const { changeAuth } = useAuthContext();
 
   myUseLayoutEffect(() => {
     if (auth === null) return;
@@ -100,13 +115,67 @@ const User = () => {
   }, []);
 
   const handleLogoutAll = () => {
+    setIsLoadingLogoutAllButton(true);
+    setIsDisabledForm(true);
+    setInputHelper(initialText);
+    setIsInputError(initialBoolean);
+
     if (inputValue.currentPassword.length === 0) {
       setIsInputError({ ...isInputError, currentPassword: true });
       setInputHelper({
         ...inputHelper,
         currentPassword: "current password can't be empty",
       });
+      setIsLoadingLogoutAllButton(false);
+      setIsDisabledForm(false);
+
+      return;
     }
+
+    if (!isStrongPassword(inputValue.currentPassword)) {
+      setTimeout(() => {
+        setIsInputError({ ...isInputError, currentPassword: true });
+        setInputHelper({
+          ...inputHelper,
+          currentPassword: "invalid password",
+        });
+        setIsLoadingLogoutAllButton(false);
+        setIsDisabledForm(false);
+      }, 1000);
+      return;
+    }
+
+    setAPIRequestData({
+      data: {
+        method: "DELETE",
+        url: "/session/all",
+        data: {
+          currentPassword: inputValue.currentPassword,
+        },
+      },
+      showErrorDefaultNotification: false,
+      response: {
+        onSuccess: () => {
+          changeAuth(false);
+          dispatchNotification({
+            type: "SUCCESS",
+            message: "Logout all",
+          });
+        },
+        onError: () => {
+          setTimeout(() => {
+            setIsInputError({ ...isInputError, currentPassword: true });
+            setInputHelper({
+              ...inputHelper,
+              currentPassword: "invalid password",
+            });
+            setIsLoadingLogoutAllButton(false);
+            setIsDisabledForm(false);
+          }, 1000);
+          return;
+        },
+      },
+    });
   };
 
   const handleDeleteAccount = () => {};
@@ -124,7 +193,7 @@ const User = () => {
   const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
     const name = event.target.name;
     const value = event.target.value;
-    setInputValue({ ...inputValue, [name]: [value] });
+    setInputValue({ ...inputValue, [name]: value });
 
     if (name === "password") {
       if (event.target.value.length === 0) {
@@ -159,6 +228,7 @@ const User = () => {
             type="text"
             placeholder="Name"
             isDisabled={isDisabledForm}
+            isError={isInputError.name}
             name="name"
           >
             {showIcon.name && (
@@ -186,6 +256,7 @@ const User = () => {
             handleOnChange={handleChangeInput}
             helper={inputHelper.email}
             type="email"
+            isError={isInputError.email}
             placeholder="Email"
             isDisabled={isDisabledForm}
             name="email"
@@ -217,6 +288,7 @@ const User = () => {
             type="password"
             placeholder="Password"
             isDisabled={isDisabledForm}
+            isError={isInputError.password}
             name="password"
           >
             {showIcon.password && (
@@ -239,6 +311,7 @@ const User = () => {
             type="password"
             placeholder="Current Password"
             name="currentPassword"
+            isError={isInputError.currentPassword}
             isDisabled={isDisabledForm}
           />
 
@@ -247,16 +320,16 @@ const User = () => {
               icon="logout"
               text="LOGOUT ALL"
               clickHandler={handleLogoutAll}
-              loading={false}
+              loading={isLoadingLogoutAllButton}
               isDisabled={isDisabledForm}
             />
 
             <ButtonWithTextAndIcon
               icon="delete_outline"
               text="DELETE ACCOUNT"
+              loading={isLoadingDeleteButton}
               clickHandler={handleDeleteAccount}
               warning={true}
-              loading={false}
               isDisabled={isDisabledForm}
             />
           </div>
