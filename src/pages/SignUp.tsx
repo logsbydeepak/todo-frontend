@@ -158,17 +158,6 @@ const SignUp: NextPage = () => {
             isError={isError.email}
             disabled={loading}
           />
-          {/* <Input
-            name="password"
-            label="Password"
-            type="password"
-            value={formData.password}
-            onChange={formInputHandler}
-            helper={helper.password}
-            placeholder="Minimum 8 character"
-            isError={isError.password}
-            disabled={loading}
-          /> */}
 
           <InputWithIcon
             value={formData.password}

@@ -48,4 +48,16 @@
       color: $color-success-dark-2;
     }
   }
+
+  &__visible i {
+    color: $color-grey-3;
+
+    &:hover {
+      color: $color-grey-2;
+    }
+
+    &:active {
+      color: $color-grey-1;
+    }
+  }
 }

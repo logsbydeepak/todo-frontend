@@ -72,13 +72,14 @@ const TodoPageLayout = () => {
       ) : (
         todo.map((todoItem: TodoType, index: number) => {
           return (
-            <TodoItem
-              index={index}
-              key={todoItem._id}
-              todoItem={todoItem}
-              dispatchTodoAction={dispatchTodoAction}
-              setAPIRequestData={setAPIRequestData}
-            />
+            <form key={todoItem._id}>
+              <TodoItem
+                index={index}
+                todoItem={todoItem}
+                dispatchTodoAction={dispatchTodoAction}
+                setAPIRequestData={setAPIRequestData}
+              />
+            </form>
           );
         })
       )}

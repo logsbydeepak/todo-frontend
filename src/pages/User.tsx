@@ -14,7 +14,8 @@ import {
 } from "components/common/Button";
 
 import { InputWithIcon } from "components/common/Input";
-import style from "components/common/styles/iconColor.module.scss";
+import iconStyle from "components/common/styles/iconColor.module.scss";
+import style from "styles/pages/user.page.module.scss";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -110,38 +111,33 @@ const User = () => {
 
   const handleDeleteAccount = () => {};
 
-  const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputValue({ ...inputValue, name: event.target.value });
-    setShowIcon({ ...showIcon, name: true });
-  };
-
   const handleNameRest = () => {
     setInputValue({ ...inputValue, name: userInfo.name });
     setShowIcon({ ...showIcon, name: false });
-  };
-
-  const handleChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputValue({ ...inputValue, email: event.target.value });
-    setShowIcon({ ...showIcon, email: true });
   };
 
   const handleEmailRest = () => {
     setInputValue({ ...inputValue, email: userInfo.email });
     setShowIcon({ ...showIcon, email: false });
   };
-  const handleChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputValue({ ...inputValue, password: event.target.value });
-    if (event.target.value.length === 0) {
-      setShowIcon({ ...showIcon, password: false });
-    } else {
-      setShowIcon({ ...showIcon, password: true });
-    }
-  };
 
-  const handleChangeCurrentPassword = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputValue({ ...inputValue, currentPassword: event.target.value });
+  const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputValue({ ...inputValue, [name]: [value] });
+
+    if (name === "password") {
+      if (event.target.value.length === 0) {
+        setShowIcon({ ...showIcon, password: false });
+      } else {
+        setShowIcon({ ...showIcon, password: true });
+      }
+      return;
+    }
+
+    if (name !== "currentPassword") {
+      setShowIcon({ ...showIcon, [name]: true });
+    }
   };
   return (
     <>
@@ -158,11 +154,12 @@ const User = () => {
         <>
           <InputWithIcon
             value={inputValue.name}
-            handleOnChange={handleChangeName}
+            handleOnChange={handleChangeInput}
             helper={inputHelper.name}
             type="text"
             placeholder="Name"
             isDisabled={isDisabledForm}
+            name="name"
           >
             {showIcon.name && (
               <div className="right">
@@ -171,14 +168,14 @@ const User = () => {
                   isLoading={isInputLoading.name}
                   handleOnClick={handleNameRest}
                   isDisabled={isDisabledForm}
-                  className={`${style.icon__reset}`}
+                  className={`${iconStyle.icon__reset}`}
                 />
                 <ButtonWithSmallIcon
                   icon="done_all"
                   isLoading={isInputLoading.name}
                   handleOnClick={() => {}}
                   isDisabled={isDisabledForm}
-                  className={`${style.icon__done}`}
+                  className={`${iconStyle.icon__done}`}
                 />
               </div>
             )}
@@ -186,11 +183,12 @@ const User = () => {
 
           <InputWithIcon
             value={inputValue.email}
-            handleOnChange={handleChangeEmail}
+            handleOnChange={handleChangeInput}
             helper={inputHelper.email}
             type="email"
             placeholder="Email"
             isDisabled={isDisabledForm}
+            name="email"
           >
             {showIcon.email && (
               <div className="right">
@@ -199,14 +197,14 @@ const User = () => {
                   isLoading={false}
                   handleOnClick={handleEmailRest}
                   isDisabled={isDisabledForm}
-                  className={`${style.icon__reset}`}
+                  className={`${iconStyle.icon__reset}`}
                 />
                 <ButtonWithSmallIcon
                   icon="done_all"
                   isLoading={isInputLoading.email}
                   handleOnClick={() => {}}
                   isDisabled={isDisabledForm}
-                  className={`${style.icon__done}`}
+                  className={`${iconStyle.icon__done}`}
                 />
               </div>
             )}
@@ -214,11 +212,12 @@ const User = () => {
 
           <InputWithIcon
             value={inputValue.password}
-            handleOnChange={handleChangePassword}
+            handleOnChange={handleChangeInput}
             helper={inputHelper.email}
             type="password"
             placeholder="Password"
             isDisabled={isDisabledForm}
+            name="password"
           >
             {showIcon.password && (
               <div className="right">
@@ -227,7 +226,7 @@ const User = () => {
                   isLoading={isInputLoading.password}
                   handleOnClick={() => {}}
                   isDisabled={isDisabledForm}
-                  className={`${style.icon__done}`}
+                  className={`${iconStyle.icon__done}`}
                 />
               </div>
             )}
@@ -235,11 +234,11 @@ const User = () => {
 
           <InputWithIcon
             value={inputValue.currentPassword}
-            handleOnChange={handleChangeCurrentPassword}
+            handleOnChange={handleChangeInput}
             helper={inputHelper.currentPassword}
             type="password"
             placeholder="Current Password"
-            name="password"
+            name="currentPassword"
             isDisabled={isDisabledForm}
           />
 

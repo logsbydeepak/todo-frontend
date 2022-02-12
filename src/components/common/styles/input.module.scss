@@ -11,6 +11,10 @@
   display: inline-block;
 }
 
+.form__out {
+  margin-bottom: 3rem;
+}
+
 .input {
   width: 100%;
   background-color: #121212;
@@ -34,7 +38,6 @@
     padding: 0 1rem;
     display: flex;
     align-items: center;
-    margin-bottom: 3rem;
 
     & input {
       padding: 1.8rem 1rem;

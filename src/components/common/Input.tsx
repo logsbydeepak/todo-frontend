@@ -1,13 +1,8 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  FunctionComponent,
-  SetStateAction,
-  useState,
-} from "react";
-import { ButtonWithIcon, ButtonWithSmallIcon } from "./Button";
+import { ChangeEvent, FunctionComponent, useState } from "react";
+import { ButtonWithSmallIcon } from "./Button";
 
 import style from "./styles/input.module.scss";
+import iconStyle from "components/common/styles/iconColor.module.scss";
 
 type Props = {
   name: string;
@@ -97,7 +92,7 @@ export const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
             {label}
           </label>
         )}
-        <form className={`${style.input} ${style.input__icon}`}>
+        <div className={`${style.input} ${style.input__icon}`}>
           <input
             type={inputType}
             disabled={isDisabled}
@@ -115,12 +110,13 @@ export const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
                   setShowPassword(!showPassword);
                   setInputType(showPassword ? "password" : "text");
                 }}
+                className={`${iconStyle.icon__visible}`}
               />
             </div>
           )}
 
           {children}
-        </form>
+        </div>
         <p className={style.helper}>{helper}</p>
       </div>
     </>
