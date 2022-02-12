@@ -27,7 +27,7 @@ interface ButtonWithIconProps {
 
 interface ButtonWithSmallIconProps {
   icon: string;
-  isLoading: boolean;
+  isLoading?: boolean;
   className?: string;
   handleOnClick: () => void;
   isDisabled?: boolean;

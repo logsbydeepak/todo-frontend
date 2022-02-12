@@ -8,7 +8,7 @@ import { InputWithIcon } from "components/common/Input";
 import { ButtonWithSmallIcon } from "components/common/Button";
 
 import { TodoItemPropsType } from "types";
-import style from "./styles/todoItem.element.module.scss";
+import style from "components/common/styles/iconColor.module.scss";
 
 const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
   index,

@@ -13,8 +13,8 @@ import {
   ButtonWithTextAndIcon,
 } from "components/common/Button";
 
-import style from "styles/pages/user.page.module.scss";
 import { InputWithIcon } from "components/common/Input";
+import style from "components/common/styles/iconColor.module.scss";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -131,7 +131,11 @@ const User = () => {
   };
   const handleChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue({ ...inputValue, password: event.target.value });
-    setShowIcon({ ...showIcon, password: true });
+    if (event.target.value.length === 0) {
+      setShowIcon({ ...showIcon, password: false });
+    } else {
+      setShowIcon({ ...showIcon, password: true });
+    }
   };
 
   const handleChangeCurrentPassword = (
@@ -167,12 +171,14 @@ const User = () => {
                   isLoading={isInputLoading.name}
                   handleOnClick={handleNameRest}
                   isDisabled={isDisabledForm}
+                  className={`${style.icon__reset}`}
                 />
                 <ButtonWithSmallIcon
                   icon="done_all"
                   isLoading={isInputLoading.name}
                   handleOnClick={() => {}}
                   isDisabled={isDisabledForm}
+                  className={`${style.icon__done}`}
                 />
               </div>
             )}
@@ -193,12 +199,14 @@ const User = () => {
                   isLoading={false}
                   handleOnClick={handleEmailRest}
                   isDisabled={isDisabledForm}
+                  className={`${style.icon__reset}`}
                 />
                 <ButtonWithSmallIcon
                   icon="done_all"
                   isLoading={isInputLoading.email}
                   handleOnClick={() => {}}
                   isDisabled={isDisabledForm}
+                  className={`${style.icon__done}`}
                 />
               </div>
             )}
@@ -219,6 +227,7 @@ const User = () => {
                   isLoading={isInputLoading.password}
                   handleOnClick={() => {}}
                   isDisabled={isDisabledForm}
+                  className={`${style.icon__done}`}
                 />
               </div>
             )}
