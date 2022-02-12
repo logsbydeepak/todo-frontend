@@ -64,8 +64,10 @@ interface InputWithIconProps {
   isDisabled?: boolean;
   placeholder?: string;
   className?: string;
+  label?: string;
   value: string;
   handleOnChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  name?: string;
 }
 export const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
   type = "text",
@@ -77,6 +79,8 @@ export const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
   children,
   value,
   handleOnChange,
+  label = "",
+  name = "",
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [inputType, setInputType] = useState(type);
@@ -86,14 +90,21 @@ export const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
       <div
         className={`${isError && style.error} ${
           isDisabled && style.disabled
-        } ${className}`}
+        } ${className} ${style.form__out}`}
       >
+        {label.length !== 0 && (
+          <label className={style.label} htmlFor={name}>
+            {label}
+          </label>
+        )}
         <form className={`${style.input} ${style.input__icon}`}>
           <input
             type={inputType}
             disabled={isDisabled}
+            id={name}
             placeholder={placeholder}
             value={value}
+            name={name}
             onChange={handleOnChange}
           />
           {type === "password" && (

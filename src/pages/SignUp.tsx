@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 
-import Input from "components/common/Input";
+import Input, { InputWithIcon } from "components/common/Input";
 import PageTitle from "components/common/PageTitle";
 import { ButtonWithTextAndIcon } from "components/common/Button";
 import style from "styles/pages/loginSignUp.page.module.scss";
@@ -158,7 +158,7 @@ const SignUp: NextPage = () => {
             isError={isError.email}
             disabled={loading}
           />
-          <Input
+          {/* <Input
             name="password"
             label="Password"
             type="password"
@@ -168,7 +168,20 @@ const SignUp: NextPage = () => {
             placeholder="Minimum 8 character"
             isError={isError.password}
             disabled={loading}
+          /> */}
+
+          <InputWithIcon
+            value={formData.password}
+            handleOnChange={formInputHandler}
+            helper={helper.password}
+            type="password"
+            placeholder="Minimum 8 character"
+            label="Password"
+            name="password"
+            isError={isError.password}
+            isDisabled={loading}
           />
+
           <ButtonWithTextAndIcon
             icon="east"
             text="Create your account"

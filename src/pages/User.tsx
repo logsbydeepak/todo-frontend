@@ -239,6 +239,7 @@ const User = () => {
             helper={inputHelper.currentPassword}
             type="password"
             placeholder="Current Password"
+            name="password"
             isDisabled={isDisabledForm}
           />
 
