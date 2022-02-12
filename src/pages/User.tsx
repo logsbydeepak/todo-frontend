@@ -33,14 +33,30 @@ const initialText = {
   currentPassword: "",
 };
 
+const initialBooleanWithoutCurrentPassword = {
+  name: false,
+  email: false,
+  password: false,
+};
+
+const initialTextWithNameAndEmail = {
+  name: "",
+  email: "",
+};
+
 const User = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [userInfo, setUserInfo] = useState(initialText);
+  const [userInfo, setUserInfo] = useState(initialTextWithNameAndEmail);
   const [setAPIRequestData] = useAPICall(null);
 
-  const [isInputError, setIsInputError] = useState(initialBoolean);
+  const [showIcon, setShowIcon] = useState(
+    initialBooleanWithoutCurrentPassword
+  );
+  const [inputValue, setInputValue] = useState(initialText);
   const [inputHelper, setInputHelper] = useState(initialText);
+  const [isInputError, setIsInputError] = useState(initialBoolean);
   const [isInputLoading, setIsInputLoading] = useState(initialBoolean);
+  const [isDisabledForm, setIsDisabledForm] = useState(false);
 
   const { auth } = useAuthContext();
   const router = useRouter();
@@ -65,6 +81,11 @@ const User = () => {
             name: successResponse.name,
             email: successResponse.email,
           });
+          setInputValue({
+            ...inputValue,
+            name: successResponse.name,
+            email: successResponse.email,
+          });
           setIsLoading(false);
         },
         onError: () => {},
@@ -78,7 +99,7 @@ const User = () => {
   }, []);
 
   const handleLogoutAll = () => {
-    if (userInfo.currentPassword.length === 0) {
+    if (inputValue.currentPassword.length === 0) {
       setIsInputError({ ...isInputError, currentPassword: true });
       setInputHelper({
         ...inputHelper,
@@ -90,19 +111,33 @@ const User = () => {
   const handleDeleteAccount = () => {};
 
   const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
-    setUserInfo({ ...userInfo, name: event.target.value });
+    setInputValue({ ...inputValue, name: event.target.value });
+    setShowIcon({ ...showIcon, name: true });
+  };
+
+  const handleNameRest = () => {
+    setInputValue({ ...inputValue, name: userInfo.name });
+    setShowIcon({ ...showIcon, name: false });
   };
 
   const handleChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
-    setUserInfo({ ...userInfo, email: event.target.value });
+    setInputValue({ ...inputValue, email: event.target.value });
+    setShowIcon({ ...showIcon, email: true });
+  };
+
+  const handleEmailRest = () => {
+    setInputValue({ ...inputValue, email: userInfo.email });
+    setShowIcon({ ...showIcon, email: false });
   };
   const handleChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setUserInfo({ ...userInfo, password: event.target.value });
+    setInputValue({ ...inputValue, password: event.target.value });
+    setShowIcon({ ...showIcon, password: true });
   };
+
   const handleChangeCurrentPassword = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    setUserInfo({ ...userInfo, currentPassword: event.target.value });
+    setInputValue({ ...inputValue, currentPassword: event.target.value });
   };
   return (
     <>
@@ -118,69 +153,84 @@ const User = () => {
       ) : (
         <>
           <InputWithIcon
-            value={userInfo.name}
+            value={inputValue.name}
             handleOnChange={handleChangeName}
             helper={inputHelper.name}
             type="text"
             placeholder="Name"
+            isDisabled={isDisabledForm}
           >
-            <div className="right">
-              <ButtonWithSmallIcon
-                icon="settings_backup_restore"
-                isLoading={isInputLoading.name}
-                handleOnClick={() => {}}
-              />
-              <ButtonWithSmallIcon
-                icon="done_all"
-                isLoading={isInputLoading.name}
-                handleOnClick={() => {}}
-              />
-            </div>
+            {showIcon.name && (
+              <div className="right">
+                <ButtonWithSmallIcon
+                  icon="settings_backup_restore"
+                  isLoading={isInputLoading.name}
+                  handleOnClick={handleNameRest}
+                  isDisabled={isDisabledForm}
+                />
+                <ButtonWithSmallIcon
+                  icon="done_all"
+                  isLoading={isInputLoading.name}
+                  handleOnClick={() => {}}
+                  isDisabled={isDisabledForm}
+                />
+              </div>
+            )}
           </InputWithIcon>
 
           <InputWithIcon
-            value={userInfo.email}
+            value={inputValue.email}
             handleOnChange={handleChangeEmail}
             helper={inputHelper.email}
             type="email"
             placeholder="Email"
+            isDisabled={isDisabledForm}
           >
-            <div className="right">
-              <ButtonWithSmallIcon
-                icon="settings_backup_restore"
-                isLoading={false}
-                handleOnClick={() => {}}
-              />
-              <ButtonWithSmallIcon
-                icon="done_all"
-                isLoading={isInputLoading.email}
-                handleOnClick={() => {}}
-              />
-            </div>
+            {showIcon.email && (
+              <div className="right">
+                <ButtonWithSmallIcon
+                  icon="settings_backup_restore"
+                  isLoading={false}
+                  handleOnClick={handleEmailRest}
+                  isDisabled={isDisabledForm}
+                />
+                <ButtonWithSmallIcon
+                  icon="done_all"
+                  isLoading={isInputLoading.email}
+                  handleOnClick={() => {}}
+                  isDisabled={isDisabledForm}
+                />
+              </div>
+            )}
           </InputWithIcon>
 
           <InputWithIcon
-            value={userInfo.password}
+            value={inputValue.password}
             handleOnChange={handleChangePassword}
             helper={inputHelper.email}
             type="password"
             placeholder="Password"
+            isDisabled={isDisabledForm}
           >
-            <div className="right">
-              <ButtonWithSmallIcon
-                icon="done_all"
-                isLoading={isInputLoading.password}
-                handleOnClick={() => {}}
-              />
-            </div>
+            {showIcon.password && (
+              <div className="right">
+                <ButtonWithSmallIcon
+                  icon="done_all"
+                  isLoading={isInputLoading.password}
+                  handleOnClick={() => {}}
+                  isDisabled={isDisabledForm}
+                />
+              </div>
+            )}
           </InputWithIcon>
 
           <InputWithIcon
-            value={userInfo.currentPassword}
+            value={inputValue.currentPassword}
             handleOnChange={handleChangeCurrentPassword}
             helper={inputHelper.currentPassword}
             type="password"
             placeholder="Current Password"
+            isDisabled={isDisabledForm}
           />
 
           <div className={style.button}>
@@ -189,6 +239,7 @@ const User = () => {
               text="LOGOUT ALL"
               clickHandler={handleLogoutAll}
               loading={false}
+              isDisabled={isDisabledForm}
             />
 
             <ButtonWithTextAndIcon
@@ -197,6 +248,7 @@ const User = () => {
               clickHandler={handleDeleteAccount}
               warning={true}
               loading={false}
+              isDisabled={isDisabledForm}
             />
           </div>
         </>

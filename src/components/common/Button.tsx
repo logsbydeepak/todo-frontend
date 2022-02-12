@@ -14,6 +14,7 @@ interface ButtonWithTextAndIconProps {
   clickHandler: any;
   loading: boolean;
   warning?: boolean;
+  isDisabled?: boolean;
 }
 
 interface ButtonWithIconProps {
@@ -46,13 +47,20 @@ export const ButtonWithLInk: FunctionComponent<ButtonWithLInkProps> = ({
 
 export const ButtonWithTextAndIcon: FunctionComponent<
   ButtonWithTextAndIconProps
-> = ({ icon, text, clickHandler, warning = false, loading = false }) => {
+> = ({
+  icon,
+  text,
+  clickHandler,
+  warning = false,
+  loading = false,
+  isDisabled = false,
+}) => {
   return (
     <>
       <button
         className={`${warning && style.warning}`}
         onClick={clickHandler}
-        disabled={loading}
+        disabled={isDisabled}
       >
         {text}
         {!loading && <i className={`icon ${style.icon}`}>{icon}</i>}

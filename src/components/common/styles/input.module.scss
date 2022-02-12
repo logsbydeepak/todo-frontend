@@ -25,9 +25,9 @@
     color: #818181;
   }
 
-  &:focus,
   &:focus-within,
-  &:hover {
+  &:hover,
+  &:focus {
     border-color: #b794f6;
   }
 
