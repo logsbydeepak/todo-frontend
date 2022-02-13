@@ -3,7 +3,7 @@ import { FunctionComponent, useState, MouseEvent, ChangeEvent } from "react";
 import { ButtonWithIcon } from "components/common/Button";
 import inputStyle from "components/common/styles/input.module.scss";
 import style from "./styles/todoCreate.element.module.scss";
-import { handleCreateTodo } from "lib/handler/createTodo.handler";
+import { handleCreateTodo } from "lib/handler/todo/create.todo.handler";
 import { useAPICall } from "lib/helper/useAPICall.helper";
 import { DispatchTodoActionType } from "types";
 

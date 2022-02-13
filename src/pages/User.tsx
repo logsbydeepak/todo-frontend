@@ -24,6 +24,7 @@ import iconStyle from "components/common/styles/iconColor.module.scss";
 import style from "styles/pages/user.page.module.scss";
 import isStrongPassword from "validator/lib/isStrongPassword";
 import Modal from "components/common/Modal";
+import { getUser } from "lib/handler/user/get.user";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -86,34 +87,15 @@ const User = () => {
     }
   }, [auth]);
 
-  const getUser = () => {
-    setAPIRequestData({
-      data: {
-        method: "GET",
-        url: "/user",
-      },
-      response: {
-        onSuccess: (successResponse: any) => {
-          setUserInfo({
-            ...userInfo,
-            name: successResponse.name,
-            email: successResponse.email,
-          });
-          setInputValue({
-            ...inputValue,
-            name: successResponse.name,
-            email: successResponse.email,
-          });
-          setIsLoading(false);
-        },
-        onError: () => {},
-      },
-    });
-  };
-
   useEffect(() => {
-    setIsLoading(true);
-    getUser();
+    getUser(
+      setAPIRequestData,
+      setIsLoading,
+      setUserInfo,
+      userInfo,
+      inputValue,
+      setInputValue
+    );
   }, []);
 
   const handleLogoutAll = () => {

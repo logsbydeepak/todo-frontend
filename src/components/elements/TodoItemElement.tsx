@@ -1,8 +1,8 @@
 import React, { ChangeEvent, FunctionComponent, useState } from "react";
 
-import { handleDeleteTodo } from "lib/handler/deleteTodo.handler";
-import { handleChangeTodoTask } from "lib/handler/changeTodoTask.handler";
-import { handleChangeTodoStatus } from "lib/handler/changeTodoStatus.handler";
+import { handleDeleteTodo } from "lib/handler/todo/delete.todo.handler";
+import { handleChangeTodoTask } from "lib/handler/todo/changeTask.todo.handler";
+import { handleChangeTodoStatus } from "lib/handler/todo/changeStatus.todo.handler";
 
 import { InputWithIcon } from "components/common/Input";
 import { ButtonWithSmallIcon } from "components/common/Button";

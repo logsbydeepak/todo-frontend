@@ -13,9 +13,9 @@ import { TodoStateType, TodoType } from "types/todoReducerType";
 
 import Spinner from "components/common/Spinner";
 import { useAPICall } from "lib/helper/useAPICall.helper";
-import { handleGetMoreTodo } from "lib/handler/loadMoreTodo.handler";
+import { handleGetMoreTodo } from "lib/handler/todo/loadMore.todo.handler";
 import { useNotificationContext } from "lib/context/NotificationContext";
-import { handleGetTodoOnMenuChange } from "lib/handler/getTodoOnMenuChange.handler";
+import { handleGetTodoOnMenuChange } from "lib/handler/todo/getOnMenuChange.todo.handler";
 
 import style from "./styles/todoPage.layout.module.scss";
 import { useAuthContext } from "lib/context";
