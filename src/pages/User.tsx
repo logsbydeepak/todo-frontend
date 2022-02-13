@@ -272,6 +272,96 @@ const User = () => {
     setShowModel(false);
     handleDeleteAccount();
   };
+
+  const handleUpdatePassword = () => {
+    setIsDisabledForm(true);
+    setInputHelper({ ...initialText });
+    setIsInputError(() => initialBoolean);
+    setIsInputLoading({ ...isInputLoading, password: true });
+
+    if (inputValue.password.length === 0) {
+      setTimeout(() => {
+        setIsInputError({ ...isInputError, password: true });
+        setInputHelper({
+          ...inputHelper,
+          password: "password can't be empty",
+        });
+        setIsDisabledForm(false);
+        setIsInputLoading({ ...isInputLoading, password: false });
+      }, 1000);
+      return;
+    }
+
+    if (!isStrongPassword(inputValue.password)) {
+      setTimeout(() => {
+        setIsInputError({ ...isInputError, password: true });
+        setInputHelper({
+          ...inputHelper,
+          password: "min of 8 characters, 1 lower case, upper case, symbol",
+        });
+        setIsDisabledForm(false);
+        setIsInputLoading({ ...isInputLoading, password: false });
+      }, 1000);
+      return;
+    }
+
+    if (inputValue.currentPassword.length === 0) {
+      setTimeout(() => {
+        setIsInputError({ ...isInputError, currentPassword: true });
+        setInputHelper({
+          ...inputHelper,
+          currentPassword: "current password can't be empty",
+        });
+        setIsDisabledForm(false);
+        setIsInputLoading({ ...isInputLoading, password: false });
+      }, 1000);
+      return;
+    }
+
+    if (!isStrongPassword(inputValue.currentPassword)) {
+      setTimeout(() => {
+        setIsInputError({ ...isInputError, currentPassword: true });
+        setInputHelper({
+          ...inputHelper,
+          currentPassword: "invalid password",
+        });
+        setIsDisabledForm(false);
+      }, 1000);
+      setIsInputLoading({ ...isInputLoading, password: false });
+      return;
+    }
+
+    setAPIRequestData({
+      data: {
+        method: "PUT",
+        url: "/user",
+        data: {
+          currentPassword: inputValue.currentPassword,
+          toUpdate: "password",
+          password: inputValue.password,
+        },
+      },
+      showErrorDefaultNotification: false,
+      response: {
+        onSuccess: () => {
+          setIsInputLoading({ ...isInputLoading, password: false });
+          setInputValue({ ...inputValue, password: "", currentPassword: "" });
+        },
+        onError: () => {
+          setTimeout(() => {
+            setIsInputError({ ...isInputError, currentPassword: true });
+            setInputHelper({
+              ...inputHelper,
+              currentPassword: "invalid password",
+            });
+            setIsDisabledForm(false);
+            setIsInputLoading({ ...isInputLoading, password: false });
+          }, 1000);
+          return;
+        },
+      },
+    });
+  };
   return (
     <>
       <Head>
@@ -348,7 +438,7 @@ const User = () => {
           <InputWithIcon
             value={inputValue.password}
             handleOnChange={handleChangeInput}
-            helper={inputHelper.email}
+            helper={inputHelper.password}
             type="password"
             placeholder="Password"
             isDisabled={isDisabledForm}
@@ -360,7 +450,7 @@ const User = () => {
                 <ButtonWithSmallIcon
                   icon="done_all"
                   isLoading={isInputLoading.password}
-                  handleOnClick={() => {}}
+                  handleOnClick={handleUpdatePassword}
                   isDisabled={isDisabledForm}
                   className={`${iconStyle.icon__done}`}
                 />
