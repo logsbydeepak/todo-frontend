@@ -44,6 +44,7 @@ const Input: FunctionComponent<Props> = ({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
+          autoComplete="text"
           disabled={disabled}
         />
         <p className={style.helper}>{helper}</p>
@@ -95,6 +96,7 @@ export const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
         <div className={`${style.input} ${style.input__icon}`}>
           <input
             type={inputType}
+            autoComplete="text"
             disabled={isDisabled}
             id={name}
             placeholder={placeholder}
