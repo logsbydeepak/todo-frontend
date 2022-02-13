@@ -22,8 +22,8 @@ import {
 import { InputWithIcon } from "components/common/Input";
 import iconStyle from "components/common/styles/iconColor.module.scss";
 import style from "styles/pages/user.page.module.scss";
-import { on } from "stream";
 import isStrongPassword from "validator/lib/isStrongPassword";
+import Modal from "components/common/Modal";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -66,6 +66,8 @@ const User = () => {
   const [isInputError, setIsInputError] = useState(initialBoolean);
   const [isInputLoading, setIsInputLoading] = useState(initialBoolean);
   const [isDisabledForm, setIsDisabledForm] = useState(false);
+
+  const [showModal, setShowModel] = useState(false);
 
   const [isLoadingLogoutAllButton, setIsLoadingLogoutAllButton] =
     useState(false);
@@ -121,13 +123,16 @@ const User = () => {
     setIsInputError(initialBoolean);
 
     if (inputValue.currentPassword.length === 0) {
-      setIsInputError({ ...isInputError, currentPassword: true });
-      setInputHelper({
-        ...inputHelper,
-        currentPassword: "current password can't be empty",
-      });
-      setIsLoadingLogoutAllButton(false);
-      setIsDisabledForm(false);
+      setTimeout(() => {
+        setIsInputError({ ...isInputError, currentPassword: true });
+        setInputHelper({
+          ...inputHelper,
+          currentPassword: "current password can't be empty",
+        });
+
+        setIsLoadingLogoutAllButton(false);
+        setIsDisabledForm(false);
+      }, 1000);
 
       return;
     }
@@ -185,13 +190,15 @@ const User = () => {
     setIsInputError(initialBoolean);
 
     if (inputValue.currentPassword.length === 0) {
-      setIsInputError({ ...isInputError, currentPassword: true });
-      setInputHelper({
-        ...inputHelper,
-        currentPassword: "current password can't be empty",
-      });
-      setIsLoadingDeleteButton(false);
-      setIsDisabledForm(false);
+      setTimeout(() => {
+        setIsInputError({ ...isInputError, currentPassword: true });
+        setInputHelper({
+          ...inputHelper,
+          currentPassword: "current password can't be empty",
+        });
+        setIsLoadingDeleteButton(false);
+        setIsDisabledForm(false);
+      }, 1000);
 
       return;
     }
@@ -269,6 +276,19 @@ const User = () => {
     if (name !== "currentPassword") {
       setShowIcon({ ...showIcon, [name]: true });
     }
+  };
+
+  const handleOnCancel = () => {
+    setIsLoadingLogoutAllButton(false);
+    setIsDisabledForm(false);
+    setInputHelper(initialText);
+    setIsInputError(initialBoolean);
+    setShowModel(false);
+  };
+
+  const handleOnContinue = () => {
+    setShowModel(false);
+    handleDeleteAccount();
   };
   return (
     <>
@@ -390,11 +410,19 @@ const User = () => {
               icon="delete_outline"
               text="DELETE ACCOUNT"
               loading={isLoadingDeleteButton}
-              clickHandler={handleDeleteAccount}
+              clickHandler={() => {
+                setShowModel(true);
+              }}
               warning={true}
               isDisabled={isDisabledForm}
             />
           </div>
+          {showModal && (
+            <Modal
+              handleOnCancel={handleOnCancel}
+              handleOnContinue={handleOnContinue}
+            />
+          )}
         </>
       )}
     </>
