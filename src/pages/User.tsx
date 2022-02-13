@@ -281,9 +281,9 @@ const User = () => {
 
     if (inputValue.password.length === 0) {
       setTimeout(() => {
-        setIsInputError({ ...isInputError, password: true });
+        setIsInputError({ ...initialBoolean, password: true });
         setInputHelper({
-          ...inputHelper,
+          ...initialText,
           password: "password can't be empty",
         });
         setIsDisabledForm(false);
@@ -294,9 +294,9 @@ const User = () => {
 
     if (!isStrongPassword(inputValue.password)) {
       setTimeout(() => {
-        setIsInputError({ ...isInputError, password: true });
+        setIsInputError({ ...initialBoolean, password: true });
         setInputHelper({
-          ...inputHelper,
+          ...initialText,
           password: "min of 8 characters, 1 lower case, upper case, symbol",
         });
         setIsDisabledForm(false);
@@ -307,9 +307,9 @@ const User = () => {
 
     if (inputValue.currentPassword.length === 0) {
       setTimeout(() => {
-        setIsInputError({ ...isInputError, currentPassword: true });
+        setIsInputError({ ...initialBoolean, currentPassword: true });
         setInputHelper({
-          ...inputHelper,
+          ...initialText,
           currentPassword: "current password can't be empty",
         });
         setIsDisabledForm(false);
@@ -320,9 +320,9 @@ const User = () => {
 
     if (!isStrongPassword(inputValue.currentPassword)) {
       setTimeout(() => {
-        setIsInputError({ ...isInputError, currentPassword: true });
+        setIsInputError({ ...initialBoolean, currentPassword: true });
         setInputHelper({
-          ...inputHelper,
+          ...initialText,
           currentPassword: "invalid password",
         });
         setIsDisabledForm(false);
