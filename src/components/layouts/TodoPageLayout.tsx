@@ -1,5 +1,6 @@
 import Head from "next/head";
-import { useEffect, useMemo, useReducer } from "react";
+import { useEffect, useMemo } from "react";
+import { useImmerReducer } from "use-immer";
 
 import PageTitle from "components/common/PageTitle";
 import { ButtonWithTextAndIcon } from "components/common/Button";
@@ -30,7 +31,7 @@ const initialTodoState: TodoStateType = {
 
 const TodoPageLayout = () => {
   const { auth } = useAuthContext();
-  const [todoState, dispatchTodoAction] = useReducer(
+  const [todoState, dispatchTodoAction] = useImmerReducer(
     todoReducer,
     initialTodoState
   );

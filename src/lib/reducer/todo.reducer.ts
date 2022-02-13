@@ -1,73 +1,60 @@
-import { TodoActionType, TodoStateType } from "types";
+import { TodoActionType, TodoStateType, TodoType } from "types";
 
-export const todoReducer = (
-  state: TodoStateType,
-  action: TodoActionType
-): TodoStateType => {
+export const todoReducer = (draft: TodoStateType, action: TodoActionType) => {
   switch (action.type) {
     case "EMPTY_TODO":
-      return {
-        ...state,
-        todo: [],
-      };
+      draft.todo = [];
+      break;
 
     case "ADD_TODO_FROM_TOP":
-      return {
-        ...state,
-        todo: [action.todo, ...state.todo],
-        activeMenu: state.activeMenu === "true" ? "false" : state.activeMenu,
-      };
+      draft.todo.unshift(action.todo);
+      draft.activeMenu =
+        draft.activeMenu === "true" ? "false" : draft.activeMenu;
+      break;
 
     case "ADD_TODO_FROM_BOTTOM":
-      return {
-        ...state,
-        todo: [...state.todo, ...action.todo],
-        showLoadMoreButton: action.todo.length >= 5,
-      };
+      draft.todo.push(...action.todo);
+      draft.showLoadMoreButton = action.todo.length >= 5;
+      break;
 
     case "REMOVE_TODO":
-      const removeTodo = state.todo.filter(
+      draft.todo = draft.todo.filter(
         (_: any, index: number) => index !== action.index
       );
-      return { ...state, todo: [...removeTodo] };
+      break;
 
     case "UPDATE_TODO_STATUS":
-      const cloneTodo = { ...state };
-
-      switch (state.activeMenu) {
-        case "all":
-          cloneTodo.todo[action.index].status =
-            !state.todo[action.index].status;
-          return { ...cloneTodo };
-
-        default:
-          const filterTodo = state.todo.filter(
-            (_: any, index: number) => index !== action.index
-          );
-          return {
-            ...cloneTodo,
-            todo: [...filterTodo],
-          };
+      if (draft.activeMenu === "all") {
+        draft.todo[action.index].status = !draft.todo[action.index].status;
+      } else {
+        draft.todo = draft.todo = draft.todo.filter(
+          (_: TodoType, index: number) => index !== action.index
+        );
       }
+      break;
 
     case "UPDATE_TODO_TASK":
-      const updateStatusTodo = state.todo;
-      updateStatusTodo[action.index].task = action.task;
-      return { ...state, todo: [...updateStatusTodo] };
+      draft.todo[action.index].task = action.task;
+      break;
 
     case "LOADING":
-      return { ...state, isLoading: action.isLoading };
+      draft.isLoading = action.isLoading;
+      break;
 
     case "LOAD_MORE":
-      return { ...state, isLoadingMore: action.isLoadingMore };
+      draft.isLoadingMore = action.isLoadingMore;
+      break;
 
     case "LOAD_MORE_BUTTON":
-      return { ...state, showLoadMoreButton: action.showLoadMoreButton };
+      draft.showLoadMoreButton = action.showLoadMoreButton;
+      break;
 
     case "UPDATE_ACTIVE_MENU":
-      return { ...state, activeMenu: action.activeMenu };
+      draft.activeMenu = action.activeMenu;
+      break;
 
     default:
-      return state;
+      draft;
+      break;
   }
 };
