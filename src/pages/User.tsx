@@ -27,6 +27,7 @@ import Modal from "components/common/Modal";
 import { getUser } from "lib/handler/user/get.user";
 import { useImmer } from "use-immer";
 import { handleChangeTodoStatus } from "lib/handler/todo/changeStatus.todo.handler";
+import { logoutAllUser } from "lib/handler/user/logoutAll.user";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -90,6 +91,29 @@ const User = () => {
     getUser(setAPIRequestData, setPageState, setInputState);
   }, []);
 
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const inputName = event.target.name;
+    const inputValue = event.target.value;
+
+    if (
+      !(
+        inputName === "email" ||
+        inputName === "name" ||
+        inputName === "password" ||
+        inputName === "currentPassword"
+      )
+    )
+      return;
+
+    setInputState((draft) => {
+      draft.value[inputName] = inputValue;
+      if (inputName === "currentPassword") return;
+      draft.showIcon[inputName] = true;
+      if (draft.value.password.length !== 0) return;
+      draft.showIcon.password = false;
+    });
+  };
+
   return (
     <>
       <Head>
@@ -105,7 +129,7 @@ const User = () => {
         <>
           <InputWithIcon
             value={inputState.value.name}
-            handleOnChange={() => {}}
+            handleOnChange={handleInputChange}
             helper={inputState.helper.name}
             type="text"
             placeholder="Name"
@@ -135,7 +159,7 @@ const User = () => {
 
           <InputWithIcon
             value={inputState.value.email}
-            handleOnChange={() => {}}
+            handleOnChange={handleInputChange}
             helper={inputState.helper.email}
             type="email"
             isError={inputState.isError.email}
@@ -165,7 +189,7 @@ const User = () => {
 
           <InputWithIcon
             value={inputState.value.password}
-            handleOnChange={() => {}}
+            handleOnChange={handleInputChange}
             helper={inputState.helper.password}
             type="password"
             placeholder="Password"
@@ -188,7 +212,7 @@ const User = () => {
 
           <InputWithIcon
             value={inputState.value.currentPassword}
-            handleOnChange={() => {}}
+            handleOnChange={handleInputChange}
             helper={inputState.helper.currentPassword}
             type="password"
             placeholder="Current Password"
@@ -201,7 +225,16 @@ const User = () => {
             <ButtonWithTextAndIcon
               icon="logout"
               text="LOGOUT ALL"
-              clickHandler={() => {}}
+              clickHandler={() => {
+                logoutAllUser(
+                  setAPIRequestData,
+                  inputState,
+                  setPageState,
+                  setInputState,
+                  changeAuth,
+                  dispatchNotification
+                );
+              }}
               loading={pageState.isLoadingLogoutAllButton}
               isDisabled={pageState.isDisabled}
             />

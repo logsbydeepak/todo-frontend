@@ -46,19 +46,17 @@ export const logoutAllUser = (
   let currentPasswordHelper: string = "";
 
   if (inputState.value.currentPassword.length === 0) {
-    currentPasswordHelper = "current password is required";
-  }
-
-  if (!isStrongPassword(inputState.value.currentPassword)) {
-    currentPasswordHelper = "invalid password";
+    setCurrentPasswordError(
+      "current password is required",
+      setPageState,
+      setInputState
+    );
     return;
   }
 
-  if (
-    inputState.value.currentPassword.length === 0 ||
-    !isStrongPassword(inputState.value.currentPassword)
-  ) {
-    setCurrentPasswordError(currentPasswordHelper, setPageState, setInputState);
+  if (!isStrongPassword(inputState.value.currentPassword)) {
+    setCurrentPasswordError("invalid password", setPageState, setInputState);
+    return;
   }
 
   setAPIRequestData({
