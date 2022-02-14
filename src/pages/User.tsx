@@ -20,6 +20,7 @@ import Modal from "components/common/Modal";
 import { handleGetUser } from "lib/handler/user/get.user.handler";
 import { useImmer } from "use-immer";
 import { handleLogoutAllUser } from "lib/handler/user/logoutAll.user.handler";
+import { handleDeleteUser } from "lib/handler/user/delete.user.handler";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -265,6 +266,14 @@ const User = () => {
               handleOnContinue={() => {
                 setPageState((draft) => {
                   draft.showModal = false;
+                  handleDeleteUser(
+                    setAPIRequestData,
+                    inputState,
+                    setPageState,
+                    setInputState,
+                    changeAuth,
+                    dispatchNotification
+                  );
                 });
               }}
             />
