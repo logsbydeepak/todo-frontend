@@ -25,7 +25,7 @@ const setCurrentPasswordError = (
   }, 1000);
 };
 
-export const logoutAllUser = (
+export const handleLogoutAllUser = (
   setAPIRequestData: SetAPIRequestDataType,
   inputState: UserInputStateType,
   setPageState: SetPageStateType,
@@ -42,8 +42,6 @@ export const logoutAllUser = (
     draft.helper = initialText;
     draft.isError = initialBoolean;
   });
-
-  let currentPasswordHelper: string = "";
 
   if (inputState.value.currentPassword.length === 0) {
     setCurrentPasswordError(

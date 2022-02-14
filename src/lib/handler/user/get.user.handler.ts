@@ -7,7 +7,7 @@ import {
 } from "types";
 import { PageStateType, SetPageStateType } from "types/userPageType";
 
-export const getUser = (
+export const handleGetUser = (
   setAPIRequestData: SetAPIRequestDataType,
   setPageState: SetPageStateType,
   setInputState: SetUserInputStateType

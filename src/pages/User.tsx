@@ -1,10 +1,4 @@
-import {
-  ChangeEvent,
-  Fragment,
-  useEffect,
-  useLayoutEffect,
-  useState,
-} from "react";
+import { ChangeEvent, useEffect, useLayoutEffect } from "react";
 
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -22,12 +16,10 @@ import {
 import { InputWithIcon } from "components/common/Input";
 import iconStyle from "components/common/styles/iconColor.module.scss";
 import style from "styles/pages/user.page.module.scss";
-import isStrongPassword from "validator/lib/isStrongPassword";
 import Modal from "components/common/Modal";
-import { getUser } from "lib/handler/user/get.user";
+import { handleGetUser } from "lib/handler/user/get.user.handler";
 import { useImmer } from "use-immer";
-import { handleChangeTodoStatus } from "lib/handler/todo/changeStatus.todo.handler";
-import { logoutAllUser } from "lib/handler/user/logoutAll.user";
+import { handleLogoutAllUser } from "lib/handler/user/logoutAll.user.handler";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -88,7 +80,7 @@ const User = () => {
   }, [auth]);
 
   useEffect(() => {
-    getUser(setAPIRequestData, setPageState, setInputState);
+    handleGetUser(setAPIRequestData, setPageState, setInputState);
   }, []);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -109,8 +101,19 @@ const User = () => {
       draft.value[inputName] = inputValue;
       if (inputName === "currentPassword") return;
       draft.showIcon[inputName] = true;
+      draft.showIcon.name =
+        draft.value.name === pageState.userInfo.name ? false : true;
+      draft.showIcon.email =
+        draft.value.email === pageState.userInfo.email ? false : true;
       if (draft.value.password.length !== 0) return;
       draft.showIcon.password = false;
+    });
+  };
+
+  const handleInputReset = (target: "name" | "email") => {
+    setInputState((draft) => {
+      draft.value[target] = pageState.userInfo[target];
+      draft.showIcon[target] = false;
     });
   };
 
@@ -142,7 +145,7 @@ const User = () => {
                 <ButtonWithSmallIcon
                   icon="settings_backup_restore"
                   isLoading={inputState.isLoading.name}
-                  handleOnClick={() => {}}
+                  handleOnClick={() => handleInputReset("name")}
                   isDisabled={pageState.isDisabled}
                   className={`${iconStyle.icon__reset}`}
                 />
@@ -172,7 +175,7 @@ const User = () => {
                 <ButtonWithSmallIcon
                   icon="settings_backup_restore"
                   isLoading={false}
-                  handleOnClick={() => {}}
+                  handleOnClick={() => handleInputReset("email")}
                   isDisabled={pageState.isDisabled}
                   className={`${iconStyle.icon__reset}`}
                 />
@@ -225,16 +228,16 @@ const User = () => {
             <ButtonWithTextAndIcon
               icon="logout"
               text="LOGOUT ALL"
-              clickHandler={() => {
-                logoutAllUser(
+              clickHandler={() =>
+                handleLogoutAllUser(
                   setAPIRequestData,
                   inputState,
                   setPageState,
                   setInputState,
                   changeAuth,
                   dispatchNotification
-                );
-              }}
+                )
+              }
               loading={pageState.isLoadingLogoutAllButton}
               isDisabled={pageState.isDisabled}
             />
@@ -243,13 +246,28 @@ const User = () => {
               icon="delete_outline"
               text="DELETE ACCOUNT"
               loading={pageState.isLoadingDeleteButton}
-              clickHandler={() => {}}
+              clickHandler={() => {
+                setPageState((draft) => {
+                  draft.showModal = true;
+                });
+              }}
               warning={true}
               isDisabled={pageState.isDisabled}
             />
           </div>
           {pageState.showModal && (
-            <Modal handleOnCancel={() => {}} handleOnContinue={() => {}} />
+            <Modal
+              handleOnCancel={() => {
+                setPageState((draft) => {
+                  draft.showModal = false;
+                });
+              }}
+              handleOnContinue={() => {
+                setPageState((draft) => {
+                  draft.showModal = false;
+                });
+              }}
+            />
           )}
         </>
       )}
