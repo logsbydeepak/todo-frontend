@@ -21,7 +21,7 @@ import { handleGetUser } from "lib/handler/user/get.user.handler";
 import { useImmer } from "use-immer";
 import { handleLogoutAllUser } from "lib/handler/user/logoutAll.user.handler";
 import { handleDeleteUser } from "lib/handler/user/delete.user.handler";
-import { handleUpdateUserInfo } from "lib/handler/user/updateName.user.handler";
+import { handleUpdateUserInfo } from "lib/handler/user/update.user.handler";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
