@@ -21,6 +21,7 @@ import { handleGetUser } from "lib/handler/user/get.user.handler";
 import { useImmer } from "use-immer";
 import { handleLogoutAllUser } from "lib/handler/user/logoutAll.user.handler";
 import { handleDeleteUser } from "lib/handler/user/delete.user.handler";
+import { handleUpdateUserInfo } from "lib/handler/user/updateName.user.handler";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -108,6 +109,8 @@ const User = () => {
         draft.value.email === pageState.userInfo.email ? false : true;
       if (draft.value.password.length !== 0) return;
       draft.showIcon.password = false;
+      draft.isError.password = false;
+      draft.helper.password = "";
     });
   };
 
@@ -115,6 +118,8 @@ const User = () => {
     setInputState((draft) => {
       draft.value[target] = pageState.userInfo[target];
       draft.showIcon[target] = false;
+      draft.isError[target] = false;
+      draft.helper[target] = "";
     });
   };
 
@@ -145,7 +150,6 @@ const User = () => {
               <div className="right">
                 <ButtonWithSmallIcon
                   icon="settings_backup_restore"
-                  isLoading={inputState.isLoading.name}
                   handleOnClick={() => handleInputReset("name")}
                   isDisabled={pageState.isDisabled}
                   className={`${iconStyle.icon__reset}`}
@@ -153,7 +157,15 @@ const User = () => {
                 <ButtonWithSmallIcon
                   icon="done_all"
                   isLoading={inputState.isLoading.name}
-                  handleOnClick={() => {}}
+                  handleOnClick={() =>
+                    handleUpdateUserInfo(
+                      setAPIRequestData,
+                      inputState,
+                      setPageState,
+                      setInputState,
+                      "name"
+                    )
+                  }
                   isDisabled={pageState.isDisabled}
                   className={`${iconStyle.icon__done}`}
                 />
@@ -183,7 +195,15 @@ const User = () => {
                 <ButtonWithSmallIcon
                   icon="done_all"
                   isLoading={inputState.isLoading.email}
-                  handleOnClick={() => {}}
+                  handleOnClick={() =>
+                    handleUpdateUserInfo(
+                      setAPIRequestData,
+                      inputState,
+                      setPageState,
+                      setInputState,
+                      "email"
+                    )
+                  }
                   isDisabled={pageState.isDisabled}
                   className={`${iconStyle.icon__done}`}
                 />
@@ -206,9 +226,17 @@ const User = () => {
                 <ButtonWithSmallIcon
                   icon="done_all"
                   isLoading={inputState.isLoading.password}
-                  handleOnClick={() => {}}
                   isDisabled={pageState.isDisabled}
                   className={`${iconStyle.icon__done}`}
+                  handleOnClick={() =>
+                    handleUpdateUserInfo(
+                      setAPIRequestData,
+                      inputState,
+                      setPageState,
+                      setInputState,
+                      "password"
+                    )
+                  }
                 />
               </div>
             )}
