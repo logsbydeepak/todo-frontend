@@ -1,27 +1,20 @@
+import { userInfo } from "os";
 import { Dispatch, SetStateAction } from "react";
-import { SetAPIRequestDataType } from "types";
+import {
+  SetAPIRequestDataType,
+  UserInputStateType,
+  SetUserInputStateType,
+} from "types";
+import { PageStateType, SetPageStateType } from "types/userPageType";
 
 export const getUser = (
   setAPIRequestData: SetAPIRequestDataType,
-  setIsLoading: Dispatch<SetStateAction<boolean>>,
-  setUserInfo: Dispatch<{ name: string; email: string }>,
-  userInfo: { name: string; email: string },
-  inputValue: {
-    name: string;
-    email: string;
-    password: string;
-    currentPassword: string;
-  },
-  setInputValue: Dispatch<
-    SetStateAction<{
-      name: string;
-      email: string;
-      password: string;
-      currentPassword: string;
-    }>
-  >
+  setPageState: SetPageStateType,
+  setInputState: SetUserInputStateType
 ) => {
-  setIsLoading(true);
+  setPageState((draft) => {
+    draft.isLoadingUser = true;
+  });
 
   setAPIRequestData({
     data: {
@@ -30,17 +23,15 @@ export const getUser = (
     },
     response: {
       onSuccess: (successResponse: any) => {
-        setUserInfo({
-          ...userInfo,
-          name: successResponse.name,
-          email: successResponse.email,
+        setPageState((draft) => {
+          draft.userInfo.name = successResponse.name;
+          draft.userInfo.email = successResponse.email;
+          draft.isLoadingUser = false;
         });
-        setInputValue({
-          ...inputValue,
-          name: successResponse.name,
-          email: successResponse.email,
+        setInputState((draft) => {
+          draft.value.name = successResponse.name;
+          draft.value.email = successResponse.email;
         });
-        setIsLoading(false);
       },
       onError: () => {},
     },
