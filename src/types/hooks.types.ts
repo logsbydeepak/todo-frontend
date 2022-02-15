@@ -10,10 +10,9 @@ export type APIRequestDataType = {
   showErrorDefaultNotification?: boolean;
   response: {
     onSuccess: (value: Object) => void;
-    onError: () => void;
+    onError: (value: Object) => void;
   };
 } | null;
-console.log("hi");
 
 export type SetAPIRequestDataType = Dispatch<
   SetStateAction<APIRequestDataType>

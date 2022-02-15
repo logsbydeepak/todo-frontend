@@ -19,9 +19,8 @@ import style from "styles/pages/user.page.module.scss";
 import Modal from "components/common/Modal";
 import { handleGetUser } from "lib/handler/user/get.user.handler";
 import { useImmer } from "use-immer";
-import { handleLogoutAllUser } from "lib/handler/user/logoutAll.user.handler";
-import { handleDeleteUser } from "lib/handler/user/delete.user.handler";
 import { handleUpdateUserInfo } from "lib/handler/user/update.user.handler";
+import { handleDeleteAndLogoutAllUser } from "lib/handler/user/deleteAndLogoutAll.user";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -258,7 +257,8 @@ const User = () => {
               icon="logout"
               text="LOGOUT ALL"
               clickHandler={() =>
-                handleLogoutAllUser(
+                handleDeleteAndLogoutAllUser(
+                  "logoutAll",
                   setAPIRequestData,
                   inputState,
                   setPageState,
@@ -294,7 +294,8 @@ const User = () => {
               handleOnContinue={() => {
                 setPageState((draft) => {
                   draft.showModal = false;
-                  handleDeleteUser(
+                  handleDeleteAndLogoutAllUser(
+                    "delete",
                     setAPIRequestData,
                     inputState,
                     setPageState,

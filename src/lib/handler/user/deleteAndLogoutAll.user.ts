@@ -9,14 +9,19 @@ import {
 import isStrongPassword from "validator/lib/isStrongPassword";
 
 const setCurrentPasswordError = (
+  action: "logoutAll" | "delete",
   currentPasswordHelper: string,
   setPageState: SetPageStateType,
   setInputState: SetUserInputStateType
 ) => {
   setTimeout(() => {
     setPageState((draft) => {
-      draft.isLoadingDeleteButton = false;
       draft.isDisabled = false;
+      if (action === "logoutAll") {
+        draft.isLoadingLogoutAllButton = false;
+      } else {
+        draft.isLoadingDeleteButton = false;
+      }
     });
     setInputState((draft) => {
       draft.isError.currentPassword = true;
@@ -25,7 +30,8 @@ const setCurrentPasswordError = (
   }, 1000);
 };
 
-export const handleDeleteUser = (
+export const handleDeleteAndLogoutAllUser = (
+  action: "logoutAll" | "delete",
   setAPIRequestData: SetAPIRequestDataType,
   inputState: UserInputStateType,
   setPageState: SetPageStateType,
@@ -34,7 +40,11 @@ export const handleDeleteUser = (
   dispatchNotification: DispatchNotificationType
 ) => {
   setPageState((draft) => {
-    draft.isLoadingDeleteButton = true;
+    if (action === "logoutAll") {
+      draft.isLoadingLogoutAllButton = true;
+    } else {
+      draft.isLoadingDeleteButton = true;
+    }
     draft.isDisabled = true;
   });
 
@@ -45,6 +55,7 @@ export const handleDeleteUser = (
 
   if (inputState.value.currentPassword.length === 0) {
     setCurrentPasswordError(
+      action,
       "current password is required",
       setPageState,
       setInputState
@@ -53,14 +64,19 @@ export const handleDeleteUser = (
   }
 
   if (!isStrongPassword(inputState.value.currentPassword)) {
-    setCurrentPasswordError("invalid password", setPageState, setInputState);
+    setCurrentPasswordError(
+      action,
+      "invalid password",
+      setPageState,
+      setInputState
+    );
     return;
   }
 
   setAPIRequestData({
     data: {
       method: "DELETE",
-      url: "/user",
+      url: action === "logoutAll" ? "/session/all" : "/user",
       data: {
         currentPassword: inputState.value.currentPassword,
       },
@@ -71,15 +87,32 @@ export const handleDeleteUser = (
         changeAuth(false);
         dispatchNotification({
           type: "SUCCESS",
-          message: "User removed",
+          message: action === "logoutAll" ? "Logout all" : "User deleted",
         });
       },
-      onError: () => {
-        setCurrentPasswordError(
-          "invalid password",
-          setPageState,
-          setInputState
-        );
+      onError: (errorResponse: Object) => {
+        if (errorResponse === "invalid password") {
+          setCurrentPasswordError(
+            action,
+            "invalid password",
+            setPageState,
+            setInputState
+          );
+        }
+
+        dispatchNotification({
+          type: "ERROR",
+          message: "Something went wrong",
+        });
+
+        setPageState((draft) => {
+          draft.isDisabled = false;
+          if (action === "logoutAll") {
+            draft.isLoadingLogoutAllButton = false;
+          } else {
+            draft.isLoadingDeleteButton = false;
+          }
+        });
       },
     },
   });

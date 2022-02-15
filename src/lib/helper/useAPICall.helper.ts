@@ -45,7 +45,7 @@ export const useAPICall = (requestData: APIRequestDataType) => {
                 message: "Something went wrong in request",
               });
             }
-            onError();
+            onError(errorResponse.response.data?.error);
             return;
           }
 
