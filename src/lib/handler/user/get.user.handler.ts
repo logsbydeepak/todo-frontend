@@ -1,11 +1,5 @@
-import { userInfo } from "os";
-import { Dispatch, SetStateAction } from "react";
-import {
-  SetAPIRequestDataType,
-  UserInputStateType,
-  SetUserInputStateType,
-} from "types";
-import { PageStateType, SetPageStateType } from "types/userPageType";
+import { SetPageStateType } from "types/userPageType";
+import { SetAPIRequestDataType, SetUserInputStateType } from "types";
 
 export const handleGetUser = (
   setAPIRequestData: SetAPIRequestDataType,

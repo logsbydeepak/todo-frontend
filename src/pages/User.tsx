@@ -21,34 +21,15 @@ import { handleGetUser } from "lib/handler/user/get.user.handler";
 import { useImmer } from "use-immer";
 import { handleUpdateUserInfo } from "lib/handler/user/update.user.handler";
 import { handleDeleteAndLogoutAllUser } from "lib/handler/user/deleteAndLogoutAll.user";
+import {
+  initialBoolean,
+  initialBooleanWithoutCurrentPassword,
+  initialText,
+  initialTextWithNameAndEmail,
+} from "lib/data/userPage.data";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
-
-export const initialBoolean = {
-  name: false,
-  email: false,
-  password: false,
-  currentPassword: false,
-};
-
-export const initialText = {
-  name: "",
-  email: "",
-  password: "",
-  currentPassword: "",
-};
-
-export const initialBooleanWithoutCurrentPassword = {
-  name: false,
-  email: false,
-  password: false,
-};
-
-export const initialTextWithNameAndEmail = {
-  name: "",
-  email: "",
-};
 
 const User = () => {
   const [inputState, setInputState] = useImmer({

@@ -1,4 +1,4 @@
-import { initialBoolean, initialText } from "pages/User";
+import { initialBoolean, initialText } from "lib/data/userPage.data";
 import {
   SetAPIRequestDataType,
   SetPageStateType,
