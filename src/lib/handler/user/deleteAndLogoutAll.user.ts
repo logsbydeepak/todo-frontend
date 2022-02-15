@@ -9,6 +9,16 @@ import {
 import isStrongPassword from "validator/lib/isStrongPassword";
 
 const setCurrentPasswordError = (
+  currentPasswordHelper: string,
+  setInputState: SetUserInputStateType
+) => {
+  setInputState((draft) => {
+    draft.isError.currentPassword = true;
+    draft.helper.currentPassword = currentPasswordHelper;
+  });
+};
+
+const setCurrentPasswordErrorAndResetState = (
   action: "logoutAll" | "delete",
   currentPasswordHelper: string,
   setPageState: SetPageStateType,
@@ -37,6 +47,21 @@ export const handleDeleteAndLogoutAllUser = (
   changeAuth: (value: boolean) => void,
   dispatchNotification: DispatchNotificationType
 ) => {
+  setInputState((draft) => {
+    draft.helper = initialText;
+    draft.isError = initialBoolean;
+  });
+
+  if (inputState.value.currentPassword.length === 0) {
+    setCurrentPasswordError("current password is required", setInputState);
+    return;
+  }
+
+  if (!isStrongPassword(inputState.value.currentPassword)) {
+    setCurrentPasswordError("invalid password", setInputState);
+    return;
+  }
+
   setPageState((draft) => {
     if (action === "logoutAll") {
       draft.isLoadingLogoutAllButton = true;
@@ -45,31 +70,6 @@ export const handleDeleteAndLogoutAllUser = (
     }
     draft.isDisabled = true;
   });
-
-  setInputState((draft) => {
-    draft.helper = initialText;
-    draft.isError = initialBoolean;
-  });
-
-  if (inputState.value.currentPassword.length === 0) {
-    setCurrentPasswordError(
-      action,
-      "current password is required",
-      setPageState,
-      setInputState
-    );
-    return;
-  }
-
-  if (!isStrongPassword(inputState.value.currentPassword)) {
-    setCurrentPasswordError(
-      action,
-      "invalid password",
-      setPageState,
-      setInputState
-    );
-    return;
-  }
 
   setAPIRequestData({
     data: {
@@ -88,14 +88,15 @@ export const handleDeleteAndLogoutAllUser = (
           message: action === "logoutAll" ? "Logout all" : "User deleted",
         });
       },
-      onError: (errorResponse: Object) => {
-        if (errorResponse === "invalid password") {
-          setCurrentPasswordError(
+      onError: (errorResponse: any) => {
+        if (errorResponse.message === "invalid password") {
+          setCurrentPasswordErrorAndResetState(
             action,
             "invalid password",
             setPageState,
             setInputState
           );
+          return;
         }
 
         dispatchNotification({
