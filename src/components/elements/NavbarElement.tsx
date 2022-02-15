@@ -25,20 +25,18 @@ const Navbar: FunctionComponent = () => {
     setIsLoading(true);
 
     setAPIRequestData({
-      data: {
+      request: {
         method: "DELETE",
         url: "/session",
       },
-      response: {
-        onSuccess: () => {
-          setIsLoading(false);
-          dispatchNotification({ type: "SUCCESS", message: "User logout" });
-          changeAuth(false);
-          router.push("/");
-        },
-        onError: () => {
-          setIsLoading(false);
-        },
+      onSuccess: () => {
+        setIsLoading(false);
+        dispatchNotification({ type: "SUCCESS", message: "User logout" });
+        changeAuth(false);
+        router.push("/");
+      },
+      onError: () => {
+        setIsLoading(false);
       },
     });
   };

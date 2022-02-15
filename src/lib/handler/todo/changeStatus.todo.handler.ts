@@ -15,25 +15,23 @@ export const handleChangeTodoStatus = (
   setIsDisabled: SetIsDisabled
 ) => {
   setAPIRequestData({
-    data: {
+    request: {
       url: `/todo`,
       method: "PUT",
-      data: {
+      body: {
         id: todoItem._id,
         task: todoItem.task,
         status: !todoItem.status,
       },
     },
-    response: {
-      onSuccess: () => {
-        setIsDisabled(false);
-        setLoadingIcon((preValue) => ({ ...preValue, status: false }));
-        dispatchTodoAction({ type: "UPDATE_TODO_STATUS", index });
-      },
-      onError: () => {
-        setIsDisabled(false);
-        setLoadingIcon((preValue) => ({ ...preValue, status: false }));
-      },
+    onSuccess: () => {
+      setIsDisabled(false);
+      setLoadingIcon((preValue) => ({ ...preValue, status: false }));
+      dispatchTodoAction({ type: "UPDATE_TODO_STATUS", index });
+    },
+    onError: () => {
+      setIsDisabled(false);
+      setLoadingIcon((preValue) => ({ ...preValue, status: false }));
     },
   });
 };

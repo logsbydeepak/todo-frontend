@@ -16,18 +16,18 @@ export const useAPICall = (requestData: APIRequestDataType) => {
 
   useEffect(() => {
     if (!APIRequestData) return;
-    const { method, url, data } = APIRequestData.data;
-    const { onSuccess, onError } = APIRequestData.response;
-    const showErrorDefaultNotification =
-      typeof APIRequestData.showErrorDefaultNotification === "boolean"
-        ? APIRequestData.showErrorDefaultNotification
+    const { method, url, body } = APIRequestData.request;
+    const { onSuccess, onError } = APIRequestData;
+    const showDefaultErrorNotification =
+      typeof APIRequestData.showDefaultErrorNotification === "boolean"
+        ? APIRequestData.showDefaultErrorNotification
         : true;
 
     const fetch = async () => {
       axiosRequest({
         url,
         method,
-        data,
+        data: body,
       })
         .then((successResponse: AxiosResponse<any>) => {
           onSuccess(successResponse.data?.data);
@@ -38,8 +38,8 @@ export const useAPICall = (requestData: APIRequestDataType) => {
             errorResponse.response.data.error.title === "BODY_PARSE" ||
             errorResponse.response.data.error.title === "QUERY_PARSE"
           ) {
-            console.log(showErrorDefaultNotification);
-            if (showErrorDefaultNotification) {
+            console.log(showDefaultErrorNotification);
+            if (showDefaultErrorNotification) {
               dispatchNotification({
                 type: "ERROR",
                 message: "Something went wrong in request",
@@ -60,7 +60,7 @@ export const useAPICall = (requestData: APIRequestDataType) => {
                 axiosRequest({
                   url,
                   method,
-                  data,
+                  data: body,
                 }).then((successResponse) => {
                   onSuccess(successResponse.data.data);
                   return;
@@ -74,7 +74,7 @@ export const useAPICall = (requestData: APIRequestDataType) => {
                   axiosRequest({
                     url,
                     method,
-                    data,
+                    data: body,
                   }).then((successResponse) => {
                     onSuccess(successResponse.data.data);
                     return;

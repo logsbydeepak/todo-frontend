@@ -72,47 +72,45 @@ export const handleDeleteAndLogoutAllUser = (
   });
 
   setAPIRequestData({
-    data: {
+    request: {
       method: "DELETE",
       url: action === "logoutAll" ? "/session/all" : "/user",
-      data: {
+      body: {
         currentPassword: inputState.value.currentPassword,
       },
     },
-    showErrorDefaultNotification: false,
-    response: {
-      onSuccess: () => {
-        changeAuth(false);
-        dispatchNotification({
-          type: "SUCCESS",
-          message: action === "logoutAll" ? "Logout all" : "User deleted",
-        });
-      },
-      onError: (errorResponse: any) => {
-        if (errorResponse.message === "invalid password") {
-          setCurrentPasswordErrorAndResetState(
-            action,
-            "invalid password",
-            setPageState,
-            setInputState
-          );
-          return;
+    showDefaultErrorNotification: false,
+    onSuccess: () => {
+      changeAuth(false);
+      dispatchNotification({
+        type: "SUCCESS",
+        message: action === "logoutAll" ? "Logout all" : "User deleted",
+      });
+    },
+    onError: (errorResponse: any) => {
+      if (errorResponse.message === "invalid password") {
+        setCurrentPasswordErrorAndResetState(
+          action,
+          "invalid password",
+          setPageState,
+          setInputState
+        );
+        return;
+      }
+
+      dispatchNotification({
+        type: "ERROR",
+        message: "Something went wrong",
+      });
+
+      setPageState((draft) => {
+        draft.isDisabled = false;
+        if (action === "logoutAll") {
+          draft.isLoadingLogoutAllButton = false;
+        } else {
+          draft.isLoadingDeleteButton = false;
         }
-
-        dispatchNotification({
-          type: "ERROR",
-          message: "Something went wrong",
-        });
-
-        setPageState((draft) => {
-          draft.isDisabled = false;
-          if (action === "logoutAll") {
-            draft.isLoadingLogoutAllButton = false;
-          } else {
-            draft.isLoadingDeleteButton = false;
-          }
-        });
-      },
+      });
     },
   });
 };

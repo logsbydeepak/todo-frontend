@@ -98,43 +98,41 @@ export const handleUpdateUserInfo = (
   }
 
   setAPIRequestData({
-    data: {
+    request: {
       method: "PUT",
       url: "/user",
-      data: {
+      body: {
         toUpdate,
         currentPassword: inputState.value.currentPassword,
         [toUpdate]: inputState.value[toUpdate],
       },
     },
-    showErrorDefaultNotification: false,
+    showDefaultErrorNotification: false,
 
-    response: {
-      onSuccess: (successResponse: any) => {
-        setInputState((draft) => {
-          draft.isLoading[toUpdate] = false;
-          draft.value.currentPassword = "";
-          draft.showIcon[toUpdate] = false;
-          if (toUpdate === "password") {
-            draft.value.password = "";
-            return;
-          }
-          draft.value[toUpdate] = successResponse[toUpdate];
-        });
-        setPageState((draft) => {
-          draft.isDisabled = false;
-          if (toUpdate === "password") return;
-          draft.userInfo[toUpdate] = successResponse[toUpdate];
-        });
-      },
-      onError: () => {
-        setCurrentPasswordError(
-          "invalid password",
-          setPageState,
-          setInputState,
-          toUpdate
-        );
-      },
+    onSuccess: (successResponse: any) => {
+      setInputState((draft) => {
+        draft.isLoading[toUpdate] = false;
+        draft.value.currentPassword = "";
+        draft.showIcon[toUpdate] = false;
+        if (toUpdate === "password") {
+          draft.value.password = "";
+          return;
+        }
+        draft.value[toUpdate] = successResponse[toUpdate];
+      });
+      setPageState((draft) => {
+        draft.isDisabled = false;
+        if (toUpdate === "password") return;
+        draft.userInfo[toUpdate] = successResponse[toUpdate];
+      });
+    },
+    onError: () => {
+      setCurrentPasswordError(
+        "invalid password",
+        setPageState,
+        setInputState,
+        toUpdate
+      );
     },
   });
 };

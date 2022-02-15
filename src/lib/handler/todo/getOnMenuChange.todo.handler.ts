@@ -19,28 +19,26 @@ export const handleGetTodoOnMenuChange = async (
   });
 
   setAPIRequestData({
-    data: {
+    request: {
       method: "GET",
       url: `/todo?status=${activeMenu}&skip=${0}&limit=5`,
     },
-    response: {
-      onSuccess: (successResponse: any) => {
-        dispatchTodoAction({
-          type: "ADD_TODO_FROM_BOTTOM",
-          todo: successResponse,
-        });
+    onSuccess: (successResponse: any) => {
+      dispatchTodoAction({
+        type: "ADD_TODO_FROM_BOTTOM",
+        todo: successResponse,
+      });
 
-        dispatchTodoAction({
-          type: "LOADING",
-          isLoading: false,
-        });
-      },
-      onError: () => {
-        dispatchTodoAction({
-          type: "LOADING",
-          isLoading: false,
-        });
-      },
+      dispatchTodoAction({
+        type: "LOADING",
+        isLoading: false,
+      });
+    },
+    onError: () => {
+      dispatchTodoAction({
+        type: "LOADING",
+        isLoading: false,
+      });
     },
   });
 };

@@ -15,21 +15,19 @@ export const handleDeleteTodo = async (
   setIsDisabled: SetIsDisabled
 ) => {
   setAPIRequestData({
-    data: {
+    request: {
       method: "DELETE",
       url: `/todo?id=${todoItem._id}`,
     },
-    response: {
-      onSuccess: () => {
-        dispatchTodoAction({
-          type: "REMOVE_TODO",
-          index,
-        });
-      },
-      onError: () => {
-        setIsDisabled(false);
-        setLoadingIcon((preValue) => ({ ...preValue, delete: false }));
-      },
+    onSuccess: () => {
+      dispatchTodoAction({
+        type: "REMOVE_TODO",
+        index,
+      });
+    },
+    onError: () => {
+      setIsDisabled(false);
+      setLoadingIcon((preValue) => ({ ...preValue, delete: false }));
     },
   });
 };

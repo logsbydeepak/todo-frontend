@@ -11,23 +11,21 @@ export const handleGetUser = (
   });
 
   setAPIRequestData({
-    data: {
+    request: {
       method: "GET",
       url: "/user",
     },
-    response: {
-      onSuccess: (successResponse: any) => {
-        setPageState((draft) => {
-          draft.userInfo.name = successResponse.name;
-          draft.userInfo.email = successResponse.email;
-          draft.isLoadingUser = false;
-        });
-        setInputState((draft) => {
-          draft.value.name = successResponse.name;
-          draft.value.email = successResponse.email;
-        });
-      },
-      onError: () => {},
+    onSuccess: (successResponse: any) => {
+      setPageState((draft) => {
+        draft.userInfo.name = successResponse.name;
+        draft.userInfo.email = successResponse.email;
+        draft.isLoadingUser = false;
+      });
+      setInputState((draft) => {
+        draft.value.name = successResponse.name;
+        draft.value.email = successResponse.email;
+      });
     },
+    onError: () => {},
   });
 };

@@ -21,30 +21,28 @@ export const handleCreateTodo = async (
   }
 
   setAPIRequestData({
-    data: {
+    request: {
       method: "POST",
       url: "/todo",
-      data: {
+      body: {
         task: textInput,
         status: false,
       },
     },
-    response: {
-      onSuccess: (successResponse: any) => {
-        setInputState({ textInput: "", isLoading: false, isError: false });
-        dispatchTodoAction({
-          type: "ADD_TODO_FROM_TOP",
-          todo: {
-            _id: successResponse.id,
-            task: successResponse.task,
-            status: false,
-          },
-        });
-      },
+    onSuccess: (successResponse: any) => {
+      setInputState({ textInput: "", isLoading: false, isError: false });
+      dispatchTodoAction({
+        type: "ADD_TODO_FROM_TOP",
+        todo: {
+          _id: successResponse.id,
+          task: successResponse.task,
+          status: false,
+        },
+      });
+    },
 
-      onError: () => {
-        setInputState({ textInput: "", isLoading: false, isError: false });
-      },
+    onError: () => {
+      setInputState({ textInput: "", isLoading: false, isError: false });
     },
   });
 };

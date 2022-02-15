@@ -2,16 +2,14 @@ import { Method } from "axios";
 import { Dispatch, SetStateAction } from "react";
 
 export type APIRequestDataType = {
-  data: {
+  request: {
     method: Method;
     url: string;
-    data?: Object;
+    body?: any;
   };
-  showErrorDefaultNotification?: boolean;
-  response: {
-    onSuccess: (value: Object) => void;
-    onError: (value: Object) => void;
-  };
+  showDefaultErrorNotification?: boolean;
+  onSuccess: (successResponse: Object) => void;
+  onError: (errorResponse: Object) => void;
 } | null;
 
 export type SetAPIRequestDataType = Dispatch<
