@@ -58,14 +58,12 @@ const Login: NextPage = () => {
     setIsError(initialErrorData);
 
     if (!isEmail(formData.email) || !isStrongPassword(formData.password)) {
-      setTimeout(() => {
-        setHelper({
-          email: "email or password is invalid",
-          password: "email or password is invalid",
-        });
-        setIsError({ email: true, password: true });
-        setLoading(false);
-      }, 1000);
+      setHelper({
+        email: "email or password is invalid",
+        password: "email or password is invalid",
+      });
+      setIsError({ email: true, password: true });
+      setLoading(false);
       return;
     }
 
@@ -81,14 +79,12 @@ const Login: NextPage = () => {
       router.push("/");
     } catch (error: any) {
       if (error.response.data.error.message === "user do not exist") {
-        setTimeout(() => {
-          setHelper({
-            email: "email or password is invalid",
-            password: "email or password is invalid",
-          });
-          setIsError({ email: true, password: true });
-          setLoading(false);
-        }, 1000);
+        setHelper({
+          email: "email or password is invalid",
+          password: "email or password is invalid",
+        });
+        setIsError({ email: true, password: true });
+        setLoading(false);
         return;
       }
 

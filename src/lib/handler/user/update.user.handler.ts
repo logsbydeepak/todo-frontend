@@ -14,16 +14,14 @@ const setCurrentPasswordError = (
   setInputState: SetUserInputStateType,
   toUpdate: "email" | "password" | "name"
 ) => {
-  setTimeout(() => {
-    setPageState((draft) => {
-      draft.isDisabled = false;
-    });
-    setInputState((draft) => {
-      draft.isError.currentPassword = true;
-      draft.helper.currentPassword = currentPasswordHelper;
-      draft.isLoading[toUpdate] = false;
-    });
-  }, 1000);
+  setPageState((draft) => {
+    draft.isDisabled = false;
+  });
+  setInputState((draft) => {
+    draft.isError.currentPassword = true;
+    draft.helper.currentPassword = currentPasswordHelper;
+    draft.isLoading[toUpdate] = false;
+  });
 };
 
 export const handleUpdateUserInfo = (
@@ -44,44 +42,38 @@ export const handleUpdateUserInfo = (
   });
 
   if (inputState.value[toUpdate].length === 0) {
-    setTimeout(() => {
-      setPageState((draft) => {
-        draft.isDisabled = false;
-      });
-      setInputState((draft) => {
-        draft.isError[toUpdate] = true;
-        draft.helper[toUpdate] = `${toUpdate} is required`;
-        draft.isLoading[toUpdate] = false;
-      });
-    }, 1000);
+    setPageState((draft) => {
+      draft.isDisabled = false;
+    });
+    setInputState((draft) => {
+      draft.isError[toUpdate] = true;
+      draft.helper[toUpdate] = `${toUpdate} is required`;
+      draft.isLoading[toUpdate] = false;
+    });
     return;
   }
 
   if (toUpdate === "password" && !isStrongPassword(inputState.value.password)) {
-    setTimeout(() => {
-      setPageState((draft) => {
-        draft.isDisabled = false;
-      });
-      setInputState((draft) => {
-        draft.isError.password = true;
-        draft.helper.password = "invalid password";
-        draft.isLoading.password = false;
-      });
-    }, 1000);
+    setPageState((draft) => {
+      draft.isDisabled = false;
+    });
+    setInputState((draft) => {
+      draft.isError.password = true;
+      draft.helper.password = "invalid password";
+      draft.isLoading.password = false;
+    });
     return;
   }
 
   if (toUpdate === "email" && !isEmail(inputState.value.email)) {
-    setTimeout(() => {
-      setPageState((draft) => {
-        draft.isDisabled = false;
-      });
-      setInputState((draft) => {
-        draft.isError.email = true;
-        draft.helper.email = "invalid email";
-        draft.isLoading.email = false;
-      });
-    }, 1000);
+    setPageState((draft) => {
+      draft.isDisabled = false;
+    });
+    setInputState((draft) => {
+      draft.isError.email = true;
+      draft.helper.email = "invalid email";
+      draft.isLoading.email = false;
+    });
     return;
   }
 

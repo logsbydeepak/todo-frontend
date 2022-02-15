@@ -14,20 +14,18 @@ const setCurrentPasswordError = (
   setPageState: SetPageStateType,
   setInputState: SetUserInputStateType
 ) => {
-  setTimeout(() => {
-    setPageState((draft) => {
-      draft.isDisabled = false;
-      if (action === "logoutAll") {
-        draft.isLoadingLogoutAllButton = false;
-      } else {
-        draft.isLoadingDeleteButton = false;
-      }
-    });
-    setInputState((draft) => {
-      draft.isError.currentPassword = true;
-      draft.helper.currentPassword = currentPasswordHelper;
-    });
-  }, 1000);
+  setPageState((draft) => {
+    draft.isDisabled = false;
+    if (action === "logoutAll") {
+      draft.isLoadingLogoutAllButton = false;
+    } else {
+      draft.isLoadingDeleteButton = false;
+    }
+  });
+  setInputState((draft) => {
+    draft.isError.currentPassword = true;
+    draft.helper.currentPassword = currentPasswordHelper;
+  });
 };
 
 export const handleDeleteAndLogoutAllUser = (

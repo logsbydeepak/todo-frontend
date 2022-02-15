@@ -92,11 +92,9 @@ const SignUp: NextPage = () => {
       !isEmail(formData.email) ||
       !isStrongPassword(formData.password)
     ) {
-      setTimeout(() => {
-        setHelper(helperText);
-        setIsError(isErrorStatus);
-        setLoading(false);
-      }, 1000);
+      setHelper(helperText);
+      setIsError(isErrorStatus);
+      setLoading(false);
       return;
     }
 
