@@ -1,2 +1,4 @@
 import SignUpPage from "SignUpPage";
-export default () => <SignUpPage />;
+
+const SignUp = () => <SignUpPage />;
+export default SignUp;

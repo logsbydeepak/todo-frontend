@@ -1,2 +1,4 @@
 import UserPage from "UserPage";
-export default () => <UserPage />;
+
+const User = () => <UserPage />;
+export default User;

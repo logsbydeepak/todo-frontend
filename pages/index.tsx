@@ -1,2 +1,4 @@
 import HomePage from "HomePage";
-export default () => <HomePage />;
+
+const Home = () => <HomePage />;
+export default Home;

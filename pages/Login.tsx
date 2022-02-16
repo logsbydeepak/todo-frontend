@@ -1,2 +1,4 @@
 import LoginPage from "LoginPage";
-export default () => <LoginPage />;
+
+const Login = () => <LoginPage />;
+export default Login;
