@@ -7,7 +7,7 @@ import { handleChangeTodoStatus } from "HomePage/handler/changeStatus.todo.handl
 import { InputWithIcon, ButtonWithSmallIcon } from "global/components";
 
 import { TodoItemPropsType } from "HomePage/todoItemTypes";
-import style from "./styles/iconColor.module.scss";
+import style from "global/components/styles/iconColor.module.scss";
 
 const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
   index,
