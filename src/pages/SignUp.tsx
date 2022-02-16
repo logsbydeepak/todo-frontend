@@ -15,6 +15,7 @@ import style from "styles/pages/loginSignUp.page.module.scss";
 import { axiosRequest } from "lib/helper/axios.helper";
 import { useAuthContext } from "lib/context/AuthContext";
 import { useNotificationContext } from "lib/context/NotificationContext";
+import { useImmer } from "use-immer";
 
 const initialUserData = {
   name: "",
@@ -31,10 +32,12 @@ const initialErrorData = {
 const SignUp: NextPage = () => {
   const router = useRouter();
 
-  const [loading, setLoading] = useState(false);
-  const [helper, setHelper] = useState(initialUserData);
-  const [isError, setIsError] = useState(initialErrorData);
-  const [formData, setFormData] = useState(initialUserData);
+  const [formState, setFormState] = useImmer({
+    isLoading: false,
+    helper: initialUserData,
+    value: initialUserData,
+    isError: initialErrorData,
+  });
 
   const { auth, changeAuth } = useAuthContext();
   const { dispatchNotification } = useNotificationContext();
@@ -45,63 +48,77 @@ const SignUp: NextPage = () => {
     }
   }, [auth, router]);
 
-  const formInputHandler = async (event: ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
+  const formInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+    const inputName = event.target.name;
+    if (
+      !(
+        inputName === "name" ||
+        inputName === "email" ||
+        inputName === "password"
+      )
+    )
+      return;
+    setFormState((draft) => {
+      draft.value[inputName] = inputValue;
     });
   };
 
   const clickHandler = (event: FormEvent) => {
     event.preventDefault();
 
-    setLoading(true);
-    setHelper(initialUserData);
-    setIsError(initialErrorData);
+    setFormState((draft) => {
+      draft.isLoading = true;
+      draft.helper = initialUserData;
+      draft.isError = initialErrorData;
+    });
+
     const helperText = { ...initialUserData };
     const isErrorStatus = { ...initialErrorData };
 
-    if (formData.name.length === 0) {
+    if (formState.value.name.length === 0) {
       helperText.name = "name is required";
       isErrorStatus.name = true;
     }
 
-    if (!isEmail(formData.email)) {
+    if (!isEmail(formState.value.email)) {
       helperText.email = "invalid email";
       isErrorStatus.email = true;
     }
 
-    if (formData.email.length === 0) {
+    if (formState.value.email.length === 0) {
       helperText.email = "email is required";
       isErrorStatus.email = true;
     }
 
-    if (!isStrongPassword(formData.password)) {
+    if (!isStrongPassword(formState.value.password)) {
       helperText.password =
         "min of 8 characters, 1 lower case, upper case, symbol";
       isErrorStatus.password = true;
     }
 
-    if (formData.password.length === 0) {
+    if (formState.value.password.length === 0) {
       helperText.password = "password is required";
       isErrorStatus.password = true;
     }
 
     if (
-      formData.name.length === 0 ||
-      !isEmail(formData.email) ||
-      !isStrongPassword(formData.password)
+      formState.value.name.length === 0 ||
+      !isEmail(formState.value.email) ||
+      !isStrongPassword(formState.value.password)
     ) {
-      setHelper(helperText);
-      setIsError(isErrorStatus);
-      setLoading(false);
+      setFormState((draft) => {
+        draft.isLoading = false;
+        draft.helper = helperText;
+        draft.isError = isErrorStatus;
+      });
       return;
     }
 
     axiosRequest({
       method: "POST",
       url: "/user",
-      data: formData,
+      data: formState.value,
     })
       .then(() => {
         changeAuth(true);
@@ -109,15 +126,16 @@ const SignUp: NextPage = () => {
           type: "SUCCESS",
           message: "User created successfully",
         });
-
-        router.push("/");
       })
       .catch(() => {
         dispatchNotification({
           type: "ERROR",
           message: "Something went wrong",
         });
-        setLoading(false);
+
+        setFormState((draft) => {
+          draft.isLoading = false;
+        });
       });
   };
 
@@ -138,43 +156,43 @@ const SignUp: NextPage = () => {
             label="Name"
             type="text"
             autoFocus={true}
-            value={formData.name}
+            value={formState.value.name}
             onChange={formInputHandler}
-            helper={helper.name}
+            helper={formState.helper.name}
             placeholder="Your name"
-            isError={isError.name}
-            disabled={loading}
+            isError={formState.isError.name}
+            disabled={formState.isLoading}
           />
           <Input
             name="email"
             label="Email"
             type="email"
-            value={formData.email}
+            value={formState.value.email}
             onChange={formInputHandler}
-            helper={helper.email}
+            helper={formState.helper.email}
             placeholder="example@email.com"
-            isError={isError.email}
-            disabled={loading}
+            isError={formState.isError.email}
+            disabled={formState.isLoading}
           />
 
           <InputWithIcon
-            value={formData.password}
+            value={formState.value.password}
             handleOnChange={formInputHandler}
-            helper={helper.password}
+            helper={formState.helper.password}
             type="password"
             placeholder="Minimum 8 character"
             label="Password"
             name="password"
-            isError={isError.password}
-            isDisabled={loading}
+            isError={formState.isError.password}
+            isDisabled={formState.isLoading}
           />
 
           <ButtonWithTextAndIcon
             icon="east"
             text="Create your account"
             clickHandler={clickHandler}
-            loading={loading}
-            isDisabled={loading}
+            loading={formState.isLoading}
+            isDisabled={formState.isLoading}
           />
         </form>
       </div>

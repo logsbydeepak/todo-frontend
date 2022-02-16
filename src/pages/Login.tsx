@@ -97,9 +97,9 @@ const Login: NextPage = () => {
     event.preventDefault();
 
     setFormState((draft) => {
-      (draft.isLoading = true),
-        (draft.helper = initialUserData),
-        (draft.isError = initialErrorData);
+      draft.isLoading = true;
+      draft.helper = initialUserData;
+      draft.isError = initialErrorData;
     });
 
     if (formState.value.email.length === 0) {
