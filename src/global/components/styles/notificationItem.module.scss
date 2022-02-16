@@ -1,0 +1,31 @@
+@import "global/styles/utilities/variables";
+
+.base {
+  padding: 2rem;
+  width: 36rem;
+  margin-bottom: 2rem;
+  border-radius: 0.2rem;
+  transition: all 0.2s;
+  box-shadow: 0rem 0rem 2rem $color-grey-4;
+}
+
+.SUCCESS {
+  background-color: $color-success;
+}
+
+.ERROR {
+  background-color: $color-warning;
+}
+
+.bar {
+  margin-top: 0.3rem;
+  background-color: $color-black;
+  height: 0.26rem;
+  border-radius: 0.4rem;
+}
+
+.text {
+  color: $color-black;
+  font-weight: 600;
+  font-size: 1.6rem;
+}
