@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 import Head from "next/head";
 import type { NextPage } from "next";
@@ -15,6 +15,7 @@ import style from "styles/pages/loginSignUp.page.module.scss";
 import { axiosRequest } from "lib/helper/axios.helper";
 import { useNotificationContext } from "lib/context/NotificationContext";
 import { useAuthContext } from "lib/context/AuthContext";
+import { Updater, useImmer } from "use-immer";
 
 const initialUserData = {
   email: "",
@@ -26,13 +27,53 @@ const initialErrorData = {
   password: false,
 };
 
+type SetFormStateType = Updater<{
+  isLoading: boolean;
+  isError: {
+    email: boolean;
+    password: boolean;
+  };
+  helper: {
+    email: string;
+    password: string;
+  };
+  value: {
+    email: string;
+    password: string;
+  };
+}>;
+
+const setInputEmptyError = (
+  input: "email" | "password",
+  setFormState: SetFormStateType
+) => {
+  setFormState((draft) => {
+    draft.helper[input] = `${input} is required`;
+    draft.isError[input] = true;
+    draft.isLoading = false;
+  });
+};
+
+const setInputInvalidError = (setFormState: SetFormStateType) => {
+  setFormState((draft) => {
+    draft.helper = {
+      email: "email or password is invalid",
+      password: "email or password is invalid",
+    };
+    draft.isError = { email: true, password: true };
+    draft.isLoading = false;
+  });
+};
+
 const Login: NextPage = () => {
   const router = useRouter();
 
-  const [loading, setLoading] = useState(false);
-  const [helper, setHelper] = useState(initialUserData);
-  const [isError, setIsError] = useState(initialErrorData);
-  const [formData, setFormData] = useState(initialUserData);
+  const [formState, setFormState] = useImmer({
+    isLoading: false,
+    isError: initialErrorData,
+    helper: initialUserData,
+    value: initialUserData,
+  });
 
   const { auth, changeAuth } = useAuthContext();
   const { dispatchNotification } = useNotificationContext();
@@ -43,32 +84,44 @@ const Login: NextPage = () => {
     }
   }, [auth, router]);
 
-  const formInputHandler = (e: any) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
+  const formInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+    const inputName = event.target.name;
+    if (!(inputName === "email" || inputName === "password")) return;
+    setFormState((draft) => {
+      draft.value[inputName] = inputValue;
     });
   };
 
   const clickHandler = async (event: Event) => {
     event.preventDefault();
 
-    setLoading(true);
-    setHelper(initialUserData);
-    setIsError(initialErrorData);
+    setFormState((draft) => {
+      (draft.isLoading = true),
+        (draft.helper = initialUserData),
+        (draft.isError = initialErrorData);
+    });
 
-    if (!isEmail(formData.email) || !isStrongPassword(formData.password)) {
-      setHelper({
-        email: "email or password is invalid",
-        password: "email or password is invalid",
-      });
-      setIsError({ email: true, password: true });
-      setLoading(false);
+    if (formState.value.email.length === 0) {
+      setInputEmptyError("email", setFormState);
+      return;
+    }
+
+    if (formState.value.password.length === 0) {
+      setInputEmptyError("password", setFormState);
+      return;
+    }
+
+    if (
+      !isEmail(formState.value.email) ||
+      !isStrongPassword(formState.value.password)
+    ) {
+      setInputInvalidError(setFormState);
       return;
     }
 
     try {
-      await axiosRequest.post("/session", formData);
+      await axiosRequest.post("/session", formState.value);
 
       changeAuth(true);
       dispatchNotification({
@@ -79,21 +132,17 @@ const Login: NextPage = () => {
       router.push("/");
     } catch (error: any) {
       if (error.response.data.error.message === "user do not exist") {
-        setHelper({
-          email: "email or password is invalid",
-          password: "email or password is invalid",
-        });
-        setIsError({ email: true, password: true });
-        setLoading(false);
+        setInputInvalidError(setFormState);
         return;
       }
-
       dispatchNotification({
         type: "ERROR",
-        message: "Something went wrong. Please try again",
+        message: "Something went wrong",
       });
 
-      setLoading(false);
+      setFormState((draft) => {
+        draft.isLoading = false;
+      });
     }
   };
 
@@ -110,33 +159,33 @@ const Login: NextPage = () => {
             name="email"
             label="Email"
             type="email"
-            value={formData.email}
+            value={formState.value.email}
             onChange={formInputHandler}
-            helper={helper.email}
+            helper={formState.helper.email}
             placeholder="example@email.com"
-            isError={isError.email}
-            disabled={loading}
+            isError={formState.isError.email}
+            disabled={formState.isLoading}
             autoFocus={true}
           />
 
           <InputWithIcon
-            value={formData.password}
+            value={formState.value.password}
             handleOnChange={formInputHandler}
-            helper={helper.password}
+            helper={formState.helper.password}
             type="password"
             placeholder="Minimum 8 character"
             label="Password"
             name="password"
-            isError={isError.password}
-            isDisabled={loading}
+            isError={formState.isError.password}
+            isDisabled={formState.isLoading}
           />
 
           <ButtonWithTextAndIcon
             icon="east"
             text="Create your account"
             clickHandler={clickHandler}
-            loading={loading}
-            isDisabled={loading}
+            loading={formState.isLoading}
+            isDisabled={formState.isLoading}
           />
         </form>
       </div>
