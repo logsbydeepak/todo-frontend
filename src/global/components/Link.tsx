@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ButtonWithSmallIcon } from "./Button";
+import { ButtonWithIcon } from "./Button";
 
 import style from "../../AppPage/components/navbar.module.scss";
 import { useState } from "react";
@@ -29,13 +29,13 @@ export const AuthLink = ({ handelLogout }: { handelLogout: any }) => {
 
   return (
     <>
-      <ButtonWithSmallIcon
+      <ButtonWithIcon
         icon="manage_accounts"
         isLoading={false}
         handleOnClick={handleOnUserClick}
         className={style.button}
       />
-      <ButtonWithSmallIcon
+      <ButtonWithIcon
         icon="logout"
         isLoading={isLoading}
         handleOnClick={() => handelLogout(setIsLoading)}

@@ -18,7 +18,7 @@ interface ButtonWithTextAndIconProps {
   className?: string;
 }
 
-interface ButtonWithSmallIconProps {
+interface ButtonWithIconProps {
   icon: string;
   isLoading?: boolean;
   className?: string;
@@ -69,9 +69,7 @@ export const ButtonWithTextAndIcon: FunctionComponent<
   );
 };
 
-export const ButtonWithSmallIcon: FunctionComponent<
-  ButtonWithSmallIconProps
-> = ({
+export const ButtonWithIcon: FunctionComponent<ButtonWithIconProps> = ({
   icon,
   className,
   handleOnClick,
@@ -81,7 +79,7 @@ export const ButtonWithSmallIcon: FunctionComponent<
   return (
     <>
       <button
-        className={`${style.buttonWithSmallIcon} ${className}`}
+        className={`${style.ButtonWithIcon} ${className}`}
         disabled={isDisabled}
         onClick={(
           event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>

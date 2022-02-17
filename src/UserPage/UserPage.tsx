@@ -9,7 +9,7 @@ import { useAPICall } from "global/hooks";
 import {
   Spinner,
   PageTitle,
-  ButtonWithSmallIcon,
+  ButtonWithIcon,
   ButtonWithTextAndIcon,
   InputWithIcon,
   Modal,
@@ -128,13 +128,13 @@ export const UserPage = () => {
           >
             {inputState.showIcon.name && (
               <div className="right">
-                <ButtonWithSmallIcon
+                <ButtonWithIcon
                   icon="settings_backup_restore"
                   handleOnClick={() => handleInputReset("name")}
                   isDisabled={pageState.isDisabled}
                   className={`${iconStyle.icon__reset}`}
                 />
-                <ButtonWithSmallIcon
+                <ButtonWithIcon
                   icon="done_all"
                   isLoading={inputState.isLoading.name}
                   handleOnClick={() =>
@@ -165,14 +165,14 @@ export const UserPage = () => {
           >
             {inputState.showIcon.email && (
               <div className="right">
-                <ButtonWithSmallIcon
+                <ButtonWithIcon
                   icon="settings_backup_restore"
                   isLoading={false}
                   handleOnClick={() => handleInputReset("email")}
                   isDisabled={pageState.isDisabled}
                   className={`${iconStyle.icon__reset}`}
                 />
-                <ButtonWithSmallIcon
+                <ButtonWithIcon
                   icon="done_all"
                   isLoading={inputState.isLoading.email}
                   handleOnClick={() =>
@@ -203,7 +203,7 @@ export const UserPage = () => {
           >
             {inputState.showIcon.password && (
               <div className="right">
-                <ButtonWithSmallIcon
+                <ButtonWithIcon
                   icon="done_all"
                   isLoading={inputState.isLoading.password}
                   isDisabled={pageState.isDisabled}

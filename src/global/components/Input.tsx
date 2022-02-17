@@ -1,5 +1,5 @@
 import { ChangeEvent, FunctionComponent, useState } from "react";
-import { ButtonWithSmallIcon } from "./Button";
+import { ButtonWithIcon } from "./Button";
 
 import style from "./styles/input.module.scss";
 import iconStyle from "global/components/styles/iconColor.module.scss";
@@ -106,7 +106,7 @@ export const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
           />
           {type === "password" && (
             <div className="right">
-              <ButtonWithSmallIcon
+              <ButtonWithIcon
                 icon={showPassword ? "visibility" : "visibility_off"}
                 handleOnClick={() => {
                   setShowPassword(!showPassword);

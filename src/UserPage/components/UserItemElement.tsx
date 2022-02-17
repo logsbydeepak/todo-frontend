@@ -1,4 +1,4 @@
-import { ButtonWithSmallIcon } from "global/components";
+import { ButtonWithIcon } from "global/components";
 import { ChangeEvent, FunctionComponent, useState } from "react";
 
 import style from "./userItem.module.scss";
@@ -57,13 +57,13 @@ const UserItem: FunctionComponent<Props> = ({
             <>
               {tick && (
                 <>
-                  <ButtonWithSmallIcon
+                  <ButtonWithIcon
                     icon="settings_backup_restore"
                     isLoading={false}
                     handleOnClick={handleReset}
                   />
 
-                  <ButtonWithSmallIcon
+                  <ButtonWithIcon
                     icon="done_all"
                     isLoading={isLoading}
                     handleOnClick={() => {}}

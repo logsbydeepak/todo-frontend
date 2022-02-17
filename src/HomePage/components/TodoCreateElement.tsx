@@ -6,7 +6,7 @@ import style from "./styles/todoCreate.element.module.scss";
 import { handleCreateTodo } from "HomePage/handler/create.todo.handler";
 import { useAPICall } from "global/hooks";
 import { DispatchTodoActionType } from "global/reducer";
-import { ButtonWithSmallIcon } from "global/components";
+import { ButtonWithIcon } from "global/components";
 
 interface Props {
   dispatchTodoAction: DispatchTodoActionType;
@@ -41,7 +41,7 @@ const TodoCreateLayoutComponent: FunctionComponent<Props> = ({
             value={textInput}
             onChange={handleInputChange}
           />
-          <ButtonWithSmallIcon
+          <ButtonWithIcon
             icon="arrow_forward_ios"
             isLoading={isLoading}
             handleOnClick={() => {

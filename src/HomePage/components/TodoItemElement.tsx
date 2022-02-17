@@ -4,7 +4,7 @@ import { handleDeleteTodo } from "HomePage/handler/delete.todo.handler";
 import { handleChangeTodoTask } from "HomePage/handler/changeTask.todo.handler";
 import { handleChangeTodoStatus } from "HomePage/handler/changeStatus.todo.handler.";
 
-import { InputWithIcon, ButtonWithSmallIcon } from "global/components";
+import { InputWithIcon, ButtonWithIcon } from "global/components";
 
 import { TodoItemPropsType } from "HomePage/todoItemTypes";
 import style from "global/components/styles/iconColor.module.scss";
@@ -87,7 +87,7 @@ const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
         className={`${style.form}`}
       >
         <div className="left">
-          <ButtonWithSmallIcon
+          <ButtonWithIcon
             icon={status ? "check_circle_outline" : "radio_button_unchecked"}
             isLoading={loadingIcon.status}
             className={style.icon__check}
@@ -98,7 +98,7 @@ const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
         <div className="right">
           {tick && (
             <>
-              <ButtonWithSmallIcon
+              <ButtonWithIcon
                 icon="settings_backup_restore"
                 isLoading={false}
                 className={style.icon__reset}
@@ -106,7 +106,7 @@ const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
                 isDisabled={isDisabled}
               />
 
-              <ButtonWithSmallIcon
+              <ButtonWithIcon
                 icon="done_all"
                 isLoading={loadingIcon.task}
                 className={style.icon__done}
@@ -116,7 +116,7 @@ const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
             </>
           )}
 
-          <ButtonWithSmallIcon
+          <ButtonWithIcon
             icon="delete_outline"
             isDisabled={isDisabled}
             isLoading={loadingIcon.delete}
