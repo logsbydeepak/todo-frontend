@@ -39,7 +39,7 @@ export const ButtonWithLInk: FunctionComponent<ButtonWithLInkProps> = ({
   return (
     <>
       <Link href={link}>
-        <a className={`button_link`}>Get Started</a>
+        <a className={style.buttonWithLink}>Get Started</a>
       </Link>
     </>
   );
@@ -58,13 +58,14 @@ export const ButtonWithTextAndIcon: FunctionComponent<
   return (
     <>
       <button
-        className={`${warning && style.warning}`}
+        className={`${style.buttonWithTextAndIcon} ${
+          warning && style.warningBackground
+        }`}
         onClick={clickHandler}
         disabled={isDisabled}
       >
         {text}
-        {!loading && <i className={`icon ${style.icon}`}>{icon}</i>}
-        {loading && <Spinner />}
+        {loading ? <Spinner /> : <i>{icon}</i>}
       </button>
     </>
   );
@@ -97,7 +98,7 @@ export const ButtonWithSmallIcon: FunctionComponent<
   return (
     <>
       <button
-        className={`${style.button__small} ${className}`}
+        className={`${style.buttonWithSmallIcon} ${className}`}
         disabled={isDisabled}
         onClick={(
           event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
@@ -106,11 +107,7 @@ export const ButtonWithSmallIcon: FunctionComponent<
           handleOnClick();
         }}
       >
-        {isLoading ? (
-          <Spinner className={style.button__small__spinner} />
-        ) : (
-          <i className={`icon ${style.button__small__icon}`}>{icon}</i>
-        )}
+        {isLoading ? <Spinner /> : <i className={`icon`}>{icon}</i>}
       </button>
     </>
   );

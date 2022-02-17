@@ -1,0 +1,33 @@
+@import "./variables";
+
+@mixin backgroundColorPrimary {
+  background-color: $color-primary;
+
+  &:hover {
+    background-color: $color-primary-dark-1;
+  }
+
+  &:active {
+    background-color: $color-primary-dark-2;
+  }
+
+  &:disabled {
+    background-color: $color-grey-3;
+  }
+}
+
+@mixin backgroundColorWarning {
+  background-color: $color-warning;
+
+  &:hover {
+    background-color: $color-warning-dark-1;
+  }
+
+  &:active {
+    background-color: $color-warning-dark-2;
+  }
+
+  &:disabled {
+    background-color: $color-grey-3;
+  }
+}
