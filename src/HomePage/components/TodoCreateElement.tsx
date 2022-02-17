@@ -1,11 +1,12 @@
 import { FunctionComponent, useState, MouseEvent, ChangeEvent } from "react";
 
 import inputStyle from "global/components/styles/input.module.scss";
-import { ButtonWithIcon } from "global/components";
+import buttonStyle from "global/components/styles/button.module.scss";
 import style from "./styles/todoCreate.element.module.scss";
 import { handleCreateTodo } from "HomePage/handler/create.todo.handler";
 import { useAPICall } from "global/hooks";
 import { DispatchTodoActionType } from "global/reducer";
+import { ButtonWithSmallIcon } from "global/components";
 
 interface Props {
   dispatchTodoAction: DispatchTodoActionType;
@@ -29,8 +30,8 @@ const TodoCreateLayoutComponent: FunctionComponent<Props> = ({
 
   return (
     <>
-      <form className={`${style.base} ${isError && inputStyle.error}`}>
-        <div>
+      <form className={`${isError && `${inputStyle.error} ${style.error}`}`}>
+        <div className={style.container}>
           <input
             type="text"
             className={`${style.input} ${inputStyle.input}`}
@@ -40,13 +41,10 @@ const TodoCreateLayoutComponent: FunctionComponent<Props> = ({
             value={textInput}
             onChange={handleInputChange}
           />
-          <ButtonWithIcon
-            loading={isLoading}
-            isError={isError}
-            handleOnClick={async (
-              event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-            ) => {
-              event.preventDefault();
+          <ButtonWithSmallIcon
+            icon="arrow_forward_ios"
+            isLoading={isLoading}
+            handleOnClick={() => {
               handleCreateTodo(
                 setAPIRequestData,
                 inputState,

@@ -96,9 +96,7 @@ export const LoginPage: NextPage = () => {
     });
   };
 
-  const clickHandler = async (event: Event) => {
-    event.preventDefault();
-
+  const handleLogin = async () => {
     setFormState((draft) => {
       draft.isLoading = true;
       draft.helper = initialUserData;
@@ -186,8 +184,8 @@ export const LoginPage: NextPage = () => {
           <ButtonWithTextAndIcon
             icon="east"
             text="Create your account"
-            clickHandler={clickHandler}
-            loading={formState.isLoading}
+            handleOnClick={handleLogin}
+            isLoading={formState.isLoading}
             isDisabled={formState.isLoading}
           />
         </form>

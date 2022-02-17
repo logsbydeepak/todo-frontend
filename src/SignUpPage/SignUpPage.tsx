@@ -67,9 +67,7 @@ export const SignUpPage: NextPage = () => {
     });
   };
 
-  const clickHandler = (event: FormEvent) => {
-    event.preventDefault();
-
+  const handleSignUp = () => {
     setFormState((draft) => {
       draft.isLoading = true;
       draft.helper = initialUserData;
@@ -193,8 +191,8 @@ export const SignUpPage: NextPage = () => {
           <ButtonWithTextAndIcon
             icon="east"
             text="Create your account"
-            clickHandler={clickHandler}
-            loading={formState.isLoading}
+            handleOnClick={handleSignUp}
+            isLoading={formState.isLoading}
             isDisabled={formState.isLoading}
           />
         </form>

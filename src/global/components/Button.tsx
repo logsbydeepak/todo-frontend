@@ -11,18 +11,11 @@ interface ButtonWithLInkProps {
 interface ButtonWithTextAndIconProps {
   icon: string;
   text: string;
-  clickHandler: any;
-  loading: boolean;
-  warning?: boolean;
+  handleOnClick: () => void;
+  isLoading?: boolean;
+  isError?: boolean;
   isDisabled?: boolean;
-}
-
-interface ButtonWithIconProps {
-  loading: boolean;
-  isError: boolean;
-  handleOnClick: (
-    event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) => Promise<void>;
+  className?: string;
 }
 
 interface ButtonWithSmallIconProps {
@@ -50,43 +43,27 @@ export const ButtonWithTextAndIcon: FunctionComponent<
 > = ({
   icon,
   text,
-  clickHandler,
-  warning = false,
-  loading = false,
+  handleOnClick,
+  isError = false,
+  isLoading = false,
   isDisabled = false,
 }) => {
   return (
     <>
       <button
-        className={`${style.buttonWithTextAndIcon} ${
-          warning && style.warningBackground
+        className={` ${style.buttonWithTextAndIcon} ${
+          isError && style.warningBackground
         }`}
-        onClick={clickHandler}
+        onClick={(
+          event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+        ) => {
+          event.preventDefault();
+          handleOnClick();
+        }}
         disabled={isDisabled}
       >
         {text}
-        {loading ? <Spinner /> : <i>{icon}</i>}
-      </button>
-    </>
-  );
-};
-
-export const ButtonWithIcon: FunctionComponent<ButtonWithIconProps> = ({
-  loading,
-  isError,
-  handleOnClick,
-}) => {
-  return (
-    <>
-      <button
-        className={`${style.base} ${style.icon} ${
-          isError ? style.warning : style.primary
-        } ${style.button__icon}`}
-        disabled={loading}
-        onClick={handleOnClick}
-      >
-        {!loading && <i className="icon">arrow_forward_ios</i>}
-        {loading && <Spinner className={style.spinner} />}
+        {isLoading ? <Spinner /> : <i>{icon}</i>}
       </button>
     </>
   );
@@ -94,7 +71,13 @@ export const ButtonWithIcon: FunctionComponent<ButtonWithIconProps> = ({
 
 export const ButtonWithSmallIcon: FunctionComponent<
   ButtonWithSmallIconProps
-> = ({ icon, isLoading, className, handleOnClick, isDisabled }) => {
+> = ({
+  icon,
+  className,
+  handleOnClick,
+  isLoading = false,
+  isDisabled = false,
+}) => {
   return (
     <>
       <button
@@ -107,7 +90,7 @@ export const ButtonWithSmallIcon: FunctionComponent<
           handleOnClick();
         }}
       >
-        {isLoading ? <Spinner /> : <i className={`icon`}>{icon}</i>}
+        {isLoading ? <Spinner /> : <i>{icon}</i>}
       </button>
     </>
   );

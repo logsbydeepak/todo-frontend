@@ -89,7 +89,7 @@ const TodoPageLayout = () => {
         <ButtonWithTextAndIcon
           icon="add"
           text="Load more"
-          clickHandler={() =>
+          handleOnClick={() =>
             handleGetMoreTodo(
               dispatchTodoAction,
               setAPIRequestData,
@@ -98,7 +98,7 @@ const TodoPageLayout = () => {
               dispatchNotification
             )
           }
-          loading={isLoadingMore}
+          isLoading={isLoadingMore}
         />
       )}
     </>
