@@ -237,7 +237,7 @@ export const UserPage = () => {
             <ButtonWithTextAndIcon
               icon="logout"
               text="LOGOUT ALL"
-              clickHandler={() =>
+              handleOnClick={() =>
                 handleDeleteAndLogoutAllUser(
                   "logoutAll",
                   setAPIRequestData,
@@ -248,15 +248,15 @@ export const UserPage = () => {
                   dispatchNotification
                 )
               }
-              loading={pageState.isLoadingLogoutAllButton}
+              isLoading={pageState.isLoadingLogoutAllButton}
               isDisabled={pageState.isDisabled}
             />
 
             <ButtonWithTextAndIcon
               icon="delete_outline"
               text="DELETE ACCOUNT"
-              loading={pageState.isLoadingDeleteButton}
-              clickHandler={() => {
+              isLoading={pageState.isLoadingDeleteButton}
+              handleOnClick={() => {
                 setPageState((draft) => {
                   draft.showModal = true;
                 });

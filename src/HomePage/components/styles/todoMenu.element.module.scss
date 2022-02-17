@@ -10,13 +10,16 @@
   }
 
   &_item {
+    cursor: pointer;
     width: auto;
+    border-radius: 0.4rem;
     background-color: $color-black;
     padding: 1.4rem 3.2rem;
     font-size: 1.6rem;
     font-weight: 500;
     color: $color-grey-3;
     border: 0.2rem solid $color-black;
+    transition: all 0.3s;
 
     &:hover {
       color: $color-grey-2;

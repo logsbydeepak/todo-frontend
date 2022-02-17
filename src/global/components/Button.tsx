@@ -16,6 +16,7 @@ interface ButtonWithTextAndIconProps {
   isError?: boolean;
   isDisabled?: boolean;
   className?: string;
+  warning?: boolean;
 }
 
 interface ButtonWithIconProps {
@@ -44,6 +45,7 @@ export const ButtonWithTextAndIcon: FunctionComponent<
   icon,
   text,
   handleOnClick,
+  warning = false,
   isError = false,
   isLoading = false,
   isDisabled = false,
@@ -51,8 +53,8 @@ export const ButtonWithTextAndIcon: FunctionComponent<
   return (
     <>
       <button
-        className={` ${style.buttonWithTextAndIcon} ${
-          isError && style.warningBackground
+        className={`${style.buttonWithTextAndIcon} ${
+          isError || (warning && style.warningBackground)
         }`}
         onClick={(
           event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>

@@ -26,14 +26,14 @@ export const Modal: FunctionComponent<Props> = ({
               <ButtonWithTextAndIcon
                 icon="close"
                 text="Cancel"
-                clickHandler={handleOnCancel}
-                loading={false}
+                handleOnClick={handleOnCancel}
+                isLoading={false}
               />
               <ButtonWithTextAndIcon
                 icon="arrow_forward_ios"
                 text="Continue"
-                clickHandler={handleOnContinue}
-                loading={false}
+                handleOnClick={handleOnContinue}
+                isLoading={false}
                 warning={true}
               />
             </div>
