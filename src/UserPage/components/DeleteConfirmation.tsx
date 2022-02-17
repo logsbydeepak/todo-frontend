@@ -7,7 +7,7 @@ interface Props {
   handleOnCancel: () => void;
 }
 
-export const Modal: FunctionComponent<Props> = ({
+export const DeleteConfirmation: FunctionComponent<Props> = ({
   handleOnContinue,
   handleOnCancel,
 }) => {

@@ -12,11 +12,11 @@ import {
   ButtonWithIcon,
   ButtonWithTextAndIcon,
   InputWithIcon,
-  Modal,
 } from "global/components";
 
 import iconStyle from "global/components/styles/iconColor.module.scss";
 import style from "./user.page.module.scss";
+import { DeleteConfirmation } from "./components/DeleteConfirmation";
 import { handleGetUser } from "./handler/get.user.handler";
 import { useImmer } from "use-immer";
 import { handleUpdateUserInfo } from "./handler/update.user.handler";
@@ -266,7 +266,7 @@ export const UserPage = () => {
             />
           </div>
           {pageState.showModal && (
-            <Modal
+            <DeleteConfirmation
               handleOnCancel={() => {
                 setPageState((draft) => {
                   draft.showModal = false;
