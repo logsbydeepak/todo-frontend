@@ -107,7 +107,6 @@ export const handleUpdateUserInfo = (
         [toUpdate]: inputState.value[toUpdate],
       },
     },
-    showDefaultErrorNotification: false,
 
     onSuccess: (successResponse: any) => {
       setInputState((draft) => {

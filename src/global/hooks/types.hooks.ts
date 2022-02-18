@@ -1,4 +1,4 @@
-import { Method } from "axios";
+import { AxiosResponse, Method } from "axios";
 import { Dispatch, SetStateAction } from "react";
 
 export type APIRequestDataType = {
@@ -7,7 +7,6 @@ export type APIRequestDataType = {
     url: string;
     body?: any;
   };
-  showDefaultErrorNotification?: boolean;
   onSuccess: (successResponse: Object) => void;
   onError: (errorResponse: Object) => void;
 } | null;

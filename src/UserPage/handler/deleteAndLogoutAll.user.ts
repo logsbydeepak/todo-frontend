@@ -79,7 +79,6 @@ export const handleDeleteAndLogoutAllUser = (
         currentPassword: inputState.value.currentPassword,
       },
     },
-    showDefaultErrorNotification: false,
     onSuccess: () => {
       changeAuth(false);
       dispatchNotification({

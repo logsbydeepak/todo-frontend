@@ -6,7 +6,6 @@ import { APIRequestDataType } from "global/hooks";
 import { axiosRequest } from "global/helper";
 
 export const useAPICall = (requestData: APIRequestDataType) => {
-  const { dispatchNotification } = useNotificationContext();
   const { changeAuth } = useAuthContext();
 
   const router = useRouter();
@@ -17,10 +16,6 @@ export const useAPICall = (requestData: APIRequestDataType) => {
     if (!APIRequestData) return;
     const { method, url, body } = APIRequestData.request;
     const { onSuccess, onError } = APIRequestData;
-    const showDefaultErrorNotification =
-      typeof APIRequestData.showDefaultErrorNotification === "boolean"
-        ? APIRequestData.showDefaultErrorNotification
-        : true;
 
     const fetch = async () => {
       axiosRequest({
@@ -37,13 +32,6 @@ export const useAPICall = (requestData: APIRequestDataType) => {
             errorResponse.response.data.error.title === "BODY_PARSE" ||
             errorResponse.response.data.error.title === "QUERY_PARSE"
           ) {
-            console.log(showDefaultErrorNotification);
-            if (showDefaultErrorNotification) {
-              dispatchNotification({
-                type: "ERROR",
-                message: "Something went wrong in request",
-              });
-            }
             onError(errorResponse.response.data?.error);
             return;
           }
@@ -85,10 +73,6 @@ export const useAPICall = (requestData: APIRequestDataType) => {
 
           changeAuth(false);
           router.push("/");
-          dispatchNotification({
-            type: "ERROR",
-            message: "Logging user out",
-          });
         });
     };
 
