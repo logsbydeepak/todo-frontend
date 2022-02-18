@@ -10,23 +10,21 @@ import {
   Spinner,
   PageTitle,
   ButtonWithIcon,
-  ButtonWithTextAndIcon,
   InputWithIcon,
 } from "global/components";
 
 import iconStyle from "global/components/styles/iconColor.module.scss";
 import style from "./user.page.module.scss";
-import { DeleteConfirmation } from "./components/DeleteConfirmation";
 import { handleGetUser } from "./handler/get.user.handler";
 import { useImmer } from "use-immer";
 import { handleUpdateUserInfo } from "./handler/update.user.handler";
-import { handleDeleteAndLogoutAllUser } from "./handler/deleteAndLogoutAll.user";
 import {
   initialBoolean,
   initialBooleanWithoutCurrentPassword,
   initialText,
   initialTextWithNameAndEmail,
 } from "./data";
+import { LogoutAllAndDeleteUserButton } from "./components/LogoutAllAndDeleteUserButton";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -233,61 +231,12 @@ export const UserPage = () => {
             isDisabled={pageState.isDisabled}
           />
 
-          <div className={style.button}>
-            <ButtonWithTextAndIcon
-              icon="logout"
-              text="LOGOUT ALL"
-              handleOnClick={() =>
-                handleDeleteAndLogoutAllUser(
-                  "logoutAll",
-                  setAPIRequestData,
-                  inputState,
-                  setPageState,
-                  setInputState,
-                  changeAuth,
-                  dispatchNotification
-                )
-              }
-              isLoading={pageState.isLoadingLogoutAllButton}
-              isDisabled={pageState.isDisabled}
-            />
-
-            <ButtonWithTextAndIcon
-              icon="delete_outline"
-              text="DELETE ACCOUNT"
-              isLoading={pageState.isLoadingDeleteButton}
-              handleOnClick={() => {
-                setPageState((draft) => {
-                  draft.showModal = true;
-                });
-              }}
-              warning={true}
-              isDisabled={pageState.isDisabled}
-            />
-          </div>
-          {pageState.showModal && (
-            <DeleteConfirmation
-              handleOnCancel={() => {
-                setPageState((draft) => {
-                  draft.showModal = false;
-                });
-              }}
-              handleOnContinue={() => {
-                setPageState((draft) => {
-                  draft.showModal = false;
-                  handleDeleteAndLogoutAllUser(
-                    "delete",
-                    setAPIRequestData,
-                    inputState,
-                    setPageState,
-                    setInputState,
-                    changeAuth,
-                    dispatchNotification
-                  );
-                });
-              }}
-            />
-          )}
+          <LogoutAllAndDeleteUserButton
+            inputState={inputState}
+            setInputState={setInputState}
+            pageState={pageState}
+            setPageState={setPageState}
+          />
         </>
       )}
     </>
