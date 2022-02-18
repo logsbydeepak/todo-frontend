@@ -1,0 +1,28 @@
+@import "global/styles/utilities/variables";
+
+.spinner {
+  margin: 10rem;
+  display: flex;
+  justify-content: center;
+  &__container {
+    width: 4rem;
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem;
+
+  & svg {
+    & path {
+      fill: $color-white;
+    }
+  }
+
+  & p {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+}

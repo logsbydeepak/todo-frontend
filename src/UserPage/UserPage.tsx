@@ -21,6 +21,7 @@ import { LogoutAllAndDeleteUserButton } from "./components/LogoutAllAndDeleteUse
 import { NameInput } from "./components/NameInput";
 import { EmailInput } from "./components/EmailInput";
 import { PasswordInput } from "./components/PasswordInput";
+import { HelperTextAndSpinner } from "./components/HelperTextAndSpinner";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -37,6 +38,7 @@ export const UserPage = () => {
   const [pageState, setPageState] = useImmer({
     userInfo: initialTextWithNameAndEmail,
     isLoadingUser: false,
+    isLoadingUserError: false,
     isDisabled: false,
     showModal: false,
     isLoadingLogoutAllButton: false,
@@ -45,8 +47,7 @@ export const UserPage = () => {
 
   const router = useRouter();
   const [setAPIRequestData] = useAPICall(null);
-  const { auth, changeAuth } = useAuthContext();
-  const { dispatchNotification } = useNotificationContext();
+  const { auth } = useAuthContext();
 
   myUseLayoutEffect(() => {
     if (auth === null) return;
@@ -104,11 +105,13 @@ export const UserPage = () => {
       </Head>
       <PageTitle title="Your Account" subtitle="Manage your account details" />
 
-      {pageState.isLoadingUser ? (
-        <div className={style.spinner}>
-          <Spinner className={style.spinner__container} />
-        </div>
-      ) : (
+      <HelperTextAndSpinner
+        isError={pageState.isLoadingUserError}
+        isLoading={pageState.isLoadingUser}
+        helperText="Something went wrong while loading user"
+      />
+
+      {!(pageState.isLoadingUser || pageState.isLoadingUserError) && (
         <>
           <NameInput
             inputState={inputState}

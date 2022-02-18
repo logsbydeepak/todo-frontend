@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
 import { Updater } from "use-immer";
 
 export interface InitialBooleanType {
@@ -39,6 +38,7 @@ export type SetUserInputStateType = Updater<UserInputStateType>;
 export interface PageStateType {
   userInfo: InitialTextWithNameAndEmailType;
   isLoadingUser: boolean;
+  isLoadingUserError: boolean;
   isDisabled: boolean;
   showModal: boolean;
   isLoadingLogoutAllButton: boolean;
