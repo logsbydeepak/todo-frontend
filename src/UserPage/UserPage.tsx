@@ -21,7 +21,7 @@ import { LogoutAllAndDeleteUserButton } from "./components/LogoutAllAndDeleteUse
 import { NameInput } from "./components/NameInput";
 import { EmailInput } from "./components/EmailInput";
 import { PasswordInput } from "./components/PasswordInput";
-import { HelperTextAndSpinner } from "./components/HelperTextAndSpinner";
+import { HelperTextAndSpinner } from "../global/components/HelperTextAndSpinner";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -108,7 +108,7 @@ export const UserPage = () => {
       <HelperTextAndSpinner
         isError={pageState.isLoadingUserError}
         isLoading={pageState.isLoadingUser}
-        helperText="Something went wrong while loading user"
+        helperText="No user info to show"
       />
 
       {!(pageState.isLoadingUser || pageState.isLoadingUserError) && (

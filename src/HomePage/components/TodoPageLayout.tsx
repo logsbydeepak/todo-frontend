@@ -19,6 +19,7 @@ import { handleGetTodoOnMenuChange } from "HomePage/handler/getOnMenuChange.todo
 
 import style from "./styles/todoPage.layout.module.scss";
 import { useAuthContext } from "global/context";
+import { HelperTextAndSpinner } from "global/components/HelperTextAndSpinner";
 
 const initialTodoState: TodoStateType = {
   todo: [],
@@ -65,11 +66,9 @@ const TodoPageLayout = () => {
         dispatchTodoAction={dispatchTodoAction}
         activeMenu={activeMenu}
       />
-      {isLoading ? (
-        <div className={style.spinner}>
-          <Spinner className={style.spinner__container} />
-        </div>
-      ) : (
+
+      {!isLoading &&
+        todo.length !== 0 &&
         todo.map((todoItem: TodoType, index: number) => {
           return (
             <form key={todoItem._id}>
@@ -81,9 +80,13 @@ const TodoPageLayout = () => {
               />
             </form>
           );
-        })
-      )}
-      {todo.length === 0 && <p className={style.noTodo}>No task to show</p>}
+        })}
+
+      <HelperTextAndSpinner
+        isLoading={isLoading}
+        isError={todo.length === 0}
+        helperText="No task to show"
+      />
 
       {showLoadMoreButton && (
         <ButtonWithTextAndIcon
