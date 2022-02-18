@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ButtonWithIcon } from "./Button";
+import { ButtonWithIcon } from "../../global/components/Button";
 
 import style from "../../AppPage/components/navbar.module.scss";
 import { useState } from "react";

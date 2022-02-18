@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { useAuthContext, useNotificationContext } from "global/context";
+import { useAuthContext } from "global/context/AuthContext";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { APIRequestDataType } from "global/hooks";

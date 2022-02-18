@@ -1,7 +1,7 @@
-import { ButtonWithLInk } from "global/components";
-import Head from "next/head";
+import { ButtonWithLink } from "HomePage/components/ButtonWithLink";
 
-import style from "./styles/landingPage.layout.module.scss";
+import Head from "next/head";
+import style from "./landingPage.layout.module.scss";
 
 const LandingPageLayout = () => {
   return (
@@ -16,7 +16,7 @@ const LandingPageLayout = () => {
             TODO<span>.</span>
           </span>
         </h1>
-        <ButtonWithLInk link="/SignUp" />
+        <ButtonWithLink href="/SignUp" />
       </div>
     </>
   );

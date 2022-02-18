@@ -1,0 +1,10 @@
+@import "global/styles/utilities/variables";
+@import "global/styles/utilities/mixin";
+
+@import "../DefaultButton";
+
+.buttonWithLink {
+  @include backgroundColorPrimary();
+  @include ButtonDefault();
+  text-align: center;
+}

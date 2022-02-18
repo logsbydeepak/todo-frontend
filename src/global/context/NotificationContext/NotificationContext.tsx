@@ -1,16 +1,9 @@
-import {
-  createContext,
-  FunctionComponent,
-  useContext,
-  useReducer,
-} from "react";
+import { createContext, FunctionComponent, useContext } from "react";
 
-import { NotificationItem } from "global/components";
-import { notificationReducer } from "global/reducer";
-
-import style from "global/components/styles/notification.module.scss";
-
-import { NotificationContextType, NotificationStateType } from ".";
+import { NotificationContainer, NotificationItem } from "./components";
+import { NotificationContextType, NotificationDraftType } from ".";
+import { notificationReducer } from "./notificationReducer";
+import { useImmerReducer } from "use-immer";
 
 export const NotificationContext = createContext<NotificationContextType>(null);
 
@@ -23,10 +16,10 @@ export const useNotificationContext = () => {
   return context;
 };
 
-const initialNotificationState: NotificationStateType = [];
+const initialNotificationState: NotificationDraftType = [];
 
 export const NotificationProvider: FunctionComponent = ({ children }) => {
-  const [state, dispatchNotification] = useReducer(
+  const [state, dispatchNotification] = useImmerReducer(
     notificationReducer,
     initialNotificationState
   );
@@ -34,7 +27,7 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
   return (
     <>
       <NotificationContext.Provider value={{ dispatchNotification }}>
-        <div className={style.base}>
+        <NotificationContainer>
           {state.map((data: any) => (
             <NotificationItem
               key={data.id}
@@ -42,7 +35,7 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
               notification={data}
             />
           ))}
-        </div>
+        </NotificationContainer>
         {children}
       </NotificationContext.Provider>
     </>

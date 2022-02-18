@@ -1,6 +1,6 @@
-import { Spinner } from "global/components";
 import { FunctionComponent } from "react";
-import style from "./styles/HelperTextAndSpinner.module.scss";
+import style from "./HelperTextAndSpinner.module.scss";
+import { Spinner } from "global/components/Spinner";
 
 interface Props {
   isError: boolean;
@@ -17,7 +17,7 @@ export const HelperTextAndSpinner: FunctionComponent<Props> = ({
     <>
       {isLoading && (
         <div className={style.container}>
-          <Spinner className={style.spinner__container} />
+          <Spinner className={style.spinner__container} theme="light" />
         </div>
       )}
 

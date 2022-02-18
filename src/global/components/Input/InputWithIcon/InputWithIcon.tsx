@@ -1,57 +1,8 @@
+import { ButtonWithIcon } from "global/components/Button";
 import { ChangeEvent, FunctionComponent, useState } from "react";
-import { ButtonWithIcon } from "./Button";
-
-import style from "./styles/input.module.scss";
-import iconStyle from "global/components/styles/iconColor.module.scss";
-
-type Props = {
-  name: string;
-  placeholder: string;
-  type: string;
-  autoFocus?: boolean;
-  value: any;
-  onChange: any;
-  label: string;
-  helper: string;
-  isError: boolean;
-  disabled?: boolean;
-};
-
-export const Input: FunctionComponent<Props> = ({
-  name,
-  placeholder,
-  type,
-  autoFocus = false,
-  value,
-  onChange,
-  label,
-  helper,
-  isError,
-  disabled = false,
-}) => {
-  return (
-    <>
-      <div className={`${style.base} ${isError && style.error}`}>
-        <label htmlFor={name} className={style.label}>
-          {label}
-        </label>
-        <input
-          autoFocus={autoFocus}
-          className={style.input}
-          type={type}
-          id={name}
-          name={name}
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-          autoComplete="text"
-          disabled={disabled}
-        />
-        <p className={style.helper}>{helper}</p>
-      </div>
-    </>
-  );
-};
+import style from "./InputWithIcon.module.scss";
+import iconStyle from "./InputWithIcon.module.scss";
+import iconColor from "global/components/styles/iconColor.module.scss";
 
 interface InputWithIconProps {
   type?: string;
@@ -65,6 +16,7 @@ interface InputWithIconProps {
   handleOnChange: (event: ChangeEvent<HTMLInputElement>) => void;
   name?: string;
 }
+
 export const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
   type = "text",
   helper = "",
@@ -112,7 +64,7 @@ export const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
                   setShowPassword(!showPassword);
                   setInputType(showPassword ? "password" : "text");
                 }}
-                className={`${iconStyle.icon__visible}`}
+                className={`${iconStyle.white}`}
               />
             </div>
           )}

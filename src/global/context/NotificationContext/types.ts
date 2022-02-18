@@ -1,6 +1,6 @@
 import { Dispatch } from "react";
 
-export type NotificationStateType = {
+export type NotificationDraftType = {
   id: string;
   message: string;
   status: string;

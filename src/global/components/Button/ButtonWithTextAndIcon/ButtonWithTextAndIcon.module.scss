@@ -1,0 +1,22 @@
+@import "global/styles/utilities/variables";
+
+.ButtonWithIcon {
+  padding: 1rem;
+  background-color: $color-black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & i {
+    color: $color-grey-3;
+    font-size: 2rem;
+  }
+
+  & svg {
+    width: 2rem;
+
+    & path {
+      fill: $color-white;
+    }
+  }
+}

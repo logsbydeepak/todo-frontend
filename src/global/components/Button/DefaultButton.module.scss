@@ -1,0 +1,11 @@
+@import "global/styles/utilities/mixin";
+
+@mixin ButtonDefault {
+  width: 100%;
+  padding: 2rem 3rem;
+  font-size: 1.8rem;
+  color: $color-black;
+  font-weight: 600;
+  border-radius: 0.4rem;
+  transition: all 0.3s;
+}
