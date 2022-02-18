@@ -6,18 +6,11 @@ import { useRouter } from "next/router";
 import { useAuthContext, useNotificationContext } from "global/context";
 import { useAPICall } from "global/hooks";
 
-import {
-  Spinner,
-  PageTitle,
-  ButtonWithIcon,
-  InputWithIcon,
-} from "global/components";
+import { Spinner, PageTitle, InputWithIcon } from "global/components";
 
-import iconStyle from "global/components/styles/iconColor.module.scss";
 import style from "./user.page.module.scss";
 import { handleGetUser } from "./handler/get.user.handler";
 import { useImmer } from "use-immer";
-import { handleUpdateUserInfo } from "./handler/update.user.handler";
 import {
   initialBoolean,
   initialBooleanWithoutCurrentPassword,
@@ -25,6 +18,9 @@ import {
   initialTextWithNameAndEmail,
 } from "./data";
 import { LogoutAllAndDeleteUserButton } from "./components/LogoutAllAndDeleteUserButton";
+import { NameInput } from "./components/NameInput";
+import { EmailInput } from "./components/EmailInput";
+import { PasswordInput } from "./components/PasswordInput";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -114,111 +110,31 @@ export const UserPage = () => {
         </div>
       ) : (
         <>
-          <InputWithIcon
-            value={inputState.value.name}
-            handleOnChange={handleInputChange}
-            helper={inputState.helper.name}
-            type="text"
-            placeholder="Name"
-            isDisabled={pageState.isDisabled}
-            isError={inputState.isError.name}
-            name="name"
-          >
-            {inputState.showIcon.name && (
-              <div className="right">
-                <ButtonWithIcon
-                  icon="settings_backup_restore"
-                  handleOnClick={() => handleInputReset("name")}
-                  isDisabled={pageState.isDisabled}
-                  className={`${iconStyle.icon__reset}`}
-                />
-                <ButtonWithIcon
-                  icon="done_all"
-                  isLoading={inputState.isLoading.name}
-                  handleOnClick={() =>
-                    handleUpdateUserInfo(
-                      setAPIRequestData,
-                      inputState,
-                      setPageState,
-                      setInputState,
-                      "name"
-                    )
-                  }
-                  isDisabled={pageState.isDisabled}
-                  className={`${iconStyle.icon__done}`}
-                />
-              </div>
-            )}
-          </InputWithIcon>
+          <NameInput
+            inputState={inputState}
+            setInputState={setInputState}
+            pageState={pageState}
+            setPageState={setPageState}
+            handleInputChange={handleInputChange}
+            handleInputReset={handleInputReset}
+          />
 
-          <InputWithIcon
-            value={inputState.value.email}
-            handleOnChange={handleInputChange}
-            helper={inputState.helper.email}
-            type="email"
-            isError={inputState.isError.email}
-            placeholder="Email"
-            isDisabled={pageState.isDisabled}
-            name="email"
-          >
-            {inputState.showIcon.email && (
-              <div className="right">
-                <ButtonWithIcon
-                  icon="settings_backup_restore"
-                  isLoading={false}
-                  handleOnClick={() => handleInputReset("email")}
-                  isDisabled={pageState.isDisabled}
-                  className={`${iconStyle.icon__reset}`}
-                />
-                <ButtonWithIcon
-                  icon="done_all"
-                  isLoading={inputState.isLoading.email}
-                  handleOnClick={() =>
-                    handleUpdateUserInfo(
-                      setAPIRequestData,
-                      inputState,
-                      setPageState,
-                      setInputState,
-                      "email"
-                    )
-                  }
-                  isDisabled={pageState.isDisabled}
-                  className={`${iconStyle.icon__done}`}
-                />
-              </div>
-            )}
-          </InputWithIcon>
+          <EmailInput
+            inputState={inputState}
+            setInputState={setInputState}
+            pageState={pageState}
+            setPageState={setPageState}
+            handleInputChange={handleInputChange}
+            handleInputReset={handleInputReset}
+          />
 
-          <InputWithIcon
-            value={inputState.value.password}
-            handleOnChange={handleInputChange}
-            helper={inputState.helper.password}
-            type="password"
-            placeholder="Password"
-            isDisabled={pageState.isDisabled}
-            isError={inputState.isError.password}
-            name="password"
-          >
-            {inputState.showIcon.password && (
-              <div className="right">
-                <ButtonWithIcon
-                  icon="done_all"
-                  isLoading={inputState.isLoading.password}
-                  isDisabled={pageState.isDisabled}
-                  className={`${iconStyle.icon__done}`}
-                  handleOnClick={() =>
-                    handleUpdateUserInfo(
-                      setAPIRequestData,
-                      inputState,
-                      setPageState,
-                      setInputState,
-                      "password"
-                    )
-                  }
-                />
-              </div>
-            )}
-          </InputWithIcon>
+          <PasswordInput
+            inputState={inputState}
+            setInputState={setInputState}
+            pageState={pageState}
+            setPageState={setPageState}
+            handleInputChange={handleInputChange}
+          />
 
           <InputWithIcon
             value={inputState.value.currentPassword}
