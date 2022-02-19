@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect } from "react";
 
 import Head from "next/head";
 import type { NextPage } from "next";
@@ -7,17 +7,14 @@ import { useRouter } from "next/router";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 
-import {
-  Input,
-  InputWithIcon,
-  PageTitle,
-  ButtonWithTextAndIcon,
-} from "global/components";
+import { SimpleInput, InputWithIcon } from "global/components/Input";
+import { PageTitle } from "global/components/PageTitle";
 import style from "./loginSignUp.page.module.scss";
+import { ButtonWithTextAndIcon } from "global/components/Button";
 
 import { axiosRequest } from "global/helper";
-import { useNotificationContext } from "global/context";
-import { useAuthContext } from "global/context";
+import { useNotificationContext } from "global/context/NotificationContext";
+import { useAuthContext } from "global/context/AuthContext";
 import { Updater, useImmer } from "use-immer";
 
 const initialUserData = {
@@ -156,7 +153,7 @@ export const LoginPage: NextPage = () => {
         <PageTitle title="Login Account" subtitle="Access your created todo" />
 
         <form>
-          <Input
+          <SimpleInput
             name="email"
             label="Email"
             type="email"

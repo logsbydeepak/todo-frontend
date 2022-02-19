@@ -1,8 +1,8 @@
 import { SetAPIRequestDataType } from "global/hooks";
-import { TodoType } from "global/reducer";
-import { DispatchTodoActionType } from "global/reducer";
-import { SetLoadingIconType } from "HomePage/todoItemTypes";
-import { SetIsDisabled } from "HomePage/todoItemTypes";
+import { TodoType } from "HomePage/helper/types";
+import { SetIsDisabled } from "HomePage/helper/types";
+import { SetLoadingIconType } from "HomePage/helper/types";
+import { DispatchTodoActionType } from "HomePage/helper/types";
 
 export const handleDeleteTodo = async (
   setAPIRequestData: SetAPIRequestDataType,

@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { ButtonWithIcon } from "../../global/components/Button";
+import { ButtonWithIcon } from "global/components/Button";
 
-import style from "../../AppPage/components/navbar.module.scss";
+import style from "./Link.module.scss";
 import { useState } from "react";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 export const NoAuthLink = () => (
   <>

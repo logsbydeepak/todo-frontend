@@ -1,9 +1,9 @@
 import { ButtonWithLink } from "HomePage/components/ButtonWithLink";
 
 import Head from "next/head";
-import style from "./landingPage.layout.module.scss";
+import style from "./LandingPage.module.scss";
 
-const LandingPageLayout = () => {
+export const LandingPage = () => {
   return (
     <>
       <Head>
@@ -21,5 +21,3 @@ const LandingPageLayout = () => {
     </>
   );
 };
-
-export default LandingPageLayout;

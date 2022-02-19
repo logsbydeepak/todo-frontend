@@ -1,7 +1,7 @@
-import { DispatchTodoActionType } from "global/reducer";
-import { InputStateType } from "HomePage/todoCreateType";
-import { SetInputStateType } from "HomePage/todoCreateType";
 import { SetAPIRequestDataType } from "global/hooks";
+import { SetInputStateType } from "HomePage/helper/types";
+import { InputStateType } from "HomePage/helper/types";
+import { DispatchTodoActionType } from "HomePage/helper/types";
 
 export const handleCreateTodo = async (
   setAPIRequestData: SetAPIRequestDataType,

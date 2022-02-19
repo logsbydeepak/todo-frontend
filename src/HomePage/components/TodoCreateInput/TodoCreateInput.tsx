@@ -1,18 +1,17 @@
-import { FunctionComponent, useState, MouseEvent, ChangeEvent } from "react";
+import { FunctionComponent, useState, ChangeEvent } from "react";
 
 import inputStyle from "global/components/styles/input.module.scss";
-import buttonStyle from "global/components/styles/button.module.scss";
 import style from "./styles/todoCreate.element.module.scss";
-import { handleCreateTodo } from "HomePage/handler/create.todo.handler";
+import { handleCreateTodo } from "./helper/createTodo.handler";
 import { useAPICall } from "global/hooks";
-import { DispatchTodoActionType } from "global/reducer";
-import { ButtonWithIcon } from "global/components";
+import { DispatchTodoActionType } from "HomePage/helper/types";
+import { ButtonWithIcon } from "global/components/Button";
 
 interface Props {
   dispatchTodoAction: DispatchTodoActionType;
 }
 
-const TodoCreateLayoutComponent: FunctionComponent<Props> = ({
+export const TodoCreateInput: FunctionComponent<Props> = ({
   dispatchTodoAction,
 }) => {
   const [inputState, setInputState] = useState({
@@ -21,7 +20,7 @@ const TodoCreateLayoutComponent: FunctionComponent<Props> = ({
     isError: false,
   });
 
-  const [setAPIRequestData] = useAPICall(null);
+  const [setAPIRequestData] = useAPICall();
   const { textInput, isLoading, isError } = inputState;
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -61,5 +60,3 @@ const TodoCreateLayoutComponent: FunctionComponent<Props> = ({
     </>
   );
 };
-
-export default TodoCreateLayoutComponent;

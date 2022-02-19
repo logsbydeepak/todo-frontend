@@ -2,22 +2,23 @@
 @import "global/styles/utilities/mixin";
 @import "../DefaultButton";
 
-.buttonWithTextAndIcon {
-  @include backgroundColorPrimary();
-  @include ButtonDefault();
+.ButtonWithIcon {
+  padding: 1rem;
+  background-color: $color-black;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 
   & i {
-    font-size: 2.6rem;
+    color: $color-grey-3;
+    font-size: 2rem;
   }
 
   & svg {
-    width: 2.6rem;
-    padding: 0.2rem;
+    width: 2rem;
+
+    & path {
+      fill: $color-white;
+    }
   }
-}
-.warningBackground {
-  @include backgroundColorWarning;
 }

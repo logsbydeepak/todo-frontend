@@ -1,4 +1,4 @@
-import { Dispatch } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 export interface TodoType {
   _id: string;
@@ -35,3 +35,27 @@ export interface TodoStateType {
 }
 
 export type DispatchTodoActionType = Dispatch<TodoActionType>;
+
+export type SetLoadingIconType = Dispatch<
+  SetStateAction<{
+    status: boolean;
+    task: boolean;
+    delete: boolean;
+  }>
+>;
+
+export type SetIsDisabled = Dispatch<SetStateAction<boolean>>;
+
+export interface InputStateType {
+  textInput: string;
+  isLoading: boolean;
+  isError: boolean;
+}
+
+export type SetInputStateType = Dispatch<
+  SetStateAction<{
+    textInput: string;
+    isLoading: boolean;
+    isError: boolean;
+  }>
+>;

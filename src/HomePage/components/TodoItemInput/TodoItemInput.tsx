@@ -1,15 +1,24 @@
 import React, { ChangeEvent, FunctionComponent, useState } from "react";
 
-import { handleDeleteTodo } from "HomePage/handler/delete.todo.handler";
-import { handleChangeTodoTask } from "HomePage/handler/changeTask.todo.handler";
-import { handleChangeTodoStatus } from "HomePage/handler/changeStatus.todo.handler.";
+import { handleDeleteTodo } from "./helper/deleteTodo.handler";
+import { handleChangeTodoTask } from "./helper/changeTask.handler";
+import { handleChangeTodoStatus } from "./helper/changeTodoStatus.handler.";
 
-import { InputWithIcon, ButtonWithIcon } from "global/components";
+import { InputWithIcon } from "global/components/Input";
+import { ButtonWithIcon } from "global/components/Button";
 
-import { TodoItemPropsType } from "HomePage/todoItemTypes";
-import style from "global/components/styles/iconColor.module.scss";
+import style from "./TodoItemInput.module.scss";
+import { DispatchTodoActionType, TodoType } from "HomePage/helper/types";
+import { SetAPIRequestDataType } from "global/hooks";
 
-const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
+interface Props {
+  index: number;
+  dispatchTodoAction: DispatchTodoActionType;
+  todoItem: TodoType;
+  setAPIRequestData: SetAPIRequestDataType;
+}
+
+export const TodoItemInput: FunctionComponent<Props> = ({
   index,
   dispatchTodoAction,
   todoItem,
@@ -128,5 +137,3 @@ const TaskInputLayoutComponent: FunctionComponent<TodoItemPropsType> = ({
     </>
   );
 };
-
-export default TaskInputLayoutComponent;

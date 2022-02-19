@@ -1,8 +1,10 @@
 import Head from "next/head";
-import Navbar from "./components/Navbar";
-
-import { NotificationProvider, AuthProvider } from "global/context";
 import { NextPage } from "next";
+
+import { AuthProvider } from "global/context/AuthContext";
+import { NotificationProvider } from "global/context/NotificationContext/NotificationContext";
+
+import { Navbar } from "./components/Navbar";
 
 export const AppPage: NextPage = ({ children }) => {
   return (

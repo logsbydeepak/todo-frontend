@@ -1,79 +1,10 @@
 @import "global/styles/utilities/variables";
+@import "global/components/Input/DefaultInput";
 
 .base {
   margin-bottom: 3rem;
 }
 
-.label {
-  font-size: 1.6rem;
-  margin-bottom: 0.8rem;
-  font-weight: 500;
-  display: inline-block;
-}
-
 .form__out {
   margin-bottom: 3rem;
-}
-
-.input {
-  width: 100%;
-  background-color: #121212;
-  border: 0.2rem solid #262626;
-  border-radius: 0.4rem;
-  font-size: 1.6rem;
-  padding: 1.8rem 3rem;
-  transition: all 0.2s;
-  margin-bottom: 0.8rem;
-
-  i &::placeholder {
-    color: #818181;
-  }
-
-  &:focus-within,
-  &:focus {
-    border-color: #b794f6;
-  }
-
-  &__icon {
-    padding: 0 1rem;
-    display: flex;
-    align-items: center;
-
-    & input {
-      padding: 1.8rem 1rem;
-      order: 2;
-    }
-  }
-}
-
-.helper {
-  margin: 0 2rem;
-  font-size: 1.4rem;
-  font-weight: 400;
-  color: #9f9f9f;
-}
-
-.error .input {
-  border: 0.2rem solid #ea959b;
-}
-
-.error .label {
-  color: #ea959b;
-}
-
-.error .helper {
-  color: #ea959b;
-}
-
-.error .input:focus,
-.error .input:focus-within {
-  border-color: #fdeaee;
-}
-
-.input:disabled {
-  color: #c2c2c2;
-}
-
-.input:disabled::placeholder {
-  color: #3c3c3c;
 }

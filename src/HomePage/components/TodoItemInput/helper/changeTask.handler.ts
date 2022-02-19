@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction } from "react";
-import { DispatchTodoActionType } from "global/reducer";
+import { DispatchTodoActionType } from "HomePage/helper/types";
 import { SetAPIRequestDataType } from "global/hooks";
-import { SetIsDisabled } from "HomePage/todoItemTypes";
-import { SetLoadingIconType } from "HomePage/todoItemTypes";
-import { TodoType } from "global/reducer";
+import { SetIsDisabled } from "HomePage/helper/types";
+import { SetLoadingIconType } from "HomePage/helper/types";
+import { TodoType } from "HomePage/helper/types";
 
 export const handleChangeTodoTask = (
   setAPIRequestData: SetAPIRequestDataType,

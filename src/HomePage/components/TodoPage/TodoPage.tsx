@@ -2,23 +2,22 @@ import Head from "next/head";
 import { useEffect, useMemo } from "react";
 import { useImmerReducer } from "use-immer";
 
-import { PageTitle, ButtonWithTextAndIcon } from "global/components";
+import { PageTitle } from "global/components/PageTitle";
+import { ButtonWithTextAndIcon } from "global/components/Button";
 
-import TodoItem from "./TodoItemElement";
-import TodoMenu from "./TodoMenuLayoutElement";
-import TodoCreate from "./TodoCreateElement";
+import { TodoItemInput } from "../TodoItemInput";
+import { TodoMenu } from "../TodoMenu";
+import { TodoCreateInput } from "../TodoCreateInput";
 
-import { todoReducer } from "HomePage/todo.reducer";
-import { TodoStateType, TodoType } from "global/reducer";
+import { todoReducer } from "HomePage/helper/todo.reducer";
+import { TodoStateType, TodoType } from "HomePage/helper/types";
 
-import { Spinner } from "global/components";
 import { useAPICall } from "global/hooks";
-import { handleGetMoreTodo } from "HomePage/handler/loadMore.todo.handler";
-import { useNotificationContext } from "global/context";
-import { handleGetTodoOnMenuChange } from "HomePage/handler/getOnMenuChange.todo.handler";
+import { handleGetMoreTodo } from "HomePage/helper/loadMore.handler";
+import { useNotificationContext } from "global/context/NotificationContext";
+import { handleGetTodoOnMenuChange } from "HomePage/helper/getTodoOnMenuChange.handler";
 
-import style from "./styles/todoPage.layout.module.scss";
-import { useAuthContext } from "global/context";
+import { useAuthContext } from "global/context/AuthContext";
 import { HelperTextAndSpinner } from "global/components/HelperTextAndSpinner";
 
 const initialTodoState: TodoStateType = {
@@ -29,7 +28,7 @@ const initialTodoState: TodoStateType = {
   showLoadMoreButton: false,
 };
 
-const TodoPageLayout = () => {
+export const TodoPage = () => {
   const { auth } = useAuthContext();
   const [todoState, dispatchTodoAction] = useImmerReducer(
     todoReducer,
@@ -39,7 +38,7 @@ const TodoPageLayout = () => {
   const { todo, activeMenu, isLoading, isLoadingMore, showLoadMoreButton } =
     todoState;
 
-  const [setAPIRequestData] = useAPICall(null);
+  const [setAPIRequestData] = useAPICall();
   const { dispatchNotification } = useNotificationContext();
 
   const useMemoHandleGetTodoOnMenuChange = useMemo(() => {
@@ -61,7 +60,7 @@ const TodoPageLayout = () => {
         <title>TODO - Get work done</title>
       </Head>
       <PageTitle title="Your Todo" subtitle="Manage your task" />
-      <TodoCreate dispatchTodoAction={dispatchTodoAction} />
+      <TodoCreateInput dispatchTodoAction={dispatchTodoAction} />
       <TodoMenu
         dispatchTodoAction={dispatchTodoAction}
         activeMenu={activeMenu}
@@ -72,7 +71,7 @@ const TodoPageLayout = () => {
         todo.map((todoItem: TodoType, index: number) => {
           return (
             <form key={todoItem._id}>
-              <TodoItem
+              <TodoItemInput
                 index={index}
                 todoItem={todoItem}
                 dispatchTodoAction={dispatchTodoAction}
@@ -107,5 +106,3 @@ const TodoPageLayout = () => {
     </>
   );
 };
-
-export default TodoPageLayout;

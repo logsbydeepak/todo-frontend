@@ -1,4 +1,4 @@
-import { TodoActionType, TodoStateType, TodoType } from "global/reducer";
+import { TodoActionType, TodoStateType, TodoType } from "HomePage/helper/types";
 
 export const todoReducer = (draft: TodoStateType, action: TodoActionType) => {
   switch (action.type) {

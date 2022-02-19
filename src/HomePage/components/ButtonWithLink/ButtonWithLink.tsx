@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FunctionComponent } from "react";
 
-import style from "./ButtonWithLInk.module.scss";
+import style from "./ButtonWithLink.module.scss";
 
 interface Props {
   href: string;

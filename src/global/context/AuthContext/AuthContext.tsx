@@ -6,13 +6,9 @@ import {
   useLayoutEffect,
   useState,
 } from "react";
+import { AuthContextType } from "./types";
 
-type AuthContext = {
-  auth: boolean | null;
-  changeAuth: (value: boolean) => void;
-} | null;
-
-export const AuthContext = createContext<AuthContext>(null);
+export const AuthContext = createContext<AuthContextType>(null);
 
 export const useAuthContext = () => {
   const context = useContext(AuthContext);

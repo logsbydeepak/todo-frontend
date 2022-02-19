@@ -1,13 +1,13 @@
 import { ChangeEvent, Dispatch, FunctionComponent } from "react";
-import style from "./styles/todoMenu.element.module.scss";
-import { TodoActionType } from "global/reducer";
+import style from "./styles/TodoMenu.module.scss";
+import { TodoActionType } from "HomePage/helper/types";
 
 interface Props {
   dispatchTodoAction: Dispatch<TodoActionType>;
   activeMenu: "true" | "false" | "all";
 }
 
-const TodoMenu: FunctionComponent<Props> = ({
+export const TodoMenu: FunctionComponent<Props> = ({
   dispatchTodoAction,
   activeMenu,
 }) => {
@@ -59,5 +59,3 @@ const TodoMenu: FunctionComponent<Props> = ({
     </>
   );
 };
-
-export default TodoMenu;

@@ -1,4 +1,4 @@
-import { AxiosResponse, Method } from "axios";
+import { Method } from "axios";
 import { Dispatch, SetStateAction } from "react";
 
 export type APIRequestDataType = {

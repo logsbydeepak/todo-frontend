@@ -1,16 +1,18 @@
-import { AxiosResponse } from "axios";
-import { useAuthContext } from "global/context/AuthContext";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+
+import { AxiosResponse } from "axios";
+import { useRouter } from "next/router";
+
+import { useAuthContext } from "global/context/AuthContext";
 import { APIRequestDataType } from "global/hooks";
 import { axiosRequest } from "global/helper";
 
-export const useAPICall = (requestData: APIRequestDataType) => {
+export const useAPICall = () => {
   const { changeAuth } = useAuthContext();
 
   const router = useRouter();
   const [APIRequestData, setAPIRequestData] =
-    useState<APIRequestDataType>(requestData);
+    useState<APIRequestDataType>(null);
 
   useEffect(() => {
     if (!APIRequestData) return;

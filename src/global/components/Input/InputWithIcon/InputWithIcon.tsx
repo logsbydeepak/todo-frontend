@@ -2,7 +2,6 @@ import { ButtonWithIcon } from "global/components/Button";
 import { ChangeEvent, FunctionComponent, useState } from "react";
 import style from "./InputWithIcon.module.scss";
 import iconStyle from "./InputWithIcon.module.scss";
-import iconColor from "global/components/styles/iconColor.module.scss";
 
 interface InputWithIconProps {
   type?: string;

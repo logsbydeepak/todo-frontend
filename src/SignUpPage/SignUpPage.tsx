@@ -7,17 +7,15 @@ import { useRouter } from "next/router";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 
-import {
-  Input,
-  InputWithIcon,
-  PageTitle,
-  ButtonWithTextAndIcon,
-} from "global/components";
+import { SimpleInput } from "global/components/Input";
+import { InputWithIcon } from "global/components/Input";
+import { PageTitle } from "global/components/PageTitle";
+import { ButtonWithTextAndIcon } from "global/components/Button";
 import style from "../LoginPage/loginSignUp.page.module.scss";
 
 import { axiosRequest } from "global/helper";
-import { useAuthContext } from "global/context";
-import { useNotificationContext } from "global/context";
+import { useAuthContext } from "global/context/AuthContext";
+import { useNotificationContext } from "global/context/NotificationContext";
 import { useImmer } from "use-immer";
 
 const initialUserData = {
@@ -152,7 +150,7 @@ export const SignUpPage: NextPage = () => {
         />
 
         <form>
-          <Input
+          <SimpleInput
             name="name"
             label="Name"
             type="text"
@@ -164,7 +162,7 @@ export const SignUpPage: NextPage = () => {
             isError={formState.isError.name}
             disabled={formState.isLoading}
           />
-          <Input
+          <SimpleInput
             name="email"
             label="Email"
             type="email"

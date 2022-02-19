@@ -1,7 +1,7 @@
 import { Spinner } from "global/components/Spinner";
 import { FunctionComponent, MouseEvent } from "react";
 
-import style from "./ButtonWithIcon.module.scss";
+import style from "./ButtonWithTextAndIcon.module.scss";
 
 interface Props {
   icon: string;
