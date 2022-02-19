@@ -1,7 +1,6 @@
 import { FunctionComponent, useState, ChangeEvent } from "react";
 
-import inputStyle from "global/components/styles/input.module.scss";
-import style from "./styles/todoCreate.element.module.scss";
+import style from "./TodoCreateInput.module.scss";
 import { handleCreateTodo } from "./helper/createTodo.handler";
 import { useAPICall } from "global/hooks";
 import { DispatchTodoActionType } from "HomePage/helper/types";
@@ -29,11 +28,11 @@ export const TodoCreateInput: FunctionComponent<Props> = ({
 
   return (
     <>
-      <form className={`${isError && `${inputStyle.error} ${style.error}`}`}>
+      <form className={`${isError && `${style.error} ${style.error}`}`}>
         <div className={style.container}>
           <input
             type="text"
-            className={`${style.input} ${inputStyle.input}`}
+            className={`${style.input} ${style.input}`}
             placeholder="Add new task"
             autoFocus={true}
             disabled={isLoading}
@@ -53,9 +52,7 @@ export const TodoCreateInput: FunctionComponent<Props> = ({
             }}
           />
         </div>
-        <p className={`${inputStyle.helper}`}>
-          {isError && "Task can't be empty"}
-        </p>
+        <p className={`${style.helper}`}>{isError && "Task can't be empty"}</p>
       </form>
     </>
   );
