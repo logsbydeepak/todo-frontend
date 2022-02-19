@@ -10,6 +10,7 @@ import { ButtonWithIcon } from "global/components/Button";
 import style from "./TodoItemInput.module.scss";
 import { DispatchTodoActionType, TodoType } from "HomePage/helper/types";
 import { SetAPIRequestDataType } from "global/hooks";
+import iconColor from "global/components/styles/iconColor.module.scss";
 
 interface Props {
   index: number;
@@ -99,7 +100,7 @@ export const TodoItemInput: FunctionComponent<Props> = ({
           <ButtonWithIcon
             icon={status ? "check_circle_outline" : "radio_button_unchecked"}
             isLoading={loadingIcon.status}
-            className={style.icon__check}
+            className={iconColor.primary}
             isDisabled={isDisabled}
             handleOnClick={handleOnCheckClick}
           />
@@ -110,16 +111,16 @@ export const TodoItemInput: FunctionComponent<Props> = ({
               <ButtonWithIcon
                 icon="settings_backup_restore"
                 isLoading={false}
-                className={style.icon__reset}
                 handleOnClick={handleInputReset}
+                className={iconColor.green}
                 isDisabled={isDisabled}
               />
 
               <ButtonWithIcon
                 icon="done_all"
                 isLoading={loadingIcon.task}
-                className={style.icon__done}
                 isDisabled={isDisabled}
+                className={iconColor.white}
                 handleOnClick={handleOnDoneClick}
               />
             </>
@@ -129,7 +130,7 @@ export const TodoItemInput: FunctionComponent<Props> = ({
             icon="delete_outline"
             isDisabled={isDisabled}
             isLoading={loadingIcon.delete}
-            className={style.icon__delete}
+            className={iconColor.red}
             handleOnClick={handleOnDeleteClick}
           />
         </div>

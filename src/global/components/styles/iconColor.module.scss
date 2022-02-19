@@ -35,3 +35,15 @@
     color: $color-success-dark-2;
   }
 }
+
+.red i {
+  color: $color-warning;
+
+  &:hover {
+    color: $color-warning-dark-2;
+  }
+
+  &:active {
+    color: $color-warning-dark-2;
+  }
+}
