@@ -1,8 +1,8 @@
 import { ButtonWithIcon } from "global/components/Button";
 import { InputWithIcon } from "global/components/Input";
 import { useAPICall } from "global/hooks";
-import { handleUpdateUserInfo } from "./update.user.handler";
-import iconStyle from "global/components/styles/iconColor.module.scss";
+import { handleUpdateUserInfo } from "./handleUpdateUserInfo";
+import iconColor from "global/components/styles/iconColor.module.scss";
 import { ChangeEvent, FunctionComponent } from "react";
 import {
   PageStateType,
@@ -49,7 +49,7 @@ export const EmailInput: FunctionComponent<Props> = ({
               isLoading={false}
               handleOnClick={() => handleInputReset("email")}
               isDisabled={pageState.isDisabled}
-              className={`${iconStyle.icon__reset}`}
+              className={`${iconColor.green}`}
             />
             <ButtonWithIcon
               icon="done_all"
@@ -64,7 +64,7 @@ export const EmailInput: FunctionComponent<Props> = ({
                 )
               }
               isDisabled={pageState.isDisabled}
-              className={`${iconStyle.icon__done}`}
+              className={`${iconColor.white}`}
             />
           </div>
         )}

@@ -1,6 +1,6 @@
 @import "global/styles/utilities/mixin";
 
-.primary {
+.primary i {
   color: $color-primary;
 
   &:hover {
@@ -12,14 +12,26 @@
   }
 }
 
-.white {
-  color: $color-primary;
+.white i {
+  color: $color-grey-1;
 
   &:hover {
-    color: $color-primary-dark-1;
+    color: $color-grey-2;
   }
 
   &:active {
-    color: $color-primary-dark-2;
+    color: $color-grey-3;
+  }
+}
+
+.green i {
+  color: $color-success;
+
+  &:hover {
+    color: $color-success-dark-1;
+  }
+
+  &:active {
+    color: $color-success-dark-2;
   }
 }

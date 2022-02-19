@@ -1,8 +1,8 @@
 import { ButtonWithIcon } from "global/components/Button";
 import { InputWithIcon } from "global/components/Input";
 import { useAPICall } from "global/hooks";
-import { handleUpdateUserInfo } from "./update.user.handler";
-import iconStyle from "global/components/styles/iconColor.module.scss";
+import { handleUpdateUserInfo } from "./handleUpdateUserInfo";
+import iconColor from "global/components/styles/iconColor.module.scss";
 import { ChangeEvent, FunctionComponent } from "react";
 import {
   PageStateType,
@@ -46,7 +46,7 @@ export const PasswordInput: FunctionComponent<Props> = ({
               icon="done_all"
               isLoading={inputState.isLoading.password}
               isDisabled={pageState.isDisabled}
-              className={`${iconStyle.icon__done}`}
+              className={`${iconColor.white}`}
               handleOnClick={() =>
                 handleUpdateUserInfo(
                   setAPIRequestData,

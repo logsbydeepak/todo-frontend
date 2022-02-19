@@ -9,7 +9,7 @@ import { useAPICall } from "global/hooks";
 import { PageTitle } from "global/components/PageTitle";
 import { InputWithIcon } from "global/components/Input";
 
-import { handleGetUser } from "./helper/getUser.handler";
+import { handleGetUser } from "./helper/handleGetUser";
 import { useImmer } from "use-immer";
 import {
   initialBoolean,

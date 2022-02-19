@@ -3,7 +3,7 @@ import { useAuthContext } from "global/context/AuthContext";
 import { useNotificationContext } from "global/context/NotificationContext";
 import { useAPICall } from "global/hooks";
 import { FunctionComponent } from "react";
-import { handleDeleteAndLogoutAllUser } from "./deleteAndLogoutAll.user";
+import { handleDeleteAndLogoutAllUser } from "./handleDeleteAndLogoutAll";
 import {
   PageStateType,
   SetPageStateType,
