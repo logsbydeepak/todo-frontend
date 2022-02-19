@@ -8,20 +8,26 @@ export const notificationReducer = (
 ) => {
   switch (action.type) {
     case "SUCCESS":
-      draft.unshift({ id: v4(), status: "SUCCESS", message: action.message });
+      draft.unshift({
+        id: v4(),
+        status: "SUCCESS",
+        message: action.message,
+      });
       break;
 
     case "ERROR":
-      draft.unshift({ id: v4(), status: "ERROR", message: action.message });
+      draft.unshift({
+        id: v4(),
+        status: "ERROR",
+        message: action.message,
+      });
       break;
 
     case "REMOVE":
-      draft.filter(
-        (notification: { id: string }) => notification.id !== action.id
-      );
+      draft.pop();
       break;
 
     default:
-      return draft;
+      draft;
   }
 };

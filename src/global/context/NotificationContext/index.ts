@@ -1,5 +1,5 @@
 export {
-  NotificationContext,
+  NotificationProvider,
   useNotificationContext,
 } from "./NotificationContext";
 export * from "./types";

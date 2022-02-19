@@ -1,9 +1,10 @@
 import { FunctionComponent, useEffect, useState } from "react";
+import { DispatchNotificationType, NotificationType } from "../../types";
 import style from "./NotificationItem.module.scss";
 
 export const NotificationItem: FunctionComponent<{
-  dispatchNotification: any;
-  notification: any;
+  dispatchNotification: DispatchNotificationType;
+  notification: NotificationType;
 }> = ({ dispatchNotification, notification }) => {
   const [timeFrame, setTimeFrame] = useState(0);
 
@@ -21,7 +22,6 @@ export const NotificationItem: FunctionComponent<{
     if (timeFrame >= 100) {
       dispatchNotification({
         type: "REMOVE",
-        id: notification.id,
       });
     }
   }, [timeFrame]);

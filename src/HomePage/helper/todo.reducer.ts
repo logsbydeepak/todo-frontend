@@ -27,7 +27,7 @@ export const todoReducer = (draft: TodoStateType, action: TodoActionType) => {
       if (draft.activeMenu === "all") {
         draft.todo[action.index].status = !draft.todo[action.index].status;
       } else {
-        draft.todo = draft.todo = draft.todo.filter(
+        draft.todo = draft.todo.filter(
           (_: TodoType, index: number) => index !== action.index
         );
       }

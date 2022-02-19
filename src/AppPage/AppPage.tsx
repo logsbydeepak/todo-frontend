@@ -2,7 +2,7 @@ import Head from "next/head";
 import { NextPage } from "next";
 
 import { AuthProvider } from "global/context/AuthContext";
-import { NotificationProvider } from "global/context/NotificationContext/NotificationContext";
+import { NotificationProvider } from "global/context/NotificationContext";
 
 import { Navbar } from "./components/Navbar";
 

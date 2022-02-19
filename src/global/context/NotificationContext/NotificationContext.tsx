@@ -1,7 +1,11 @@
 import { createContext, FunctionComponent, useContext } from "react";
 
 import { NotificationContainer, NotificationItem } from "./components";
-import { NotificationContextType, NotificationDraftType } from ".";
+import {
+  NotificationContextType,
+  NotificationDraftType,
+  NotificationType,
+} from ".";
 import { notificationReducer } from "./notificationReducer";
 import { useImmerReducer } from "use-immer";
 
@@ -28,11 +32,11 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
     <>
       <NotificationContext.Provider value={{ dispatchNotification }}>
         <NotificationContainer>
-          {state.map((data: any) => (
+          {state.map((notification: NotificationType) => (
             <NotificationItem
-              key={data.id}
+              key={notification.id}
               dispatchNotification={dispatchNotification}
-              notification={data}
+              notification={notification}
             />
           ))}
         </NotificationContainer>

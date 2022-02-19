@@ -1,14 +1,16 @@
 import { Dispatch } from "react";
 
-export type NotificationDraftType = {
+export interface NotificationType {
   id: string;
   message: string;
   status: string;
-}[];
+}
+
+export type NotificationDraftType = NotificationType[];
 
 export type NotificationActionType =
   | { type: "ERROR" | "SUCCESS"; message: string }
-  | { type: "REMOVE"; id: string };
+  | { type: "REMOVE" };
 
 export type NotificationContextType = {
   dispatchNotification: Dispatch<NotificationActionType>;
