@@ -1,6 +1,7 @@
 import { FunctionComponent } from "react";
-import { PageTitle, ButtonWithTextAndIcon } from "global/components";
-import style from "./styles/DeleteConfirmation.module.scss";
+import { PageTitle } from "global/components/PageTitle";
+import { ButtonWithTextAndIcon } from "global/components/Button";
+import style from "./DeleteConfirmation.module.scss";
 
 interface Props {
   handleOnContinue: () => void;

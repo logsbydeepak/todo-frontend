@@ -3,24 +3,25 @@ import { ChangeEvent, useEffect, useLayoutEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import { useAuthContext, useNotificationContext } from "global/context";
+import { useAuthContext } from "global/context/AuthContext";
 import { useAPICall } from "global/hooks";
 
-import { Spinner, PageTitle, InputWithIcon } from "global/components";
+import { PageTitle } from "global/components/PageTitle";
+import { InputWithIcon } from "global/components/Input";
 
-import style from "./user.page.module.scss";
-import { handleGetUser } from "./handler/get.user.handler";
+import { handleGetUser } from "./helper/getUser.handler";
 import { useImmer } from "use-immer";
 import {
   initialBoolean,
   initialBooleanWithoutCurrentPassword,
   initialText,
   initialTextWithNameAndEmail,
-} from "./data";
-import { LogoutAllAndDeleteUserButton } from "./components/LogoutAllAndDeleteUserButton";
-import { NameInput } from "./components/NameInput";
-import { EmailInput } from "./components/EmailInput";
-import { PasswordInput } from "./components/PasswordInput";
+} from "./helper/data";
+
+import { LogoutAllAndDeleteUserButton } from "./components/LogoutAllAndDeleteUserButton/LogoutAllAndDeleteUserButton";
+import { NameInput } from "./components/Input/NameInput";
+import { EmailInput } from "./components/Input/EmailInput";
+import { PasswordInput } from "./components/Input/PasswordInput";
 import { HelperTextAndSpinner } from "../global/components/HelperTextAndSpinner";
 
 const myUseLayoutEffect =
@@ -46,7 +47,7 @@ export const UserPage = () => {
   });
 
   const router = useRouter();
-  const [setAPIRequestData] = useAPICall(null);
+  const [setAPIRequestData] = useAPICall();
   const { auth } = useAuthContext();
 
   myUseLayoutEffect(() => {

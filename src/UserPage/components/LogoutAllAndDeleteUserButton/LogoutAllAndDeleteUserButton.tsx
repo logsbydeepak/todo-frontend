@@ -1,16 +1,17 @@
-import { ButtonWithTextAndIcon } from "global/components";
-import { useAuthContext, useNotificationContext } from "global/context";
+import { ButtonWithTextAndIcon } from "global/components/Button";
+import { useAuthContext } from "global/context/AuthContext";
+import { useNotificationContext } from "global/context/NotificationContext";
 import { useAPICall } from "global/hooks";
 import { FunctionComponent } from "react";
-import { handleDeleteAndLogoutAllUser } from "UserPage/handler/deleteAndLogoutAll.user";
+import { handleDeleteAndLogoutAllUser } from "./deleteAndLogoutAll.user";
 import {
   PageStateType,
   SetPageStateType,
   SetUserInputStateType,
   UserInputStateType,
-} from "UserPage/userPageType";
-import style from "./styles/LogoutAllAndDeleteUserButton.module.scss";
-import { DeleteConfirmation } from "./DeleteConfirmation";
+} from "UserPage/helper/types";
+import style from "./LogoutAllAndDeleteUserButton.module.scss";
+import { DeleteConfirmation } from "../DeleteConfirmation";
 
 interface Props {
   inputState: UserInputStateType;
@@ -25,7 +26,7 @@ export const LogoutAllAndDeleteUserButton: FunctionComponent<Props> = ({
   pageState,
   setPageState,
 }) => {
-  const [setAPIRequestData] = useAPICall(null);
+  const [setAPIRequestData] = useAPICall();
   const { changeAuth } = useAuthContext();
   const { dispatchNotification } = useNotificationContext();
 

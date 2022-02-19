@@ -1,6 +1,7 @@
-import { ButtonWithIcon, InputWithIcon } from "global/components";
+import { ButtonWithIcon } from "global/components/Button";
+import { InputWithIcon } from "global/components/Input";
 import { useAPICall } from "global/hooks";
-import { handleUpdateUserInfo } from "UserPage/handler/update.user.handler";
+import { handleUpdateUserInfo } from "./update.user.handler";
 import iconStyle from "global/components/styles/iconColor.module.scss";
 import { ChangeEvent, FunctionComponent } from "react";
 import {
@@ -8,7 +9,7 @@ import {
   SetPageStateType,
   SetUserInputStateType,
   UserInputStateType,
-} from "UserPage/userPageType";
+} from "UserPage/helper/types";
 
 interface Props {
   inputState: UserInputStateType;
@@ -25,7 +26,7 @@ export const PasswordInput: FunctionComponent<Props> = ({
   setPageState,
   handleInputChange,
 }) => {
-  const [setAPIRequestData] = useAPICall(null);
+  const [setAPIRequestData] = useAPICall();
 
   return (
     <>

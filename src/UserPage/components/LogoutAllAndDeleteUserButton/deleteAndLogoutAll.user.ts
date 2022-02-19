@@ -1,10 +1,10 @@
-import { initialBoolean, initialText } from "../data";
+import { initialBoolean, initialText } from "UserPage/helper/data";
 import {
   SetPageStateType,
   SetUserInputStateType,
   UserInputStateType,
-} from "../userPageType";
-import { DispatchNotificationType } from "global/context";
+} from "UserPage/helper/types";
+import { DispatchNotificationType } from "global/context/NotificationContext";
 import { SetAPIRequestDataType } from "global/hooks";
 import isStrongPassword from "validator/lib/isStrongPassword";
 

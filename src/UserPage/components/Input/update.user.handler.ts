@@ -1,9 +1,9 @@
-import { initialBoolean, initialText } from "../data";
+import { initialBoolean, initialText } from "UserPage/helper/data";
 import {
   SetPageStateType,
   SetUserInputStateType,
   UserInputStateType,
-} from "../userPageType";
+} from "UserPage/helper/types";
 import { SetAPIRequestDataType } from "global/hooks";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
