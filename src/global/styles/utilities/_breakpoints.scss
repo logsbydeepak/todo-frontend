@@ -4,6 +4,12 @@
   }
 }
 
+@mixin xs {
+  @media (max-width: 450px) {
+    @content;
+  }
+}
+
 @mixin sm {
   @media (max-width: 576px) {
     @content;

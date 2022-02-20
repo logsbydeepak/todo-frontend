@@ -1,3 +1,5 @@
+@import "../utilities/breakpoints";
+
 * {
   margin: 0;
   padding: 0;
@@ -19,6 +21,18 @@ html {
   margin: 0 auto;
   max-width: 60rem;
   margin-bottom: 8rem;
+
+  @include md {
+    padding: 0 4rem;
+  }
+
+  @include sm {
+    padding: 0 3rem;
+  }
+
+  @include xs {
+    padding: 0 2rem;
+  }
 }
 
 a,

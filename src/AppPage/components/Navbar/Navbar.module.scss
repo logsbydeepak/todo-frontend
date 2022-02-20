@@ -10,6 +10,18 @@
   margin-bottom: 2rem;
   max-width: 80rem;
   padding: 0 4rem;
+
+  @include md {
+    padding: 0 4rem;
+  }
+
+  @include sm {
+    padding: 0 3rem;
+  }
+
+  @include xs {
+    padding: 0 2rem;
+  }
 }
 
 .logo,
