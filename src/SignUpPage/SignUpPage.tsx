@@ -1,34 +1,24 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect } from "react";
 
 import Head from "next/head";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
+import { useImmer } from "use-immer";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 
+import { axiosRequest } from "global/helper";
 import { SimpleInput } from "global/components/Input";
 import { InputWithIcon } from "global/components/Input";
 import { PageTitle } from "global/components/PageTitle";
-import { ButtonWithTextAndIcon } from "global/components/Button";
-import style from "../LoginPage/loginSignUp.page.module.scss";
-
-import { axiosRequest } from "global/helper";
 import { useAuthContext } from "global/context/AuthContext";
+import { ButtonWithTextAndIcon } from "global/components/Button";
 import { useNotificationContext } from "global/context/NotificationContext";
-import { useImmer } from "use-immer";
 
-const initialUserData = {
-  name: "",
-  email: "",
-  password: "",
-};
+import { initialErrorData, initialUserData } from "./helper/data";
 
-const initialErrorData = {
-  name: false,
-  email: false,
-  password: false,
-};
+import style from "./SignUp.module.scss";
 
 export const SignUpPage: NextPage = () => {
   const router = useRouter();
@@ -186,13 +176,15 @@ export const SignUpPage: NextPage = () => {
             isDisabled={formState.isLoading}
           />
 
-          <ButtonWithTextAndIcon
-            icon="east"
-            text="Create your account"
-            handleOnClick={handleSignUp}
-            isLoading={formState.isLoading}
-            isDisabled={formState.isLoading}
-          />
+          <div className={style.button}>
+            <ButtonWithTextAndIcon
+              icon="east"
+              text="Create your account"
+              handleOnClick={handleSignUp}
+              isLoading={formState.isLoading}
+              isDisabled={formState.isLoading}
+            />
+          </div>
         </form>
       </div>
     </>

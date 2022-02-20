@@ -4,42 +4,24 @@ import Head from "next/head";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
+import { useImmer } from "use-immer";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 
-import { SimpleInput, InputWithIcon } from "global/components/Input";
-import { PageTitle } from "global/components/PageTitle";
-import style from "./loginSignUp.page.module.scss";
-import { ButtonWithTextAndIcon } from "global/components/Button";
-
 import { axiosRequest } from "global/helper";
-import { useNotificationContext } from "global/context/NotificationContext";
+import { PageTitle } from "global/components/PageTitle";
 import { useAuthContext } from "global/context/AuthContext";
-import { useImmer } from "use-immer";
-import { SetFormStateType } from "./helper/types";
+import { ButtonWithTextAndIcon } from "global/components/Button";
+import { SimpleInput, InputWithIcon } from "global/components/Input";
+import { useNotificationContext } from "global/context/NotificationContext";
+
+import {
+  setInputEmptyError,
+  setInputInvalidError,
+} from "./helper/handleInputError";
 import { initialErrorData, initialUserData } from "./helper/data";
 
-const setInputEmptyError = (
-  input: "email" | "password",
-  setFormState: SetFormStateType
-) => {
-  setFormState((draft) => {
-    draft.helper[input] = `${input} is required`;
-    draft.isError[input] = true;
-    draft.isLoading = false;
-  });
-};
-
-const setInputInvalidError = (setFormState: SetFormStateType) => {
-  setFormState((draft) => {
-    draft.helper = {
-      email: "email or password is invalid",
-      password: "email or password is invalid",
-    };
-    draft.isError = { email: true, password: true };
-    draft.isLoading = false;
-  });
-};
+import style from "./Login.module.scss";
 
 export const LoginPage: NextPage = () => {
   const router = useRouter();
@@ -125,7 +107,7 @@ export const LoginPage: NextPage = () => {
       <Head>
         <title>TODO - Login</title>
       </Head>
-      <div className={style.base}>
+      <div className={style.container}>
         <PageTitle title="Login Account" subtitle="Access your created todo" />
 
         <form>
@@ -154,13 +136,15 @@ export const LoginPage: NextPage = () => {
             isDisabled={formState.isLoading}
           />
 
-          <ButtonWithTextAndIcon
-            icon="east"
-            text="Create your account"
-            handleOnClick={handleLogin}
-            isLoading={formState.isLoading}
-            isDisabled={formState.isLoading}
-          />
+          <div className={style.button}>
+            <ButtonWithTextAndIcon
+              icon="east"
+              text="Create your account"
+              handleOnClick={handleLogin}
+              isLoading={formState.isLoading}
+              isDisabled={formState.isLoading}
+            />
+          </div>
         </form>
       </div>
     </>
