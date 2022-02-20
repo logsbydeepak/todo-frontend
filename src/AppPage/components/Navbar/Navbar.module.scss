@@ -1,4 +1,5 @@
 @import "global/styles/utilities/variables";
+@import "global/styles/utilities/breakpoints";
 
 .container {
   height: 16rem;
@@ -25,43 +26,10 @@
 
 .logo:hover {
   letter-spacing: 0.4rem;
-  color: $color-primary-dark-1;
+  color: $color-primary-light;
 }
 
 .logo:active {
   letter-spacing: 0.3rem;
-  color: $color-primary-dark-2;
-}
-
-.link ul li a {
-  font-size: 1.6rem;
-  font-weight: 500;
-  margin-left: 4rem;
-  transition: all 0.3s;
-  color: $color-grey-3;
-
-  &:hover {
-    color: $color-grey-2;
-  }
-
-  &:active {
-    color: $color-grey-1;
-  }
-}
-
-.link ul {
-  cursor: pointer;
-}
-
-.link ul {
-  display: flex;
-  flex-direction: row;
-}
-
-.link ul button {
-  margin-left: 1rem;
-}
-
-.link ul button i {
-  font-size: 2.2rem;
+  color: $color-primary;
 }

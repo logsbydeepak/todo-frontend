@@ -1,35 +1,29 @@
 @mixin breakpoint($width: 0) {
-  @media (min-width: $width) {
-    @content;
-  }
-}
-
-@mixin xs {
-  @media (min-width: 0) {
+  @media (max-width: $width) {
     @content;
   }
 }
 
 @mixin sm {
-  @media (min-width: 57.6rem) {
+  @media (max-width: 576px) {
     @content;
   }
 }
 
 @mixin md {
-  @media (min-width: 76.8rem) {
+  @media (max-width: 768px) {
     @content;
   }
 }
 
 @mixin lg {
-  @media (min-width: 99.2rem) {
+  @media (max-width: 992px) {
     @content;
   }
 }
 
 @mixin xl {
-  @media (min-width: 120rem) {
+  @media (min-width: 1200px) {
     @content;
   }
 }
