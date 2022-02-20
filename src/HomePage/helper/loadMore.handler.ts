@@ -1,7 +1,6 @@
-import { DispatchNotificationType } from "global/context";
-import { DispatchTodoActionType } from "global/reducer";
+import { DispatchNotificationType } from "global/context/NotificationContext";
 import { SetAPIRequestDataType } from "global/hooks";
-import { TodoMenuType } from "global/reducer";
+import { DispatchTodoActionType, TodoMenuType } from "./types";
 
 export const handleGetMoreTodo = (
   dispatchTodoAction: DispatchTodoActionType,

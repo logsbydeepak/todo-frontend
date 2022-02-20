@@ -58,6 +58,7 @@ export const UserPage = () => {
   }, [auth]);
 
   useEffect(() => {
+    if (!auth) return;
     handleGetUser(setAPIRequestData, setPageState, setInputState);
   }, []);
 

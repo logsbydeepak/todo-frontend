@@ -15,33 +15,9 @@ import { ButtonWithTextAndIcon } from "global/components/Button";
 import { axiosRequest } from "global/helper";
 import { useNotificationContext } from "global/context/NotificationContext";
 import { useAuthContext } from "global/context/AuthContext";
-import { Updater, useImmer } from "use-immer";
-
-const initialUserData = {
-  email: "",
-  password: "",
-};
-
-const initialErrorData = {
-  email: false,
-  password: false,
-};
-
-type SetFormStateType = Updater<{
-  isLoading: boolean;
-  isError: {
-    email: boolean;
-    password: boolean;
-  };
-  helper: {
-    email: string;
-    password: string;
-  };
-  value: {
-    email: string;
-    password: string;
-  };
-}>;
+import { useImmer } from "use-immer";
+import { SetFormStateType } from "./helper/types";
+import { initialErrorData, initialUserData } from "./helper/data";
 
 const setInputEmptyError = (
   input: "email" | "password",
