@@ -7,16 +7,15 @@ import { useRouter } from "next/router";
 
 export const NoAuthLink = () => (
   <>
-    <li>
+    <ul className={style.NoAuthLink}>
       <Link href="/Login">
         <a>Login</a>
       </Link>
-    </li>
-    <li>
+
       <Link href="/SignUp">
         <a>SignUp</a>
       </Link>
-    </li>
+    </ul>
   </>
 );
 
@@ -29,18 +28,18 @@ export const AuthLink = ({ handelLogout }: { handelLogout: any }) => {
 
   return (
     <>
-      <ButtonWithIcon
-        icon="manage_accounts"
-        isLoading={false}
-        handleOnClick={handleOnUserClick}
-        className={style.button}
-      />
-      <ButtonWithIcon
-        icon="logout"
-        isLoading={isLoading}
-        handleOnClick={() => handelLogout(setIsLoading)}
-        className={style.button}
-      />
+      <ul className={style.AuthLink}>
+        <ButtonWithIcon
+          icon="manage_accounts"
+          isLoading={false}
+          handleOnClick={handleOnUserClick}
+        />
+        <ButtonWithIcon
+          icon="logout"
+          isLoading={isLoading}
+          handleOnClick={() => handelLogout(setIsLoading)}
+        />
+      </ul>
     </>
   );
 };

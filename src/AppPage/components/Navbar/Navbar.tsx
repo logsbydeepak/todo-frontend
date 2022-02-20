@@ -44,7 +44,7 @@ export const Navbar: FunctionComponent = () => {
 
   return (
     <>
-      <header className={style.base}>
+      <header className={style.container}>
         <Link href="/">
           <a className={style.logo}>
             TODO
@@ -52,11 +52,7 @@ export const Navbar: FunctionComponent = () => {
           </a>
         </Link>
 
-        <div className={style.link}>
-          <ul>
-            {auth ? <AuthLink handelLogout={handelLogout} /> : <NoAuthLink />}
-          </ul>
-        </div>
+        {auth ? <AuthLink handelLogout={handelLogout} /> : <NoAuthLink />}
       </header>
     </>
   );
