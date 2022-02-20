@@ -1,30 +1,26 @@
 @import "global/styles/utilities/variables";
 
-.base {
+.container {
   margin: 0 auto;
   margin-top: 10rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
 
-.title {
-  margin-bottom: 6rem;
-}
+  & h1 {
+    margin-bottom: 6rem;
+    font-size: 6.4rem;
 
-.title,
-.title span,
-.title span span {
-  display: inline-block;
-  text-align: center;
-  font-size: 6.4rem;
-  font-weight: 600;
-}
+    & span {
+      font-size: 6.4rem;
+      display: inline-block;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 0.4rem;
 
-.title span {
-  letter-spacing: 0.4rem;
-}
-
-.title span span {
-  color: #bd9cf3;
+      & span {
+        color: $color-primary;
+      }
+    }
+  }
 }

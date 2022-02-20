@@ -1,11 +1,15 @@
 import { Dispatch, SetStateAction } from "react";
-import { DispatchTodoActionType } from "HomePage/helper/types";
-import { SetAPIRequestDataType } from "global/hooks";
-import { SetIsDisabled } from "HomePage/helper/types";
-import { SetLoadingIconType } from "HomePage/helper/types";
-import { TodoType } from "HomePage/helper/types";
 
-export const handleChangeTodoTask = (
+import { SetAPIRequestDataType } from "global/hooks";
+
+import {
+  DispatchTodoActionType,
+  SetLoadingIconType,
+  SetIsDisabled,
+  TodoType,
+} from "HomePage/helper/types";
+
+export const handleChangeTask = (
   setAPIRequestData: SetAPIRequestDataType,
   index: number,
   setLoadingIcon: SetLoadingIconType,

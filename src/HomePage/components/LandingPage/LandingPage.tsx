@@ -1,6 +1,6 @@
+import Head from "next/head";
 import { ButtonWithLink } from "HomePage/components/ButtonWithLink";
 
-import Head from "next/head";
 import style from "./LandingPage.module.scss";
 
 export const LandingPage = () => {
@@ -9,8 +9,8 @@ export const LandingPage = () => {
       <Head>
         <title>TODO - Getting Started</title>
       </Head>
-      <div className={style.base}>
-        <h1 className={style.title}>
+      <div className={style.container}>
+        <h1>
           Finish Your Task with{" "}
           <span>
             TODO<span>.</span>

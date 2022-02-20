@@ -1,15 +1,14 @@
 import React, { ChangeEvent, FunctionComponent, useState } from "react";
 
-import { handleDeleteTodo } from "./helper/deleteTodo.handler";
-import { handleChangeTodoTask } from "./helper/changeTask.handler";
-import { handleChangeTodoStatus } from "./helper/changeTodoStatus.handler.";
-
+import { SetAPIRequestDataType } from "global/hooks";
 import { InputWithIcon } from "global/components/Input";
 import { ButtonWithIcon } from "global/components/Button";
 
-import style from "./TodoItemInput.module.scss";
+import { handleDeleteTodo } from "./helper/handleDeleteTodo";
+import { handleChangeTask } from "./helper/handleChangeTask";
+import { handleChangeStatus } from "./helper/handleChangeStatus";
 import { DispatchTodoActionType, TodoType } from "HomePage/helper/types";
-import { SetAPIRequestDataType } from "global/hooks";
+
 import iconColor from "global/components/styles/iconColor.module.scss";
 
 interface Props {
@@ -21,6 +20,7 @@ interface Props {
 
 export const TodoItemInput: FunctionComponent<Props> = ({
   index,
+
   dispatchTodoAction,
   todoItem,
   setAPIRequestData,
@@ -49,7 +49,7 @@ export const TodoItemInput: FunctionComponent<Props> = ({
   const handleOnCheckClick = () => {
     setIsDisabled(true);
     setLoadingIcon({ ...loadingIcon, status: true });
-    handleChangeTodoStatus(
+    handleChangeStatus(
       setAPIRequestData,
       index,
       setLoadingIcon,
@@ -62,7 +62,7 @@ export const TodoItemInput: FunctionComponent<Props> = ({
   const handleOnDoneClick = () => {
     setIsDisabled(true);
     setLoadingIcon({ ...loadingIcon, task: true });
-    handleChangeTodoTask(
+    handleChangeTask(
       setAPIRequestData,
       index,
       setLoadingIcon,
@@ -94,7 +94,6 @@ export const TodoItemInput: FunctionComponent<Props> = ({
         value={localTask}
         handleOnChange={handleInputChange}
         isDisabled={isDisabled}
-        className={`${style.form}`}
       >
         <div className="left">
           <ButtonWithIcon

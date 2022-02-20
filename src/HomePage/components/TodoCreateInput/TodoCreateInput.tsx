@@ -1,7 +1,7 @@
 import { FunctionComponent, useState, ChangeEvent } from "react";
 
 import style from "./TodoCreateInput.module.scss";
-import { handleCreateTodo } from "./helper/createTodo.handler";
+import { handleCreateTodo } from "./helper/handeleCreateTodo";
 import { useAPICall } from "global/hooks";
 import { DispatchTodoActionType } from "HomePage/helper/types";
 import { ButtonWithIcon } from "global/components/Button";

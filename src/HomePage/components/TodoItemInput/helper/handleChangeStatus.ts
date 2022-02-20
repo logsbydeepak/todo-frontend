@@ -1,10 +1,13 @@
-import { TodoType } from "HomePage/helper/types";
-import { SetLoadingIconType } from "HomePage/helper/types";
 import { SetAPIRequestDataType } from "global/hooks";
-import { DispatchTodoActionType } from "HomePage/helper/types";
-import { SetIsDisabled } from "HomePage/helper/types";
 
-export const handleChangeTodoStatus = (
+import {
+  SetLoadingIconType,
+  TodoType,
+  DispatchTodoActionType,
+  SetIsDisabled,
+} from "HomePage/helper/types";
+
+export const handleChangeStatus = (
   setAPIRequestData: SetAPIRequestDataType,
   index: number,
   setLoadingIcon: SetLoadingIconType,
