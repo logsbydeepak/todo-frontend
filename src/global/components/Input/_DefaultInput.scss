@@ -1,10 +1,16 @@
 @import "global/styles/utilities/variables";
+@import "global/styles/utilities/breakpoints";
 
 .label {
   font-size: 1.6rem;
   margin-bottom: 0.8rem;
   font-weight: 500;
   display: inline-block;
+
+  @include xs {
+    font-size: 1.4rem;
+    margin-bottom: 0.4rem;
+  }
 }
 
 .input {
@@ -16,6 +22,12 @@
   padding: 1.8rem 3rem;
   transition: all 0.2s;
   margin-bottom: 0.8rem;
+
+  @include xs {
+    font-size: 1.5rem;
+    padding: 1.4rem 2rem;
+    margin-bottom: 0.4rem;
+  }
 
   i &::placeholder {
     color: #818181;
@@ -34,15 +46,24 @@
     & input {
       padding: 1.8rem 1rem;
       order: 2;
+
+      @include xs {
+        font-size: 1.5rem;
+        padding: 1.4rem 1rem;
+      }
     }
   }
 }
 
 .helper {
-  margin: 0 2rem;
+  margin-left: 2rem;
   font-size: 1.4rem;
   font-weight: 400;
   color: #9f9f9f;
+
+  @include xs {
+    margin-left: 1rem;
+  }
 }
 
 .error .input {

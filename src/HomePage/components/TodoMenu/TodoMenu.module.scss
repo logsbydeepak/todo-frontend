@@ -1,9 +1,19 @@
 @import "global/styles/utilities/variables";
+@import "global/styles/utilities/breakpoints";
 
 .menu {
   display: flex;
   justify-content: space-between;
   margin: 6rem 4rem;
+
+  @include sm {
+    margin: 6rem 0rem;
+  }
+
+  @include xs {
+    margin: 2rem 0;
+    flex-direction: column;
+  }
 
   & input {
     display: none;
@@ -20,6 +30,17 @@
     color: $color-grey-3;
     border: 0.2rem solid $color-black;
     transition: all 0.3s;
+
+    @include sm {
+      font-size: 1.5rem;
+      padding: 1.2rem 2rem;
+    }
+
+    @include xs {
+      text-align: center;
+      margin-top: 2rem;
+      padding: 1.4rem 3.2rem;
+    }
 
     &:hover {
       color: $color-grey-2;

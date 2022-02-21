@@ -1,10 +1,12 @@
 @import "global/styles/utilities/variables";
+@import "global/styles/utilities/breakpoints";
 @import "global/components/Input/DefaultInput";
 
-.base {
-  margin-bottom: 3rem;
-}
-
+.base,
 .form__out {
   margin-bottom: 3rem;
+
+  @include xs {
+    margin-bottom: 2rem;
+  }
 }

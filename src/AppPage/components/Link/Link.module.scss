@@ -8,8 +8,14 @@
     transition: all 0.3s;
     margin-left: 4rem;
 
+    @include sm {
+      font-size: 1.8rem;
+      margin-left: 2rem;
+    }
+
     @include xs {
       margin-left: 1rem;
+      font-size: 1.4rem;
     }
 
     &:hover {

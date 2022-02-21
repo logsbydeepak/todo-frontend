@@ -1,4 +1,11 @@
+@import "global/styles/utilities/breakpoints";
+
 .button {
   margin-top: 6rem;
   margin-bottom: 16rem;
+
+  @include xs {
+    margin-top: 4rem;
+    margin-bottom: 8rem;
+  }
 }
