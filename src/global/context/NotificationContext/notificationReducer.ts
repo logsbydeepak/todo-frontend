@@ -8,7 +8,7 @@ export const notificationReducer = (
 ) => {
   switch (action.type) {
     case "SUCCESS":
-      draft.unshift({
+      draft.push({
         id: v4(),
         status: "SUCCESS",
         message: action.message,
@@ -16,7 +16,7 @@ export const notificationReducer = (
       break;
 
     case "ERROR":
-      draft.unshift({
+      draft.push({
         id: v4(),
         status: "ERROR",
         message: action.message,
@@ -24,7 +24,7 @@ export const notificationReducer = (
       break;
 
     case "REMOVE":
-      draft.pop();
+      draft.shift();
       break;
 
     default:

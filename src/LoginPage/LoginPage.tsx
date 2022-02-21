@@ -52,6 +52,10 @@ export const LoginPage: NextPage = () => {
   };
 
   const handleLogin = async () => {
+    dispatchNotification({
+      type: "SUCCESS",
+      message: "hi hi hi hi hi hi hi hi",
+    });
     setFormState((draft) => {
       draft.isLoading = true;
       draft.helper = initialUserData;

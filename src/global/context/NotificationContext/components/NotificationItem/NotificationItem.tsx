@@ -10,7 +10,7 @@ export const NotificationItem: FunctionComponent<{
 
   useEffect(() => {
     const time = setTimeout(() => {
-      if (timeFrame >= 100) return;
+      if (timeFrame >= 105) return;
       setTimeFrame(timeFrame + 0.5);
     }, 10);
     return () => {
@@ -19,7 +19,7 @@ export const NotificationItem: FunctionComponent<{
   }, [timeFrame]);
 
   useEffect(() => {
-    if (timeFrame >= 100) {
+    if (timeFrame >= 105) {
       dispatchNotification({
         type: "REMOVE",
       });
@@ -30,7 +30,10 @@ export const NotificationItem: FunctionComponent<{
     <>
       <div className={`${style.base} ${style[notification.status]}`}>
         <p className={style.text}>{notification.message}</p>
-        <div className={style.bar} style={{ width: `${timeFrame}%` }}></div>
+        <div
+          className={style.bar}
+          style={{ width: `${timeFrame <= 100 && timeFrame}%` }}
+        ></div>
       </div>
     </>
   );
