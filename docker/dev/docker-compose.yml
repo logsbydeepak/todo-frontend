@@ -15,5 +15,4 @@ services:
 
 networks:
   dev_frontend_network:
-    external: true
-    name: todo_dev_backend_network
+    name: todo_dev_frontend_network
