@@ -23,6 +23,7 @@ import { NameInput } from "./components/Input/NameInput";
 import { EmailInput } from "./components/Input/EmailInput";
 import { PasswordInput } from "./components/Input/PasswordInput";
 import { HelperTextAndSpinner } from "../global/components/HelperTextAndSpinner";
+import { Navbar } from "AppPage/components/Navbar";
 
 const myUseLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -48,17 +49,8 @@ export const UserPage = () => {
 
   const router = useRouter();
   const [setAPIRequestData] = useAPICall();
-  const { auth } = useAuthContext();
-
-  myUseLayoutEffect(() => {
-    if (auth === null) return;
-    if (!auth) {
-      router.push("/");
-    }
-  }, [auth]);
 
   useEffect(() => {
-    if (!auth) return;
     handleGetUser(setAPIRequestData, setPageState, setInputState);
   }, []);
 
@@ -102,6 +94,7 @@ export const UserPage = () => {
 
   return (
     <>
+      <Navbar auth={true} />
       <Head>
         <title>TODO - User</title>
       </Head>

@@ -2,16 +2,13 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Dispatch, FunctionComponent, SetStateAction, useEffect } from "react";
 
-import { useAuthContext } from "global/context/AuthContext";
 import { useAPICall } from "global/hooks";
 import { useNotificationContext } from "global/context/NotificationContext";
 
 import style from "./Navbar.module.scss";
 import { AuthLink, NoAuthLink } from "AppPage/components/Link";
 
-export const Navbar: FunctionComponent = () => {
-  const { auth, changeAuth } = useAuthContext();
-
+export const Navbar: FunctionComponent<{ auth: boolean }> = ({ auth }) => {
   const [setAPIRequestData] = useAPICall();
   const { dispatchNotification } = useNotificationContext();
 
@@ -33,7 +30,6 @@ export const Navbar: FunctionComponent = () => {
       onSuccess: () => {
         setIsLoading(false);
         dispatchNotification({ type: "SUCCESS", message: "User logout" });
-        changeAuth(false);
         router.push("/");
       },
       onError: () => {

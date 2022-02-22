@@ -22,6 +22,7 @@ import {
 import { initialErrorData, initialUserData } from "./helper/data";
 
 import style from "./Login.module.scss";
+import { Navbar } from "AppPage/components/Navbar";
 
 export const LoginPage: NextPage = () => {
   const router = useRouter();
@@ -52,10 +53,6 @@ export const LoginPage: NextPage = () => {
   };
 
   const handleLogin = async () => {
-    dispatchNotification({
-      type: "SUCCESS",
-      message: "hi hi hi hi hi hi hi hi",
-    });
     setFormState((draft) => {
       draft.isLoading = true;
       draft.helper = initialUserData;
@@ -108,6 +105,7 @@ export const LoginPage: NextPage = () => {
 
   return (
     <>
+      <Navbar auth={false} />
       <Head>
         <title>TODO - Login</title>
       </Head>

@@ -14,7 +14,6 @@ export const AppPage: NextPage = ({ children }) => {
       </Head>
       <NotificationProvider>
         <AuthProvider>
-          <Navbar />
           <div className="container">{children}</div>
         </AuthProvider>
       </NotificationProvider>

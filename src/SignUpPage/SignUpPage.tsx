@@ -19,6 +19,7 @@ import { useNotificationContext } from "global/context/NotificationContext";
 import { initialErrorData, initialUserData } from "./helper/data";
 
 import style from "./SignUp.module.scss";
+import { Navbar } from "AppPage/components/Navbar";
 
 export const SignUpPage: NextPage = () => {
   const router = useRouter();
@@ -130,6 +131,7 @@ export const SignUpPage: NextPage = () => {
 
   return (
     <>
+      <Navbar auth={false} />
       <Head>
         <title>TODO - SignUp</title>
       </Head>
