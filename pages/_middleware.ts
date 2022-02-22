@@ -1,6 +1,6 @@
-import type { NextFetchEvent, NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 
-export const middleware = (req: NextRequest, ev: NextFetchEvent) => {
+export const middleware = (req: NextRequest) => {
   const pahtName = req.nextUrl.pathname.toLocaleLowerCase();
   const authCookie = req.cookies.auth;
   const originUrl = req.nextUrl.origin;

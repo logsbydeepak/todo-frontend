@@ -1,12 +1,11 @@
 import HomePage from "HomePage";
-import { NextPage } from "next";
-import { NextRequest } from "next/server";
+import { GetServerSideProps, NextPage } from "next";
 
-const Home: NextPage<{ auth: boolean }> = ({ auth }) => (
-  <HomePage auth={auth} />
+const Home: NextPage<{ auth: boolean }> = (props) => (
+  <HomePage auth={props.auth} />
 );
 
-export const getServerSideProps = ({ req }: { req: NextRequest }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   return { props: { auth: req.cookies.auth === "true" } };
 };
 
