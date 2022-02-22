@@ -10,7 +10,6 @@ import isStrongPassword from "validator/lib/isStrongPassword";
 
 import { axiosRequest } from "global/helper";
 import { PageTitle } from "global/components/PageTitle";
-import { useAuthContext } from "global/context/AuthContext";
 import { ButtonWithTextAndIcon } from "global/components/Button";
 import { SimpleInput, InputWithIcon } from "global/components/Input";
 import { useNotificationContext } from "global/context/NotificationContext";
@@ -34,14 +33,7 @@ export const LoginPage: NextPage = () => {
     value: initialUserData,
   });
 
-  const { auth, changeAuth } = useAuthContext();
   const { dispatchNotification } = useNotificationContext();
-
-  useEffect(() => {
-    if (auth) {
-      router.push("/");
-    }
-  }, [auth, router]);
 
   const formInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
@@ -80,7 +72,6 @@ export const LoginPage: NextPage = () => {
     try {
       await axiosRequest.post("/session", formState.value);
 
-      changeAuth(true);
       dispatchNotification({
         type: "SUCCESS",
         message: "User sign in successfully",

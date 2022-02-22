@@ -3,7 +3,6 @@ import { ChangeEvent, useEffect, useLayoutEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import { useAuthContext } from "global/context/AuthContext";
 import { useAPICall } from "global/hooks";
 
 import { PageTitle } from "global/components/PageTitle";
@@ -25,9 +24,6 @@ import { PasswordInput } from "./components/Input/PasswordInput";
 import { HelperTextAndSpinner } from "../global/components/HelperTextAndSpinner";
 import { Navbar } from "AppPage/components/Navbar";
 
-const myUseLayoutEffect =
-  typeof window !== "undefined" ? useLayoutEffect : useEffect;
-
 export const UserPage = () => {
   const [inputState, setInputState] = useImmer({
     value: initialText,
@@ -47,7 +43,6 @@ export const UserPage = () => {
     isLoadingDeleteButton: false,
   });
 
-  const router = useRouter();
   const [setAPIRequestData] = useAPICall();
 
   useEffect(() => {

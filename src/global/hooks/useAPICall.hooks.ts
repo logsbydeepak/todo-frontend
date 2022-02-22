@@ -3,13 +3,10 @@ import { useEffect, useState } from "react";
 import { AxiosResponse } from "axios";
 import { useRouter } from "next/router";
 
-import { useAuthContext } from "global/context/AuthContext";
 import { APIRequestDataType } from "global/hooks";
 import { axiosRequest } from "global/helper";
 
 export const useAPICall = () => {
-  const { changeAuth } = useAuthContext();
-
   const router = useRouter();
   const [APIRequestData, setAPIRequestData] =
     useState<APIRequestDataType>(null);
@@ -73,7 +70,6 @@ export const useAPICall = () => {
             return;
           }
 
-          changeAuth(false);
           router.push("/");
         });
     };

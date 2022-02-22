@@ -1,5 +1,4 @@
 import { ButtonWithTextAndIcon } from "global/components/Button";
-import { useAuthContext } from "global/context/AuthContext";
 import { useNotificationContext } from "global/context/NotificationContext";
 import { useAPICall } from "global/hooks";
 import { FunctionComponent } from "react";
@@ -27,7 +26,6 @@ export const LogoutAllAndDeleteUserButton: FunctionComponent<Props> = ({
   setPageState,
 }) => {
   const [setAPIRequestData] = useAPICall();
-  const { changeAuth } = useAuthContext();
   const { dispatchNotification } = useNotificationContext();
 
   return (
@@ -43,7 +41,6 @@ export const LogoutAllAndDeleteUserButton: FunctionComponent<Props> = ({
               inputState,
               setPageState,
               setInputState,
-              changeAuth,
               dispatchNotification
             )
           }
@@ -80,7 +77,6 @@ export const LogoutAllAndDeleteUserButton: FunctionComponent<Props> = ({
                 inputState,
                 setPageState,
                 setInputState,
-                changeAuth,
                 dispatchNotification
               );
             });

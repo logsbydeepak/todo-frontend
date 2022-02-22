@@ -12,7 +12,6 @@ import { axiosRequest } from "global/helper";
 import { SimpleInput } from "global/components/Input";
 import { InputWithIcon } from "global/components/Input";
 import { PageTitle } from "global/components/PageTitle";
-import { useAuthContext } from "global/context/AuthContext";
 import { ButtonWithTextAndIcon } from "global/components/Button";
 import { useNotificationContext } from "global/context/NotificationContext";
 
@@ -31,14 +30,7 @@ export const SignUpPage: NextPage = () => {
     isError: initialErrorData,
   });
 
-  const { auth, changeAuth } = useAuthContext();
   const { dispatchNotification } = useNotificationContext();
-
-  useEffect(() => {
-    if (auth) {
-      router.push("/");
-    }
-  }, [auth, router]);
 
   const formInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
@@ -111,7 +103,7 @@ export const SignUpPage: NextPage = () => {
       data: formState.value,
     })
       .then(() => {
-        changeAuth(true);
+        router.push("/");
         dispatchNotification({
           type: "SUCCESS",
           message: "User created successfully",

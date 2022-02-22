@@ -17,7 +17,6 @@ import { handleGetMoreTodo } from "HomePage/helper/loadMore.handler";
 import { useNotificationContext } from "global/context/NotificationContext";
 import { handleGetTodoOnMenuChange } from "HomePage/helper/getTodoOnMenuChange.handler";
 
-import { useAuthContext } from "global/context/AuthContext";
 import { HelperTextAndSpinner } from "global/components/HelperTextAndSpinner";
 
 const initialTodoState: TodoStateType = {
@@ -29,7 +28,6 @@ const initialTodoState: TodoStateType = {
 };
 
 export const TodoPage = () => {
-  const { auth } = useAuthContext();
   const [todoState, dispatchTodoAction] = useImmerReducer(
     todoReducer,
     initialTodoState
@@ -50,9 +48,8 @@ export const TodoPage = () => {
   }, [activeMenu]);
 
   useEffect(() => {
-    if (!auth) return;
     useMemoHandleGetTodoOnMenuChange;
-  }, [auth]);
+  }, []);
 
   return (
     <>

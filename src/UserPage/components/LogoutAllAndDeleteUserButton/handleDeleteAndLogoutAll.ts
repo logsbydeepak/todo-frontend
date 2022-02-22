@@ -44,7 +44,6 @@ export const handleDeleteAndLogoutAllUser = (
   inputState: UserInputStateType,
   setPageState: SetPageStateType,
   setInputState: SetUserInputStateType,
-  changeAuth: (value: boolean) => void,
   dispatchNotification: DispatchNotificationType
 ) => {
   setInputState((draft) => {
@@ -80,7 +79,6 @@ export const handleDeleteAndLogoutAllUser = (
       },
     },
     onSuccess: () => {
-      changeAuth(false);
       dispatchNotification({
         type: "SUCCESS",
         message: action === "logoutAll" ? "Logout all" : "User deleted",
