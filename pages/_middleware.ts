@@ -1,4 +1,4 @@
-import type { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export const middleware = (req: NextRequest) => {
   const pahtName = req.nextUrl.pathname.toLocaleLowerCase();
@@ -7,13 +7,13 @@ export const middleware = (req: NextRequest) => {
 
   if (pahtName === "/login" || pahtName === "/signup") {
     if (authCookie === "true") {
-      return Response.redirect(originUrl);
+      return NextResponse.redirect(originUrl, 302);
     }
   }
 
   if (pahtName === "/user") {
     if (authCookie !== "true") {
-      return Response.redirect(originUrl);
+      return NextResponse.redirect(originUrl, 302);
     }
   }
 };
