@@ -52,21 +52,39 @@ export const LoginPage: NextPage = () => {
       draft.isError = initialErrorData;
     });
 
+    const helperText = { ...initialUserData };
+    const isErrorStatus = { ...initialErrorData };
+
+    if (!isEmail(formState.value.email)) {
+      helperText.email = "invalid email";
+      isErrorStatus.email = true;
+    }
+
     if (formState.value.email.length === 0) {
-      setInputEmptyError("email", setFormState);
-      return;
+      helperText.email = "email is required";
+      isErrorStatus.email = true;
+    }
+
+    if (!isStrongPassword(formState.value.password)) {
+      helperText.password =
+        "min of 8 characters, 1 lower case, upper case, symbol";
+      isErrorStatus.password = true;
     }
 
     if (formState.value.password.length === 0) {
-      setInputEmptyError("password", setFormState);
-      return;
+      helperText.password = "password is required";
+      isErrorStatus.password = true;
     }
 
     if (
       !isEmail(formState.value.email) ||
       !isStrongPassword(formState.value.password)
     ) {
-      setInputInvalidError(setFormState);
+      setFormState((draft) => {
+        draft.isLoading = false;
+        draft.helper = helperText;
+        draft.isError = isErrorStatus;
+      });
       return;
     }
 
@@ -80,7 +98,34 @@ export const LoginPage: NextPage = () => {
 
       router.push("/");
     } catch (error: any) {
-      setInputInvalidError(setFormState);
+      const message = error.response.data.error.message;
+
+      if (message === "user do not exist") {
+        setFormState((draft) => {
+          draft.helper.email = "user don't exist";
+          draft.isError.email = true;
+          draft.isLoading = false;
+        });
+        return;
+      }
+
+      if (message === "invalid password") {
+        setFormState((draft) => {
+          draft.helper.password = "invalid password";
+          draft.isError.password = true;
+          draft.isLoading = false;
+        });
+        return;
+      }
+
+      dispatchNotification({
+        type: "ERROR",
+        message: "Something went wrong",
+      });
+
+      setFormState((draft) => {
+        draft.isLoading = false;
+      });
     }
   };
 

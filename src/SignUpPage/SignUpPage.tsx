@@ -113,13 +113,11 @@ export const SignUpPage: NextPage = () => {
 
       .catch((error: any) => {
         const message = error.response.data.error.message;
-        if (message === "email already exists") {
-          dispatchNotification({
-            type: "ERROR",
-            message: "User already exist",
-          });
 
+        if (message === "email already exists") {
           setFormState((draft) => {
+            draft.helper.email = "user already exists";
+            draft.isError.email = true;
             draft.isLoading = false;
           });
           return;
