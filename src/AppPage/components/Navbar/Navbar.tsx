@@ -8,6 +8,7 @@ import { useNotificationContext } from "global/context/NotificationContext";
 import style from "./Navbar.module.scss";
 import { AuthLink, NoAuthLink } from "AppPage/components/Link";
 import axios from "axios";
+import { clearAuthCookie } from "global/helper";
 
 export const Navbar: FunctionComponent<{ auth: boolean }> = ({ auth }) => {
   const [setAPIRequestData] = useAPICall();
@@ -30,19 +31,9 @@ export const Navbar: FunctionComponent<{ auth: boolean }> = ({ auth }) => {
       },
       onSuccess: () => {
         setIsLoading(false);
-        axios
-          .request({ method: "DELETE", url: "api/auth" })
-          .then(() => {
-            dispatchNotification({ type: "SUCCESS", message: "User logout" });
-            router.push("/");
-          })
-          .catch(() => {
-            dispatchNotification({
-              type: "ERROR",
-              message: "Something went wrong",
-            });
-            router.push("/");
-          });
+        clearAuthCookie();
+        dispatchNotification({ type: "SUCCESS", message: "User logout" });
+        router.push("/");
       },
       onError: () => {
         setIsLoading(false);

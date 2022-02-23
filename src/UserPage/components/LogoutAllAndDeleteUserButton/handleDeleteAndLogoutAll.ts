@@ -7,6 +7,7 @@ import {
 import { DispatchNotificationType } from "global/context/NotificationContext";
 import { SetAPIRequestDataType } from "global/hooks";
 import isStrongPassword from "validator/lib/isStrongPassword";
+import { clearAuthCookie } from "global/helper";
 
 const setCurrentPasswordError = (
   currentPasswordHelper: string,
@@ -79,6 +80,7 @@ export const handleDeleteAndLogoutAllUser = (
       },
     },
     onSuccess: () => {
+      clearAuthCookie();
       dispatchNotification({
         type: "SUCCESS",
         message: action === "logoutAll" ? "Logout all" : "User deleted",

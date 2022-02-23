@@ -8,7 +8,7 @@ import { useImmer } from "use-immer";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 
-import { axiosRequest } from "global/helper";
+import { axiosRequest, createAuthCookie } from "global/helper";
 import { SimpleInput } from "global/components/Input";
 import { InputWithIcon } from "global/components/Input";
 import { PageTitle } from "global/components/PageTitle";
@@ -105,23 +105,15 @@ export const SignUpPage: NextPage = () => {
       data: formState.value,
     })
       .then(() => {
+        createAuthCookie();
+
         dispatchNotification({
           type: "SUCCESS",
           message: "User created successfully",
         });
-
-        axios
-          .request({ method: "POST", url: "/api/auth" })
-          .then(() => {
-            router.push("/");
-          })
-          .catch(() => {
-            dispatchNotification({
-              type: "ERROR",
-              message: "User created try Login in",
-            });
-          });
+        router.push("/");
       })
+
       .catch(() => {
         dispatchNotification({
           type: "ERROR",

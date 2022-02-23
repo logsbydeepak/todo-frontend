@@ -4,11 +4,7 @@ import { AxiosResponse } from "axios";
 import { useRouter } from "next/router";
 
 import { APIRequestDataType } from "global/hooks";
-import { axiosRequest } from "global/helper";
-
-const deleteCookie = (name: string) => {
-  document.cookie = name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-};
+import { axiosRequest, clearAuthCookie } from "global/helper";
 
 export const useAPICall = () => {
   const router = useRouter();
@@ -47,6 +43,7 @@ export const useAPICall = () => {
               method: "PUT",
             })
               .then((successResponse) => {
+                clearAuthCookie();
                 axiosRequest({
                   url,
                   method,
@@ -74,7 +71,7 @@ export const useAPICall = () => {
             return;
           }
 
-          deleteCookie("auth");
+          clearAuthCookie();
           router.push("/");
         });
     };
