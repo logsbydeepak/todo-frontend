@@ -8,21 +8,16 @@ import { useImmer } from "use-immer";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 
-import { axiosRequest } from "global/helper";
+import { axiosRequest, createAuthCookie } from "global/helper";
 import { PageTitle } from "global/components/PageTitle";
 import { ButtonWithTextAndIcon } from "global/components/Button";
 import { SimpleInput, InputWithIcon } from "global/components/Input";
 import { useNotificationContext } from "global/context/NotificationContext";
 
-import {
-  setInputEmptyError,
-  setInputInvalidError,
-} from "./helper/handleInputError";
 import { initialErrorData, initialUserData } from "./helper/data";
 
 import style from "./Login.module.scss";
 import { Navbar } from "AppPage/components/Navbar";
-import { serialize } from "cookie";
 
 export const LoginPage: NextPage = () => {
   const router = useRouter();
@@ -67,7 +62,7 @@ export const LoginPage: NextPage = () => {
 
     if (!isStrongPassword(formState.value.password)) {
       helperText.password =
-        "min of 8 characters, 1 lower case, upper case, symbol";
+        "min of 8 characters, 1 lower case, upper case, symbol, number";
       isErrorStatus.password = true;
     }
 
@@ -90,6 +85,8 @@ export const LoginPage: NextPage = () => {
 
     try {
       await axiosRequest.post("/session", formState.value);
+
+      createAuthCookie();
 
       dispatchNotification({
         type: "SUCCESS",

@@ -11,6 +11,7 @@ import {
 } from "UserPage/helper/types";
 import style from "./LogoutAllAndDeleteUserButton.module.scss";
 import { DeleteConfirmation } from "../DeleteConfirmation";
+import { useRouter } from "next/router";
 
 interface Props {
   inputState: UserInputStateType;
@@ -25,6 +26,7 @@ export const LogoutAllAndDeleteUserButton: FunctionComponent<Props> = ({
   pageState,
   setPageState,
 }) => {
+  const router = useRouter();
   const [setAPIRequestData] = useAPICall();
   const { dispatchNotification } = useNotificationContext();
 
@@ -41,7 +43,8 @@ export const LogoutAllAndDeleteUserButton: FunctionComponent<Props> = ({
               inputState,
               setPageState,
               setInputState,
-              dispatchNotification
+              dispatchNotification,
+              router
             )
           }
           isLoading={pageState.isLoadingLogoutAllButton}
@@ -77,7 +80,8 @@ export const LogoutAllAndDeleteUserButton: FunctionComponent<Props> = ({
                 inputState,
                 setPageState,
                 setInputState,
-                dispatchNotification
+                dispatchNotification,
+                router
               );
             });
           }}

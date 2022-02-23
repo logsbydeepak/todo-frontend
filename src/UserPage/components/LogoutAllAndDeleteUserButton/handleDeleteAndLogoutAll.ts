@@ -8,6 +8,7 @@ import { DispatchNotificationType } from "global/context/NotificationContext";
 import { SetAPIRequestDataType } from "global/hooks";
 import isStrongPassword from "validator/lib/isStrongPassword";
 import { clearAuthCookie } from "global/helper";
+import { NextRouter } from "next/router";
 
 const setCurrentPasswordError = (
   currentPasswordHelper: string,
@@ -45,7 +46,8 @@ export const handleDeleteAndLogoutAllUser = (
   inputState: UserInputStateType,
   setPageState: SetPageStateType,
   setInputState: SetUserInputStateType,
-  dispatchNotification: DispatchNotificationType
+  dispatchNotification: DispatchNotificationType,
+  router: NextRouter
 ) => {
   setInputState((draft) => {
     draft.helper = initialText;
@@ -85,6 +87,7 @@ export const handleDeleteAndLogoutAllUser = (
         type: "SUCCESS",
         message: action === "logoutAll" ? "Logout all" : "User deleted",
       });
+      router.push("/");
     },
     onError: (errorResponse: any) => {
       if (errorResponse.message === "invalid password") {

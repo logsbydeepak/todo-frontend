@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useLayoutEffect } from "react";
 
 import Head from "next/head";
-import { useRouter } from "next/router";
+import { Router, useRouter } from "next/router";
 
 import { useAPICall } from "global/hooks";
 
@@ -25,6 +25,7 @@ import { HelperTextAndSpinner } from "../global/components/HelperTextAndSpinner"
 import { Navbar } from "AppPage/components/Navbar";
 
 export const UserPage = () => {
+  const router = useRouter();
   const [inputState, setInputState] = useImmer({
     value: initialText,
     helper: initialText,

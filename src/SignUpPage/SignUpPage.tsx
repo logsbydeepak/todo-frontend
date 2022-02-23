@@ -75,7 +75,7 @@ export const SignUpPage: NextPage = () => {
 
     if (!isStrongPassword(formState.value.password)) {
       helperText.password =
-        "min of 8 characters, 1 lower case, upper case, symbol";
+        "min of 8 characters, 1 lower case, upper case, symbol, number";
       isErrorStatus.password = true;
     }
 
