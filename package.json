@@ -12,7 +12,9 @@
     "format:watch": "onchange \"**/*\" --exclude-path .prettierignore -- prettier --write --ignore-unknown {{changed}}"
   },
   "dependencies": {
+    "@types/cookie": "^0.4.1",
     "axios": "^0.26.0",
+    "cookie": "^0.4.2",
     "immer": "^9.0.12",
     "next": "^12.1.0",
     "react": "17.0.2",

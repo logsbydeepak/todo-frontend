@@ -19,6 +19,8 @@ import { initialErrorData, initialUserData } from "./helper/data";
 
 import style from "./SignUp.module.scss";
 import { Navbar } from "AppPage/components/Navbar";
+import { serialize } from "cookie";
+import axios from "axios";
 
 export const SignUpPage: NextPage = () => {
   const router = useRouter();
@@ -103,11 +105,22 @@ export const SignUpPage: NextPage = () => {
       data: formState.value,
     })
       .then(() => {
-        router.push("/");
         dispatchNotification({
           type: "SUCCESS",
           message: "User created successfully",
         });
+
+        axios
+          .request({ method: "POST", url: "/api/auth" })
+          .then(() => {
+            router.push("/");
+          })
+          .catch(() => {
+            dispatchNotification({
+              type: "ERROR",
+              message: "User created try Login in",
+            });
+          });
       })
       .catch(() => {
         dispatchNotification({
