@@ -80,18 +80,7 @@ export const LoginPage: NextPage = () => {
 
       router.push("/");
     } catch (error: any) {
-      if (error.response.data.error.message === "user do not exist") {
-        setInputInvalidError(setFormState);
-        return;
-      }
-      dispatchNotification({
-        type: "ERROR",
-        message: "Something went wrong",
-      });
-
-      setFormState((draft) => {
-        draft.isLoading = false;
-      });
+      setInputInvalidError(setFormState);
     }
   };
 

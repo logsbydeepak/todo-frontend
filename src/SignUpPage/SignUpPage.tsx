@@ -19,8 +19,6 @@ import { initialErrorData, initialUserData } from "./helper/data";
 
 import style from "./SignUp.module.scss";
 import { Navbar } from "AppPage/components/Navbar";
-import { serialize } from "cookie";
-import axios from "axios";
 
 export const SignUpPage: NextPage = () => {
   const router = useRouter();
@@ -106,7 +104,6 @@ export const SignUpPage: NextPage = () => {
     })
       .then(() => {
         createAuthCookie();
-
         dispatchNotification({
           type: "SUCCESS",
           message: "User created successfully",
@@ -114,7 +111,20 @@ export const SignUpPage: NextPage = () => {
         router.push("/");
       })
 
-      .catch(() => {
+      .catch((error: any) => {
+        const message = error.response.data.error.message;
+        if (message === "email already exists") {
+          dispatchNotification({
+            type: "ERROR",
+            message: "User already exist",
+          });
+
+          setFormState((draft) => {
+            draft.isLoading = false;
+          });
+          return;
+        }
+
         dispatchNotification({
           type: "ERROR",
           message: "Something went wrong",
