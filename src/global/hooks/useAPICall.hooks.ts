@@ -47,6 +47,7 @@ export const useAPICall = () => {
                 axiosRequest({
                   url,
                   method,
+
                   data: body,
                 }).then((successResponse) => {
                   onSuccess(successResponse.data.data);
