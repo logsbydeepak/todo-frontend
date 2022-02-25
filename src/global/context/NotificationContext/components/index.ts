@@ -1,2 +1,4 @@
+import NotificationItem from "./NotificationItem/NotificationItem";
+
 export { NotificationContainer } from "./NotificationContainer/NotificationContainer";
-export { NotificationItem } from "./NotificationItem/NotificationItem";
+export { NotificationItem };

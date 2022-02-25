@@ -6,7 +6,7 @@ import {
   NotificationContextType,
   NotificationDraftType,
   NotificationType,
-} from ".";
+} from "./types";
 import notificationReducer from "./notificationReducer";
 
 export const NotificationContext = createContext<NotificationContextType>(null);

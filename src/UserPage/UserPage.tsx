@@ -23,7 +23,7 @@ import { EmailInput } from "./components/Input/EmailInput";
 import { PasswordInput } from "./components/Input/PasswordInput";
 import { HelperTextAndSpinner } from "../global/components/HelperTextAndSpinner";
 
-export function UserPage() {
+export var UserPage = () => {
   const [inputState, setInputState] = useImmer({
     value: initialText,
     helper: initialText,
@@ -147,4 +147,4 @@ export function UserPage() {
       )}
     </>
   );
-}
+};

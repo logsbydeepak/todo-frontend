@@ -1,11 +1,16 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { DispatchNotificationType, NotificationType } from "../../types";
 import style from "./NotificationItem.module.scss";
 
-export const NotificationItem: FunctionComponent<{
+interface Props {
   dispatchNotification: DispatchNotificationType;
   notification: NotificationType;
-}> = ({ dispatchNotification, notification }) => {
+}
+
+const NotificationItem: FC<Props> = ({
+  dispatchNotification,
+  notification,
+}) => {
   const [timeFrame, setTimeFrame] = useState(0);
 
   useEffect(() => {
@@ -36,3 +41,5 @@ export const NotificationItem: FunctionComponent<{
     </div>
   );
 };
+
+export default NotificationItem;

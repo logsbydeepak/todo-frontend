@@ -26,7 +26,7 @@ const initialTodoState: TodoStateType = {
   showLoadMoreButton: false,
 };
 
-export function TodoPage() {
+export var TodoPage = () => {
   const [todoState, dispatchTodoAction] = useImmerReducer(
     todoReducer,
     initialTodoState
@@ -99,4 +99,4 @@ export function TodoPage() {
       )}
     </>
   );
-}
+};

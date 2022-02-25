@@ -1,9 +1,7 @@
 import LoginPage from "LoginPage";
 import { GetServerSideProps } from "next";
 
-function Login() {
-  return <LoginPage />;
-}
+const Login = () => <LoginPage />;
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const auth = req.cookies.auth === "true";

@@ -1,6 +1,6 @@
 import { v4 } from "uuid";
 
-import { NotificationDraftType, NotificationActionType } from ".";
+import { NotificationDraftType, NotificationActionType } from "./types";
 
 const notificationReducer = (
   draft: NotificationDraftType,

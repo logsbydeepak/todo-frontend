@@ -5,21 +5,19 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import style from "./Link.module.scss";
 
-export function NoAuthLink() {
-  return (
-    <ul className={style.NoAuthLink}>
-      <Link href="/Login">
-        <a>Login</a>
-      </Link>
+export var NoAuthLink = () => (
+  <ul className={style.NoAuthLink}>
+    <Link href="/Login">
+      <a>Login</a>
+    </Link>
 
-      <Link href="/SignUp">
-        <a>SignUp</a>
-      </Link>
-    </ul>
-  );
-}
+    <Link href="/SignUp">
+      <a>SignUp</a>
+    </Link>
+  </ul>
+);
 
-export function AuthLink({ handelLogout }: { handelLogout: any }) {
+export var AuthLink = ({ handelLogout }: { handelLogout: any }) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const handleOnUserClick = () => {
@@ -40,4 +38,4 @@ export function AuthLink({ handelLogout }: { handelLogout: any }) {
       />
     </ul>
   );
-}
+};
