@@ -33,6 +33,10 @@ html {
   @include xs {
     padding: 0 2rem;
   }
+
+  &__error {
+    margin-top: 20rem;
+  }
 }
 
 a,
