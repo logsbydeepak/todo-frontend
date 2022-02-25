@@ -5,10 +5,6 @@ import { useImmerReducer } from "use-immer";
 import { PageTitle } from "global/components/PageTitle";
 import { ButtonWithTextAndIcon } from "global/components/Button";
 
-import { TodoItemInput } from "../TodoItemInput";
-import { TodoMenu } from "../TodoMenu";
-import { TodoCreateInput } from "../TodoCreateInput";
-
 import { todoReducer } from "HomePage/helper/todo.reducer";
 import { TodoStateType, TodoType } from "HomePage/helper/types";
 
@@ -18,6 +14,9 @@ import { useNotificationContext } from "global/context/NotificationContext";
 import { handleGetTodoOnMenuChange } from "HomePage/helper/getTodoOnMenuChange.handler";
 
 import { HelperTextAndSpinner } from "global/components/HelperTextAndSpinner";
+import { TodoCreateInput } from "../TodoCreateInput";
+import { TodoMenu } from "../TodoMenu";
+import { TodoItemInput } from "../TodoItemInput";
 
 const initialTodoState: TodoStateType = {
   todo: [],
@@ -27,7 +26,7 @@ const initialTodoState: TodoStateType = {
   showLoadMoreButton: false,
 };
 
-export const TodoPage = () => {
+export function TodoPage() {
   const [todoState, dispatchTodoAction] = useImmerReducer(
     todoReducer,
     initialTodoState
@@ -65,18 +64,16 @@ export const TodoPage = () => {
 
       {!isLoading &&
         todo.length !== 0 &&
-        todo.map((todoItem: TodoType, index: number) => {
-          return (
-            <form key={todoItem._id}>
-              <TodoItemInput
-                index={index}
-                todoItem={todoItem}
-                dispatchTodoAction={dispatchTodoAction}
-                setAPIRequestData={setAPIRequestData}
-              />
-            </form>
-          );
-        })}
+        todo.map((todoItem: TodoType, index: number) => (
+          <form key={todoItem._id}>
+            <TodoItemInput
+              index={index}
+              todoItem={todoItem}
+              dispatchTodoAction={dispatchTodoAction}
+              setAPIRequestData={setAPIRequestData}
+            />
+          </form>
+        ))}
 
       <HelperTextAndSpinner
         isLoading={isLoading}
@@ -102,4 +99,4 @@ export const TodoPage = () => {
       )}
     </>
   );
-};
+}

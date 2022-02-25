@@ -22,24 +22,18 @@ export const ButtonWithTextAndIcon: FunctionComponent<Props> = ({
   isError = false,
   isLoading = false,
   isDisabled = false,
-}) => {
-  return (
-    <>
-      <button
-        className={`${style.buttonWithTextAndIcon} ${
-          isError || (warning && style.warningBackground)
-        }`}
-        onClick={(
-          event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-        ) => {
-          event.preventDefault();
-          handleOnClick();
-        }}
-        disabled={isDisabled}
-      >
-        {text}
-        {isLoading ? <Spinner /> : <i>{icon}</i>}
-      </button>
-    </>
-  );
-};
+}) => (
+  <button
+    className={`${style.buttonWithTextAndIcon} ${
+      isError || (warning && style.warningBackground)
+    }`}
+    onClick={(event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+      event.preventDefault();
+      handleOnClick();
+    }}
+    disabled={isDisabled}
+  >
+    {text}
+    {isLoading ? <Spinner /> : <i>{icon}</i>}
+  </button>
+);

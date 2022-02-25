@@ -1,15 +1,15 @@
 import { ChangeEvent, useEffect } from "react";
 
 import Head from "next/head";
-import { useRouter } from "next/router";
 
 import { useAPICall } from "global/hooks";
 
 import { PageTitle } from "global/components/PageTitle";
 import { InputWithIcon } from "global/components/Input";
 
-import { handleGetUser } from "./helper/handleGetUser";
 import { useImmer } from "use-immer";
+import { Navbar } from "AppPage/components/Navbar";
+import { handleGetUser } from "./helper/handleGetUser";
 import {
   initialBoolean,
   initialBooleanWithoutCurrentPassword,
@@ -22,9 +22,8 @@ import { NameInput } from "./components/Input/NameInput";
 import { EmailInput } from "./components/Input/EmailInput";
 import { PasswordInput } from "./components/Input/PasswordInput";
 import { HelperTextAndSpinner } from "../global/components/HelperTextAndSpinner";
-import { Navbar } from "AppPage/components/Navbar";
 
-export const UserPage = () => {
+export function UserPage() {
   const [inputState, setInputState] = useImmer({
     value: initialText,
     helper: initialText,
@@ -67,10 +66,8 @@ export const UserPage = () => {
       draft.value[inputName] = inputValue;
       if (inputName === "currentPassword") return;
       draft.showIcon[inputName] = true;
-      draft.showIcon.name =
-        draft.value.name === pageState.userInfo.name ? false : true;
-      draft.showIcon.email =
-        draft.value.email === pageState.userInfo.email ? false : true;
+      draft.showIcon.name = draft.value.name !== pageState.userInfo.name;
+      draft.showIcon.email = draft.value.email !== pageState.userInfo.email;
       if (draft.value.password.length !== 0) return;
       draft.showIcon.password = false;
       draft.isError.password = false;
@@ -89,7 +86,7 @@ export const UserPage = () => {
 
   return (
     <>
-      <Navbar auth={true} />
+      <Navbar auth />
       <Head>
         <title>TODO - User</title>
       </Head>
@@ -150,4 +147,4 @@ export const UserPage = () => {
       )}
     </>
   );
-};
+}

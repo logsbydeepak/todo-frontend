@@ -1,7 +1,6 @@
 import { SetAPIRequestDataType } from "global/hooks";
 
-import { TodoMenuType } from "./types";
-import { DispatchTodoActionType } from "./types";
+import { TodoMenuType, DispatchTodoActionType } from "./types";
 
 export const handleGetTodoOnMenuChange = async (
   setAPIRequestData: SetAPIRequestDataType,

@@ -33,45 +33,43 @@ export const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
   const [inputType, setInputType] = useState(type);
 
   return (
-    <>
-      <div
-        className={`${isError && style.error} ${
-          isDisabled && style.disabled
-        } ${className} ${style.form__out}`}
-      >
-        {label.length !== 0 && (
-          <label className={style.label} htmlFor={name}>
-            {label}
-          </label>
+    <div
+      className={`${isError && style.error} ${
+        isDisabled && style.disabled
+      } ${className} ${style.form__out}`}
+    >
+      {label.length !== 0 && (
+        <label className={style.label} htmlFor={name}>
+          {label}
+        </label>
+      )}
+      <div className={`${style.input} ${style.input__icon}`}>
+        <input
+          type={inputType}
+          autoComplete="text"
+          disabled={isDisabled}
+          id={name}
+          placeholder={placeholder}
+          value={value}
+          name={name}
+          onChange={handleOnChange}
+        />
+        {type === "password" && (
+          <div className="right">
+            <ButtonWithIcon
+              icon={showPassword ? "visibility" : "visibility_off"}
+              handleOnClick={() => {
+                setShowPassword(!showPassword);
+                setInputType(showPassword ? "password" : "text");
+              }}
+              className={`${iconStyle.white}`}
+            />
+          </div>
         )}
-        <div className={`${style.input} ${style.input__icon}`}>
-          <input
-            type={inputType}
-            autoComplete="text"
-            disabled={isDisabled}
-            id={name}
-            placeholder={placeholder}
-            value={value}
-            name={name}
-            onChange={handleOnChange}
-          />
-          {type === "password" && (
-            <div className="right">
-              <ButtonWithIcon
-                icon={showPassword ? "visibility" : "visibility_off"}
-                handleOnClick={() => {
-                  setShowPassword(!showPassword);
-                  setInputType(showPassword ? "password" : "text");
-                }}
-                className={`${iconStyle.white}`}
-              />
-            </div>
-          )}
 
-          {children}
-        </div>
-        <p className={style.helper}>{helper}</p>
+        {children}
       </div>
-    </>
+      <p className={style.helper}>{helper}</p>
+    </div>
   );
 };

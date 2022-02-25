@@ -3,7 +3,7 @@ import { ButtonWithLink } from "HomePage/components/ButtonWithLink";
 
 import style from "./LandingPage.module.scss";
 
-export const LandingPage = () => {
+export function LandingPage() {
   return (
     <>
       <Head>
@@ -20,4 +20,4 @@ export const LandingPage = () => {
       </div>
     </>
   );
-};
+}

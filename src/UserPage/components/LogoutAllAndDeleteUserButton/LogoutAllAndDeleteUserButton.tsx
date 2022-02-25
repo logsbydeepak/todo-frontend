@@ -2,16 +2,16 @@ import { ButtonWithTextAndIcon } from "global/components/Button";
 import { useNotificationContext } from "global/context/NotificationContext";
 import { useAPICall } from "global/hooks";
 import { FunctionComponent } from "react";
-import { handleDeleteAndLogoutAllUser } from "./handleDeleteAndLogoutAll";
 import {
   PageStateType,
   SetPageStateType,
   SetUserInputStateType,
   UserInputStateType,
 } from "UserPage/helper/types";
+import { useRouter } from "next/router";
+import { handleDeleteAndLogoutAllUser } from "./handleDeleteAndLogoutAll";
 import style from "./LogoutAllAndDeleteUserButton.module.scss";
 import { DeleteConfirmation } from "../DeleteConfirmation";
-import { useRouter } from "next/router";
 
 interface Props {
   inputState: UserInputStateType;
@@ -60,7 +60,7 @@ export const LogoutAllAndDeleteUserButton: FunctionComponent<Props> = ({
               draft.showModal = true;
             });
           }}
-          warning={true}
+          warning
           isDisabled={pageState.isDisabled}
         />
       </div>

@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { AxiosResponse } from "axios";
 import { useRouter } from "next/router";
 
-import { APIRequestDataType } from "global/hooks";
 import { axiosRequest, clearAuthCookie } from "global/helper";
+import { APIRequestDataType } from "./types.hooks";
 
-export const useAPICall = () => {
+const useAPICall = () => {
   const router = useRouter();
   const [APIRequestData, setAPIRequestData] =
     useState<APIRequestDataType>(null);
@@ -24,7 +24,6 @@ export const useAPICall = () => {
       })
         .then((successResponse: AxiosResponse<any>) => {
           onSuccess(successResponse.data?.data);
-          return;
         })
         .catch((errorResponse) => {
           if (
@@ -51,12 +50,11 @@ export const useAPICall = () => {
                   data: body,
                 }).then((successResponse) => {
                   onSuccess(successResponse.data.data);
-                  return;
                 });
               })
-              .catch((errorResponse) => {
+              .catch((_errorResponse) => {
                 if (
-                  errorResponse.response.data.error.message ===
+                  _errorResponse.response.data.error.message ===
                   "access token is not expired"
                 ) {
                   axiosRequest({
@@ -65,7 +63,6 @@ export const useAPICall = () => {
                     data: body,
                   }).then((successResponse) => {
                     onSuccess(successResponse.data.data);
-                    return;
                   });
                 }
               });
@@ -82,3 +79,5 @@ export const useAPICall = () => {
 
   return [setAPIRequestData];
 };
+
+export default useAPICall;

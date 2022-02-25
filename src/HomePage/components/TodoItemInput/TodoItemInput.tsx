@@ -4,12 +4,11 @@ import { SetAPIRequestDataType } from "global/hooks";
 import { InputWithIcon } from "global/components/Input";
 import { ButtonWithIcon } from "global/components/Button";
 
+import { DispatchTodoActionType, TodoType } from "HomePage/helper/types";
+import iconColor from "global/components/styles/iconColor.module.scss";
 import { handleDeleteTodo } from "./helper/handleDeleteTodo";
 import { handleChangeTask } from "./helper/handleChangeTask";
 import { handleChangeStatus } from "./helper/handleChangeStatus";
-import { DispatchTodoActionType, TodoType } from "HomePage/helper/types";
-
-import iconColor from "global/components/styles/iconColor.module.scss";
 
 interface Props {
   index: number;
@@ -88,52 +87,50 @@ export const TodoItemInput: FunctionComponent<Props> = ({
   };
 
   return (
-    <>
-      <InputWithIcon
-        placeholder={"Task"}
-        value={localTask}
-        handleOnChange={handleInputChange}
-        isDisabled={isDisabled}
-      >
-        <div className="left">
-          <ButtonWithIcon
-            icon={status ? "check_circle_outline" : "radio_button_unchecked"}
-            isLoading={loadingIcon.status}
-            className={iconColor.primary}
-            isDisabled={isDisabled}
-            handleOnClick={handleOnCheckClick}
-          />
-        </div>
-        <div className="right">
-          {tick && (
-            <>
-              <ButtonWithIcon
-                icon="settings_backup_restore"
-                isLoading={false}
-                handleOnClick={handleInputReset}
-                className={iconColor.green}
-                isDisabled={isDisabled}
-              />
+    <InputWithIcon
+      placeholder="Task"
+      value={localTask}
+      handleOnChange={handleInputChange}
+      isDisabled={isDisabled}
+    >
+      <div className="left">
+        <ButtonWithIcon
+          icon={status ? "check_circle_outline" : "radio_button_unchecked"}
+          isLoading={loadingIcon.status}
+          className={iconColor.primary}
+          isDisabled={isDisabled}
+          handleOnClick={handleOnCheckClick}
+        />
+      </div>
+      <div className="right">
+        {tick && (
+          <>
+            <ButtonWithIcon
+              icon="settings_backup_restore"
+              isLoading={false}
+              handleOnClick={handleInputReset}
+              className={iconColor.green}
+              isDisabled={isDisabled}
+            />
 
-              <ButtonWithIcon
-                icon="done_all"
-                isLoading={loadingIcon.task}
-                isDisabled={isDisabled}
-                className={iconColor.white}
-                handleOnClick={handleOnDoneClick}
-              />
-            </>
-          )}
+            <ButtonWithIcon
+              icon="done_all"
+              isLoading={loadingIcon.task}
+              isDisabled={isDisabled}
+              className={iconColor.white}
+              handleOnClick={handleOnDoneClick}
+            />
+          </>
+        )}
 
-          <ButtonWithIcon
-            icon="delete_outline"
-            isDisabled={isDisabled}
-            isLoading={loadingIcon.delete}
-            className={iconColor.red}
-            handleOnClick={handleOnDeleteClick}
-          />
-        </div>
-      </InputWithIcon>
-    </>
+        <ButtonWithIcon
+          icon="delete_outline"
+          isDisabled={isDisabled}
+          isLoading={loadingIcon.delete}
+          className={iconColor.red}
+          handleOnClick={handleOnDeleteClick}
+        />
+      </div>
+    </InputWithIcon>
   );
 };

@@ -9,16 +9,15 @@ import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 
 import { axiosRequest, createAuthCookie } from "global/helper";
-import { SimpleInput } from "global/components/Input";
-import { InputWithIcon } from "global/components/Input";
+import { SimpleInput, InputWithIcon } from "global/components/Input";
 import { PageTitle } from "global/components/PageTitle";
 import { ButtonWithTextAndIcon } from "global/components/Button";
 import { useNotificationContext } from "global/context/NotificationContext";
 
+import { Navbar } from "AppPage/components/Navbar";
 import { initialErrorData, initialUserData } from "./helper/data";
 
 import style from "./SignUp.module.scss";
-import { Navbar } from "AppPage/components/Navbar";
 
 export const SignUpPage: NextPage = () => {
   const router = useRouter();
@@ -112,7 +111,7 @@ export const SignUpPage: NextPage = () => {
       })
 
       .catch((error: any) => {
-        const message = error.response.data.error.message;
+        const { message } = error.response.data.error;
 
         if (message === "email already exists") {
           setFormState((draft) => {
@@ -151,7 +150,7 @@ export const SignUpPage: NextPage = () => {
             name="name"
             label="Name"
             type="text"
-            autoFocus={true}
+            autoFocus
             value={formState.value.name}
             onChange={formInputHandler}
             helper={formState.helper.name}

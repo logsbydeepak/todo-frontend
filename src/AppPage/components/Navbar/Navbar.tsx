@@ -5,9 +5,9 @@ import { Dispatch, FunctionComponent, SetStateAction, useEffect } from "react";
 import { useAPICall } from "global/hooks";
 import { useNotificationContext } from "global/context/NotificationContext";
 
-import style from "./Navbar.module.scss";
 import { AuthLink, NoAuthLink } from "AppPage/components/Link";
 import { clearAuthCookie } from "global/helper";
+import style from "./Navbar.module.scss";
 
 export const Navbar: FunctionComponent<{ auth: boolean }> = ({ auth }) => {
   const [setAPIRequestData] = useAPICall();
@@ -41,17 +41,15 @@ export const Navbar: FunctionComponent<{ auth: boolean }> = ({ auth }) => {
   };
 
   return (
-    <>
-      <header className={style.container}>
-        <Link href="/">
-          <a className={style.logo}>
-            TODO
-            <span>.</span>
-          </a>
-        </Link>
+    <header className={style.container}>
+      <Link href="/">
+        <a className={style.logo}>
+          TODO
+          <span>.</span>
+        </a>
+      </Link>
 
-        {auth ? <AuthLink handelLogout={handelLogout} /> : <NoAuthLink />}
-      </header>
-    </>
+      {auth ? <AuthLink handelLogout={handelLogout} /> : <NoAuthLink />}
+    </header>
   );
 };

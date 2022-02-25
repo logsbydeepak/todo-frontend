@@ -27,14 +27,12 @@ export const NotificationItem: FunctionComponent<{
   }, [timeFrame, dispatchNotification]);
 
   return (
-    <>
-      <div className={`${style.base} ${style[notification.status]}`}>
-        <p className={style.text}>{notification.message}</p>
-        <div
-          className={style.bar}
-          style={{ width: `${timeFrame <= 100 && timeFrame}%` }}
-        ></div>
-      </div>
-    </>
+    <div className={`${style.base} ${style[notification.status]}`}>
+      <p className={style.text}>{notification.message}</p>
+      <div
+        className={style.bar}
+        style={{ width: `${timeFrame <= 100 && timeFrame}%` }}
+      />
+    </div>
   );
 };

@@ -14,10 +14,10 @@ import { ButtonWithTextAndIcon } from "global/components/Button";
 import { SimpleInput, InputWithIcon } from "global/components/Input";
 import { useNotificationContext } from "global/context/NotificationContext";
 
+import { Navbar } from "AppPage/components/Navbar";
 import { initialErrorData, initialUserData } from "./helper/data";
 
 import style from "./Login.module.scss";
-import { Navbar } from "AppPage/components/Navbar";
 
 export const LoginPage: NextPage = () => {
   const router = useRouter();
@@ -95,7 +95,7 @@ export const LoginPage: NextPage = () => {
 
       router.push("/");
     } catch (error: any) {
-      const message = error.response.data.error.message;
+      const { message } = error.response.data.error;
 
       if (message === "user do not exist") {
         setFormState((draft) => {
@@ -146,7 +146,7 @@ export const LoginPage: NextPage = () => {
             placeholder="example@email.com"
             isError={formState.isError.email}
             disabled={formState.isLoading}
-            autoFocus={true}
+            autoFocus
           />
 
           <InputWithIcon

@@ -7,12 +7,8 @@ interface Props {
   href: string;
 }
 
-export const ButtonWithLink: FunctionComponent<Props> = ({ href }) => {
-  return (
-    <>
-      <Link href={href}>
-        <a className={style.buttonWithLink}>Get Started</a>
-      </Link>
-    </>
-  );
-};
+export const ButtonWithLink: FunctionComponent<Props> = ({ href }) => (
+  <Link href={href}>
+    <a className={style.buttonWithLink}>Get Started</a>
+  </Link>
+);

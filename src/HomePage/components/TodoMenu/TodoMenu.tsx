@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, FunctionComponent } from "react";
 
-import style from "./TodoMenu.module.scss";
 import { TodoActionType } from "HomePage/helper/types";
+import style from "./TodoMenu.module.scss";
 
 interface Props {
   dispatchTodoAction: Dispatch<TodoActionType>;
@@ -25,38 +25,36 @@ export const TodoMenu: FunctionComponent<Props> = ({
   };
 
   return (
-    <>
-      <form className={style.menu} onChange={handleOnActiveMenuChange}>
-        <label
-          className={`button ${style.menu_item} ${
-            activeMenu === "false" && style.menu_active
-          }`}
-          htmlFor="false"
-        >
-          Incomplete
-        </label>
-        <input type="radio" value="false" name="menu" id="false" />
+    <form className={style.menu} onChange={handleOnActiveMenuChange}>
+      <label
+        className={`button ${style.menu_item} ${
+          activeMenu === "false" && style.menu_active
+        }`}
+        htmlFor="false"
+      >
+        Incomplete
+      </label>
+      <input type="radio" value="false" name="menu" id="false" />
 
-        <label
-          className={`button ${style.menu_item} ${
-            activeMenu === "all" && style.menu_active
-          }`}
-          htmlFor="all"
-        >
-          All
-        </label>
-        <input type="radio" value="all" name="menu" id="all" />
+      <label
+        className={`button ${style.menu_item} ${
+          activeMenu === "all" && style.menu_active
+        }`}
+        htmlFor="all"
+      >
+        All
+      </label>
+      <input type="radio" value="all" name="menu" id="all" />
 
-        <label
-          className={`button ${style.menu_item} ${
-            activeMenu === "true" && style.menu_active
-          }`}
-          htmlFor="true"
-        >
-          Completed
-        </label>
-        <input type="radio" value="true" name="menu" id="true" />
-      </form>
-    </>
+      <label
+        className={`button ${style.menu_item} ${
+          activeMenu === "true" && style.menu_active
+        }`}
+        htmlFor="true"
+      >
+        Completed
+      </label>
+      <input type="radio" value="true" name="menu" id="true" />
+    </form>
   );
 };

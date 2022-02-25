@@ -25,27 +25,23 @@ export const SimpleInput: FunctionComponent<Props> = ({
   helper,
   isError,
   disabled = false,
-}) => {
-  return (
-    <>
-      <div className={`${style.base} ${isError && style.error}`}>
-        <label htmlFor={name} className={style.label}>
-          {label}
-        </label>
-        <input
-          autoFocus={autoFocus}
-          className={style.input}
-          type={type}
-          id={name}
-          name={name}
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-          autoComplete="text"
-          disabled={disabled}
-        />
-        <p className={style.helper}>{helper}</p>
-      </div>
-    </>
-  );
-};
+}) => (
+  <div className={`${style.base} ${isError && style.error}`}>
+    <label htmlFor={name} className={style.label}>
+      {label}
+    </label>
+    <input
+      autoFocus={autoFocus}
+      className={style.input}
+      type={type}
+      id={name}
+      name={name}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      autoComplete="text"
+      disabled={disabled}
+    />
+    <p className={style.helper}>{helper}</p>
+  </div>
+);

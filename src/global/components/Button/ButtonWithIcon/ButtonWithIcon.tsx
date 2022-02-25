@@ -17,21 +17,15 @@ export const ButtonWithIcon: FunctionComponent<Props> = ({
   handleOnClick,
   isLoading = false,
   isDisabled = false,
-}) => {
-  return (
-    <>
-      <button
-        className={`${style.ButtonWithIcon} ${className}`}
-        disabled={isDisabled}
-        onClick={(
-          event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-        ) => {
-          event.preventDefault();
-          handleOnClick();
-        }}
-      >
-        {isLoading ? <Spinner /> : <i>{icon}</i>}
-      </button>
-    </>
-  );
-};
+}) => (
+  <button
+    className={`${style.ButtonWithIcon} ${className}`}
+    disabled={isDisabled}
+    onClick={(event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+      event.preventDefault();
+      handleOnClick();
+    }}
+  >
+    {isLoading ? <Spinner /> : <i>{icon}</i>}
+  </button>
+);

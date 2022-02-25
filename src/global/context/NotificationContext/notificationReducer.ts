@@ -2,7 +2,7 @@ import { v4 } from "uuid";
 
 import { NotificationDraftType, NotificationActionType } from ".";
 
-export const notificationReducer = (
+const notificationReducer = (
   draft: NotificationDraftType,
   action: NotificationActionType
 ) => {
@@ -31,3 +31,5 @@ export const notificationReducer = (
       draft;
   }
 };
+
+export default notificationReducer;
