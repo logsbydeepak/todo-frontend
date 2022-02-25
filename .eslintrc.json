@@ -1,7 +1,14 @@
 {
-  "extends": ["next/core-web-vitals"],
+  "extends": ["airbnb", "airbnb-typescript", "next", "prettier"],
   "plugins": ["@typescript-eslint", "prettier"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
   "rules": {
+    "no-param-reassign": [
+      "error",
+      { "props": true, "ignorePropertyModificationsFor": ["draft"] }
+    ],
     "prettier/prettier": "error",
     "no-console": "error"
   }
