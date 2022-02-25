@@ -42,7 +42,7 @@ export const useAPICall = () => {
               url: "/session/refresh",
               method: "PUT",
             })
-              .then((successResponse) => {
+              .then(() => {
                 clearAuthCookie();
                 axiosRequest({
                   url,
@@ -78,7 +78,7 @@ export const useAPICall = () => {
     };
 
     fetch();
-  }, [APIRequestData]);
+  }, [APIRequestData, router]);
 
   return [setAPIRequestData];
 };

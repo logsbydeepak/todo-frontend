@@ -1,7 +1,7 @@
-import { ChangeEvent, useEffect, useLayoutEffect } from "react";
+import { ChangeEvent, useEffect } from "react";
 
 import Head from "next/head";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 import { useAPICall } from "global/hooks";
 
@@ -25,7 +25,6 @@ import { HelperTextAndSpinner } from "../global/components/HelperTextAndSpinner"
 import { Navbar } from "AppPage/components/Navbar";
 
 export const UserPage = () => {
-  const router = useRouter();
   const [inputState, setInputState] = useImmer({
     value: initialText,
     helper: initialText,
@@ -48,7 +47,7 @@ export const UserPage = () => {
 
   useEffect(() => {
     handleGetUser(setAPIRequestData, setPageState, setInputState);
-  }, []);
+  }, [setAPIRequestData, setInputState, setPageState]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputName = event.target.name;

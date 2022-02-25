@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect } from "react";
+import { ChangeEvent } from "react";
 
 import Head from "next/head";
 import type { NextPage } from "next";

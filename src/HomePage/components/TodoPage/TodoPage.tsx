@@ -45,11 +45,11 @@ export const TodoPage = () => {
       dispatchTodoAction,
       activeMenu
     );
-  }, [activeMenu]);
+  }, [activeMenu, dispatchTodoAction, setAPIRequestData]);
 
   useEffect(() => {
     useMemoHandleGetTodoOnMenuChange;
-  }, []);
+  }, [useMemoHandleGetTodoOnMenuChange]);
 
   return (
     <>

@@ -24,7 +24,7 @@ export const NotificationItem: FunctionComponent<{
         type: "REMOVE",
       });
     }
-  }, [timeFrame]);
+  }, [timeFrame, dispatchNotification]);
 
   return (
     <>

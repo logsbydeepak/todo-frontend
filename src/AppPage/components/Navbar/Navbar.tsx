@@ -7,7 +7,6 @@ import { useNotificationContext } from "global/context/NotificationContext";
 
 import style from "./Navbar.module.scss";
 import { AuthLink, NoAuthLink } from "AppPage/components/Link";
-import axios from "axios";
 import { clearAuthCookie } from "global/helper";
 
 export const Navbar: FunctionComponent<{ auth: boolean }> = ({ auth }) => {

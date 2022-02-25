@@ -3,7 +3,6 @@
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
     "prettier/prettier": "error",
-    "no-console": "error",
-    "no-unused-vars": "error"
+    "no-console": "error"
   }
 }
