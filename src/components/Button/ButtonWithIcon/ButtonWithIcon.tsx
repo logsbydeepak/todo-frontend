@@ -1,4 +1,4 @@
-import { Spinner } from "global/components/Spinner";
+import { Spinner } from "components/Spinner";
 import { FunctionComponent, MouseEvent } from "react";
 
 import style from "./ButtonWithIcon.module.scss";

@@ -9,12 +9,12 @@ import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 
 import { axiosRequest, createAuthCookie } from "global/helper";
-import { PageTitle } from "global/components/PageTitle";
-import { ButtonWithTextAndIcon } from "global/components/Button";
-import { SimpleInput, InputWithIcon } from "global/components/Input";
+import { PageTitle } from "components/PageTitle";
+import { ButtonWithTextAndIcon } from "components/Button";
+import { SimpleInput, InputWithIcon } from "components/Input";
 import { useNotificationContext } from "global/context/NotificationContext";
 
-import { Navbar } from "AppPage/components/Navbar";
+import { Navbar } from "components/Navbar";
 import { initialErrorData, initialUserData } from "./helper/data";
 
 import style from "./Login.module.scss";

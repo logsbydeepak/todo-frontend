@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { Spinner } from "global/components/Spinner";
+import { Spinner } from "components/Spinner";
 import style from "./HelperTextAndSpinner.module.scss";
 
 interface Props {

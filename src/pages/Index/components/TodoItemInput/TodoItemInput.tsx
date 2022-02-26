@@ -1,11 +1,11 @@
 import React, { ChangeEvent, FunctionComponent, useState } from "react";
 
 import { SetAPIRequestDataType } from "global/hooks";
-import { InputWithIcon } from "global/components/Input";
-import { ButtonWithIcon } from "global/components/Button";
+import { InputWithIcon } from "components/Input";
+import { ButtonWithIcon } from "components/Button";
 
 import { DispatchTodoActionType, TodoType } from "pages/Index/helper/types";
-import iconColor from "global/components/styles/iconColor.module.scss";
+import iconColor from "components/styles/iconColor.module.scss";
 import { handleDeleteTodo } from "./helper/handleDeleteTodo";
 import { handleChangeTask } from "./helper/handleChangeTask";
 import { handleChangeStatus } from "./helper/handleChangeStatus";

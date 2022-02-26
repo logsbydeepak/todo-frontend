@@ -5,7 +5,7 @@ import { Dispatch, FunctionComponent, SetStateAction, useEffect } from "react";
 import { useAPICall } from "global/hooks";
 import { useNotificationContext } from "global/context/NotificationContext";
 
-import { AuthLink, NoAuthLink } from "AppPage/components/Link";
+import { AuthLink, NoAuthLink } from "components/Link";
 import { clearAuthCookie } from "global/helper";
 import style from "./Navbar.module.scss";
 

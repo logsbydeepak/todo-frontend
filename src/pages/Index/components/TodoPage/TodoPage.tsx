@@ -2,8 +2,8 @@ import Head from "next/head";
 import { useEffect, useMemo } from "react";
 import { useImmerReducer } from "use-immer";
 
-import { PageTitle } from "global/components/PageTitle";
-import { ButtonWithTextAndIcon } from "global/components/Button";
+import { PageTitle } from "components/PageTitle";
+import { ButtonWithTextAndIcon } from "components/Button";
 
 import { todoReducer } from "pages/Index/helper/todo.reducer";
 import { TodoStateType, TodoType } from "pages/Index/helper/types";
@@ -13,7 +13,7 @@ import { handleGetMoreTodo } from "pages/Index/helper/loadMore.handler";
 import { useNotificationContext } from "global/context/NotificationContext";
 import { handleGetTodoOnMenuChange } from "pages/Index/helper/getTodoOnMenuChange.handler";
 
-import { HelperTextAndSpinner } from "global/components/HelperTextAndSpinner";
+import { HelperTextAndSpinner } from "components/HelperTextAndSpinner";
 import { TodoCreateInput } from "../TodoCreateInput";
 import { TodoMenu } from "../TodoMenu";
 import { TodoItemInput } from "../TodoItemInput";

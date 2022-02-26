@@ -1,5 +1,5 @@
 import { GetServerSideProps, NextPage } from "next";
-import { Navbar } from "AppPage/components/Navbar";
+import { Navbar } from "components/Navbar";
 import { TodoPage } from "./Index/components/TodoPage";
 import { LandingPage } from "./Index/components/LandingPage";
 

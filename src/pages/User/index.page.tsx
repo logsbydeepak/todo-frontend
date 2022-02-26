@@ -4,11 +4,11 @@ import Head from "next/head";
 
 import { useAPICall } from "global/hooks";
 
-import { PageTitle } from "global/components/PageTitle";
-import { InputWithIcon } from "global/components/Input";
+import { PageTitle } from "components/PageTitle";
+import { InputWithIcon } from "components/Input";
 
 import { useImmer } from "use-immer";
-import { Navbar } from "AppPage/components/Navbar";
+import { Navbar } from "components/Navbar";
 import { handleGetUser } from "./helper/handleGetUser";
 import {
   initialBoolean,
@@ -21,7 +21,7 @@ import { LogoutAllAndDeleteUserButton } from "./components/LogoutAllAndDeleteUse
 import { NameInput } from "./components/Input/NameInput";
 import { EmailInput } from "./components/Input/EmailInput";
 import { PasswordInput } from "./components/Input/PasswordInput";
-import { HelperTextAndSpinner } from "global/components/HelperTextAndSpinner";
+import { HelperTextAndSpinner } from "components/HelperTextAndSpinner";
 import { GetServerSideProps } from "next";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {

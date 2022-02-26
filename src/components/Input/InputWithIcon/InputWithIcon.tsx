@@ -1,4 +1,4 @@
-import { ButtonWithIcon } from "global/components/Button";
+import { ButtonWithIcon } from "components/Button";
 import { ChangeEvent, FunctionComponent, useState } from "react";
 import style from "./InputWithIcon.module.scss";
 import iconStyle from "./InputWithIcon.module.scss";

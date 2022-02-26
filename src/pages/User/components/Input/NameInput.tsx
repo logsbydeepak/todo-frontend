@@ -1,7 +1,7 @@
-import { ButtonWithIcon } from "global/components/Button";
-import { InputWithIcon } from "global/components/Input";
+import { ButtonWithIcon } from "components/Button";
+import { InputWithIcon } from "components/Input";
 import { useAPICall } from "global/hooks";
-import iconColor from "global/components/styles/iconColor.module.scss";
+import iconColor from "components/styles/iconColor.module.scss";
 import { ChangeEvent, FunctionComponent } from "react";
 import {
   PageStateType,

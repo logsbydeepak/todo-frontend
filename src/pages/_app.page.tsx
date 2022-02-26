@@ -1,12 +1,20 @@
+import Head from "next/head";
 import type { AppProps } from "next/app";
 
-import AppPage from "AppPage";
 import "global/styles/globals.scss";
+import { NotificationProvider } from "global/context/NotificationContext";
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
-  <AppPage>
-    <Component {...pageProps} />
-  </AppPage>
+  <>
+    <Head>
+      <link rel="icon" href="/favicon.png" />
+    </Head>
+    <NotificationProvider>
+      <div className="container">
+        <Component {...pageProps} />
+      </div>
+    </NotificationProvider>
+  </>
 );
 
 export default MyApp;

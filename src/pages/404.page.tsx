@@ -1,4 +1,4 @@
-import { PageTitle } from "global/components/PageTitle";
+import { PageTitle } from "components/PageTitle";
 
 const Custom404 = () => (
   <div className="container__error">

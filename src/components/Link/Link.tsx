@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { ButtonWithIcon } from "global/components/Button";
+import { ButtonWithIcon } from "components/Button";
 
 import { useState } from "react";
 import { useRouter } from "next/router";
 import style from "./Link.module.scss";
 
-export var NoAuthLink = () => (
+export const NoAuthLink = () => (
   <ul className={style.NoAuthLink}>
     <Link href="/Login">
       <a>Login</a>
@@ -17,7 +17,7 @@ export var NoAuthLink = () => (
   </ul>
 );
 
-export var AuthLink = ({ handelLogout }: { handelLogout: any }) => {
+export const AuthLink = ({ handelLogout }: { handelLogout: any }) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const handleOnUserClick = () => {
@@ -39,3 +39,5 @@ export var AuthLink = ({ handelLogout }: { handelLogout: any }) => {
     </ul>
   );
 };
+
+export default Link

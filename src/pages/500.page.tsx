@@ -1,9 +1,9 @@
-import { PageTitle } from "global/components/PageTitle";
+import { PageTitle } from "components/PageTitle";
 
-const Custom404 = () => (
+const Custom500 = () => (
   <div className="container__error">
     <PageTitle title="500" subtitle="Server-side error occurred" />
   </div>
 );
 
-export default Custom404;
+export default Custom500;
