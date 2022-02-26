@@ -8,7 +8,7 @@
     "no-underscore-dangle": ["error", { "allow": ["_id"] }],
     "no-param-reassign": [
       "error",
-      { "props": true, "ignorePropertyModificationsFor": ["draft"] }
+      { "props": true, "ignorePropertyModificationsFor": ["draft", "res"] }
     ],
     "react/function-component-definition": [
       2,

@@ -20,7 +20,7 @@ interface Props {
   handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const EmailInput: FunctionComponent<Props> = ({
+const EmailInput: FunctionComponent<Props> = ({
   inputState,
   setInputState,
   pageState,
@@ -70,3 +70,5 @@ export const EmailInput: FunctionComponent<Props> = ({
     </InputWithIcon>
   );
 };
+
+export default EmailInput;

@@ -1,14 +1,14 @@
-import { initialBoolean, initialText } from "UserPage/helper/data";
-import {
-  SetPageStateType,
-  SetUserInputStateType,
-  UserInputStateType,
-} from "UserPage/helper/types";
 import { DispatchNotificationType } from "context/NotificationContext";
 import { SetAPIRequestDataType } from "hooks";
 import isStrongPassword from "validator/lib/isStrongPassword";
 import { clearAuthCookie } from "helper";
 import { NextRouter } from "next/router";
+import {
+  SetPageStateType,
+  SetUserInputStateType,
+  UserInputStateType,
+} from "../../helper/types";
+import { initialBoolean, initialText } from "../../helper/data";
 
 const setCurrentPasswordError = (
   currentPasswordHelper: string,
@@ -40,7 +40,7 @@ const setCurrentPasswordErrorAndResetState = (
   });
 };
 
-export const handleDeleteAndLogoutAllUser = (
+const handleDeleteAndLogoutAllUser = (
   action: "logoutAll" | "delete",
   setAPIRequestData: SetAPIRequestDataType,
   inputState: UserInputStateType,
@@ -116,3 +116,5 @@ export const handleDeleteAndLogoutAllUser = (
     },
   });
 };
+
+export default handleDeleteAndLogoutAllUser;

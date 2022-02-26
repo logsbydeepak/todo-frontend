@@ -20,7 +20,7 @@ interface Props {
   handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const NameInput: FunctionComponent<Props> = ({
+const NameInput: FunctionComponent<Props> = ({
   inputState,
   setInputState,
   pageState,
@@ -69,3 +69,5 @@ export const NameInput: FunctionComponent<Props> = ({
     </InputWithIcon>
   );
 };
+
+export default NameInput;

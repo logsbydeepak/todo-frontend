@@ -8,7 +8,7 @@ interface Props {
   handleOnCancel: () => void;
 }
 
-export const DeleteConfirmation: FunctionComponent<Props> = ({
+const DeleteConfirmation: FunctionComponent<Props> = ({
   handleOnContinue,
   handleOnCancel,
 }) => (
@@ -39,3 +39,5 @@ export const DeleteConfirmation: FunctionComponent<Props> = ({
     </div>
   </div>
 );
+
+export default DeleteConfirmation;

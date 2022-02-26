@@ -19,7 +19,7 @@ interface Props {
   handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const PasswordInput: FunctionComponent<Props> = ({
+const PasswordInput: FunctionComponent<Props> = ({
   inputState,
   setInputState,
   pageState,
@@ -61,3 +61,5 @@ export const PasswordInput: FunctionComponent<Props> = ({
     </InputWithIcon>
   );
 };
+
+export default PasswordInput;

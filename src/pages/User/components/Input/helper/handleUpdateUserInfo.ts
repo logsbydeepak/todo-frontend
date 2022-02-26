@@ -24,7 +24,7 @@ const setCurrentPasswordError = (
   });
 };
 
-export const handleUpdateUserInfo = (
+const handleUpdateUserInfo = (
   setAPIRequestData: SetAPIRequestDataType,
   inputState: UserInputStateType,
   setPageState: SetPageStateType,
@@ -135,3 +135,5 @@ export const handleUpdateUserInfo = (
     },
   });
 };
+
+export default handleUpdateUserInfo;

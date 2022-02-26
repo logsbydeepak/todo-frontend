@@ -1,1 +1,2 @@
-export { DeleteConfirmation } from "./DeleteConfirmation";
+/* eslint-disable import/prefer-default-export */
+export { default as DeleteConfirmation } from "./DeleteConfirmation";

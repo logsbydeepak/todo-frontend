@@ -2,14 +2,14 @@ import { ButtonWithTextAndIcon } from "components/Button";
 import { useNotificationContext } from "context/NotificationContext";
 import { useAPICall } from "hooks";
 import { FunctionComponent } from "react";
+import { useRouter } from "next/router";
 import {
   PageStateType,
   SetPageStateType,
   SetUserInputStateType,
   UserInputStateType,
-} from "UserPage/helper/types";
-import { useRouter } from "next/router";
-import { handleDeleteAndLogoutAllUser } from "./handleDeleteAndLogoutAll";
+} from "../../helper/types";
+import handleDeleteAndLogoutAllUser from "./handleDeleteAndLogoutAll";
 import style from "./LogoutAllAndDeleteUserButton.module.scss";
 import { DeleteConfirmation } from "../DeleteConfirmation";
 
@@ -20,7 +20,7 @@ interface Props {
   setPageState: SetPageStateType;
 }
 
-export const LogoutAllAndDeleteUserButton: FunctionComponent<Props> = ({
+const LogoutAllAndDeleteUserButton: FunctionComponent<Props> = ({
   inputState,
   setInputState,
   pageState,
@@ -90,3 +90,5 @@ export const LogoutAllAndDeleteUserButton: FunctionComponent<Props> = ({
     </>
   );
 };
+
+export default LogoutAllAndDeleteUserButton;

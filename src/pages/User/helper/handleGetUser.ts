@@ -1,7 +1,7 @@
-import { SetPageStateType, SetUserInputStateType } from "UserPage/helper/types";
 import { SetAPIRequestDataType } from "hooks";
+import { SetPageStateType, SetUserInputStateType } from "./types";
 
-export const handleGetUser = (
+const handleGetUser = (
   setAPIRequestData: SetAPIRequestDataType,
   setPageState: SetPageStateType,
   setInputState: SetUserInputStateType
@@ -29,3 +29,5 @@ export const handleGetUser = (
     onError: () => {},
   });
 };
+
+export default handleGetUser;

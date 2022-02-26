@@ -9,6 +9,8 @@ import { InputWithIcon } from "components/Input";
 
 import { useImmer } from "use-immer";
 import { Navbar } from "components/Navbar";
+import { HelperTextAndSpinner } from "components/HelperTextAndSpinner";
+import { GetServerSideProps } from "next";
 import { handleGetUser } from "./helper/handleGetUser";
 import {
   initialBoolean,
@@ -21,8 +23,6 @@ import { LogoutAllAndDeleteUserButton } from "./components/LogoutAllAndDeleteUse
 import { NameInput } from "./components/Input/NameInput";
 import { EmailInput } from "./components/Input/EmailInput";
 import { PasswordInput } from "./components/Input/PasswordInput";
-import { HelperTextAndSpinner } from "components/HelperTextAndSpinner";
-import { GetServerSideProps } from "next";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const auth = req.cookies.auth !== "true";
@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   return { props: {} };
 };
 
-export var User = () => {
+export const User = () => {
   const [inputState, setInputState] = useImmer({
     value: initialText,
     helper: initialText,

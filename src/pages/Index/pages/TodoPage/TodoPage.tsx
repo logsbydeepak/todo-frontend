@@ -1,19 +1,19 @@
 import Head from "next/head";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useImmerReducer } from "use-immer";
 
 import { PageTitle } from "components/PageTitle";
 import { ButtonWithTextAndIcon } from "components/Button";
 
-import todoReducer from "../../helper/todoReducer";
 import { TodoStateType, TodoType } from "pages/Index/helper/types";
 
 import { useAPICall } from "hooks";
-import handleGetMoreTodo from "../../helper/handleGetMoreTodo";
 import { useNotificationContext } from "context/NotificationContext";
+import { HelperTextAndSpinner } from "components/HelperTextAndSpinner";
+import handleGetMoreTodo from "../../helper/handleGetMoreTodo";
 import handleGetTodoOnMenuChange from "../../helper/handleGetTodoOnMenuChange";
 
-import { HelperTextAndSpinner } from "components/HelperTextAndSpinner";
+import todoReducer from "../../helper/todoReducer";
 import { TodoCreateInput } from "../../components/TodoCreateInput";
 import { TodoMenu } from "../../components/TodoMenu";
 import { TodoItemInput } from "../../components/TodoItemInput";
@@ -26,7 +26,7 @@ const initialTodoState: TodoStateType = {
   showLoadMoreButton: false,
 };
 
-var TodoPage = () => {
+const TodoPage = () => {
   const [todoState, dispatchTodoAction] = useImmerReducer(
     todoReducer,
     initialTodoState
@@ -38,17 +38,13 @@ var TodoPage = () => {
   const [setAPIRequestData] = useAPICall();
   const { dispatchNotification } = useNotificationContext();
 
-  const useMemoHandleGetTodoOnMenuChange = useMemo(() => {
+  useEffect(() => {
     handleGetTodoOnMenuChange(
       setAPIRequestData,
       dispatchTodoAction,
       activeMenu
     );
   }, [activeMenu, dispatchTodoAction, setAPIRequestData]);
-
-  useEffect(() => {
-    useMemoHandleGetTodoOnMenuChange;
-  }, [useMemoHandleGetTodoOnMenuChange]);
 
   return (
     <>

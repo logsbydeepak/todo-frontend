@@ -15,8 +15,8 @@ import { ButtonWithTextAndIcon } from "components/Button";
 import { useNotificationContext } from "context/NotificationContext";
 
 import { Navbar } from "components/Navbar";
-import { initialErrorData, initialUserData } from "./helper/data";
 import { GetServerSideProps } from "next";
+import { initialErrorData, initialUserData } from "./helper/data";
 
 import style from "./SignUp.module.scss";
 
