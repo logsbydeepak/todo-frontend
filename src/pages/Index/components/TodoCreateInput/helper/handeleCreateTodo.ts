@@ -5,7 +5,7 @@ import {
   DispatchTodoActionType,
 } from "pages/Index/helper/types";
 
-export const handleCreateTodo = async (
+const handleCreateTodo = async (
   setAPIRequestData: SetAPIRequestDataType,
   inputState: InputStateType,
   setInputState: SetInputStateType,
@@ -45,3 +45,5 @@ export const handleCreateTodo = async (
     },
   });
 };
+
+export default handleCreateTodo;

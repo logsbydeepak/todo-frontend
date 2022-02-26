@@ -7,7 +7,7 @@ import {
   SetIsDisabled,
 } from "pages/Index/helper/types";
 
-export const handleChangeStatus = (
+const handleChangeStatus = (
   setAPIRequestData: SetAPIRequestDataType,
   index: number,
   setLoadingIcon: SetLoadingIconType,
@@ -37,3 +37,5 @@ export const handleChangeStatus = (
     },
   });
 };
+
+export default handleChangeStatus;

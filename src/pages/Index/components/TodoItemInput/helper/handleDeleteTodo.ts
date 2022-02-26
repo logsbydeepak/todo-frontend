@@ -7,7 +7,7 @@ import {
   DispatchTodoActionType,
 } from "pages/Index/helper/types";
 
-export const handleDeleteTodo = async (
+const handleDeleteTodo = async (
   setAPIRequestData: SetAPIRequestDataType,
   index: number,
   dispatchTodoAction: DispatchTodoActionType,
@@ -32,3 +32,5 @@ export const handleDeleteTodo = async (
     },
   });
 };
+
+export default handleDeleteTodo;

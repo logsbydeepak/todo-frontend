@@ -2,7 +2,7 @@ import { DispatchNotificationType } from "context/NotificationContext";
 import { SetAPIRequestDataType } from "hooks";
 import { DispatchTodoActionType, TodoMenuType } from "./types";
 
-export const handleGetMoreTodo = (
+const handleGetMoreTodo = (
   dispatchTodoAction: DispatchTodoActionType,
   setAPIRequestData: SetAPIRequestDataType,
   activeMenu: TodoMenuType,
@@ -45,3 +45,5 @@ export const handleGetMoreTodo = (
     },
   });
 };
+
+export default handleGetMoreTodo;

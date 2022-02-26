@@ -1,5 +1,1 @@
-import PageTitle from "./PageTitle";
-
-const toExport = { PageTitle };
-
-export default toExport;
+export { default as PageTitle } from "./PageTitle";

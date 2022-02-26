@@ -8,19 +8,23 @@ interface Props {
   activeMenu: "true" | "false" | "all";
 }
 
-export const TodoMenu: FunctionComponent<Props> = ({
+const TodoMenu: FunctionComponent<Props> = ({
   dispatchTodoAction,
   activeMenu,
 }) => {
   const handleOnActiveMenuChange = (event: ChangeEvent<HTMLFormElement>) => {
-    const activeMenu: string = event.target.value;
+    const currentActiveMenu: string = event.target.value;
 
-    if (activeMenu !== "true" && activeMenu !== "false" && activeMenu !== "all")
+    if (
+      currentActiveMenu !== "true" &&
+      currentActiveMenu !== "false" &&
+      currentActiveMenu !== "all"
+    )
       return;
 
     dispatchTodoAction({
       type: "UPDATE_ACTIVE_MENU",
-      activeMenu,
+      activeMenu: currentActiveMenu,
     });
   };
 
@@ -30,31 +34,33 @@ export const TodoMenu: FunctionComponent<Props> = ({
         className={`button ${style.menu_item} ${
           activeMenu === "false" && style.menu_active
         }`}
-        htmlFor="false"
+        htmlFor="false-id"
       >
         Incomplete
+        <input type="radio" value="false" name="menu" id="false-id" />
       </label>
-      <input type="radio" value="false" name="menu" id="false" />
 
       <label
         className={`button ${style.menu_item} ${
           activeMenu === "all" && style.menu_active
         }`}
-        htmlFor="all"
+        htmlFor="all-id"
       >
         All
+        <input type="radio" value="all" name="menu" id="all-id" />
       </label>
-      <input type="radio" value="all" name="menu" id="all" />
 
       <label
         className={`button ${style.menu_item} ${
           activeMenu === "true" && style.menu_active
         }`}
-        htmlFor="true"
+        htmlFor="true-id"
       >
         Completed
+        <input type="radio" value="true" name="menu" id="trud-id" />
       </label>
-      <input type="radio" value="true" name="menu" id="true" />
     </form>
   );
 };
+
+export default TodoMenu;

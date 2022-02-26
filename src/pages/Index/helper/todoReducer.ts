@@ -1,6 +1,6 @@
 import { TodoActionType, TodoStateType, TodoType } from "./types";
 
-export const todoReducer = (draft: TodoStateType, action: TodoActionType) => {
+const todoReducer = (draft: TodoStateType, action: TodoActionType) => {
   switch (action.type) {
     case "EMPTY_TODO":
       draft.todo = [];
@@ -54,7 +54,10 @@ export const todoReducer = (draft: TodoStateType, action: TodoActionType) => {
       break;
 
     default:
+      /* eslint @typescript-eslint/no-unused-expressions: "off" */
       draft;
       break;
   }
 };
+
+export default todoReducer;

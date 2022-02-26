@@ -3,16 +3,14 @@ import { FunctionComponent, useState, ChangeEvent } from "react";
 import { useAPICall } from "hooks";
 import { DispatchTodoActionType } from "pages/Index/helper/types";
 import { ButtonWithIcon } from "components/Button";
-import { handleCreateTodo } from "./helper/handeleCreateTodo";
+import handleCreateTodo from "./helper/handeleCreateTodo";
 import style from "./TodoCreateInput.module.scss";
 
 interface Props {
   dispatchTodoAction: DispatchTodoActionType;
 }
 
-export const TodoCreateInput: FunctionComponent<Props> = ({
-  dispatchTodoAction,
-}) => {
+const TodoCreateInput: FunctionComponent<Props> = ({ dispatchTodoAction }) => {
   const [inputState, setInputState] = useState({
     textInput: "",
     isLoading: false,
@@ -33,7 +31,6 @@ export const TodoCreateInput: FunctionComponent<Props> = ({
           type="text"
           className={`${style.input} ${style.input}`}
           placeholder="Add new task"
-          autoFocus
           disabled={isLoading}
           value={textInput}
           onChange={handleInputChange}
@@ -55,3 +52,5 @@ export const TodoCreateInput: FunctionComponent<Props> = ({
     </form>
   );
 };
+
+export default TodoCreateInput;

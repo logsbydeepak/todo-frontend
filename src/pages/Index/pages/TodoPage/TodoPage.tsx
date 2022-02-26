@@ -5,18 +5,18 @@ import { useImmerReducer } from "use-immer";
 import { PageTitle } from "components/PageTitle";
 import { ButtonWithTextAndIcon } from "components/Button";
 
-import { todoReducer } from "pages/Index/helper/todo.reducer";
+import todoReducer from "../../helper/todoReducer";
 import { TodoStateType, TodoType } from "pages/Index/helper/types";
 
 import { useAPICall } from "hooks";
-import { handleGetMoreTodo } from "pages/Index/helper/loadMore.handler";
+import handleGetMoreTodo from "../../helper/handleGetMoreTodo";
 import { useNotificationContext } from "context/NotificationContext";
-import { handleGetTodoOnMenuChange } from "pages/Index/helper/getTodoOnMenuChange.handler";
+import handleGetTodoOnMenuChange from "../../helper/handleGetTodoOnMenuChange";
 
 import { HelperTextAndSpinner } from "components/HelperTextAndSpinner";
-import { TodoCreateInput } from "../TodoCreateInput";
-import { TodoMenu } from "../TodoMenu";
-import { TodoItemInput } from "../TodoItemInput";
+import { TodoCreateInput } from "../../components/TodoCreateInput";
+import { TodoMenu } from "../../components/TodoMenu";
+import { TodoItemInput } from "../../components/TodoItemInput";
 
 const initialTodoState: TodoStateType = {
   todo: [],
@@ -26,7 +26,7 @@ const initialTodoState: TodoStateType = {
   showLoadMoreButton: false,
 };
 
-export var TodoPage = () => {
+var TodoPage = () => {
   const [todoState, dispatchTodoAction] = useImmerReducer(
     todoReducer,
     initialTodoState
@@ -100,3 +100,5 @@ export var TodoPage = () => {
     </>
   );
 };
+
+export default TodoPage;

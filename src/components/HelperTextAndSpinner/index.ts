@@ -1,7 +1,1 @@
-import HelperTextAndSpinner from "./HelperTextAndSpinner";
-
-const toExport = {
-  HelperTextAndSpinner,
-};
-
-export default toExport;
+export { default as HelperTextAndSpinner } from "./HelperTextAndSpinner";

@@ -9,7 +9,7 @@ import {
   TodoType,
 } from "pages/Index/helper/types";
 
-export const handleChangeTask = (
+const handleChangeTask = (
   setAPIRequestData: SetAPIRequestDataType,
   index: number,
   setLoadingIcon: SetLoadingIconType,
@@ -46,3 +46,5 @@ export const handleChangeTask = (
     },
   });
 };
+
+export default handleChangeTask;

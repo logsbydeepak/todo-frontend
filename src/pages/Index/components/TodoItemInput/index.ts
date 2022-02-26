@@ -1,1 +1,1 @@
-export { TodoItemInput } from "./TodoItemInput";
+export { default as TodoItemInput } from "./TodoItemInput";

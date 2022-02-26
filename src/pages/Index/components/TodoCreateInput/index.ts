@@ -1,1 +1,1 @@
-export { TodoCreateInput } from "./TodoCreateInput";
+export { default as TodoCreateInput } from "./TodoCreateInput";

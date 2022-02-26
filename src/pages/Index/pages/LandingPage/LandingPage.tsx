@@ -1,9 +1,9 @@
 import Head from "next/head";
-import { ButtonWithLink } from "pages/Index/components/ButtonWithLink";
+import { ButtonWithLink } from "../../components/Button";
 
 import style from "./LandingPage.module.scss";
 
-export var LandingPage = () => (
+const LandingPage = () => (
   <>
     <Head>
       <title>TODO - Getting Started</title>
@@ -19,3 +19,5 @@ export var LandingPage = () => (
     </div>
   </>
 );
+
+export default LandingPage;

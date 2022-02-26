@@ -2,7 +2,7 @@ import { SetAPIRequestDataType } from "hooks";
 
 import { TodoMenuType, DispatchTodoActionType } from "./types";
 
-export const handleGetTodoOnMenuChange = async (
+const handleGetTodoOnMenuChange = async (
   setAPIRequestData: SetAPIRequestDataType,
   dispatchTodoAction: DispatchTodoActionType,
   activeMenu: TodoMenuType
@@ -40,3 +40,5 @@ export const handleGetTodoOnMenuChange = async (
     },
   });
 };
+
+export default handleGetTodoOnMenuChange;

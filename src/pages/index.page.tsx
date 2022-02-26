@@ -1,7 +1,7 @@
 import { GetServerSideProps, NextPage } from "next";
 import { Navbar } from "components/Navbar";
 import { TodoPage } from "./Index/components/TodoPage";
-import { LandingPage } from "./Index/components/LandingPage";
+import { LandingPage } from "./Index/pages/LandingPage";
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => ({
   props: { auth: req.cookies.auth === "true" },

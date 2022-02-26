@@ -1,7 +1,1 @@
-import Navbar from "./Navbar";
-
-const toExport = {
-  Navbar,
-};
-
-export default toExport;
+export { default as Navbar } from "./Navbar";

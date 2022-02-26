@@ -6,9 +6,9 @@ import { ButtonWithIcon } from "components/Button";
 
 import { DispatchTodoActionType, TodoType } from "pages/Index/helper/types";
 import iconColor from "components/styles/iconColor.module.scss";
-import { handleDeleteTodo } from "./helper/handleDeleteTodo";
-import { handleChangeTask } from "./helper/handleChangeTask";
-import { handleChangeStatus } from "./helper/handleChangeStatus";
+import handleDeleteTodo from "./helper/handleDeleteTodo";
+import handleChangeTask from "./helper/handleChangeTask";
+import handleChangeStatus from "./helper/handleChangeStatus";
 
 interface Props {
   index: number;
@@ -17,7 +17,7 @@ interface Props {
   setAPIRequestData: SetAPIRequestDataType;
 }
 
-export const TodoItemInput: FunctionComponent<Props> = ({
+const TodoItemInput: FunctionComponent<Props> = ({
   index,
 
   dispatchTodoAction,
@@ -134,3 +134,5 @@ export const TodoItemInput: FunctionComponent<Props> = ({
     </InputWithIcon>
   );
 };
+
+export default TodoItemInput;
