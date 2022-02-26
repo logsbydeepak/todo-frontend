@@ -10,18 +10,17 @@ interface Props {
   isLoading?: boolean;
   isError?: boolean;
   isDisabled?: boolean;
-  className?: string;
   warning?: boolean;
 }
 
-export const ButtonWithTextAndIcon: FunctionComponent<Props> = ({
+const ButtonWithTextAndIcon: FunctionComponent<Props> = ({
   icon,
   text,
   handleOnClick,
-  warning = false,
-  isError = false,
-  isLoading = false,
-  isDisabled = false,
+  warning,
+  isError,
+  isLoading,
+  isDisabled,
 }) => (
   <button
     className={`${style.buttonWithTextAndIcon} ${
@@ -32,8 +31,18 @@ export const ButtonWithTextAndIcon: FunctionComponent<Props> = ({
       handleOnClick();
     }}
     disabled={isDisabled}
+    type="button"
   >
     {text}
     {isLoading ? <Spinner /> : <i>{icon}</i>}
   </button>
 );
+
+ButtonWithTextAndIcon.defaultProps = {
+  warning: false,
+  isError: false,
+  isLoading: false,
+  isDisabled: false,
+};
+
+export default ButtonWithTextAndIcon;

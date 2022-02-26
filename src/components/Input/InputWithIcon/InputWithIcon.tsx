@@ -1,7 +1,7 @@
 import { ButtonWithIcon } from "components/Button";
 import { ChangeEvent, FunctionComponent, useState } from "react";
+import iconColor from "components/styles/iconColor.module.scss";
 import style from "./InputWithIcon.module.scss";
-import iconStyle from "./InputWithIcon.module.scss";
 
 interface InputWithIconProps {
   type?: string;
@@ -16,7 +16,7 @@ interface InputWithIconProps {
   name?: string;
 }
 
-export const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
+const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
   type = "text",
   helper = "",
   isError = false,
@@ -26,8 +26,8 @@ export const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
   children,
   value,
   handleOnChange,
-  label = "",
-  name = "",
+  label,
+  name,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [inputType, setInputType] = useState(type);
@@ -38,7 +38,7 @@ export const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
         isDisabled && style.disabled
       } ${className} ${style.form__out}`}
     >
-      {label.length !== 0 && (
+      {isError && (
         <label className={style.label} htmlFor={name}>
           {label}
         </label>
@@ -62,7 +62,7 @@ export const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
                 setShowPassword(!showPassword);
                 setInputType(showPassword ? "password" : "text");
               }}
-              className={`${iconStyle.white}`}
+              className={`${iconColor.white}`}
             />
           </div>
         )}
@@ -73,3 +73,16 @@ export const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
     </div>
   );
 };
+
+InputWithIcon.defaultProps = {
+  type: "text",
+  helper: "",
+  isError: false,
+  isDisabled: false,
+  placeholder: "Input",
+  className: "",
+  label: "",
+  name: "",
+};
+
+export default InputWithIcon;

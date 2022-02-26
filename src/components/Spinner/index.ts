@@ -1,1 +1,5 @@
-export { Spinner } from "./Spinner";
+import Spinner from "./Spinner";
+
+const toExport = { Spinner };
+
+export default toExport;

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Dispatch, FunctionComponent, SetStateAction, useEffect } from "react";
+import { Dispatch, FunctionComponent, SetStateAction } from "react";
 
 import { useAPICall } from "hooks";
 import { useNotificationContext } from "context/NotificationContext";
@@ -9,14 +9,10 @@ import { AuthLink, NoAuthLink } from "components/Link";
 import { clearAuthCookie } from "helper";
 import style from "./Navbar.module.scss";
 
-export const Navbar: FunctionComponent<{ auth: boolean }> = ({ auth }) => {
+const Navbar: FunctionComponent<{ auth: boolean }> = ({ auth }) => {
   const [setAPIRequestData] = useAPICall();
   const { dispatchNotification } = useNotificationContext();
-
   const router = useRouter();
-  useEffect(() => {
-    if (!auth) return;
-  }, [auth]);
 
   const handelLogout = async (
     setIsLoading: Dispatch<SetStateAction<boolean>>
@@ -43,7 +39,7 @@ export const Navbar: FunctionComponent<{ auth: boolean }> = ({ auth }) => {
   return (
     <header className={style.container}>
       <Link href="/">
-        <a className={style.logo}>
+        <a href="/" className={style.logo}>
           TODO
           <span>.</span>
         </a>
@@ -53,3 +49,5 @@ export const Navbar: FunctionComponent<{ auth: boolean }> = ({ auth }) => {
     </header>
   );
 };
+
+export default Navbar;

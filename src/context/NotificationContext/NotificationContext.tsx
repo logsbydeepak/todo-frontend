@@ -1,4 +1,4 @@
-import { createContext, FunctionComponent, useContext } from "react";
+import { createContext, FunctionComponent, useContext, useMemo } from "react";
 
 import { useImmerReducer } from "use-immer";
 import { NotificationContainer, NotificationItem } from "./components";
@@ -28,8 +28,13 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
     initialNotificationState
   );
 
+  const memoValue = useMemo(
+    () => ({ dispatchNotification }),
+    [dispatchNotification]
+  );
+
   return (
-    <NotificationContext.Provider value={{ dispatchNotification }}>
+    <NotificationContext.Provider value={memoValue}>
       <NotificationContainer>
         {state.map((notification: NotificationType) => (
           <NotificationItem

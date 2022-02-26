@@ -11,16 +11,17 @@ interface Props {
   isDisabled?: boolean;
 }
 
-export const ButtonWithIcon: FunctionComponent<Props> = ({
+const ButtonWithIcon: FunctionComponent<Props> = ({
   icon,
   className,
   handleOnClick,
-  isLoading = false,
-  isDisabled = false,
+  isLoading,
+  isDisabled,
 }) => (
   <button
     className={`${style.ButtonWithIcon} ${className}`}
     disabled={isDisabled}
+    type="button"
     onClick={(event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
       event.preventDefault();
       handleOnClick();
@@ -29,3 +30,11 @@ export const ButtonWithIcon: FunctionComponent<Props> = ({
     {isLoading ? <Spinner /> : <i>{icon}</i>}
   </button>
 );
+
+ButtonWithIcon.defaultProps = {
+  className: "",
+  isLoading: false,
+  isDisabled: false,
+};
+
+export default ButtonWithIcon;

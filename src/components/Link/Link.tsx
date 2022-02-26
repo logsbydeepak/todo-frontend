@@ -8,11 +8,11 @@ import style from "./Link.module.scss";
 export const NoAuthLink = () => (
   <ul className={style.NoAuthLink}>
     <Link href="/Login">
-      <a>Login</a>
+      <a href="/Login">Login</a>
     </Link>
 
     <Link href="/SignUp">
-      <a>SignUp</a>
+      <a href="/SignUp">SignUp</a>
     </Link>
   </ul>
 );
@@ -40,4 +40,4 @@ export const AuthLink = ({ handelLogout }: { handelLogout: any }) => {
   );
 };
 
-export default Link
+export default Link;

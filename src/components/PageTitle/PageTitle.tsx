@@ -7,9 +7,11 @@ interface Props {
   subtitle: string;
 }
 
-export const PageTitle: FunctionComponent<Props> = ({ title, subtitle }) => (
+const PageTitle: FunctionComponent<Props> = ({ title, subtitle }) => (
   <div className={style.container}>
     <h1>{title}</h1>
     <h3>{subtitle}</h3>
   </div>
 );
+
+export default PageTitle;

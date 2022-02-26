@@ -6,10 +6,7 @@ interface Props {
   theme?: "dark" | "light";
 }
 
-export const Spinner: FunctionComponent<Props> = ({
-  className = "",
-  theme = "dark",
-}) => (
+const Spinner: FunctionComponent<Props> = ({ className, theme }) => (
   <svg
     className={`${style.spinner} ${className}`}
     width="24"
@@ -26,3 +23,10 @@ export const Spinner: FunctionComponent<Props> = ({
     />
   </svg>
 );
+
+Spinner.defaultProps = {
+  className: "",
+  theme: "dark",
+};
+
+export default Spinner;

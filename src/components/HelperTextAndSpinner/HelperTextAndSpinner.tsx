@@ -8,7 +8,7 @@ interface Props {
   helperText: string;
 }
 
-export const HelperTextAndSpinner: FunctionComponent<Props> = ({
+const HelperTextAndSpinner: FunctionComponent<Props> = ({
   isError,
   isLoading,
   helperText,
@@ -27,3 +27,5 @@ export const HelperTextAndSpinner: FunctionComponent<Props> = ({
     )}
   </>
 );
+
+export default HelperTextAndSpinner;

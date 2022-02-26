@@ -5,7 +5,6 @@ type Props = {
   name: string;
   placeholder: string;
   type: string;
-  autoFocus?: boolean;
   value: any;
   onChange: any;
   label: string;
@@ -14,11 +13,10 @@ type Props = {
   disabled?: boolean;
 };
 
-export const SimpleInput: FunctionComponent<Props> = ({
+const SimpleInput: FunctionComponent<Props> = ({
   name,
   placeholder,
   type,
-  autoFocus = false,
   value,
   onChange,
   label,
@@ -31,7 +29,6 @@ export const SimpleInput: FunctionComponent<Props> = ({
       {label}
     </label>
     <input
-      autoFocus={autoFocus}
       className={style.input}
       type={type}
       id={name}
@@ -45,3 +42,9 @@ export const SimpleInput: FunctionComponent<Props> = ({
     <p className={style.helper}>{helper}</p>
   </div>
 );
+
+SimpleInput.defaultProps = {
+  disabled: false,
+};
+
+export default SimpleInput;

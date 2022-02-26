@@ -13,7 +13,7 @@ const notificationReducer = (
         status: "SUCCESS",
         message: action.message,
       });
-      break;
+      return;
 
     case "ERROR":
       draft.push({
@@ -21,13 +21,14 @@ const notificationReducer = (
         status: "ERROR",
         message: action.message,
       });
-      break;
+      return;
 
     case "REMOVE":
       draft.shift();
-      break;
+      return;
 
     default:
+      /* eslint @typescript-eslint/no-unused-expressions: "off" */
       draft;
   }
 };
