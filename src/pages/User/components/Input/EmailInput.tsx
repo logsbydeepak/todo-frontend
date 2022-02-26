@@ -1,6 +1,6 @@
 import { ButtonWithIcon } from "components/Button";
 import { InputWithIcon } from "components/Input";
-import { useAPICall } from "global/hooks";
+import { useAPICall } from "hooks";
 import iconColor from "components/styles/iconColor.module.scss";
 import { ChangeEvent, FunctionComponent } from "react";
 import {

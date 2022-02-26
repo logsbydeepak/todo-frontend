@@ -1,6 +1,6 @@
 import { ButtonWithTextAndIcon } from "components/Button";
-import { useNotificationContext } from "global/context/NotificationContext";
-import { useAPICall } from "global/hooks";
+import { useNotificationContext } from "context/NotificationContext";
+import { useAPICall } from "hooks";
 import { FunctionComponent } from "react";
 import {
   PageStateType,

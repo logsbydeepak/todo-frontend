@@ -4,7 +4,7 @@ import {
   SetUserInputStateType,
   UserInputStateType,
 } from "pages/User/helper/types";
-import { SetAPIRequestDataType } from "global/hooks";
+import { SetAPIRequestDataType } from "hooks";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 

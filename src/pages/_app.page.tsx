@@ -1,8 +1,8 @@
 import Head from "next/head";
 import type { AppProps } from "next/app";
 
-import "global/styles/globals.scss";
-import { NotificationProvider } from "global/context/NotificationContext";
+import "styles/globals.scss";
+import { NotificationProvider } from "context/NotificationContext";
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
   <>

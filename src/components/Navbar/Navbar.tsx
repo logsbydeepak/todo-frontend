@@ -2,11 +2,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Dispatch, FunctionComponent, SetStateAction, useEffect } from "react";
 
-import { useAPICall } from "global/hooks";
-import { useNotificationContext } from "global/context/NotificationContext";
+import { useAPICall } from "hooks";
+import { useNotificationContext } from "context/NotificationContext";
 
 import { AuthLink, NoAuthLink } from "components/Link";
-import { clearAuthCookie } from "global/helper";
+import { clearAuthCookie } from "helper";
 import style from "./Navbar.module.scss";
 
 export const Navbar: FunctionComponent<{ auth: boolean }> = ({ auth }) => {

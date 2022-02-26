@@ -1,4 +1,4 @@
-import { SetAPIRequestDataType } from "global/hooks";
+import { SetAPIRequestDataType } from "hooks";
 import {
   SetInputStateType,
   InputStateType,

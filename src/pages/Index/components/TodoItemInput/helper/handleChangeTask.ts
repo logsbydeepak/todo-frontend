@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 
-import { SetAPIRequestDataType } from "global/hooks";
+import { SetAPIRequestDataType } from "hooks";
 
 import {
   DispatchTodoActionType,

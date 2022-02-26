@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { AxiosResponse } from "axios";
 import { useRouter } from "next/router";
 
-import { axiosRequest, clearAuthCookie } from "global/helper";
+import { axiosRequest, clearAuthCookie } from "helper";
 import { APIRequestDataType } from "./types.hooks";
 
 const useAPICall = () => {

@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect } from "react";
 
 import Head from "next/head";
 
-import { useAPICall } from "global/hooks";
+import { useAPICall } from "hooks";
 
 import { PageTitle } from "components/PageTitle";
 import { InputWithIcon } from "components/Input";

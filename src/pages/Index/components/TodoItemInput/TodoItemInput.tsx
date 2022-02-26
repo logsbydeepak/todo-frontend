@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FunctionComponent, useState } from "react";
 
-import { SetAPIRequestDataType } from "global/hooks";
+import { SetAPIRequestDataType } from "hooks";
 import { InputWithIcon } from "components/Input";
 import { ButtonWithIcon } from "components/Button";
 

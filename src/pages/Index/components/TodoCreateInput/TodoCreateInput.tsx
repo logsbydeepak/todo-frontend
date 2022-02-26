@@ -1,6 +1,6 @@
 import { FunctionComponent, useState, ChangeEvent } from "react";
 
-import { useAPICall } from "global/hooks";
+import { useAPICall } from "hooks";
 import { DispatchTodoActionType } from "pages/Index/helper/types";
 import { ButtonWithIcon } from "components/Button";
 import { handleCreateTodo } from "./helper/handeleCreateTodo";

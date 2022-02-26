@@ -4,10 +4,10 @@ import {
   SetUserInputStateType,
   UserInputStateType,
 } from "UserPage/helper/types";
-import { DispatchNotificationType } from "global/context/NotificationContext";
-import { SetAPIRequestDataType } from "global/hooks";
+import { DispatchNotificationType } from "context/NotificationContext";
+import { SetAPIRequestDataType } from "hooks";
 import isStrongPassword from "validator/lib/isStrongPassword";
-import { clearAuthCookie } from "global/helper";
+import { clearAuthCookie } from "helper";
 import { NextRouter } from "next/router";
 
 const setCurrentPasswordError = (

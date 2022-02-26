@@ -8,9 +8,9 @@ import { ButtonWithTextAndIcon } from "components/Button";
 import { todoReducer } from "pages/Index/helper/todo.reducer";
 import { TodoStateType, TodoType } from "pages/Index/helper/types";
 
-import { useAPICall } from "global/hooks";
+import { useAPICall } from "hooks";
 import { handleGetMoreTodo } from "pages/Index/helper/loadMore.handler";
-import { useNotificationContext } from "global/context/NotificationContext";
+import { useNotificationContext } from "context/NotificationContext";
 import { handleGetTodoOnMenuChange } from "pages/Index/helper/getTodoOnMenuChange.handler";
 
 import { HelperTextAndSpinner } from "components/HelperTextAndSpinner";
