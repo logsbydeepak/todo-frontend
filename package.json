@@ -10,7 +10,8 @@
     "clean": "rimraf .next",
     "clean:modules": "rimraf node_modules",
     "format": "prettier --write .",
-    "format:watch": "onchange \"**/*\" --exclude-path .prettierignore -- prettier --write --ignore-unknown {{changed}}"
+    "format:watch": "onchange \"**/*\" --exclude-path .prettierignore -- prettier --write --ignore-unknown {{changed}}",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@types/cookie": "^0.4.1",
@@ -37,6 +38,7 @@
     "eslint-config-next": "^12.1.0",
     "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.4",
     "onchange": "^7.1.0",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
