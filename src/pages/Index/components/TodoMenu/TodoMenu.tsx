@@ -57,7 +57,7 @@ const TodoMenu: FunctionComponent<Props> = ({
         htmlFor="true-id"
       >
         Completed
-        <input type="radio" value="true" name="menu" id="trud-id" />
+        <input type="radio" value="true" name="menu" id="true-id" />
       </label>
     </form>
   );
