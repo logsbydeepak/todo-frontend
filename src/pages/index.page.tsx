@@ -6,7 +6,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => ({
   props: { auth: req.cookies.auth === "true" },
 });
 
-export const Home: NextPage<{ auth: boolean }> = ({ auth }) => (
+const Home: NextPage<{ auth: boolean }> = ({ auth }) => (
   <>
     <Navbar auth={auth} />
     {auth ? <TodoPage /> : <LandingPage />}
