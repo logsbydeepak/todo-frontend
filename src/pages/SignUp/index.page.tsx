@@ -201,6 +201,7 @@ export const SignUp: NextPage = () => {
               handleOnClick={handleSignUp}
               isLoading={formState.isLoading}
               isDisabled={formState.isLoading}
+              type="submit"
             />
           </div>
         </form>

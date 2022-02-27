@@ -11,11 +11,13 @@ interface Props {
   isError?: boolean;
   isDisabled?: boolean;
   warning?: boolean;
+  type?: "button" | "submit";
 }
 
 const ButtonWithTextAndIcon: FunctionComponent<Props> = ({
   icon,
   text,
+  type,
   handleOnClick,
   warning,
   isError,
@@ -31,7 +33,8 @@ const ButtonWithTextAndIcon: FunctionComponent<Props> = ({
       handleOnClick();
     }}
     disabled={isDisabled}
-    type="button"
+    // eslint-disable-next-line react/button-has-type
+    type={type}
   >
     {text}
     {isLoading ? <Spinner /> : <i>{icon}</i>}
@@ -39,6 +42,7 @@ const ButtonWithTextAndIcon: FunctionComponent<Props> = ({
 );
 
 ButtonWithTextAndIcon.defaultProps = {
+  type: "button",
   warning: false,
   isError: false,
   isLoading: false,

@@ -61,7 +61,7 @@ const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
                 setShowPassword(!showPassword);
                 setInputType(showPassword ? "password" : "text");
               }}
-              className={`${iconColor.white}`}
+              className={iconColor.grey}
             />
           </div>
         )}

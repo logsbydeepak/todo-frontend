@@ -175,6 +175,7 @@ export const Login: NextPage = () => {
           <div className={style.button}>
             <ButtonWithTextAndIcon
               icon="east"
+              type="submit"
               text="Create your account"
               handleOnClick={handleLogin}
               isLoading={formState.isLoading}
