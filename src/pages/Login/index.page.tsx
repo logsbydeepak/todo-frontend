@@ -158,7 +158,6 @@ export const Login: NextPage = () => {
             placeholder="example@email.com"
             isError={formState.isError.email}
             disabled={formState.isLoading}
-            autoFocus
           />
 
           <InputWithIcon

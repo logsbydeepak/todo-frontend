@@ -38,11 +38,10 @@ const InputWithIcon: FunctionComponent<InputWithIconProps> = ({
         isDisabled && style.disabled
       } ${className} ${style.form__out}`}
     >
-      {isError && (
-        <label className={style.label} htmlFor={name}>
-          {label}
-        </label>
-      )}
+      <label className={style.label} htmlFor={name}>
+        {label}
+      </label>
+
       <div className={`${style.input} ${style.input__icon}`}>
         <input
           type={inputType}

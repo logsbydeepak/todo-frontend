@@ -11,7 +11,7 @@ import { useImmer } from "use-immer";
 import { Navbar } from "components/Navbar";
 import { HelperTextAndSpinner } from "components/HelperTextAndSpinner";
 import { GetServerSideProps } from "next";
-import { handleGetUser } from "./helper/handleGetUser";
+import handleGetUser from "./helper/handleGetUser";
 import {
   initialBoolean,
   initialBooleanWithoutCurrentPassword,
@@ -19,10 +19,10 @@ import {
   initialTextWithNameAndEmail,
 } from "./helper/data";
 
-import { LogoutAllAndDeleteUserButton } from "./components/LogoutAllAndDeleteUserButton/LogoutAllAndDeleteUserButton";
-import { NameInput } from "./components/Input/NameInput";
-import { EmailInput } from "./components/Input/EmailInput";
-import { PasswordInput } from "./components/Input/PasswordInput";
+import LogoutAllAndDeleteUserButton from "./components/LogoutAllAndDeleteUserButton/LogoutAllAndDeleteUserButton";
+import NameInput from "./components/Input/NameInput";
+import EmailInput from "./components/Input/EmailInput";
+import PasswordInput from "./components/Input/PasswordInput";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const auth = req.cookies.auth !== "true";

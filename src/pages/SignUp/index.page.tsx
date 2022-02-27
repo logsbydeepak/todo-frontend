@@ -163,7 +163,6 @@ export const SignUp: NextPage = () => {
             name="name"
             label="Name"
             type="text"
-            autoFocus
             value={formState.value.name}
             onChange={formInputHandler}
             helper={formState.helper.name}

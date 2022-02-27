@@ -8,8 +8,8 @@ import {
   SetPageStateType,
   SetUserInputStateType,
   UserInputStateType,
-} from "UserPage/helper/types";
-import { handleUpdateUserInfo } from "./helper/handleUpdateUserInfo";
+} from "../../helper/types";
+import handleUpdateUserInfo from "./helper/handleUpdateUserInfo";
 
 interface Props {
   inputState: UserInputStateType;
