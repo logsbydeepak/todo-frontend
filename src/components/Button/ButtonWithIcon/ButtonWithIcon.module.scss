@@ -9,17 +9,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  @include xs {
+    padding: 0.6rem;
+  }
 
   & i {
     color: $color-grey-3;
     font-size: 2rem;
+
+    @include xs {
+      font-size: 1.6rem;
+    }
   }
 
   & svg {
     width: 2rem;
-
-    & path {
-      fill: $color-white;
+    @include xs {
+      width: 1.6rem;
     }
   }
 }

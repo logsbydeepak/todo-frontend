@@ -27,7 +27,7 @@ const ButtonWithIcon: FunctionComponent<Props> = ({
       handleOnClick();
     }}
   >
-    {isLoading ? <Spinner /> : <i>{icon}</i>}
+    {isLoading ? <Spinner theme="light" /> : <i>{icon}</i>}
   </button>
 );
 
