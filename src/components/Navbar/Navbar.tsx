@@ -27,8 +27,8 @@ const Navbar: FunctionComponent<{ auth: boolean }> = ({ auth }) => {
       onSuccess: () => {
         setIsLoading(false);
         clearAuthCookie();
-        dispatchNotification({ type: "SUCCESS", message: "User logout" });
         router.push("/");
+        dispatchNotification({ type: "SUCCESS", message: "User logout" });
       },
       onError: () => {
         setIsLoading(false);

@@ -75,7 +75,7 @@ const useAPICall = () => {
     };
 
     fetch();
-  }, [APIRequestData, router]);
+  }, [APIRequestData, router, setAPIRequestData]);
 
   return [setAPIRequestData];
 };
