@@ -73,6 +73,10 @@ const useAPICall = () => {
         });
     };
     fetch();
+    // eslint-disable-next-line consistent-return
+    return () => {
+      setAPIRequestData(null);
+    };
   }, [APIRequestData, router]);
 
   return [setAPIRequestData];
