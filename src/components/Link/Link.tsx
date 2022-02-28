@@ -3,6 +3,9 @@ import { ButtonWithIcon } from "components/Button";
 
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { useAPICall } from "hooks";
+import { useNotificationContext } from "context/NotificationContext";
+import { clearAuthCookie } from "helper";
 import style from "./Link.module.scss";
 
 export const NoAuthLink = () => (
@@ -17,11 +20,33 @@ export const NoAuthLink = () => (
   </ul>
 );
 
-export const AuthLink = ({ handelLogout }: { handelLogout: any }) => {
+export const AuthLink = () => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const handleOnUserClick = () => {
     router.push("/User");
+  };
+  const [setAPIRequestData] = useAPICall();
+  const { dispatchNotification } = useNotificationContext();
+
+  const handelLogout = async () => {
+    setIsLoading(true);
+
+    setAPIRequestData({
+      request: {
+        method: "DELETE",
+        url: "/session",
+      },
+      onSuccess: () => {
+        setIsLoading(false);
+        clearAuthCookie();
+        dispatchNotification({ type: "SUCCESS", message: "User logout" });
+        router.push("/");
+      },
+      onError: () => {
+        setIsLoading(false);
+      },
+    });
   };
 
   return (
@@ -34,7 +59,7 @@ export const AuthLink = ({ handelLogout }: { handelLogout: any }) => {
       <ButtonWithIcon
         icon="logout"
         isLoading={isLoading}
-        handleOnClick={() => handelLogout(setIsLoading)}
+        handleOnClick={handelLogout}
       />
     </ul>
   );

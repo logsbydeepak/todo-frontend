@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { AxiosResponse } from "axios";
 import { useRouter } from "next/router";
 
-import { axiosRequest, clearAuthCookie } from "helper";
+import { axiosRequest, clearAuthCookie, createAuthCookie } from "helper";
 import { APIRequestDataType } from "./types.hooks";
 
 const useAPICall = () => {
@@ -42,11 +42,10 @@ const useAPICall = () => {
               method: "PUT",
             })
               .then(() => {
-                clearAuthCookie();
+                createAuthCookie();
                 axiosRequest({
                   url,
                   method,
-
                   data: body,
                 }).then((successResponse) => {
                   onSuccess(successResponse.data.data);
@@ -73,9 +72,8 @@ const useAPICall = () => {
           router.push("/");
         });
     };
-
     fetch();
-  }, [APIRequestData, router, setAPIRequestData]);
+  }, [APIRequestData, router]);
 
   return [setAPIRequestData];
 };
