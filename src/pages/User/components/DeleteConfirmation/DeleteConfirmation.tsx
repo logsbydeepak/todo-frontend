@@ -28,7 +28,7 @@ const DeleteConfirmation: FunctionComponent<Props> = ({
             isLoading={false}
           />
           <ButtonWithTextAndIcon
-            icon="arrow_forward_ios"
+            icon="east"
             text="Continue"
             handleOnClick={handleOnContinue}
             isLoading={false}

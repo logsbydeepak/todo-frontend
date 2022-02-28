@@ -1,4 +1,5 @@
 @import "styles/utilities/variables";
+@import "styles/utilities/breakpoints";
 @import "components/Button/DefaultButton";
 
 .buttonWithTextAndIcon {
@@ -10,11 +11,19 @@
 
   & i {
     font-size: 2.6rem;
+
+    @include xs {
+      font-size: 2.2rem;
+    }
   }
 
   & svg {
     width: 2.6rem;
     padding: 0.2rem;
+
+    @include xs {
+      width: 2.2rem;
+    }
   }
 }
 .warningBackground {
