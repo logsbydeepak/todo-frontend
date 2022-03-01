@@ -38,6 +38,7 @@ const TodoCreateInput: FunctionComponent<Props> = ({ dispatchTodoAction }) => {
         <ButtonWithIcon
           icon="arrow_forward_ios"
           isLoading={isLoading}
+          type="submit"
           handleOnClick={() => {
             handleCreateTodo(
               setAPIRequestData,

@@ -29,36 +29,39 @@ const PasswordInput: FunctionComponent<Props> = ({
   const [setAPIRequestData] = useAPICall();
 
   return (
-    <InputWithIcon
-      value={inputState.value.password}
-      handleOnChange={handleInputChange}
-      helper={inputState.helper.password}
-      type="password"
-      placeholder="Password"
-      isDisabled={pageState.isDisabled}
-      isError={inputState.isError.password}
-      name="password"
-    >
-      {inputState.showIcon.password && (
-        <div className="right">
-          <ButtonWithIcon
-            icon="done_all"
-            isLoading={inputState.isLoading.password}
-            isDisabled={pageState.isDisabled}
-            className={`${iconColor.white}`}
-            handleOnClick={() =>
-              handleUpdateUserInfo(
-                setAPIRequestData,
-                inputState,
-                setPageState,
-                setInputState,
-                "password"
-              )
-            }
-          />
-        </div>
-      )}
-    </InputWithIcon>
+    <form>
+      <InputWithIcon
+        value={inputState.value.password}
+        handleOnChange={handleInputChange}
+        helper={inputState.helper.password}
+        type="password"
+        placeholder="Password"
+        isDisabled={pageState.isDisabled}
+        isError={inputState.isError.password}
+        name="password"
+      >
+        {inputState.showIcon.password && (
+          <div className="right">
+            <ButtonWithIcon
+              icon="done_all"
+              isLoading={inputState.isLoading.password}
+              isDisabled={pageState.isDisabled}
+              className={`${iconColor.white}`}
+              type="submit"
+              handleOnClick={() =>
+                handleUpdateUserInfo(
+                  setAPIRequestData,
+                  inputState,
+                  setPageState,
+                  setInputState,
+                  "password"
+                )
+              }
+            />
+          </div>
+        )}
+      </InputWithIcon>
+    </form>
   );
 };
 

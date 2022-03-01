@@ -9,6 +9,7 @@ interface Props {
   className?: string;
   handleOnClick: () => void;
   isDisabled?: boolean;
+  type?: "button" | "submit";
 }
 
 const ButtonWithIcon: FunctionComponent<Props> = ({
@@ -17,11 +18,13 @@ const ButtonWithIcon: FunctionComponent<Props> = ({
   handleOnClick,
   isLoading,
   isDisabled,
+  type,
 }) => (
   <button
     className={`${style.ButtonWithIcon} ${className}`}
     disabled={isDisabled}
-    type="button"
+    // eslint-disable-next-line react/button-has-type
+    type={type}
     onClick={(event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
       event.preventDefault();
       handleOnClick();
@@ -35,6 +38,7 @@ ButtonWithIcon.defaultProps = {
   className: "",
   isLoading: false,
   isDisabled: false,
+  type: "button",
 };
 
 export default ButtonWithIcon;

@@ -119,6 +119,7 @@ const TodoItemInput: FunctionComponent<Props> = ({
               isDisabled={isDisabled}
               className={iconColor.white}
               handleOnClick={handleOnDoneClick}
+              type="submit"
             />
           </>
         )}
@@ -129,6 +130,7 @@ const TodoItemInput: FunctionComponent<Props> = ({
           isLoading={loadingIcon.delete}
           className={iconColor.red}
           handleOnClick={handleOnDeleteClick}
+          type="submit"
         />
       </div>
     </InputWithIcon>

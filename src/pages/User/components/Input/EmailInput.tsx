@@ -31,43 +31,46 @@ const EmailInput: FunctionComponent<Props> = ({
   const [setAPIRequestData] = useAPICall();
 
   return (
-    <InputWithIcon
-      value={inputState.value.email}
-      handleOnChange={handleInputChange}
-      helper={inputState.helper.email}
-      type="email"
-      isError={inputState.isError.email}
-      placeholder="Email"
-      isDisabled={pageState.isDisabled}
-      name="email"
-    >
-      {inputState.showIcon.email && (
-        <div className="right">
-          <ButtonWithIcon
-            icon="settings_backup_restore"
-            isLoading={false}
-            handleOnClick={() => handleInputReset("email")}
-            isDisabled={pageState.isDisabled}
-            className={`${iconColor.green}`}
-          />
-          <ButtonWithIcon
-            icon="done_all"
-            isLoading={inputState.isLoading.email}
-            handleOnClick={() =>
-              handleUpdateUserInfo(
-                setAPIRequestData,
-                inputState,
-                setPageState,
-                setInputState,
-                "email"
-              )
-            }
-            isDisabled={pageState.isDisabled}
-            className={`${iconColor.white}`}
-          />
-        </div>
-      )}
-    </InputWithIcon>
+    <form>
+      <InputWithIcon
+        value={inputState.value.email}
+        handleOnChange={handleInputChange}
+        helper={inputState.helper.email}
+        type="email"
+        isError={inputState.isError.email}
+        placeholder="Email"
+        isDisabled={pageState.isDisabled}
+        name="email"
+      >
+        {inputState.showIcon.email && (
+          <div className="right">
+            <ButtonWithIcon
+              icon="settings_backup_restore"
+              isLoading={false}
+              handleOnClick={() => handleInputReset("email")}
+              isDisabled={pageState.isDisabled}
+              className={`${iconColor.green}`}
+            />
+            <ButtonWithIcon
+              icon="done_all"
+              isLoading={inputState.isLoading.email}
+              type="submit"
+              handleOnClick={() =>
+                handleUpdateUserInfo(
+                  setAPIRequestData,
+                  inputState,
+                  setPageState,
+                  setInputState,
+                  "email"
+                )
+              }
+              isDisabled={pageState.isDisabled}
+              className={`${iconColor.white}`}
+            />
+          </div>
+        )}
+      </InputWithIcon>
+    </form>
   );
 };
 
