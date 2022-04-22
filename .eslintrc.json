@@ -10,6 +10,7 @@
       "error",
       { "props": true, "ignorePropertyModificationsFor": ["draft", "res"] }
     ],
+    "react-hooks/rules-of-hooks": ["off"],
     "react/function-component-definition": [
       2,
       {
@@ -17,7 +18,6 @@
         "unnamedComponents": "arrow-function"
       }
     ],
-    "prettier/prettier": "error",
     "no-console": "error"
   }
 }

@@ -1,38 +1,32 @@
 import { ChangeEvent } from "react";
 
 import Head from "next/head";
-import type { GetServerSideProps, NextPage } from "next";
+import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
 import { useImmer } from "use-immer";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 
-import { axiosRequest, createAuthCookie } from "helper";
+import { axiosRequest } from "helper";
 import { PageTitle } from "components/PageTitle";
 import { ButtonWithTextAndIcon } from "components/Button";
 import { SimpleInput, InputWithIcon } from "components/Input";
 import { useNotificationContext } from "context/NotificationContext";
 
-import { Navbar } from "components/Navbar";
+import { useAuthContext } from "context/AuthContext";
 import { initialErrorData, initialUserData } from "./helper/data";
 
 import style from "./Login.module.scss";
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const auth = req.cookies.auth === "true";
-
-  if (auth) {
-    res.setHeader("location", "/");
-    res.statusCode = 302;
-    res.end();
-    return { props: {} };
-  }
-  return { props: {} };
-};
-
 export const Login: NextPage = () => {
+  const { isAuth, setIsAuth } = useAuthContext();
   const router = useRouter();
+
+  if (isAuth) {
+    router.push("/");
+    return null;
+  }
 
   const [formState, setFormState] = useImmer({
     isLoading: false,
@@ -98,7 +92,7 @@ export const Login: NextPage = () => {
     try {
       await axiosRequest.post("/session", formState.value);
 
-      createAuthCookie();
+      setIsAuth(true);
 
       dispatchNotification({
         type: "SUCCESS",
@@ -140,7 +134,6 @@ export const Login: NextPage = () => {
 
   return (
     <>
-      <Navbar auth={false} />
       <Head>
         <title>TODO - Login</title>
       </Head>

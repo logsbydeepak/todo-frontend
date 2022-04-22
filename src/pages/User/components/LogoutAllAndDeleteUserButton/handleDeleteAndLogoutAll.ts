@@ -1,8 +1,8 @@
 import { DispatchNotificationType } from "context/NotificationContext";
 import { SetAPIRequestDataType } from "hooks";
 import isStrongPassword from "validator/lib/isStrongPassword";
-import { clearAuthCookie } from "helper";
 import { NextRouter } from "next/router";
+import { useAuthContext } from "context/AuthContext";
 import {
   SetPageStateType,
   SetUserInputStateType,
@@ -49,6 +49,7 @@ const handleDeleteAndLogoutAllUser = (
   dispatchNotification: DispatchNotificationType,
   router: NextRouter
 ) => {
+  const { setIsAuth } = useAuthContext();
   setInputState((draft) => {
     draft.helper = initialText;
     draft.isError = initialBoolean;
@@ -82,7 +83,7 @@ const handleDeleteAndLogoutAllUser = (
       },
     },
     onSuccess: () => {
-      clearAuthCookie();
+      setIsAuth(false);
       dispatchNotification({
         type: "SUCCESS",
         message: action === "logoutAll" ? "Logout all" : "User deleted",

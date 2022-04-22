@@ -8,9 +8,10 @@ import { PageTitle } from "components/PageTitle";
 import { InputWithIcon } from "components/Input";
 
 import { useImmer } from "use-immer";
-import { Navbar } from "components/Navbar";
 import { HelperTextAndSpinner } from "components/HelperTextAndSpinner";
-import { GetServerSideProps } from "next";
+import { NextPage } from "next";
+import { useAuthContext } from "context/AuthContext";
+import { useRouter } from "next/router";
 import handleGetUser from "./helper/handleGetUser";
 import {
   initialBoolean,
@@ -24,19 +25,15 @@ import NameInput from "./components/Input/NameInput";
 import EmailInput from "./components/Input/EmailInput";
 import PasswordInput from "./components/Input/PasswordInput";
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const auth = req.cookies.auth !== "true";
+export const User: NextPage = () => {
+  const { isAuth } = useAuthContext();
+  const router = useRouter();
 
-  if (auth) {
-    res.setHeader("location", "/");
-    res.statusCode = 302;
-    res.end();
-    return { props: {} };
+  if (!isAuth) {
+    router.push("/");
+    return null;
   }
-  return { props: {} };
-};
 
-export const User = () => {
   const [inputState, setInputState] = useImmer({
     value: initialText,
     helper: initialText,
@@ -60,6 +57,11 @@ export const User = () => {
   useEffect(() => {
     handleGetUser(setAPIRequestData, setPageState, setInputState);
   }, [setAPIRequestData, setInputState, setPageState]);
+
+  if (!isAuth) {
+    router.push("/");
+    return null;
+  }
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputName = event.target.name;
@@ -99,7 +101,6 @@ export const User = () => {
 
   return (
     <>
-      <Navbar auth />
       <Head>
         <title>TODO - User</title>
       </Head>

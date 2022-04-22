@@ -5,7 +5,9 @@ import "styles/globals.scss";
 import { NotificationProvider } from "context/NotificationContext";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { AuthProvider } from "context/AuthContext";
 import { PageProgress } from "./App/components/progress";
+import Layout from "./App/components/Layout";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
@@ -30,12 +32,16 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <title>TODO</title>
       </Head>
       <PageProgress progress={isPageLoading} />
-      <NotificationProvider>
-        <div className="container">
-          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-          <Component {...pageProps} />
-        </div>
-      </NotificationProvider>
+      <AuthProvider>
+        <NotificationProvider>
+          <div className="container">
+            <Layout>
+              {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+              <Component {...pageProps} />
+            </Layout>
+          </div>
+        </NotificationProvider>
+      </AuthProvider>
     </>
   );
 };

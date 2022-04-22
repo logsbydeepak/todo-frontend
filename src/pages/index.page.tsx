@@ -1,16 +1,12 @@
-import { GetServerSideProps, NextPage } from "next";
-import { Navbar } from "components/Navbar";
+import { NextPage } from "next";
+import { useAuthContext } from "context/AuthContext";
 import { TodoPage, LandingPage } from "./Index/pages";
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => ({
-  props: { auth: req.cookies.auth === "true" },
-});
+const Home: NextPage<{ auth: boolean }> = () => {
+  const { isAuth } = useAuthContext();
 
-const Home: NextPage<{ auth: boolean }> = ({ auth }) => (
-  <>
-    <Navbar auth={auth} />
-    {auth ? <TodoPage /> : <LandingPage />}
-  </>
-);
+  if (!isAuth) return <LandingPage />;
+  return <TodoPage />;
+};
 
 export default Home;

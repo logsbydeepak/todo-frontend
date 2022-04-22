@@ -1,4 +1,4 @@
 import axiosRequest from "./axios.helper";
 
-export * from "./cookie.helper";
+// eslint-disable-next-line import/prefer-default-export
 export { axiosRequest };

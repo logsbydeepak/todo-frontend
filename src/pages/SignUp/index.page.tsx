@@ -8,32 +8,25 @@ import { useImmer } from "use-immer";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 
-import { axiosRequest, createAuthCookie } from "helper";
+import { axiosRequest } from "helper";
 import { SimpleInput, InputWithIcon } from "components/Input";
 import { PageTitle } from "components/PageTitle";
 import { ButtonWithTextAndIcon } from "components/Button";
 import { useNotificationContext } from "context/NotificationContext";
 
-import { Navbar } from "components/Navbar";
-import { GetServerSideProps } from "next";
+import { useAuthContext } from "context/AuthContext";
 import { initialErrorData, initialUserData } from "./helper/data";
 
 import style from "./SignUp.module.scss";
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const auth = req.cookies.auth === "true";
-
-  if (auth) {
-    res.setHeader("location", "/");
-    res.statusCode = 302;
-    res.end();
-    return { props: {} };
-  }
-  return { props: {} };
-};
-
 export const SignUp: NextPage = () => {
+  const { isAuth, setIsAuth } = useAuthContext();
   const router = useRouter();
+
+  if (isAuth) {
+    router.push("/");
+    return null;
+  }
 
   const [formState, setFormState] = useImmer({
     isLoading: false,
@@ -115,7 +108,7 @@ export const SignUp: NextPage = () => {
       data: formState.value,
     })
       .then(() => {
-        createAuthCookie();
+        setIsAuth(true);
         dispatchNotification({
           type: "SUCCESS",
           message: "User created successfully",
@@ -148,7 +141,6 @@ export const SignUp: NextPage = () => {
 
   return (
     <>
-      <Navbar auth={false} />
       <Head>
         <title>TODO - SignUp</title>
       </Head>
